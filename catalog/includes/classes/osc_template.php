@@ -19,7 +19,7 @@
     var $_grid_column_width = 4;
     var $_data = array();
 
-    function oscTemplate() {
+    function __construct() {
       $this->_title = TITLE;
     }
 
