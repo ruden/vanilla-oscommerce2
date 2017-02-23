@@ -16,11 +16,6 @@
 // set the level of error reporting
   error_reporting(E_ALL & ~E_DEPRECATED);
 
-// check support for register_globals
-  if (function_exists('ini_get') && (ini_get('register_globals') == false) && (PHP_VERSION < 4.3) ) {
-    exit('Server Requirement Error: register_globals is disabled in your PHP configuration. This can be enabled in your php.ini configuration file or in the .htaccess file in your catalog directory. Please use PHP 4.3+ if register_globals cannot be enabled on the server.');
-  }
-
 // load server configuration parameters
   if (file_exists('includes/local/configure.php')) { // for developers
     include('includes/local/configure.php');
@@ -72,20 +67,12 @@
   }
 
 // if gzip_compression is enabled, start to buffer the output
-  if ( (GZIP_COMPRESSION == 'true') && ($ext_zlib_loaded = extension_loaded('zlib')) && !headers_sent() ) {
-    if (($ini_zlib_output_compression = (int)ini_get('zlib.output_compression')) < 1) {
-      if (PHP_VERSION < '5.4' || PHP_VERSION > '5.4.5') { // see PHP bug 55544
-        if (PHP_VERSION >= '4.0.4') {
-          ob_start('ob_gzhandler');
-        } elseif (PHP_VERSION >= '4.0.1') {
-          include(DIR_WS_FUNCTIONS . 'gzip_compression.php');
-          ob_start();
-          ob_implicit_flush();
-        }
-      }
-    } elseif (function_exists('ini_set')) {
-      ini_set('zlib.output_compression_level', GZIP_LEVEL);
+  if ((GZIP_COMPRESSION == 'true') && extension_loaded('zlib') && !headers_sent()) {
+    if ((int)ini_get('zlib.output_compression') < 1) {
+      ini_set('zlib.output_handler', '');
+      ini_set('zlib.output_compression', 1);
     }
+    ini_set('zlib.output_compression_level', GZIP_LEVEL);
   }
 
 // set the HTTP GET parameters manually if search_engine_friendly_urls is enabled
@@ -191,7 +178,7 @@
     $session_started = true;
   }
 
-  if ( ($session_started == true) && (PHP_VERSION >= 4.3) && function_exists('ini_get') && (ini_get('register_globals') == false) ) {
+  if ( ($session_started == true) && function_exists('ini_get') && (ini_get('register_globals') == false) ) {
     extract($_SESSION, EXTR_OVERWRITE+EXTR_REFS);
   }
 
