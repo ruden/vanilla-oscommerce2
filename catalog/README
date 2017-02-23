@@ -1,0 +1,13 @@
+osCommerce 2.3.4 Migrating to PHP 7.x.x
+
+Download for installation
+https://github.com/ruden/oscommerce2/archive/234-php7.zip
+
+See the code
+https://github.com/osCommerce/oscommerce2/compare/master...ruden:234-php7
+
+Migrating from PHP 5.6.x to PHP 7.0.x
+http://php.net/manual/en/migration70.php
+
+Migrating from PHP 7.0.x to PHP 7.1.x
+http://php.net/manual/en/migration71.php
