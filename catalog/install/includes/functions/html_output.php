@@ -32,8 +32,6 @@
   }
 
   function osc_draw_select_menu($name, $values, $default = null, $parameters = null) {
-    global $_GET, $_POST;
-
     $group = false;
 
     if ( isset($_GET[$name]) ) {

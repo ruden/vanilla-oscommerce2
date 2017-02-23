@@ -167,7 +167,7 @@ An example custom function style:
 
 <?php
   function tep_my_function($parameter, $optional = '') {
-    global $_GET, $another_variable;
+    global $another_variable;
 
     ....
 

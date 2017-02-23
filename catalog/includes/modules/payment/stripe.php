@@ -14,7 +14,7 @@
     var $code, $title, $description, $enabled;
 
     function __construct() {
-      global $_GET, $PHP_SELF, $order, $payment;
+      global $PHP_SELF, $order, $payment;
 
       $this->signature = 'stripe|stripe|1.0|2.3';
       $this->api_version = '2014-05-19';
@@ -329,7 +329,7 @@
     }
 
     function get_error() {
-      global $_GET, $stripe_error;
+      global $stripe_error;
 
       $message = MODULE_PAYMENT_STRIPE_ERROR_GENERAL;
 
@@ -774,8 +774,6 @@ EOD;
     }
 
     function sendDebugEmail($response = array()) {
-      global $_POST, $_GET;
-
       if (tep_not_null(MODULE_PAYMENT_STRIPE_DEBUG_EMAIL)) {
         $email_body = '';
 

@@ -14,7 +14,7 @@
     var $code, $title, $description, $enabled;
 
     function __construct() {
-      global $_GET, $PHP_SELF, $order;
+      global $PHP_SELF, $order;
 
       $this->signature = 'paypal|paypal_pro_payflow_ec|3.0|2.3';
 
@@ -632,8 +632,6 @@
     }
 
     function sendDebugEmail($response = array()) {
-      global $_POST, $_GET;
-
       if (tep_not_null(MODULE_PAYMENT_PAYPAL_PRO_PAYFLOW_EC_DEBUG_EMAIL)) {
         $email_body = '';
 

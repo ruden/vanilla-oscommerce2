@@ -33,8 +33,6 @@
     }
 
     function getHttpRequest($url) {
-      global $_SERVER;
-
       $server = parse_url($url);
 
       if (isset($server['port']) === false) {

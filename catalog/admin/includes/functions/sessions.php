@@ -52,8 +52,6 @@
   }
 
   function tep_session_start() {
-    global $_GET, $_POST, $_COOKIE;
-
     $sane_session_id = true;
 
     if ( isset($_GET[tep_session_name()]) ) {
@@ -131,8 +129,6 @@
   }
 
   function tep_session_destroy() {
-    global $_COOKIE;
-
     if ( isset($_COOKIE[tep_session_name()]) ) {
       $session_data = session_get_cookie_params();
 

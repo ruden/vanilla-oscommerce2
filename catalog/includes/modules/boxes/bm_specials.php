@@ -31,7 +31,7 @@
     }
 
     function execute() {
-      global $_GET, $languages_id, $currencies, $oscTemplate;
+      global $languages_id, $currencies, $oscTemplate;
 
       if (!isset($_GET['products_id'])) {
         if ($random_product = tep_random_select("select p.products_id, pd.products_name, p.products_price, p.products_tax_class_id, p.products_image, s.specials_new_products_price from " . TABLE_PRODUCTS . " p, " . TABLE_PRODUCTS_DESCRIPTION . " pd, " . TABLE_SPECIALS . " s where p.products_status = '1' and p.products_id = s.products_id and pd.products_id = s.products_id and pd.language_id = '" . (int)$languages_id . "' and s.status = '1' order by s.specials_date_added desc limit " . MAX_RANDOM_SELECT_SPECIALS)) {

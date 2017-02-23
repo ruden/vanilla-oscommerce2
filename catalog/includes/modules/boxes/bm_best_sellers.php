@@ -31,7 +31,7 @@
     }
 
     function execute() {
-      global $_GET, $current_category_id, $languages_id, $oscTemplate;
+      global $current_category_id, $languages_id, $oscTemplate;
 
       if (!isset($_GET['products_id'])) {
         if (isset($current_category_id) && ($current_category_id > 0)) {

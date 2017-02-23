@@ -14,7 +14,7 @@
     var $code, $title, $description, $enabled;
 
     function __construct() {
-      global $_GET, $PHP_SELF, $order, $payment;
+      global $PHP_SELF, $order, $payment;
 
       $this->signature = 'paypal|paypal_express|3.0|2.3';
       $this->api_version = '112';
@@ -667,8 +667,6 @@
     }
 
     function sendDebugEmail($response = array()) {
-      global $_POST, $_GET;
-
       if (tep_not_null(MODULE_PAYMENT_PAYPAL_EXPRESS_DEBUG_EMAIL)) {
         $email_body = '';
 
