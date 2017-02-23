@@ -26,8 +26,7 @@
 // Define the project version --- obsolete, now retrieved with tep_get_version()
   define('PROJECT_VERSION', 'osCommerce Online Merchant v2.3');
 
-// some code to solve compatibility issues
-  require(DIR_WS_FUNCTIONS . 'compatibility.php');
+  date_default_timezone_set(defined('CFG_TIME_ZONE') ? CFG_TIME_ZONE : date_default_timezone_get());
 
 // set the type of request (secure or not)
   $request_type = (getenv('HTTPS') == 'on') ? 'SSL' : 'NONSSL';
