@@ -33,7 +33,9 @@
           $this->public_title .= ' (' . $this->code . '; Sandbox)';
         }
 
-        $this->description .= $this->getTestLinkInfo();
+        if ( defined('FILENAME_MODULES') ) {
+          $this->description .= $this->getTestLinkInfo();
+        }
       }
 
       if ( !function_exists('curl_init') ) {
