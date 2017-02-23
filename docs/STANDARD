@@ -81,10 +81,10 @@ $_SESSION['variable']
 PHP 4.0.x does not support the above scope which was introduced in PHP 4.1.x.
 The following can be used which is not compatible with PHP 3.x:
 
-$_GET =& $_GET;
-$_POST =& $_POST;
-$_COOKIE =& $_COOKIE;
-$_SESSION =& $_SESSION;
+$_GET =& $HTTP_GET_VARS;
+$_POST =& $HTTP_POST_VARS;
+$_COOKIE =& $HTTP_COOKIE_VARS;
+$_SESSION =& $HTTP_SESSION_VARS;
 
 include() vs require()
 ----------------------

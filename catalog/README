@@ -11,3 +11,11 @@ http://php.net/manual/en/migration70.php
 
 Migrating from PHP 7.0.x to PHP 7.1.x
 http://php.net/manual/en/migration71.php
+
+If you install add-on needs to be replaced
+$HTTP_GET_VARS -> $_GET
+$HTTP_POST_VARS -> $_POST
+$HTTP_COOKIE_VARS -> $_COOKIE
+$HTTP_SESSION_VARS -> $_SESSION
+$HTTP_POST_FILES -> $_FILES
+$HTTP_SERVER_VARS -> $_SERVER
