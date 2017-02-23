@@ -1,4 +1,4 @@
-osCommerce 2.3.4 Migrating to PHP 7.x.x
+osCommerce 2.3.4 Migrating to PHP 7.x
 
 Download for installation
 https://github.com/ruden/oscommerce2/archive/234-php7.zip
@@ -18,4 +18,6 @@ $HTTP_POST_VARS -> $_POST
 $HTTP_COOKIE_VARS -> $_COOKIE
 $HTTP_SESSION_VARS -> $_SESSION
 $HTTP_POST_FILES -> $_FILES
-$HTTP_SERVER_VARS -> $_SERVER
+$HTTP_SERVER_VARS -> $_SERVER`
+
+Goodbye php5.x :)
