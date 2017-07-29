@@ -29,7 +29,7 @@
     }
 
     function execute() {
-      global $PHP_SELF, $_GET, $cPath, $oscTemplate;
+      global $PHP_SELF, $cPath, $oscTemplate;
 
       if (basename($PHP_SELF) == FILENAME_PRODUCT_INFO) {
         $oscTemplate->addBlock('<link rel="canonical" href="' . tep_href_link(FILENAME_PRODUCT_INFO, 'products_id=' . (int)$_GET['products_id'], 'NONSSL', false) . '" />' . "\n", $this->group);
