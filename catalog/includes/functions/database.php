@@ -21,6 +21,7 @@
 
     if ( !mysqli_connect_errno() ) {
       mysqli_set_charset($$link, 'utf8');
+      mysqli_query($$link, "set sql_mode=(select replace(@@sql_mode, 'ONLY_FULL_GROUP_BY', ''))");
     } 
 
     return $$link;
