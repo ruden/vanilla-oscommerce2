@@ -38,6 +38,7 @@
                   '# Database Server: ' . DB_SERVER . "\n" .
                   '#' . "\n" .
                   '# Backup Date: ' . date(PHP_DATE_TIME_FORMAT) . "\n\n";
+                  'SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";'. "\n\n";
         fputs($fp, $schema);
 
         $tables_query = tep_db_query('show tables');
