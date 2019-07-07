@@ -235,7 +235,7 @@
     }
 
     function before_process() {
-      global $customer_id, $order, $_POST, $braintree_result, $braintree_token, $braintree_error;
+      global $customer_id, $order, $braintree_result, $braintree_token, $braintree_error;
 
       $braintree_token = null;
       $braintree_token_cvv = null;
