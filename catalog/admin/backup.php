@@ -43,7 +43,7 @@
 
         $tables_query = tep_db_query('show tables');
         while ($tables = tep_db_fetch_array($tables_query)) {
-          list(,$table) = each($tables);
+          $table = reset($tables);
 
           $schema = 'drop table if exists ' . $table . ';' . "\n" .
                     'create table ' . $table . ' (' . "\n";
@@ -81,7 +81,7 @@
             $index[$kname]['columns'][] = $keys['Column_name'];
           }
 
-          while (list($kname, $info) = each($index)) {
+          foreach ($index as $kname => $info) {
             $schema .= ',' . "\n";
 
             $columns = implode($info['columns'], ', ');
@@ -106,8 +106,7 @@
             while ($rows = tep_db_fetch_array($rows_query)) {
               $schema = 'insert into ' . $table . ' (' . implode(', ', $table_list) . ') values (';
 
-              reset($table_list);
-              while (list(,$i) = each($table_list)) {
+              foreach ($table_list as $i) {
                 if (!isset($rows[$i])) {
                   $schema .= 'NULL, ';
                 } elseif (tep_not_null($rows[$i])) {

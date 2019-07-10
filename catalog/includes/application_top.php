@@ -91,7 +91,7 @@
       }
 
       if (sizeof($GET_array) > 0) {
-        while (list($key, $value) = each($GET_array)) {
+        foreach ($GET_array as $key => $value) {
           $_GET[$key] = $value;
         }
       }
