@@ -18,7 +18,7 @@
     var $icon = 'twitter.png';
     var $enabled = false;
 
-    function sb_twitter_button() {
+    function __construct() {
       $this->title = MODULE_SOCIAL_BOOKMARKS_TWITTER_BUTTON_TITLE;
       $this->public_title = MODULE_SOCIAL_BOOKMARKS_TWITTER_BUTTON_PUBLIC_TITLE;
       $this->description = MODULE_SOCIAL_BOOKMARKS_TWITTER_BUTTON_DESCRIPTION;
@@ -30,9 +30,7 @@
     }
 
     function getOutput() {
-      global $HTTP_GET_VARS;
-
-      $params = array('url=' . urlencode(tep_href_link(FILENAME_PRODUCT_INFO, 'products_id=' . $HTTP_GET_VARS['products_id'], 'NONSSL', false)));
+      $params = array('url=' . urlencode(tep_href_link(FILENAME_PRODUCT_INFO, 'products_id=' . $_GET['products_id'], 'NONSSL', false)));
 
       if ( strlen(MODULE_SOCIAL_BOOKMARKS_TWITTER_BUTTON_ACCOUNT) > 0 ) {
         $params[] = 'via=' . urlencode(MODULE_SOCIAL_BOOKMARKS_TWITTER_BUTTON_ACCOUNT);

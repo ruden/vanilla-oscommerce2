@@ -14,16 +14,14 @@
     var $sql_query, $number_of_rows, $current_page_number, $number_of_pages, $number_of_rows_per_page, $page_name;
 
 /* class constructor */
-    function splitPageResults($query, $max_rows, $count_key = '*', $page_holder = 'page') {
-      global $HTTP_GET_VARS, $HTTP_POST_VARS;
-
+    function __construct($query, $max_rows, $count_key = '*', $page_holder = 'page') {
       $this->sql_query = $query;
       $this->page_name = $page_holder;
 
-      if (isset($HTTP_GET_VARS[$page_holder])) {
-        $page = $HTTP_GET_VARS[$page_holder];
-      } elseif (isset($HTTP_POST_VARS[$page_holder])) {
-        $page = $HTTP_POST_VARS[$page_holder];
+      if (isset($_GET[$page_holder])) {
+        $page = $_GET[$page_holder];
+      } elseif (isset($_POST[$page_holder])) {
+        $page = $_POST[$page_holder];
       } else {
         $page = '';
       }

@@ -14,7 +14,7 @@ class inpay
     var $code, $title, $description, $enabled;
 
     // class constructor
-    function inpay()
+    function __construct()
     {
         global $order;
         $this->signature = 'inpay|inpay|1.0|2.2';
@@ -158,8 +158,7 @@ class inpay
                 $order_totals = array ();
                 if (is_array($order_total_modules->modules))
                 {
-                    reset($order_total_modules->modules);
-                    while ( list (, $value) = each($order_total_modules->modules))
+                    foreach($order_total_modules->modules as $value)
                     {
                         $class = substr($value, 0, strrpos($value, '.'));
                         if ($GLOBALS[$class]->enabled)
@@ -366,8 +365,8 @@ class inpay
         // calc Md5 sum
         //
         $parameters['checksum'] = $this->calcInpayMd5Key($parameters);
-        reset($parameters);
-        while ( list ($key, $value) = each($parameters))
+        
+        foreach($parameters as $key => $value)
         {
             $process_button_string .= tep_draw_hidden_field($key, $value);
         }
@@ -379,7 +378,7 @@ class inpay
         global $customer_id, $order, $order_totals, $sendto, $billto, $languages_id, $payment, $currencies, $cart, $cart_inpay_Standard_ID;
         global $$payment;
         $order_id = substr($cart_inpay_Standard_ID, strpos($cart_inpay_Standard_ID, '-')+1);
-        $my_status_query = tep_db_query("select orders_status from ".TABLE_ORDERS." where orders_id = '".$order_id."'"); // TODO: fix PB to add all params"' and customers_id = '" . (int)$HTTP_POST_VARS['custom'] . "'");
+        $my_status_query = tep_db_query("select orders_status from ".TABLE_ORDERS." where orders_id = '".$order_id."'"); // TODO: fix PB to add all params"' and customers_id = '" . (int)$_POST['custom'] . "'");
         $current_status_id = 0;
         $delivered_status = 3;
         $update_status = true;

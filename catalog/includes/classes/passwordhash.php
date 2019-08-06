@@ -35,7 +35,7 @@ class PasswordHash {
 	var $portable_hashes;
 	var $random_state;
 
-	function PasswordHash($iteration_count_log2, $portable_hashes)
+	function __construct($iteration_count_log2, $portable_hashes)
 	{
 		$this->itoa64 = './0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
 
@@ -110,8 +110,7 @@ class PasswordHash {
 	function gensalt_private($input)
 	{
 		$output = '$P$';
-		$output .= $this->itoa64[min($this->iteration_count_log2 +
-			((PHP_VERSION >= '5') ? 5 : 3), 30)];
+		$output .= $this->itoa64[min($this->iteration_count_log2 + 5, 30)];
 		$output .= $this->encode64($input, 6);
 
 		return $output;
@@ -144,17 +143,10 @@ class PasswordHash {
 		# in PHP would result in much worse performance and
 		# consequently in lower iteration counts and hashes that are
 		# quicker to crack (by non-PHP code).
-		if (PHP_VERSION >= '5') {
-			$hash = md5($salt . $password, TRUE);
-			do {
-				$hash = md5($hash . $password, TRUE);
-			} while (--$count);
-		} else {
-			$hash = pack('H*', md5($salt . $password));
-			do {
-				$hash = pack('H*', md5($hash . $password));
-			} while (--$count);
-		}
+	  $hash = md5($salt . $password, TRUE);
+      do {
+			  $hash = md5($hash . $password, TRUE);
+		} while (--$count);
 
 		$output = substr($setting, 0, 12);
 		$output .= $this->encode64($hash, 16);

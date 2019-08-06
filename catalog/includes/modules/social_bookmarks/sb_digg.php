@@ -18,7 +18,7 @@
     var $icon = 'digg.png';
     var $enabled = false;
 
-    function sb_digg() {
+    function __construct() {
       $this->title = MODULE_SOCIAL_BOOKMARKS_DIGG_TITLE;
       $this->public_title = MODULE_SOCIAL_BOOKMARKS_DIGG_PUBLIC_TITLE;
       $this->description = MODULE_SOCIAL_BOOKMARKS_DIGG_DESCRIPTION;
@@ -30,9 +30,7 @@
     }
 
     function getOutput() {
-      global $HTTP_GET_VARS;
-
-      return '<a href="http://digg.com/submit?url=' . urlencode(tep_href_link(FILENAME_PRODUCT_INFO, 'products_id=' . $HTTP_GET_VARS['products_id'], 'NONSSL', false)) . '" target="_blank"><img src="' . DIR_WS_IMAGES . 'social_bookmarks/' . $this->icon . '" border="0" title="' . tep_output_string_protected($this->public_title) . '" alt="' . tep_output_string_protected($this->public_title) . '"/></a>';
+      return '<a href="http://digg.com/submit?url=' . urlencode(tep_href_link(FILENAME_PRODUCT_INFO, 'products_id=' . $_GET['products_id'], 'NONSSL', false)) . '" target="_blank"><img src="' . DIR_WS_IMAGES . 'social_bookmarks/' . $this->icon . '" border="0" title="' . tep_output_string_protected($this->public_title) . '" alt="' . tep_output_string_protected($this->public_title) . '"/></a>';
     }
 
     function isEnabled() {

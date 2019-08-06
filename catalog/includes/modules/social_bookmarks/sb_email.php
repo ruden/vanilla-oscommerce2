@@ -18,7 +18,7 @@
     var $icon = 'email.png';
     var $enabled = false;
 
-    function sb_email() {
+    function __construct() {
       $this->title = MODULE_SOCIAL_BOOKMARKS_EMAIL_TITLE;
       $this->public_title = MODULE_SOCIAL_BOOKMARKS_EMAIL_PUBLIC_TITLE;
       $this->description = MODULE_SOCIAL_BOOKMARKS_EMAIL_DESCRIPTION;
@@ -30,9 +30,7 @@
     }
 
     function getOutput() {
-      global $HTTP_GET_VARS;
-
-      return '<a href="' . tep_href_link(FILENAME_TELL_A_FRIEND, 'products_id=' . $HTTP_GET_VARS['products_id']) . '"><img src="' . DIR_WS_IMAGES . 'social_bookmarks/' . $this->icon . '" border="0" title="' . tep_output_string_protected($this->public_title) . '" alt="' . tep_output_string_protected($this->public_title) . '" /></a>';
+      return '<a href="' . tep_href_link(FILENAME_TELL_A_FRIEND, 'products_id=' . $_GET['products_id']) . '"><img src="' . DIR_WS_IMAGES . 'social_bookmarks/' . $this->icon . '" border="0" title="' . tep_output_string_protected($this->public_title) . '" alt="' . tep_output_string_protected($this->public_title) . '" /></a>';
     }
 
     function isEnabled() {
