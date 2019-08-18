@@ -23,12 +23,9 @@
       $this->title = MODULE_PAYMENT_CHRONOPAY_TEXT_TITLE;
       $this->public_title = MODULE_PAYMENT_CHRONOPAY_TEXT_PUBLIC_TITLE;
       $this->description = MODULE_PAYMENT_CHRONOPAY_TEXT_DESCRIPTION;
-      $this->sort_order = MODULE_PAYMENT_CHRONOPAY_SORT_ORDER;
-      $this->enabled = ((MODULE_PAYMENT_CHRONOPAY_STATUS == 'True') ? true : false);
-
-      if ((int)MODULE_PAYMENT_CHRONOPAY_PREPARE_ORDER_STATUS_ID > 0) {
-        $this->order_status = MODULE_PAYMENT_CHRONOPAY_PREPARE_ORDER_STATUS_ID;
-      }
+      $this->sort_order = defined('MODULE_PAYMENT_CHRONOPAY_SORT_ORDER') ? MODULE_PAYMENT_CHRONOPAY_SORT_ORDER : 0;
+      $this->enabled = defined('MODULE_PAYMENT_CHRONOPAY_STATUS') && MODULE_PAYMENT_CHRONOPAY_STATUS == 'True' ? true : false;
+      $this->order_status = defined('MODULE_PAYMENT_CHRONOPAY_PREPARE_ORDER_STATUS_ID') && ((int)MODULE_PAYMENT_CHRONOPAY_PREPARE_ORDER_STATUS_ID > 0) ? (int)MODULE_PAYMENT_CHRONOPAY_PREPARE_ORDER_STATUS_ID : 0;
 
       if (is_object($order)) $this->update_status();
 
