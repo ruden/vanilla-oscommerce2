@@ -4,14 +4,22 @@
 # than images
 
 # Prevents any script files from being accessed from the images folder
-<FilesMatch "\.(php([0-9]|s)?|s?p?html|cgi|pl|exe)$">
-  <IfVersion < 2.4>
-    Order deny,allow
-    Deny from all
-  </IfVersion>
-  <IfVersion >= 2.4>
-    Require all denied
-  </IfVersion>
-</FilesMatch>
+<IfVersion < 2.4>
+  Order deny,allow
+  Deny from all
+  <Files ~ "(?i)^.*\.(jpg|jpeg|gif|png|bmp|tiff|svg|pdf|mov|mpeg|mp4|avi|mpg|wma|flv|webm|ico)$">
+    Allow from all
+  </Files>
+</IfVersion>
+<IfVersion >= 2.4>
+  Require all denied
+  <Files ~ "(?i)^.*\.(jpg|jpeg|gif|png|bmp|tiff|svg|pdf|mov|mpeg|mp4|avi|mpg|wma|flv|webm|ico)$">
+    Require all granted
+  </Files>
+</IfVersion>
+
+<Files *>
+  SetHandler default-handler
+</Files>
 
 Options -Indexes
