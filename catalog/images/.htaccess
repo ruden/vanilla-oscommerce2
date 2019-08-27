@@ -5,8 +5,13 @@
 
 # Prevents any script files from being accessed from the images folder
 <FilesMatch "\.(php([0-9]|s)?|s?p?html|cgi|pl|exe)$">
-   Order Deny,Allow
-   Deny from all
+  <IfVersion < 2.4>
+    Order deny,allow
+    Deny from all
+  </IfVersion>
+  <IfVersion >= 2.4>
+    Require all denied
+  </IfVersion>
 </FilesMatch>
 
 Options -Indexes
