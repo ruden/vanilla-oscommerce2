@@ -30,7 +30,7 @@
       $product_global = '0';
     }
 
-    (array)$products = $_POST['products'];
+    $products = (isset($_POST['products']) && is_array($_POST['products']) ? $_POST['products'] : array());
 
     if ($product_global != $global['global_product_notifications']) {
       $product_global = (($global['global_product_notifications'] == '1') ? '0' : '1');
