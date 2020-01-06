@@ -1,6 +1,4 @@
-osCommerce Online Merchant v2.x
-===============================
+<p align="center"><img src="https://i.ibb.co/3mrjpbx/vanilla-oscommerce2.png"></p>
 
-Website: http://www.oscommerce.com
-
-Support Forums: http://forums.oscommerce.com
+Vanilla osCommerce v2.3.5
+=========================
