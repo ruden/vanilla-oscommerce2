@@ -13,7 +13,7 @@
   class securityCheck_error_log_files {
     var $type = 'warning';
 
-    function securityCheck_error_log_files() {
+    function __construct() {
       global $language;
 
       include(DIR_FS_ADMIN . 'includes/languages/' . $language . '/modules/security_check/error_log_files.php');

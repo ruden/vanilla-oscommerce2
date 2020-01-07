@@ -20,7 +20,7 @@
   class messageStack extends tableBox {
 
 // class constructor
-    function messageStack() {
+    function __construct() {
       global $messageToStack;
 
       $this->messages = array();

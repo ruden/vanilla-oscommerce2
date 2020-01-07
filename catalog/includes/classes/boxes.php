@@ -20,6 +20,9 @@
     var $table_data_parameters = '';
 
 // class constructor
+    function __construct() {
+    }
+
     function tableBox($contents, $direct_output = false) {
       $tableBox_string = '<table border="' . tep_output_string($this->table_border) . '" width="' . tep_output_string($this->table_width) . '" cellspacing="' . tep_output_string($this->table_cellspacing) . '" cellpadding="' . tep_output_string($this->table_cellpadding) . '"';
       if (tep_not_null($this->table_parameters)) $tableBox_string .= ' ' . $this->table_parameters;

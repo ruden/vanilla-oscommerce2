@@ -17,7 +17,7 @@
   class braintree_cc {
     var $code, $title, $description, $enabled, $_app, $payment_types;
 
-    function braintree_cc() {
+    function __construct() {
       global $PHP_SELF, $order, $appBraintreeCcRightTurn, $payment;
 
       $this->_app = new OSCOM_Braintree();

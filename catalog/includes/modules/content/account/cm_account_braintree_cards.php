@@ -23,7 +23,7 @@
     var $enabled = false;
     var $_app;
 
-    function cm_account_braintree_cards() {
+    function __construct() {
       global $language;
 
       $this->_app = new OSCOM_Braintree();

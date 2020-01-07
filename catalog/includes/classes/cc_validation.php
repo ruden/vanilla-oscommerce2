@@ -13,7 +13,7 @@
   class cc_validation {
     var $cc_type, $cc_number, $cc_expiry_month, $cc_expiry_year;
 
-    function validate($number, $expiry_m, $expiry_y) {
+    function __construct($number, $expiry_m, $expiry_y) {
       $this->cc_number = preg_replace('/[^0-9]/', '', $number);
 
       if (preg_match('/^4[0-9]{12}([0-9]{3})?$/', $this->cc_number)) {
