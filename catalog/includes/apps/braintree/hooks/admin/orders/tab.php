@@ -38,7 +38,7 @@
 
       $status = array();
 
-      $btstatus_query = tep_db_query("select comments from " . TABLE_ORDERS_STATUS_HISTORY . " where orders_id = '" . (int)$oID . "' and orders_status_id = '" . (int)OSCOM_APP_PAYPAL_BRAINTREE_TRANSACTIONS_ORDER_STATUS_ID . "' and comments like 'Transaction ID:%' order by date_added desc limit 1");
+      $btstatus_query = tep_db_query("select comments from orders_status_history where orders_id = '" . (int)$oID . "' and orders_status_id = '" . (int)OSCOM_APP_PAYPAL_BRAINTREE_TRANSACTIONS_ORDER_STATUS_ID . "' and comments like 'Transaction ID:%' order by date_added desc limit 1");
       if ( tep_db_num_rows($btstatus_query) ) {
         $btstatus = tep_db_fetch_array($btstatus_query);
 
@@ -51,7 +51,7 @@
         }
 
         if ( isset($status['Transaction ID']) ) {
-          $order_query = tep_db_query("select o.orders_id, o.payment_method, o.currency, o.currency_value, ot.value as total from " . TABLE_ORDERS . " o, " . TABLE_ORDERS_TOTAL . " ot where o.orders_id = '" . (int)$oID . "' and o.orders_id = ot.orders_id and ot.class = 'ot_total'");
+          $order_query = tep_db_query("select o.orders_id, o.payment_method, o.currency, o.currency_value, ot.value as total from orders o, orders_total ot where o.orders_id = '" . (int)$oID . "' and o.orders_id = ot.orders_id and ot.class = 'ot_total'");
           $order = tep_db_fetch_array($order_query);
 
           $bt_server = (strpos(strtolower($order['payment_method']), 'sandbox') !== false) ? 'sandbox' : 'live';
@@ -87,10 +87,10 @@ EOD;
       $output = '';
 
       if ($status['Payment Status'] == 'authorized') {
-        $v_query = tep_db_query("select comments from " . TABLE_ORDERS_STATUS_HISTORY . " where orders_id = '" . (int)$order['orders_id'] . "' and orders_status_id = '" . (int)OSCOM_APP_PAYPAL_BRAINTREE_TRANSACTIONS_ORDER_STATUS_ID . "' and comments like 'Braintree App: Void (%' limit 1");
+        $v_query = tep_db_query("select comments from orders_status_history where orders_id = '" . (int)$order['orders_id'] . "' and orders_status_id = '" . (int)OSCOM_APP_PAYPAL_BRAINTREE_TRANSACTIONS_ORDER_STATUS_ID . "' and comments like 'Braintree App: Void (%' limit 1");
 
         if ( !tep_db_num_rows($v_query) ) {
-          $c_query = tep_db_query("select comments from " . TABLE_ORDERS_STATUS_HISTORY . " where orders_id = '" . (int)$order['orders_id'] . "' and orders_status_id = '" . (int)OSCOM_APP_PAYPAL_BRAINTREE_TRANSACTIONS_ORDER_STATUS_ID . "' and comments like 'Braintree App: Capture (%' limit 1");
+          $c_query = tep_db_query("select comments from orders_status_history where orders_id = '" . (int)$order['orders_id'] . "' and orders_status_id = '" . (int)OSCOM_APP_PAYPAL_BRAINTREE_TRANSACTIONS_ORDER_STATUS_ID . "' and comments like 'Braintree App: Capture (%' limit 1");
 
           if ( !tep_db_num_rows($c_query) ) {
             $output .= $this->_app->drawButton($this->_app->getDef('button_dialog_capture'), '#', 'success', 'data-button="braintreeButtonDoCapture"', true);
@@ -151,7 +151,7 @@ EOD;
     function getVoidButton($status, $order) {
       $output = '';
 
-      $s_query = tep_db_query("select comments from " . TABLE_ORDERS_STATUS_HISTORY . " where orders_id = '" . (int)$order['orders_id'] . "' and orders_status_id = '" . (int)OSCOM_APP_PAYPAL_BRAINTREE_TRANSACTIONS_ORDER_STATUS_ID . "' and comments like '%Payment Status:%' order by date_added desc limit 1");
+      $s_query = tep_db_query("select comments from orders_status_history where orders_id = '" . (int)$order['orders_id'] . "' and orders_status_id = '" . (int)OSCOM_APP_PAYPAL_BRAINTREE_TRANSACTIONS_ORDER_STATUS_ID . "' and comments like '%Payment Status:%' order by date_added desc limit 1");
 
       if (tep_db_num_rows($s_query)) {
         $s = tep_db_fetch_array($s_query);
@@ -172,7 +172,7 @@ EOD;
         }
 
         if (($last_status['Payment Status'] == 'authorized') || ($last_status['Payment Status'] == 'submitted_for_settlement')) {
-          $v_query = tep_db_query("select comments from " . TABLE_ORDERS_STATUS_HISTORY . " where orders_id = '" . (int)$order['orders_id'] . "' and orders_status_id = '" . (int)OSCOM_APP_PAYPAL_TRANSACTIONS_ORDER_STATUS_ID . "' and (comments like 'Braintree App: Void (%' or comments like 'Braintree App: Refund (%') limit 1");
+          $v_query = tep_db_query("select comments from orders_status_history where orders_id = '" . (int)$order['orders_id'] . "' and orders_status_id = '" . (int)OSCOM_APP_PAYPAL_TRANSACTIONS_ORDER_STATUS_ID . "' and (comments like 'Braintree App: Void (%' or comments like 'Braintree App: Refund (%') limit 1");
 
           if ( !tep_db_num_rows($v_query) ) {
             $output .= $this->_app->drawButton($this->_app->getDef('button_dialog_void'), '#', 'warning', 'data-button="braintreeButtonDoVoid"', true);
@@ -222,7 +222,7 @@ EOD;
     function getRefundButton($status, $order) {
       $output = '';
 
-      $s_query = tep_db_query("select comments from " . TABLE_ORDERS_STATUS_HISTORY . " where orders_id = '" . (int)$order['orders_id'] . "' and orders_status_id = '" . (int)OSCOM_APP_PAYPAL_BRAINTREE_TRANSACTIONS_ORDER_STATUS_ID . "' and comments not like 'Braintree App: Refund (%' and comments like '%Payment Status:%' order by date_added desc limit 1");
+      $s_query = tep_db_query("select comments from orders_status_history where orders_id = '" . (int)$order['orders_id'] . "' and orders_status_id = '" . (int)OSCOM_APP_PAYPAL_BRAINTREE_TRANSACTIONS_ORDER_STATUS_ID . "' and comments not like 'Braintree App: Refund (%' and comments like '%Payment Status:%' order by date_added desc limit 1");
 
       if ( tep_db_num_rows($s_query) ) {
         $s = tep_db_fetch_array($s_query);
@@ -245,7 +245,7 @@ EOD;
         if (($last_status['Payment Status'] == 'settled') || ($last_status['Payment Status'] == 'settling')) {
           $refund_total = $this->_app->formatCurrencyRaw($order['total'], $order['currency'], $order['currency_value']);
 
-          $r_query = tep_db_query("select comments from " . TABLE_ORDERS_STATUS_HISTORY . " where orders_id = '" . (int)$order['orders_id'] . "' and orders_status_id = '" . (int)OSCOM_APP_PAYPAL_BRAINTREE_TRANSACTIONS_ORDER_STATUS_ID . "' and comments like 'Braintree App: Refund (%'");
+          $r_query = tep_db_query("select comments from orders_status_history where orders_id = '" . (int)$order['orders_id'] . "' and orders_status_id = '" . (int)OSCOM_APP_PAYPAL_BRAINTREE_TRANSACTIONS_ORDER_STATUS_ID . "' and comments like 'Braintree App: Refund (%'");
 
           while ($r = tep_db_fetch_array($r_query)) {
             if (preg_match('/^Braintree App\: Refund \(([0-9\.]+)\)\n/', $r['comments'], $r_matches)) {

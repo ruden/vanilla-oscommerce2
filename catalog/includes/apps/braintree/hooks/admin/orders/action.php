@@ -31,7 +31,7 @@
 
     function execute() {
       if ( isset($_GET['tabaction']) ) {
-        $btstatus_query = tep_db_query("select comments from " . TABLE_ORDERS_STATUS_HISTORY . " where orders_id = '" . (int)$_GET['oID'] . "' and orders_status_id = '" . (int)OSCOM_APP_PAYPAL_BRAINTREE_TRANSACTIONS_ORDER_STATUS_ID . "' and comments like 'Transaction ID:%' order by date_added limit 1");
+        $btstatus_query = tep_db_query("select comments from orders_status_history where orders_id = '" . (int)$_GET['oID'] . "' and orders_status_id = '" . (int)OSCOM_APP_PAYPAL_BRAINTREE_TRANSACTIONS_ORDER_STATUS_ID . "' and comments like 'Transaction ID:%' order by date_added limit 1");
         if ( tep_db_num_rows($btstatus_query) ) {
           $btstatus = tep_db_fetch_array($btstatus_query);
 
@@ -46,7 +46,7 @@
           }
 
           if ( isset($bt['Transaction ID']) ) {
-            $o_query = tep_db_query("select o.orders_id, o.payment_method, o.currency, o.currency_value, ot.value as total from " . TABLE_ORDERS . " o, " . TABLE_ORDERS_TOTAL . " ot where o.orders_id = '" . (int)$_GET['oID'] . "' and o.orders_id = ot.orders_id and ot.class = 'ot_total'");
+            $o_query = tep_db_query("select o.orders_id, o.payment_method, o.currency, o.currency_value, ot.value as total from orders o, orders_total ot where o.orders_id = '" . (int)$_GET['oID'] . "' and o.orders_id = ot.orders_id and ot.class = 'ot_total'");
             $o = tep_db_fetch_array($o_query);
 
             if ((isset($bt['Server']) && ($bt['Server'] !== 'production')) || (strpos($o['payment_method'], 'Sandbox') !== false)) {
@@ -248,7 +248,7 @@
                                 'customer_notified' => '0',
                                 'comments' => $result);
 
-        tep_db_perform(TABLE_ORDERS_STATUS_HISTORY, $sql_data_array);
+        tep_db_perform('orders_status_history', $sql_data_array);
 
         $messageStack->add_session($this->_app->getDef('ms_success_doVoid'), 'success');
       } else {
@@ -290,7 +290,7 @@
                                 'customer_notified' => '0',
                                 'comments' => $result);
 
-        tep_db_perform(TABLE_ORDERS_STATUS_HISTORY, $sql_data_array);
+        tep_db_perform('orders_status_history', $sql_data_array);
 
         $messageStack->add_session($this->_app->getDef('ms_success_doRefund', array(
           'refund_amount' => tep_db_prepare_input($response->transaction->amount)
