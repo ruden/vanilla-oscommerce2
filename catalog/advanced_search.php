@@ -12,9 +12,9 @@
 
   require('includes/application_top.php');
 
-  require(DIR_WS_LANGUAGES . $language . '/' . FILENAME_ADVANCED_SEARCH);
+  require(DIR_WS_LANGUAGES . $language . '/advanced_search.php');
 
-  $breadcrumb->add(NAVBAR_TITLE_1, tep_href_link(FILENAME_ADVANCED_SEARCH));
+  $breadcrumb->add(NAVBAR_TITLE_1, tep_href_link('advanced_search.php'));
 
   require(DIR_WS_INCLUDES . 'template_top.php');
 ?>
@@ -115,7 +115,7 @@ function popupWindow(url) {
   }
 ?>
 
-<?php echo tep_draw_form('advanced_search', tep_href_link(FILENAME_ADVANCED_SEARCH_RESULT, '', 'NONSSL', false), 'get', 'onsubmit="return check_form(this);"') . tep_hide_session_id(); ?>
+<?php echo tep_draw_form('advanced_search', tep_href_link('advanced_search_result.php', '', 'NONSSL', false), 'get', 'onsubmit="return check_form(this);"') . tep_hide_session_id(); ?>
 
 <div class="contentContainer">
   <h2><?php echo HEADING_SEARCH_CRITERIA; ?></h2>
@@ -128,7 +128,7 @@ function popupWindow(url) {
     <br />
 
     <div>
-      <span><?php echo '<a href="' . tep_href_link(FILENAME_POPUP_SEARCH_HELP) . '" target="_blank" onclick="$(\'#helpSearch\').dialog(\'open\'); return false;">' . TEXT_SEARCH_HELP_LINK . '</a>'; ?></span>
+      <span><?php echo '<a href="' . tep_href_link('popup_search_help.php') . '" target="_blank" onclick="$(\'#helpSearch\').dialog(\'open\'); return false;">' . TEXT_SEARCH_HELP_LINK . '</a>'; ?></span>
       <span style="float: right;"><?php echo tep_draw_button(IMAGE_BUTTON_SEARCH, 'search', null, 'primary'); ?></span>
     </div>
 

@@ -12,7 +12,7 @@
 
   require('includes/application_top.php');
 
-  require(DIR_WS_LANGUAGES . $language . '/' . FILENAME_PASSWORD_FORGOTTEN);
+  require(DIR_WS_LANGUAGES . $language . '/password_forgotten.php');
 
   $password_reset_initiated = false;
 
@@ -32,7 +32,7 @@
 
         tep_db_query("update customers_info set password_reset_key = '" . tep_db_input($reset_key) . "', password_reset_date = now() where customers_info_id = '" . (int)$check_customer['customers_id'] . "'");
 
-        $reset_key_url = tep_href_link(FILENAME_PASSWORD_RESET, 'account=' . urlencode($email_address) . '&key=' . $reset_key, 'SSL', false);
+        $reset_key_url = tep_href_link('password_reset.php', 'account=' . urlencode($email_address) . '&key=' . $reset_key, 'SSL', false);
 
         if ( strpos($reset_key_url, '&amp;') !== false ) {
           $reset_key_url = str_replace('&amp;', '&', $reset_key_url);
@@ -51,8 +51,8 @@
     }
   }
 
-  $breadcrumb->add(NAVBAR_TITLE_1, tep_href_link(FILENAME_LOGIN, '', 'SSL'));
-  $breadcrumb->add(NAVBAR_TITLE_2, tep_href_link(FILENAME_PASSWORD_FORGOTTEN, '', 'SSL'));
+  $breadcrumb->add(NAVBAR_TITLE_1, tep_href_link('login.php', '', 'SSL'));
+  $breadcrumb->add(NAVBAR_TITLE_2, tep_href_link('password_forgotten.php', '', 'SSL'));
 
   require(DIR_WS_INCLUDES . 'template_top.php');
 ?>
@@ -77,7 +77,7 @@
   } else {
 ?>
 
-<?php echo tep_draw_form('password_forgotten', tep_href_link(FILENAME_PASSWORD_FORGOTTEN, 'action=process', 'SSL'), 'post', '', true); ?>
+<?php echo tep_draw_form('password_forgotten', tep_href_link('password_forgotten.php', 'action=process', 'SSL'), 'post', '', true); ?>
 
 <div class="contentContainer">
   <div class="contentText">
@@ -94,7 +94,7 @@
   <div class="buttonSet">
     <span class="buttonAction"><?php echo tep_draw_button(IMAGE_BUTTON_CONTINUE, 'triangle-1-e', null, 'primary'); ?></span>
 
-    <?php echo tep_draw_button(IMAGE_BUTTON_BACK, 'triangle-1-w', tep_href_link(FILENAME_LOGIN, '', 'SSL')); ?>
+    <?php echo tep_draw_button(IMAGE_BUTTON_BACK, 'triangle-1-w', tep_href_link('login.php', '', 'SSL')); ?>
   </div>
 </div>
 

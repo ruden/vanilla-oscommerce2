@@ -15,23 +15,23 @@
 // if the customer is not logged on, redirect them to the login page
   if (!tep_session_is_registered('customer_id')) {
     $navigation->set_snapshot();
-    tep_redirect(tep_href_link(FILENAME_LOGIN, '', 'SSL'));
+    tep_redirect(tep_href_link('login.php', '', 'SSL'));
   }
 
 // if there is nothing in the customers cart, redirect them to the shopping cart page
   if ($cart->count_contents() < 1) {
-    tep_redirect(tep_href_link(FILENAME_SHOPPING_CART));
+    tep_redirect(tep_href_link('shopping_cart.php'));
   }
 
 // if no shipping method has been selected, redirect the customer to the shipping method selection page
   if (!tep_session_is_registered('shipping')) {
-    tep_redirect(tep_href_link(FILENAME_CHECKOUT_SHIPPING, '', 'SSL'));
+    tep_redirect(tep_href_link('checkout_shipping.php', '', 'SSL'));
   }
 
 // avoid hack attempts during the checkout procedure by checking the internal cartID
   if (isset($cart->cartID) && tep_session_is_registered('cartID')) {
     if ($cart->cartID != $cartID) {
-      tep_redirect(tep_href_link(FILENAME_CHECKOUT_SHIPPING, '', 'SSL'));
+      tep_redirect(tep_href_link('checkout_shipping.php', '', 'SSL'));
     }
   }
 
@@ -40,7 +40,7 @@
     $products = $cart->get_products();
     for ($i=0, $n=sizeof($products); $i<$n; $i++) {
       if (tep_check_stock($products[$i]['id'], $products[$i]['quantity'])) {
-        tep_redirect(tep_href_link(FILENAME_SHOPPING_CART));
+        tep_redirect(tep_href_link('shopping_cart.php'));
         break;
       }
     }
@@ -78,10 +78,10 @@
   require(DIR_WS_CLASSES . 'payment.php');
   $payment_modules = new payment;
 
-  require(DIR_WS_LANGUAGES . $language . '/' . FILENAME_CHECKOUT_PAYMENT);
+  require(DIR_WS_LANGUAGES . $language . '/checkout_payment.php');
 
-  $breadcrumb->add(NAVBAR_TITLE_1, tep_href_link(FILENAME_CHECKOUT_SHIPPING, '', 'SSL'));
-  $breadcrumb->add(NAVBAR_TITLE_2, tep_href_link(FILENAME_CHECKOUT_PAYMENT, '', 'SSL'));
+  $breadcrumb->add(NAVBAR_TITLE_1, tep_href_link('checkout_shipping.php', '', 'SSL'));
+  $breadcrumb->add(NAVBAR_TITLE_2, tep_href_link('checkout_payment.php', '', 'SSL'));
 
   require(DIR_WS_INCLUDES . 'template_top.php');
 ?>
@@ -122,7 +122,7 @@ function rowOutEffect(object) {
 
 <h1><?php echo HEADING_TITLE; ?></h1>
 
-<?php echo tep_draw_form('checkout_payment', tep_href_link(FILENAME_CHECKOUT_CONFIRMATION, '', 'SSL'), 'post', 'onsubmit="return check_form();"', true); ?>
+<?php echo tep_draw_form('checkout_payment', tep_href_link('checkout_confirmation.php', '', 'SSL'), 'post', 'onsubmit="return check_form();"', true); ?>
 
 <div class="contentContainer">
 
@@ -151,7 +151,7 @@ function rowOutEffect(object) {
       </div>
     </div>
 
-    <?php echo TEXT_SELECTED_BILLING_DESTINATION; ?><br /><br /><?php echo tep_draw_button(IMAGE_BUTTON_CHANGE_ADDRESS, 'home', tep_href_link(FILENAME_CHECKOUT_PAYMENT_ADDRESS, '', 'SSL')); ?>
+    <?php echo TEXT_SELECTED_BILLING_DESTINATION; ?><br /><br /><?php echo tep_draw_button(IMAGE_BUTTON_CHANGE_ADDRESS, 'home', tep_href_link('checkout_payment_address.php', '', 'SSL')); ?>
   </div>
 
   <div style="clear: both;"></div>
@@ -271,7 +271,7 @@ function rowOutEffect(object) {
 
       <table border="0" width="100%" cellspacing="0" cellpadding="2">
         <tr>
-          <td align="center" width="33%" class="checkoutBarFrom"><?php echo '<a href="' . tep_href_link(FILENAME_CHECKOUT_SHIPPING, '', 'SSL') . '" class="checkoutBarFrom">' . CHECKOUT_BAR_DELIVERY . '</a>'; ?></td>
+          <td align="center" width="33%" class="checkoutBarFrom"><?php echo '<a href="' . tep_href_link('checkout_shipping.php', '', 'SSL') . '" class="checkoutBarFrom">' . CHECKOUT_BAR_DELIVERY . '</a>'; ?></td>
           <td align="center" width="33%" class="checkoutBarCurrent"><?php echo CHECKOUT_BAR_PAYMENT; ?></td>
           <td align="center" width="33%" class="checkoutBarTo"><?php echo CHECKOUT_BAR_CONFIRMATION; ?></td>
         </tr>

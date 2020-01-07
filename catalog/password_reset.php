@@ -12,7 +12,7 @@
 
   require('includes/application_top.php');
 
-  require(DIR_WS_LANGUAGES . $language . '/' . FILENAME_PASSWORD_RESET);
+  require(DIR_WS_LANGUAGES . $language . '/password_reset.php');
 
   $error = false;
 
@@ -53,7 +53,7 @@
   }
 
   if ($error == true) {
-    tep_redirect(tep_href_link(FILENAME_PASSWORD_FORGOTTEN));
+    tep_redirect(tep_href_link('password_forgotten.php'));
   }
 
   if (isset($_GET['action']) && ($_GET['action'] == 'process') && isset($_POST['formid']) && ($_POST['formid'] == $sessiontoken)) {
@@ -77,11 +77,11 @@
 
       $messageStack->add_session('login', SUCCESS_PASSWORD_RESET, 'success');
 
-      tep_redirect(tep_href_link(FILENAME_LOGIN, '', 'SSL'));
+      tep_redirect(tep_href_link('login.php', '', 'SSL'));
     }
   }
 
-  $breadcrumb->add(NAVBAR_TITLE_1, tep_href_link(FILENAME_LOGIN, '', 'SSL'));
+  $breadcrumb->add(NAVBAR_TITLE_1, tep_href_link('login.php', '', 'SSL'));
   $breadcrumb->add(NAVBAR_TITLE_2);
 
   require(DIR_WS_INCLUDES . 'template_top.php');
@@ -96,7 +96,7 @@
   }
 ?>
 
-<?php echo tep_draw_form('password_reset', tep_href_link(FILENAME_PASSWORD_RESET, 'account=' . $email_address . '&key=' . $password_key . '&action=process', 'SSL'), 'post', 'onsubmit="return check_form(password_reset);"', true); ?>
+<?php echo tep_draw_form('password_reset', tep_href_link('password_reset.php', 'account=' . $email_address . '&key=' . $password_key . '&action=process', 'SSL'), 'post', 'onsubmit="return check_form(password_reset);"', true); ?>
 
 <div class="contentContainer">
   <div class="contentText">

@@ -12,9 +12,9 @@
 
   require('includes/application_top.php');
 
-  require(DIR_WS_LANGUAGES . $language . '/' . FILENAME_SPECIALS);
+  require(DIR_WS_LANGUAGES . $language . '/specials.php');
 
-  $breadcrumb->add(NAVBAR_TITLE, tep_href_link(FILENAME_SPECIALS));
+  $breadcrumb->add(NAVBAR_TITLE, tep_href_link('specials.php'));
 
   require(DIR_WS_INCLUDES . 'template_top.php');
 ?>
@@ -51,7 +51,7 @@
     while ($specials = tep_db_fetch_array($specials_query)) {
       $row++;
 
-      echo '        <td align="center" width="33%"><a href="' . tep_href_link(FILENAME_PRODUCT_INFO, 'products_id=' . $specials['products_id']) . '">' . tep_image(DIR_WS_IMAGES . $specials['products_image'], $specials['products_name'], SMALL_IMAGE_WIDTH, SMALL_IMAGE_HEIGHT) . '</a><br /><a href="' . tep_href_link(FILENAME_PRODUCT_INFO, 'products_id=' . $specials['products_id']) . '">' . $specials['products_name'] . '</a><br /><del>' . $currencies->display_price($specials['products_price'], tep_get_tax_rate($specials['products_tax_class_id'])) . '</del><br /><span class="productSpecialPrice">' . $currencies->display_price($specials['specials_new_products_price'], tep_get_tax_rate($specials['products_tax_class_id'])) . '</span></td>' . "\n";
+      echo '        <td align="center" width="33%"><a href="' . tep_href_link('product_info.php', 'products_id=' . $specials['products_id']) . '">' . tep_image(DIR_WS_IMAGES . $specials['products_image'], $specials['products_name'], SMALL_IMAGE_WIDTH, SMALL_IMAGE_HEIGHT) . '</a><br /><a href="' . tep_href_link('product_info.php', 'products_id=' . $specials['products_id']) . '">' . $specials['products_name'] . '</a><br /><del>' . $currencies->display_price($specials['products_price'], tep_get_tax_rate($specials['products_tax_class_id'])) . '</del><br /><span class="productSpecialPrice">' . $currencies->display_price($specials['specials_new_products_price'], tep_get_tax_rate($specials['products_tax_class_id'])) . '</span></td>' . "\n";
 
       if ((($row / 3) == floor($row / 3))) {
 ?>

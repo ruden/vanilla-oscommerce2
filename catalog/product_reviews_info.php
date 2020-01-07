@@ -17,10 +17,10 @@
     $review_check = tep_db_fetch_array($review_check_query);
 
     if ($review_check['total'] < 1) {
-      tep_redirect(tep_href_link(FILENAME_PRODUCT_REVIEWS, tep_get_all_get_params(array('reviews_id'))));
+      tep_redirect(tep_href_link('product_reviews.php', tep_get_all_get_params(array('reviews_id'))));
     }
   } else {
-    tep_redirect(tep_href_link(FILENAME_PRODUCT_REVIEWS, tep_get_all_get_params(array('reviews_id'))));
+    tep_redirect(tep_href_link('product_reviews.php', tep_get_all_get_params(array('reviews_id'))));
   }
 
   tep_db_query("update reviews set reviews_read = reviews_read+1 where reviews_id = '" . (int)$_GET['reviews_id'] . "'");
@@ -40,9 +40,9 @@
     $products_name = $review['products_name'];
   }
 
-  require(DIR_WS_LANGUAGES . $language . '/' . FILENAME_PRODUCT_REVIEWS_INFO);
+  require(DIR_WS_LANGUAGES . $language . '/product_reviews_info.php');
 
-  $breadcrumb->add(NAVBAR_TITLE, tep_href_link(FILENAME_PRODUCT_REVIEWS, tep_get_all_get_params()));
+  $breadcrumb->add(NAVBAR_TITLE, tep_href_link('product_reviews.php', tep_get_all_get_params()));
 
   require(DIR_WS_INCLUDES . 'template_top.php');
 ?>
@@ -59,7 +59,7 @@
 ?>
 
   <div style="float: right; width: <?php echo SMALL_IMAGE_WIDTH+20; ?>px; text-align: center;">
-    <?php echo '<a href="' . tep_href_link(FILENAME_PRODUCT_INFO, 'products_id=' . $review['products_id']) . '">' . tep_image(DIR_WS_IMAGES . $review['products_image'], addslashes($review['products_name']), SMALL_IMAGE_WIDTH, SMALL_IMAGE_HEIGHT, 'hspace="5" vspace="5"') . '</a>'; ?>
+    <?php echo '<a href="' . tep_href_link('product_info.php', 'products_id=' . $review['products_id']) . '">' . tep_image(DIR_WS_IMAGES . $review['products_image'], addslashes($review['products_name']), SMALL_IMAGE_WIDTH, SMALL_IMAGE_HEIGHT, 'hspace="5" vspace="5"') . '</a>'; ?>
 
     <p><?php echo tep_draw_button(IMAGE_BUTTON_IN_CART, 'cart', tep_href_link(basename($PHP_SELF), tep_get_all_get_params(array('action')) . 'action=buy_now')); ?></p>
   </div>
@@ -80,9 +80,9 @@
   <br />
 
   <div class="buttonSet">
-    <span class="buttonAction"><?php echo tep_draw_button(IMAGE_BUTTON_WRITE_REVIEW, 'comment', tep_href_link(FILENAME_PRODUCT_REVIEWS_WRITE, tep_get_all_get_params(array('reviews_id'))), 'primary'); ?></span>
+    <span class="buttonAction"><?php echo tep_draw_button(IMAGE_BUTTON_WRITE_REVIEW, 'comment', tep_href_link('product_reviews_write.php', tep_get_all_get_params(array('reviews_id'))), 'primary'); ?></span>
 
-    <?php echo tep_draw_button(IMAGE_BUTTON_BACK, 'triangle-1-w', tep_href_link(FILENAME_PRODUCT_REVIEWS, tep_get_all_get_params(array('reviews_id')))); ?>
+    <?php echo tep_draw_button(IMAGE_BUTTON_BACK, 'triangle-1-w', tep_href_link('product_reviews.php', tep_get_all_get_params(array('reviews_id')))); ?>
   </div>
 </div>
 

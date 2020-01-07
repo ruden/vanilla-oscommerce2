@@ -99,13 +99,13 @@
     function preLogin() {
       global $paypal_login_access_token, $paypal_login_customer_id, $sendto, $billto;
 
-      $return_url = tep_href_link(FILENAME_LOGIN, '', 'SSL');
+      $return_url = tep_href_link('login.php', '', 'SSL');
 
       if ( isset($_GET['code']) ) {
         $paypal_login_customer_id = false;
 
         $params = array('code' => $_GET['code'],
-                        'redirect_uri' => str_replace('&amp;', '&', tep_href_link(FILENAME_LOGIN, 'action=paypal_login', 'SSL')));
+                        'redirect_uri' => str_replace('&amp;', '&', tep_href_link('login.php', 'action=paypal_login', 'SSL')));
 
         $response_token = $this->_app->getApiResult('LOGIN', 'GrantToken', $params);
 
@@ -251,7 +251,7 @@
               tep_session_register('billto');
             }
 
-            $return_url = tep_href_link(FILENAME_LOGIN, 'action=paypal_login_process', 'SSL');
+            $return_url = tep_href_link('login.php', 'action=paypal_login_process', 'SSL');
           }
         }
       }

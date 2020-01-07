@@ -4,7 +4,7 @@
   <div class="contentText">
     <p><?php echo MODULE_CONTENT_LOGIN_TEXT_RETURNING_CUSTOMER; ?></p>
 
-    <?php echo tep_draw_form('login', tep_href_link(FILENAME_LOGIN, 'action=process', 'SSL'), 'post', '', true); ?>
+    <?php echo tep_draw_form('login', tep_href_link('login.php', 'action=process', 'SSL'), 'post', '', true); ?>
 
     <table border="0" cellspacing="0" cellpadding="2" width="100%">
       <tr>
@@ -17,7 +17,7 @@
       </tr>
     </table>
 
-    <p><?php echo '<a href="' . tep_href_link(FILENAME_PASSWORD_FORGOTTEN, '', 'SSL') . '">' . MODULE_CONTENT_LOGIN_TEXT_PASSWORD_FORGOTTEN . '</a>'; ?></p>
+    <p><?php echo '<a href="' . tep_href_link('password_forgotten.php', '', 'SSL') . '">' . MODULE_CONTENT_LOGIN_TEXT_PASSWORD_FORGOTTEN . '</a>'; ?></p>
 
     <p align="right"><?php echo tep_draw_button(IMAGE_BUTTON_LOGIN, 'key', null, 'primary'); ?></p>
 

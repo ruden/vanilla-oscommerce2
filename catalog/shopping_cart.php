@@ -19,9 +19,9 @@
     $payment_modules = new payment;
   }
 
-  require(DIR_WS_LANGUAGES . $language . '/' . FILENAME_SHOPPING_CART);
+  require(DIR_WS_LANGUAGES . $language . '/shopping_cart.php');
 
-  $breadcrumb->add(NAVBAR_TITLE, tep_href_link(FILENAME_SHOPPING_CART));
+  $breadcrumb->add(NAVBAR_TITLE, tep_href_link('shopping_cart.php'));
 
   require(DIR_WS_INCLUDES . 'template_top.php');
 ?>
@@ -32,7 +32,7 @@
   if ($cart->count_contents() > 0) {
 ?>
 
-<?php echo tep_draw_form('cart_quantity', tep_href_link(FILENAME_SHOPPING_CART, 'action=update_product')); ?>
+<?php echo tep_draw_form('cart_quantity', tep_href_link('shopping_cart.php', 'action=update_product')); ?>
 
 <div class="contentContainer">
   <h2><?php echo TABLE_HEADING_PRODUCTS; ?></h2>
@@ -77,8 +77,8 @@
 
       $products_name = '<table border="0" cellspacing="2" cellpadding="2">' .
                        '  <tr>' .
-                       '    <td align="center"><a href="' . tep_href_link(FILENAME_PRODUCT_INFO, 'products_id=' . $products[$i]['id']) . '">' . tep_image(DIR_WS_IMAGES . $products[$i]['image'], $products[$i]['name'], SMALL_IMAGE_WIDTH, SMALL_IMAGE_HEIGHT) . '</a></td>' .
-                       '    <td valign="top"><a href="' . tep_href_link(FILENAME_PRODUCT_INFO, 'products_id=' . $products[$i]['id']) . '"><strong>' . $products[$i]['name'] . '</strong></a>';
+                       '    <td align="center"><a href="' . tep_href_link('product_info.php', 'products_id=' . $products[$i]['id']) . '">' . tep_image(DIR_WS_IMAGES . $products[$i]['image'], $products[$i]['name'], SMALL_IMAGE_WIDTH, SMALL_IMAGE_HEIGHT) . '</a></td>' .
+                       '    <td valign="top"><a href="' . tep_href_link('product_info.php', 'products_id=' . $products[$i]['id']) . '"><strong>' . $products[$i]['name'] . '</strong></a>';
 
       if (STOCK_CHECK == 'true') {
         $stock_check = tep_check_stock($products[$i]['id'], $products[$i]['quantity']);
@@ -95,7 +95,7 @@
         }
       }
 
-      $products_name .= '<br /><br />' . tep_draw_input_field('cart_quantity[]', $products[$i]['quantity'], 'size="4"') . tep_draw_hidden_field('products_id[]', $products[$i]['id']) . tep_draw_button(IMAGE_BUTTON_UPDATE, 'refresh') . '&nbsp;&nbsp;&nbsp;' . TEXT_OR . '<a href="' . tep_href_link(FILENAME_SHOPPING_CART, 'products_id=' . $products[$i]['id'] . '&action=remove_product') . '">' . TEXT_REMOVE . '</a>';
+      $products_name .= '<br /><br />' . tep_draw_input_field('cart_quantity[]', $products[$i]['quantity'], 'size="4"') . tep_draw_hidden_field('products_id[]', $products[$i]['id']) . tep_draw_button(IMAGE_BUTTON_UPDATE, 'refresh') . '&nbsp;&nbsp;&nbsp;' . TEXT_OR . '<a href="' . tep_href_link('shopping_cart.php', 'products_id=' . $products[$i]['id'] . '&action=remove_product') . '">' . TEXT_REMOVE . '</a>';
 
       $products_name .= '    </td>' .
                         '  </tr>' .
@@ -132,7 +132,7 @@
   </div>
 
   <div class="buttonSet">
-    <span class="buttonAction"><?php echo tep_draw_button(IMAGE_BUTTON_CHECKOUT, 'triangle-1-e', tep_href_link(FILENAME_CHECKOUT_SHIPPING, '', 'SSL'), 'primary'); ?></span>
+    <span class="buttonAction"><?php echo tep_draw_button(IMAGE_BUTTON_CHECKOUT, 'triangle-1-e', tep_href_link('checkout_shipping.php', '', 'SSL'), 'primary'); ?></span>
   </div>
 
 <?php
@@ -151,7 +151,7 @@
   <div class="contentText">
     <?php echo TEXT_CART_EMPTY; ?>
 
-    <p align="right"><?php echo tep_draw_button(IMAGE_BUTTON_CONTINUE, 'triangle-1-e', tep_href_link(FILENAME_DEFAULT)); ?></p>
+    <p align="right"><?php echo tep_draw_button(IMAGE_BUTTON_CONTINUE, 'triangle-1-e', tep_href_link('index.php')); ?></p>
   </div>
 </div>
 

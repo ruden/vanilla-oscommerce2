@@ -14,13 +14,13 @@
 
   if (!tep_session_is_registered('customer_id')) {
     $navigation->set_snapshot();
-    tep_redirect(tep_href_link(FILENAME_LOGIN, '', 'SSL'));
+    tep_redirect(tep_href_link('login.php', '', 'SSL'));
   }
 
-  require(DIR_WS_LANGUAGES . $language . '/' . FILENAME_ADDRESS_BOOK);
+  require(DIR_WS_LANGUAGES . $language . '/address_book.php');
 
-  $breadcrumb->add(NAVBAR_TITLE_1, tep_href_link(FILENAME_ACCOUNT, '', 'SSL'));
-  $breadcrumb->add(NAVBAR_TITLE_2, tep_href_link(FILENAME_ADDRESS_BOOK, '', 'SSL'));
+  $breadcrumb->add(NAVBAR_TITLE_1, tep_href_link('account.php', '', 'SSL'));
+  $breadcrumb->add(NAVBAR_TITLE_2, tep_href_link('address_book.php', '', 'SSL'));
 
   require(DIR_WS_INCLUDES . 'template_top.php');
 ?>
@@ -61,7 +61,7 @@
 ?>
 
     <div>
-      <span style="float: right;"><?php echo tep_draw_button(SMALL_IMAGE_BUTTON_EDIT, 'document', tep_href_link(FILENAME_ADDRESS_BOOK_PROCESS, 'edit=' . $addresses['address_book_id'], 'SSL')) . ' ' . tep_draw_button(SMALL_IMAGE_BUTTON_DELETE, 'trash', tep_href_link(FILENAME_ADDRESS_BOOK_PROCESS, 'delete=' . $addresses['address_book_id'], 'SSL')); ?></span>
+      <span style="float: right;"><?php echo tep_draw_button(SMALL_IMAGE_BUTTON_EDIT, 'document', tep_href_link('address_book_process.php', 'edit=' . $addresses['address_book_id'], 'SSL')) . ' ' . tep_draw_button(SMALL_IMAGE_BUTTON_DELETE, 'trash', tep_href_link('address_book_process.php', 'delete=' . $addresses['address_book_id'], 'SSL')); ?></span>
       <p><strong><?php echo tep_output_string_protected($addresses['firstname'] . ' ' . $addresses['lastname']); ?></strong><?php if ($addresses['address_book_id'] == $customer_default_address_id) echo '&nbsp;<small><i>' . PRIMARY_ADDRESS . '</i></small>'; ?></p>
       <p style="padding-left: 20px;"><?php echo tep_address_format($format_id, $addresses, true, ' ', '<br />'); ?></p>
     </div>
@@ -78,13 +78,13 @@
   if (tep_count_customer_address_book_entries() < MAX_ADDRESS_BOOK_ENTRIES) {
 ?>
 
-    <span class="buttonAction"><?php echo tep_draw_button(IMAGE_BUTTON_ADD_ADDRESS, 'home', tep_href_link(FILENAME_ADDRESS_BOOK_PROCESS, '', 'SSL'), 'primary'); ?></span>
+    <span class="buttonAction"><?php echo tep_draw_button(IMAGE_BUTTON_ADD_ADDRESS, 'home', tep_href_link('address_book_process.php', '', 'SSL'), 'primary'); ?></span>
 
 <?php
   }
 ?>
 
-    <?php echo tep_draw_button(IMAGE_BUTTON_BACK, 'triangle-1-w', tep_href_link(FILENAME_ACCOUNT, '', 'SSL')); ?>
+    <?php echo tep_draw_button(IMAGE_BUTTON_BACK, 'triangle-1-w', tep_href_link('account.php', '', 'SSL')); ?>
   </div>
 
   <p><?php echo sprintf(TEXT_MAXIMUM_ENTRIES, MAX_ADDRESS_BOOK_ENTRIES); ?></p>

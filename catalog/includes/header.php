@@ -16,16 +16,16 @@
 ?>
 
 <div id="header" class="grid_24">
-  <div id="storeLogo"><?php echo '<a href="' . tep_href_link(FILENAME_DEFAULT) . '">' . tep_image(DIR_WS_IMAGES . 'store_logo.png', STORE_NAME) . '</a>'; ?></div>
+  <div id="storeLogo"><?php echo '<a href="' . tep_href_link('index.php') . '">' . tep_image(DIR_WS_IMAGES . 'store_logo.png', STORE_NAME) . '</a>'; ?></div>
 
   <div id="headerShortcuts">
 <?php
-  echo tep_draw_button(HEADER_TITLE_CART_CONTENTS . ($cart->count_contents() > 0 ? ' (' . $cart->count_contents() . ')' : ''), 'cart', tep_href_link(FILENAME_SHOPPING_CART)) .
-       tep_draw_button(HEADER_TITLE_CHECKOUT, 'triangle-1-e', tep_href_link(FILENAME_CHECKOUT_SHIPPING, '', 'SSL')) .
-       tep_draw_button(HEADER_TITLE_MY_ACCOUNT, 'person', tep_href_link(FILENAME_ACCOUNT, '', 'SSL'));
+  echo tep_draw_button(HEADER_TITLE_CART_CONTENTS . ($cart->count_contents() > 0 ? ' (' . $cart->count_contents() . ')' : ''), 'cart', tep_href_link('shopping_cart.php')) .
+       tep_draw_button(HEADER_TITLE_CHECKOUT, 'triangle-1-e', tep_href_link('checkout_shipping.php', '', 'SSL')) .
+       tep_draw_button(HEADER_TITLE_MY_ACCOUNT, 'person', tep_href_link('account.php', '', 'SSL'));
 
   if (tep_session_is_registered('customer_id')) {
-    echo tep_draw_button(HEADER_TITLE_LOGOFF, null, tep_href_link(FILENAME_LOGOFF, '', 'SSL'));
+    echo tep_draw_button(HEADER_TITLE_LOGOFF, null, tep_href_link('logoff.php', '', 'SSL'));
   }
 ?>
   </div>

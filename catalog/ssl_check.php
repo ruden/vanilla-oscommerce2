@@ -12,9 +12,9 @@
 
   require('includes/application_top.php');
 
-  require(DIR_WS_LANGUAGES . $language . '/' . FILENAME_SSL_CHECK);
+  require(DIR_WS_LANGUAGES . $language . '/ssl_check.php');
 
-  $breadcrumb->add(NAVBAR_TITLE, tep_href_link(FILENAME_SSL_CHECK));
+  $breadcrumb->add(NAVBAR_TITLE, tep_href_link('ssl_check.php'));
 
   require(DIR_WS_INCLUDES . 'template_top.php');
 ?>
@@ -35,7 +35,7 @@
   </div>
 
   <div class="buttonSet">
-    <span class="buttonAction"><?php echo tep_draw_button(IMAGE_BUTTON_CONTINUE, 'triangle-1-e', tep_href_link(FILENAME_LOGIN)); ?></span>
+    <span class="buttonAction"><?php echo tep_draw_button(IMAGE_BUTTON_CONTINUE, 'triangle-1-e', tep_href_link('login.php')); ?></span>
   </div>
 </div>
 

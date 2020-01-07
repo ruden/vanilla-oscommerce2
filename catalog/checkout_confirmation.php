@@ -14,25 +14,25 @@
 
 // if the customer is not logged on, redirect them to the login page
   if (!tep_session_is_registered('customer_id')) {
-    $navigation->set_snapshot(array('mode' => 'SSL', 'page' => FILENAME_CHECKOUT_PAYMENT));
-    tep_redirect(tep_href_link(FILENAME_LOGIN, '', 'SSL'));
+    $navigation->set_snapshot(array('mode' => 'SSL', 'page' => 'checkout_payment.php'));
+    tep_redirect(tep_href_link('login.php', '', 'SSL'));
   }
 
 // if there is nothing in the customers cart, redirect them to the shopping cart page
   if ($cart->count_contents() < 1) {
-    tep_redirect(tep_href_link(FILENAME_SHOPPING_CART));
+    tep_redirect(tep_href_link('shopping_cart.php'));
   }
 
 // avoid hack attempts during the checkout procedure by checking the internal cartID
   if (isset($cart->cartID) && tep_session_is_registered('cartID')) {
     if ($cart->cartID != $cartID) {
-      tep_redirect(tep_href_link(FILENAME_CHECKOUT_SHIPPING, '', 'SSL'));
+      tep_redirect(tep_href_link('checkout_shipping.php', '', 'SSL'));
     }
   }
 
 // if no shipping method has been selected, redirect the customer to the shipping method selection page
   if (!tep_session_is_registered('shipping')) {
-    tep_redirect(tep_href_link(FILENAME_CHECKOUT_SHIPPING, '', 'SSL'));
+    tep_redirect(tep_href_link('checkout_shipping.php', '', 'SSL'));
   }
 
   if (!tep_session_is_registered('payment')) tep_session_register('payment');
@@ -53,7 +53,7 @@
   $payment_modules->update_status();
 
   if ( ($payment_modules->selected_module != $payment) || ( is_array($payment_modules->modules) && (sizeof($payment_modules->modules) > 1) && !is_object($$payment) ) || (is_object($$payment) && ($$payment->enabled == false)) ) {
-    tep_redirect(tep_href_link(FILENAME_CHECKOUT_PAYMENT, 'error_message=' . urlencode(ERROR_NO_PAYMENT_MODULE_SELECTED), 'SSL'));
+    tep_redirect(tep_href_link('checkout_payment.php', 'error_message=' . urlencode(ERROR_NO_PAYMENT_MODULE_SELECTED), 'SSL'));
   }
 
   if (is_array($payment_modules->modules)) {
@@ -78,13 +78,13 @@
     }
     // Out of Stock
     if ( (STOCK_ALLOW_CHECKOUT != 'true') && ($any_out_of_stock == true) ) {
-      tep_redirect(tep_href_link(FILENAME_SHOPPING_CART));
+      tep_redirect(tep_href_link('shopping_cart.php'));
     }
   }
 
-  require(DIR_WS_LANGUAGES . $language . '/' . FILENAME_CHECKOUT_CONFIRMATION);
+  require(DIR_WS_LANGUAGES . $language . '/checkout_confirmation.php');
 
-  $breadcrumb->add(NAVBAR_TITLE_1, tep_href_link(FILENAME_CHECKOUT_SHIPPING, '', 'SSL'));
+  $breadcrumb->add(NAVBAR_TITLE_1, tep_href_link('checkout_shipping.php', '', 'SSL'));
   $breadcrumb->add(NAVBAR_TITLE_2);
 
   require(DIR_WS_INCLUDES . 'template_top.php');
@@ -100,7 +100,7 @@
   if (isset($$payment->form_action_url)) {
     $form_action_url = $$payment->form_action_url;
   } else {
-    $form_action_url = tep_href_link(FILENAME_CHECKOUT_PROCESS, '', 'SSL');
+    $form_action_url = tep_href_link('checkout_process.php', '', 'SSL');
   }
 
   echo tep_draw_form('checkout_confirmation', $form_action_url, 'post');
@@ -119,7 +119,7 @@
 
         <td width="30%" valign="top"><table border="0" width="100%" cellspacing="0" cellpadding="2">
           <tr>
-            <td><?php echo '<strong>' . HEADING_DELIVERY_ADDRESS . '</strong> <a href="' . tep_href_link(FILENAME_CHECKOUT_SHIPPING_ADDRESS, '', 'SSL') . '"><span class="orderEdit">(' . TEXT_EDIT . ')</span></a>'; ?></td>
+            <td><?php echo '<strong>' . HEADING_DELIVERY_ADDRESS . '</strong> <a href="' . tep_href_link('checkout_shipping_address.php', '', 'SSL') . '"><span class="orderEdit">(' . TEXT_EDIT . ')</span></a>'; ?></td>
           </tr>
           <tr>
             <td><?php echo tep_address_format($order->delivery['format_id'], $order->delivery, 1, ' ', '<br />'); ?></td>
@@ -130,7 +130,7 @@
 ?>
 
           <tr>
-            <td><?php echo '<strong>' . HEADING_SHIPPING_METHOD . '</strong> <a href="' . tep_href_link(FILENAME_CHECKOUT_SHIPPING, '', 'SSL') . '"><span class="orderEdit">(' . TEXT_EDIT . ')</span></a>'; ?></td>
+            <td><?php echo '<strong>' . HEADING_SHIPPING_METHOD . '</strong> <a href="' . tep_href_link('checkout_shipping.php', '', 'SSL') . '"><span class="orderEdit">(' . TEXT_EDIT . ')</span></a>'; ?></td>
           </tr>
           <tr>
             <td><?php echo $order->info['shipping_method']; ?></td>
@@ -152,7 +152,7 @@
 ?>
 
           <tr>
-            <td colspan="2"><?php echo '<strong>' . HEADING_PRODUCTS . '</strong> <a href="' . tep_href_link(FILENAME_SHOPPING_CART) . '"><span class="orderEdit">(' . TEXT_EDIT . ')</span></a>'; ?></td>
+            <td colspan="2"><?php echo '<strong>' . HEADING_PRODUCTS . '</strong> <a href="' . tep_href_link('shopping_cart.php') . '"><span class="orderEdit">(' . TEXT_EDIT . ')</span></a>'; ?></td>
             <td align="right"><strong><?php echo HEADING_TAX; ?></strong></td>
             <td align="right"><strong><?php echo HEADING_TOTAL; ?></strong></td>
           </tr>
@@ -162,7 +162,7 @@
 ?>
 
           <tr>
-            <td colspan="3"><?php echo '<strong>' . HEADING_PRODUCTS . '</strong> <a href="' . tep_href_link(FILENAME_SHOPPING_CART) . '"><span class="orderEdit">(' . TEXT_EDIT . ')</span></a>'; ?></td>
+            <td colspan="3"><?php echo '<strong>' . HEADING_PRODUCTS . '</strong> <a href="' . tep_href_link('shopping_cart.php') . '"><span class="orderEdit">(' . TEXT_EDIT . ')</span></a>'; ?></td>
           </tr>
 
 <?php
@@ -204,13 +204,13 @@
       <tr>
         <td width="30%" valign="top"><table border="0" width="100%" cellspacing="0" cellpadding="2">
           <tr>
-            <td><?php echo '<strong>' . HEADING_BILLING_ADDRESS . '</strong> <a href="' . tep_href_link(FILENAME_CHECKOUT_PAYMENT_ADDRESS, '', 'SSL') . '"><span class="orderEdit">(' . TEXT_EDIT . ')</span></a>'; ?></td>
+            <td><?php echo '<strong>' . HEADING_BILLING_ADDRESS . '</strong> <a href="' . tep_href_link('checkout_payment_address.php', '', 'SSL') . '"><span class="orderEdit">(' . TEXT_EDIT . ')</span></a>'; ?></td>
           </tr>
           <tr>
             <td><?php echo tep_address_format($order->billing['format_id'], $order->billing, 1, ' ', '<br />'); ?></td>
           </tr>
           <tr>
-            <td><?php echo '<strong>' . HEADING_PAYMENT_METHOD . '</strong> <a href="' . tep_href_link(FILENAME_CHECKOUT_PAYMENT, '', 'SSL') . '"><span class="orderEdit">(' . TEXT_EDIT . ')</span></a>'; ?></td>
+            <td><?php echo '<strong>' . HEADING_PAYMENT_METHOD . '</strong> <a href="' . tep_href_link('checkout_payment.php', '', 'SSL') . '"><span class="orderEdit">(' . TEXT_EDIT . ')</span></a>'; ?></td>
           </tr>
           <tr>
             <td><?php echo $order->info['payment_method']; ?></td>
@@ -269,7 +269,7 @@
   if (tep_not_null($order->info['comments'])) {
 ?>
 
-  <h2><?php echo '<strong>' . HEADING_ORDER_COMMENTS . '</strong> <a href="' . tep_href_link(FILENAME_CHECKOUT_PAYMENT, '', 'SSL') . '"><span class="orderEdit">(' . TEXT_EDIT . ')</span></a>'; ?></h2>
+  <h2><?php echo '<strong>' . HEADING_ORDER_COMMENTS . '</strong> <a href="' . tep_href_link('checkout_payment.php', '', 'SSL') . '"><span class="orderEdit">(' . TEXT_EDIT . ')</span></a>'; ?></h2>
 
   <div class="contentText">
     <?php echo nl2br(tep_output_string_protected($order->info['comments'])) . tep_draw_hidden_field('comments', $order->info['comments']); ?>

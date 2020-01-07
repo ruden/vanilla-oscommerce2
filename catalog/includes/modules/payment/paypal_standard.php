@@ -78,7 +78,7 @@
 // Before the stock quantity check is performed in checkout_process.php, detect if the quantity
 // has already beed deducated in the IPN to avoid a quantity == 0 redirect
       if ( $this->enabled === true ) {
-        if ( defined('FILENAME_CHECKOUT_PROCESS') && (basename($PHP_SELF) == FILENAME_CHECKOUT_PROCESS) ) {
+        if ( defined(''checkout_process.php'') && (basename($PHP_SELF) == 'checkout_process.php') ) {
           if ( tep_session_is_registered('payment') && ($payment == $this->code) ) {
             $this->pre_before_check();
           }
@@ -365,8 +365,8 @@
                           'custom' => $customer_id,
                           'notify_url' => tep_href_link('ext/modules/payment/paypal/standard_ipn.php', (isset($ipn_language) ? 'language=' . $ipn_language : ''), 'SSL', false, false),
                           'rm' => '2',
-                          'return' => tep_href_link(FILENAME_CHECKOUT_PROCESS, '', 'SSL'),
-                          'cancel_return' => tep_href_link(FILENAME_CHECKOUT_PAYMENT, '', 'SSL'),
+                          'return' => tep_href_link('checkout_process.php', '', 'SSL'),
+                          'cancel_return' => tep_href_link('checkout_payment.php', '', 'SSL'),
                           'bn' => $this->_app->getIdentifier(),
                           'paymentaction' => (OSCOM_APP_PAYPAL_PS_TRANSACTION_METHOD == '1') ? 'sale' : 'authorization');
 
@@ -635,7 +635,7 @@
       if ( $result != 'VERIFIED' ) {
         $messageStack->add_session('header', $this->_app->getDef('module_ps_error_invalid_transaction'));
 
-        tep_redirect(tep_href_link(FILENAME_SHOPPING_CART));
+        tep_redirect(tep_href_link('shopping_cart.php'));
       }
 
       $this->verifyTransaction($pptx_params);
@@ -645,7 +645,7 @@
       $check_query = tep_db_query("select orders_status from orders where orders_id = '" . (int)$order_id . "' and customers_id = '" . (int)$customer_id . "'");
 
       if (!tep_db_num_rows($check_query) || ($order_id != $pptx_params['invoice']) || ($customer_id != $pptx_params['custom'])) {
-        tep_redirect(tep_href_link(FILENAME_SHOPPING_CART));
+        tep_redirect(tep_href_link('shopping_cart.php'));
       }
 
       $check = tep_db_fetch_array($check_query);
@@ -763,7 +763,7 @@
       $email_order = STORE_NAME . "\n" .
                      EMAIL_SEPARATOR . "\n" .
                      EMAIL_TEXT_ORDER_NUMBER . ' ' . $order_id . "\n" .
-                     EMAIL_TEXT_INVOICE_URL . ' ' . tep_href_link(FILENAME_ACCOUNT_HISTORY_INFO, 'order_id=' . $order_id, 'SSL', false) . "\n" .
+                     EMAIL_TEXT_INVOICE_URL . ' ' . tep_href_link('account_history_info.php', 'order_id=' . $order_id, 'SSL', false) . "\n" .
                      EMAIL_TEXT_DATE_ORDERED . ' ' . strftime(DATE_FORMAT_LONG) . "\n\n";
       if ($order->info['comments']) {
         $email_order .= tep_db_output($order->info['comments']) . "\n\n";
@@ -822,7 +822,7 @@
 
       tep_session_unregister('cart_PayPal_Standard_ID');
 
-      tep_redirect(tep_href_link(FILENAME_CHECKOUT_SUCCESS, '', 'SSL'));
+      tep_redirect(tep_href_link('checkout_success.php', '', 'SSL'));
     }
 
     function get_error() {

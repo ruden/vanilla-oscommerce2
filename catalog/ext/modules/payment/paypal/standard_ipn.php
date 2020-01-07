@@ -21,7 +21,7 @@
 
   $paypal_standard = new paypal_standard();
 
-  require(DIR_FS_CATALOG . 'includes/languages/' . $language . '/' . FILENAME_CHECKOUT_PROCESS);
+  require(DIR_FS_CATALOG . 'includes/languages/' . $language . '/checkout_process.php');
 
   $result = false;
 
@@ -159,7 +159,7 @@
         $email_order = STORE_NAME . "\n" .
                        EMAIL_SEPARATOR . "\n" .
                        EMAIL_TEXT_ORDER_NUMBER . ' ' . $order_id . "\n" .
-                       EMAIL_TEXT_INVOICE_URL . ' ' . tep_href_link(FILENAME_ACCOUNT_HISTORY_INFO, 'order_id=' . $order_id, 'SSL', false) . "\n" .
+                       EMAIL_TEXT_INVOICE_URL . ' ' . tep_href_link('account_history_info.php', 'order_id=' . $order_id, 'SSL', false) . "\n" .
                        EMAIL_TEXT_DATE_ORDERED . ' ' . strftime(DATE_FORMAT_LONG) . "\n\n";
         if ($order->info['comments']) {
           $email_order .= tep_db_output($order->info['comments']) . "\n\n";

@@ -291,7 +291,7 @@ EOD;
               $bt_3ds_ssl_check = true;
               tep_session_register('bt_3ds_ssl_check');
 
-              tep_redirect(tep_href_link(FILENAME_CHECKOUT_CONFIRMATION, '', 'SSL'));
+              tep_redirect(tep_href_link('checkout_confirmation.php', '', 'SSL'));
             }
           }
         }

@@ -13,10 +13,10 @@
   require('includes/application_top.php');
 
   if (!isset($_GET['products_id'])) {
-    tep_redirect(tep_href_link(FILENAME_DEFAULT));
+    tep_redirect(tep_href_link('index.php'));
   }
 
-  require(DIR_WS_LANGUAGES . $language . '/' . FILENAME_PRODUCT_INFO);
+  require(DIR_WS_LANGUAGES . $language . '/product_info.php');
 
   $product_check_query = tep_db_query("select count(*) as total from products p, products_description pd where p.products_status = '1' and p.products_id = '" . (int)$_GET['products_id'] . "' and pd.products_id = p.products_id and pd.language_id = '" . (int)$languages_id . "'");
   $product_check = tep_db_fetch_array($product_check_query);
@@ -32,7 +32,7 @@
   </div>
 
   <div style="float: right;">
-    <?php echo tep_draw_button(IMAGE_BUTTON_CONTINUE, 'triangle-1-e', tep_href_link(FILENAME_DEFAULT)); ?>
+    <?php echo tep_draw_button(IMAGE_BUTTON_CONTINUE, 'triangle-1-e', tep_href_link('index.php')); ?>
   </div>
 </div>
 
@@ -56,7 +56,7 @@
     }
 ?>
 
-<?php echo tep_draw_form('cart_quantity', tep_href_link(FILENAME_PRODUCT_INFO, tep_get_all_get_params(array('action')) . 'action=add_product')); ?>
+<?php echo tep_draw_form('cart_quantity', tep_href_link('product_info.php', tep_get_all_get_params(array('action')) . 'action=add_product')); ?>
 
 <div>
   <h1 style="float: right;"><?php echo $products_price; ?></h1>
@@ -214,14 +214,14 @@ $(function() {
   <div class="buttonSet">
     <span class="buttonAction"><?php echo tep_draw_hidden_field('products_id', $product_info['products_id']) . tep_draw_button(IMAGE_BUTTON_IN_CART, 'cart', null, 'primary'); ?></span>
 
-    <?php echo tep_draw_button(IMAGE_BUTTON_REVIEWS . (($reviews['count'] > 0) ? ' (' . $reviews['count'] . ')' : ''), 'comment', tep_href_link(FILENAME_PRODUCT_REVIEWS, tep_get_all_get_params())); ?>
+    <?php echo tep_draw_button(IMAGE_BUTTON_REVIEWS . (($reviews['count'] > 0) ? ' (' . $reviews['count'] . ')' : ''), 'comment', tep_href_link('product_reviews.php', tep_get_all_get_params())); ?>
   </div>
 
 <?php
     if ((USE_CACHE == 'true') && empty($SID)) {
       echo tep_cache_also_purchased(3600);
     } else {
-      include(DIR_WS_MODULES . FILENAME_ALSO_PURCHASED_PRODUCTS);
+      include(DIR_WS_MODULES . 'also_purchased_products.php');
     }
 ?>
 

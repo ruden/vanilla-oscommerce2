@@ -15,7 +15,7 @@ require('includes/application_top.php');
 
 if (!tep_session_is_registered('customer_id')) {
   $navigation->set_snapshot();
-  tep_redirect(tep_href_link(FILENAME_LOGIN, '', 'SSL'));
+  tep_redirect(tep_href_link('login.php', '', 'SSL'));
 }
 
 if (!class_exists('braintree_cc', false)) {
@@ -25,7 +25,7 @@ if (!class_exists('braintree_cc', false)) {
 $pm = new braintree_cc();
 
 if (($pm->enabled !== true) || (OSCOM_APP_PAYPAL_BRAINTREE_CC_CC_TOKENS == '0')) {
-  tep_redirect(tep_href_link(FILENAME_ACCOUNT, '', 'SSL'));
+  tep_redirect(tep_href_link('account.php', '', 'SSL'));
 }
 
 if (!class_exists('cm_account_braintree_cards', false)) {
@@ -35,7 +35,7 @@ if (!class_exists('cm_account_braintree_cards', false)) {
 $cm = new cm_account_braintree_cards();
 
 if (!$cm->isEnabled()) {
-  tep_redirect(tep_href_link(FILENAME_ACCOUNT, '', 'SSL'));
+  tep_redirect(tep_href_link('account.php', '', 'SSL'));
 }
 
 if (isset($_GET['action'])) {
@@ -54,7 +54,7 @@ if (isset($_GET['action'])) {
   tep_redirect(tep_href_link('ext/modules/content/account/braintree/cards.php', '', 'SSL'));
 }
 
-$breadcrumb->add($cm->_app->getDef('account_braintree_cards_navbar_title_1'), tep_href_link(FILENAME_ACCOUNT, '', 'SSL'));
+$breadcrumb->add($cm->_app->getDef('account_braintree_cards_navbar_title_1'), tep_href_link('account.php', '', 'SSL'));
 $breadcrumb->add($cm->_app->getDef('account_braintree_cards_navbar_title_2'), tep_href_link('ext/modules/content/account/braintree/cards.php', '', 'SSL'));
 
 require(DIR_WS_INCLUDES . 'template_top.php');
@@ -103,7 +103,7 @@ if ( tep_db_num_rows($tokens_query) > 0 ) {
   </div>
 
   <div class="buttonSet">
-    <?php echo tep_draw_button(IMAGE_BUTTON_BACK, 'triangle-1-w', tep_href_link(FILENAME_ACCOUNT, '', 'SSL')); ?>
+    <?php echo tep_draw_button(IMAGE_BUTTON_BACK, 'triangle-1-w', tep_href_link('account.php', '', 'SSL')); ?>
   </div>
 </div>
 
