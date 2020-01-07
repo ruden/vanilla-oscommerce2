@@ -20,11 +20,6 @@
     error_reporting(E_ALL & ~E_NOTICE & ~E_DEPRECATED);
   }
 
-// check support for register_globals
-  if (function_exists('ini_get') && (ini_get('register_globals') == false) && (PHP_VERSION < 4.3) ) {
-    exit('Server Requirement Error: register_globals is disabled in your PHP configuration. This can be enabled in your php.ini configuration file or in the .htaccess file in your catalog directory. Please use PHP 4.3+ if register_globals cannot be enabled on the server.');
-  }
-
 // load server configuration parameters
   if (file_exists('includes/local/configure.php')) { // for developers
     include('includes/local/configure.php');
@@ -141,13 +136,7 @@
   tep_session_save_path(SESSION_WRITE_DIRECTORY);
 
 // set the session cookie parameters
-   if (function_exists('session_set_cookie_params')) {
-    session_set_cookie_params(0, $cookie_path, $cookie_domain);
-  } elseif (function_exists('ini_set')) {
-    ini_set('session.cookie_lifetime', '0');
-    ini_set('session.cookie_path', $cookie_path);
-    ini_set('session.cookie_domain', $cookie_domain);
-  }
+  session_set_cookie_params(0, $cookie_path, $cookie_domain);
 
   @ini_set('session.use_only_cookies', (SESSION_FORCE_COOKIE_USE == 'True') ? 1 : 0);
 
@@ -195,7 +184,7 @@
     $session_started = true;
   }
 
-  if ( ($session_started == true) && (PHP_VERSION >= 4.3) && function_exists('ini_get') && (ini_get('register_globals') == false) ) {
+  if ($session_started == true) { // force register_globals
     extract($_SESSION, EXTR_OVERWRITE+EXTR_REFS);
   }
 

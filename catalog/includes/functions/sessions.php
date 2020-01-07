@@ -10,11 +10,6 @@
   Released under the GNU General Public License
 */
 
-  if ( (PHP_VERSION >= 4.3) && ((bool)ini_get('register_globals') == false) ) {
-    @ini_set('session.bug_compat_42', 1);
-    @ini_set('session.bug_compat_warn', 0);
-  }
-
   if (STORE_SESSIONS == 'mysql') {
     function _sess_open($save_path, $session_name) {
       return true;
@@ -107,34 +102,22 @@
     global $session_started;
 
     if ($session_started == true) {
-      if (PHP_VERSION < 4.3) {
-        return session_register($variable);
-      } else {
-        if (!isset($GLOBALS[$variable])) {
-          $GLOBALS[$variable] = null;
-        }
-
-        $_SESSION[$variable] =& $GLOBALS[$variable];
+      if (!isset($GLOBALS[$variable])) {
+        $GLOBALS[$variable] = null;
       }
+
+      $_SESSION[$variable] =& $GLOBALS[$variable];
     }
 
     return false;
   }
 
   function tep_session_is_registered($variable) {
-    if (PHP_VERSION < 4.3) {
-      return session_is_registered($variable);
-    } else {
-      return isset($_SESSION) && array_key_exists($variable, $_SESSION);
-    }
+    return isset($_SESSION) && array_key_exists($variable, $_SESSION);
   }
 
   function tep_session_unregister($variable) {
-    if (PHP_VERSION < 4.3) {
-      return session_unregister($variable);
-    } else {
-      unset($_SESSION[$variable]);
-    }
+    unset($_SESSION[$variable]);
   }
 
   function tep_session_id($sessid = '') {
@@ -154,11 +137,7 @@
   }
 
   function tep_session_close() {
-    if (PHP_VERSION >= '4.0.4') {
-      return session_write_close();
-    } elseif (function_exists('session_close')) {
-      return session_close();
-    }
+    return session_write_close();
   }
 
   function tep_session_destroy() {
@@ -185,16 +164,14 @@
   function tep_session_recreate() {
     global $SID;
 
-    if (PHP_VERSION >= 5.1) {
-      $old_id = session_id();
+    $old_id = session_id();
 
-      session_regenerate_id(true);
+    session_regenerate_id(true);
 
-      if (!empty($SID)) {
-        $SID = tep_session_name() . '=' . tep_session_id();
-      }
-
-      tep_whos_online_update_session_id($old_id, tep_session_id());
+    if (!empty($SID)) {
+      $SID = tep_session_name() . '=' . tep_session_id();
     }
+
+    tep_whos_online_update_session_id($old_id, tep_session_id());
   }
 ?>

@@ -1250,16 +1250,6 @@
 ////
 // Return a random value
   function tep_rand($min = null, $max = null) {
-    static $seeded;
-
-    if (!isset($seeded)) {
-      $seeded = true;
-
-      if ( (PHP_VERSION < '4.2.0') ) {
-        mt_srand((double)microtime()*1000000);
-      }
-    }
-
     if (isset($min) && isset($max)) {
       if ($min >= $max) {
         return $min;
@@ -1276,23 +1266,7 @@
   }
 
   function tep_validate_ip_address($ip_address) {
-    if (function_exists('filter_var') && defined('FILTER_VALIDATE_IP')) {
-      return filter_var($ip_address, FILTER_VALIDATE_IP, array('flags' => FILTER_FLAG_IPV4));
-    }
-
-    if (preg_match('/^(\d{1,3})\.(\d{1,3})\.(\d{1,3})\.(\d{1,3})$/', $ip_address)) {
-      $parts = explode('.', $ip_address);
-
-      foreach ($parts as $ip_parts) {
-        if ( (intval($ip_parts) > 255) || (intval($ip_parts) < 0) ) {
-          return false; // number is not within 0-255
-        }
-      }
-
-      return true;
-    }
-
-    return false;
+    return filter_var($ip_address, FILTER_VALIDATE_IP, array('flags' => FILTER_FLAG_IPV4));
   }
 
   function tep_get_ip_address() {
@@ -1383,10 +1357,6 @@
 
 // nl2br() prior PHP 4.2.0 did not convert linefeeds on all OSs (it only converted \n)
   function tep_convert_linefeeds($from, $to, $string) {
-    if ((PHP_VERSION < "4.0.5") && is_array($from)) {
-      return preg_replace('/(' . implode('|', $from) . ')/', $to, $string);
-    } else {
-      return str_replace($from, $to, $string);
-    }
+    return str_replace($from, $to, $string);
   }
 ?>
