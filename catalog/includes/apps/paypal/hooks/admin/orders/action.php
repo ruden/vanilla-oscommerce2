@@ -28,10 +28,8 @@
     }
 
     function execute() {
-      global $HTTP_GET_VARS, $HTTP_POST_VARS;
-
-      if ( isset($HTTP_GET_VARS['tabaction']) ) {
-        $ppstatus_query = tep_db_query("select comments from " . TABLE_ORDERS_STATUS_HISTORY . " where orders_id = '" . (int)$HTTP_GET_VARS['oID'] . "' and orders_status_id = '" . (int)OSCOM_APP_PAYPAL_TRANSACTIONS_ORDER_STATUS_ID . "' and comments like '%Transaction ID:%' order by date_added limit 1");
+      if ( isset($_GET['tabaction']) ) {
+        $ppstatus_query = tep_db_query("select comments from " . TABLE_ORDERS_STATUS_HISTORY . " where orders_id = '" . (int)$_GET['oID'] . "' and orders_status_id = '" . (int)OSCOM_APP_PAYPAL_TRANSACTIONS_ORDER_STATUS_ID . "' and comments like '%Transaction ID:%' order by date_added limit 1");
         if ( tep_db_num_rows($ppstatus_query) ) {
           $ppstatus = tep_db_fetch_array($ppstatus_query);
 
@@ -46,10 +44,10 @@
           }
 
           if ( isset($pp['Transaction ID']) ) {
-            $o_query = tep_db_query("select o.orders_id, o.payment_method, o.currency, o.currency_value, ot.value as total from " . TABLE_ORDERS . " o, " . TABLE_ORDERS_TOTAL . " ot where o.orders_id = '" . (int)$HTTP_GET_VARS['oID'] . "' and o.orders_id = ot.orders_id and ot.class = 'ot_total'");
+            $o_query = tep_db_query("select o.orders_id, o.payment_method, o.currency, o.currency_value, ot.value as total from " . TABLE_ORDERS . " o, " . TABLE_ORDERS_TOTAL . " ot where o.orders_id = '" . (int)$_GET['oID'] . "' and o.orders_id = ot.orders_id and ot.class = 'ot_total'");
             $o = tep_db_fetch_array($o_query);
 
-            switch ( $HTTP_GET_VARS['tabaction'] ) {
+            switch ( $_GET['tabaction'] ) {
               case 'getTransactionDetails':
                 $this->getTransactionDetails($pp, $o);
                 break;
@@ -67,7 +65,7 @@
                 break;
             }
 
-            tep_redirect(tep_href_link(FILENAME_ORDERS, 'page=' . $HTTP_GET_VARS['page'] . '&oID=' . $HTTP_GET_VARS['oID'] . '&action=edit#section_status_history_content'));
+            tep_redirect(tep_href_link(FILENAME_ORDERS, 'page=' . $_GET['page'] . '&oID=' . $_GET['oID'] . '&action=edit#section_status_history_content'));
           }
         }
       }
@@ -186,16 +184,16 @@
     }
 
     function doCapture($comments, $order) {
-      global $HTTP_POST_VARS, $messageStack;
+      global $messageStack;
 
       $pass = false;
 
       $capture_total = $capture_value = $this->_app->formatCurrencyRaw($order['total'], $order['currency'], $order['currency_value']);
       $capture_final = true;
 
-      if ( $this->_app->formatCurrencyRaw($HTTP_POST_VARS['ppCaptureAmount'], $order['currency'], 1) < $capture_value ) {
-        $capture_value = $this->_app->formatCurrencyRaw($HTTP_POST_VARS['ppCaptureAmount'], $order['currency'], 1);
-        $capture_final = (isset($HTTP_POST_VARS['ppCatureComplete']) && ($HTTP_POST_VARS['ppCatureComplete'] == 'true')) ? true : false;
+      if ( $this->_app->formatCurrencyRaw($_POST['ppCaptureAmount'], $order['currency'], 1) < $capture_value ) {
+        $capture_value = $this->_app->formatCurrencyRaw($_POST['ppCaptureAmount'], $order['currency'], 1);
+        $capture_final = (isset($_POST['ppCatureComplete']) && ($_POST['ppCatureComplete'] == 'true')) ? true : false;
       }
 
       if ( !isset($comments['Gateway']) ) {
@@ -294,9 +292,9 @@
     }
 
     function refundTransaction($comments, $order) {
-      global $HTTP_POST_VARS, $messageStack;
+      global $messageStack;
 
-      if ( isset($HTTP_POST_VARS['ppRefund']) ) {
+      if ( isset($_POST['ppRefund']) ) {
         $tids = array();
 
         $ppr_query = tep_db_query("select comments from " . TABLE_ORDERS_STATUS_HISTORY . " where orders_id = '" . (int)$order['orders_id'] . "' and orders_status_id = '" . (int)OSCOM_APP_PAYPAL_TRANSACTIONS_ORDER_STATUS_ID . "' and comments like 'PayPal App: %' order by date_added desc");
@@ -318,7 +316,7 @@
 
         $rids = array();
 
-        foreach ( $HTTP_POST_VARS['ppRefund'] as $id ) {
+        foreach ( $_POST['ppRefund'] as $id ) {
           if ( isset($tids[$id]) && !isset($tids[$id]['Refund']) ) {
             $rids[] = $id;
           }

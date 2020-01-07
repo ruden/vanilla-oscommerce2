@@ -474,14 +474,14 @@ EOD;
     }
 
     function before_process() {
-      global $HTTP_POST_VARS, $customer_id, $order, $braintree_result, $braintree_token, $messageStack, $appBraintreeCcNonce;
+      global $customer_id, $order, $braintree_result, $braintree_token, $messageStack, $appBraintreeCcNonce;
 
       $braintree_token = null;
       $braintree_error = null;
 
       if (!tep_session_is_registered('appBraintreeCcNonce') && ((OSCOM_APP_PAYPAL_BRAINTREE_CC_CC_TOKENS == '1') || (OSCOM_APP_PAYPAL_BRAINTREE_CC_CC_TOKENS == '2'))) {
-        if (isset($HTTP_POST_VARS['braintree_cards']) && is_numeric($HTTP_POST_VARS['braintree_cards']) && ($HTTP_POST_VARS['braintree_cards'] > 0)) {
-          $token_query = tep_db_query('select braintree_token from customers_braintree_tokens where id = "' . (int)$HTTP_POST_VARS['braintree_cards'] . '" and customers_id = "' . (int)$customer_id . '"');
+        if (isset($_POST['braintree_cards']) && is_numeric($_POST['braintree_cards']) && ($_POST['braintree_cards'] > 0)) {
+          $token_query = tep_db_query('select braintree_token from customers_braintree_tokens where id = "' . (int)$_POST['braintree_cards'] . '" and customers_id = "' . (int)$customer_id . '"');
           if (tep_db_num_rows($token_query)) {
             $token = tep_db_fetch_array($token_query);
 
@@ -504,7 +504,7 @@ EOD;
         );
       } else {
         $data = array(
-          'paymentMethodNonce' => $HTTP_POST_VARS['payment_method_nonce'],
+          'paymentMethodNonce' => $_POST['payment_method_nonce'],
           'amount' => $this->_app->formatCurrencyRaw($order->info['total'], $transaction_currency),
           'merchantAccountId' => $this->getMerchantAccountId($transaction_currency),
           'customer' => array(
@@ -533,7 +533,7 @@ EOD;
         }
 
         if (!isset($braintree_token)) {
-          if (((OSCOM_APP_PAYPAL_BRAINTREE_CC_CC_TOKENS == '1') && isset($HTTP_POST_VARS['cc_save']) && ($HTTP_POST_VARS['cc_save'] == 'true')) || (OSCOM_APP_PAYPAL_BRAINTREE_CC_CC_TOKENS === '2')) {
+          if (((OSCOM_APP_PAYPAL_BRAINTREE_CC_CC_TOKENS == '1') && isset($_POST['cc_save']) && ($_POST['cc_save'] == 'true')) || (OSCOM_APP_PAYPAL_BRAINTREE_CC_CC_TOKENS === '2')) {
             $data['options']['storeInVaultOnSuccess'] = true;
           }
         }
@@ -593,7 +593,7 @@ EOD;
     }
 
     function after_process() {
-      global $HTTP_POST_VARS, $customer_id, $insert_id, $braintree_result, $braintree_token;
+      global $customer_id, $insert_id, $braintree_result, $braintree_token;
 
       $status_comment = array(
         'Transaction ID: ' . tep_db_prepare_input($braintree_result->transaction->id)
@@ -614,7 +614,7 @@ EOD;
         $status_comment[] = 'Server: ' . tep_db_prepare_input(Braintree_Configuration::environment());
       }
 
-      if (!tep_session_is_registered('appBraintreeCcNonce') && (((OSCOM_APP_PAYPAL_BRAINTREE_CC_CC_TOKENS == '1') && isset($HTTP_POST_VARS['cc_save']) && ($HTTP_POST_VARS['cc_save'] == 'true')) || (OSCOM_APP_PAYPAL_BRAINTREE_CC_CC_TOKENS === '2')) && !isset($braintree_token) && isset($braintree_result->transaction->creditCard['token'])) {
+      if (!tep_session_is_registered('appBraintreeCcNonce') && (((OSCOM_APP_PAYPAL_BRAINTREE_CC_CC_TOKENS == '1') && isset($_POST['cc_save']) && ($_POST['cc_save'] == 'true')) || (OSCOM_APP_PAYPAL_BRAINTREE_CC_CC_TOKENS === '2')) && !isset($braintree_token) && isset($braintree_result->transaction->creditCard['token'])) {
         $token = $braintree_result->transaction->creditCard['token'];
         $type = $braintree_result->transaction->creditCard['cardType'];
         $number = $braintree_result->transaction->creditCard['last4'];
@@ -659,11 +659,9 @@ EOD;
     }
 
     function get_error() {
-      global $HTTP_GET_VARS;
-
       $error_message = $this->_app->getDef('module_cc_error_general');
 
-      switch ($HTTP_GET_VARS['error']) {
+      switch ($_GET['error']) {
         case 'not_available':
           $error_message = $this->_app->getDef('module_cc_error_unavailable');
           break;

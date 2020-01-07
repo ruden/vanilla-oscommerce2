@@ -12,7 +12,7 @@
 
   $btUpdateDownloadResult = array('rpcStatus' => -1);
 
-  if ( isset($HTTP_GET_VARS['v']) && is_numeric($HTTP_GET_VARS['v']) && ($HTTP_GET_VARS['v'] > $OSCOM_Braintree->getVersion()) ) {
+  if ( isset($_GET['v']) && is_numeric($_GET['v']) && ($_GET['v'] > $OSCOM_Braintree->getVersion()) ) {
     if ( $OSCOM_Braintree->isWritable(DIR_FS_CATALOG . 'includes/apps/braintree/work') ) {
       if ( !file_exists(DIR_FS_CATALOG . 'includes/apps/braintree/work') ) {
         mkdir(DIR_FS_CATALOG . 'includes/apps/braintree/work', 0777, true);
@@ -24,7 +24,7 @@
         unlink($filepath);
       }
 
-      $btUpdateDownloadFile = $OSCOM_Braintree->makeApiCall('https://apps.oscommerce.com/index.php?Download&braintree&app&2_300&' . str_replace('.', '_', $HTTP_GET_VARS['v']) . '&update');
+      $btUpdateDownloadFile = $OSCOM_Braintree->makeApiCall('https://apps.oscommerce.com/index.php?Download&braintree&app&2_300&' . str_replace('.', '_', $_GET['v']) . '&update');
 
       $save_result = @file_put_contents($filepath, $btUpdateDownloadFile);
 

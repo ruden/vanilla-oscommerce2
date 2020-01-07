@@ -24,7 +24,7 @@
     }
   }
 
-  $current_module = (isset($HTTP_GET_VARS['module']) && in_array($HTTP_GET_VARS['module'], $modules)) ? $HTTP_GET_VARS['module'] : $default_module;
+  $current_module = (isset($_GET['module']) && in_array($_GET['module'], $modules)) ? $_GET['module'] : $default_module;
 
   if ( !defined('OSCOM_APP_PAYPAL_TRANSACTIONS_ORDER_STATUS_ID') ) {
     $check_query = tep_db_query("select orders_status_id from " . TABLE_ORDERS_STATUS . " where orders_status_name = 'PayPal [Transactions]' limit 1");

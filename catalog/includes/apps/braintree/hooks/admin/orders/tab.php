@@ -28,7 +28,7 @@
     }
 
     function execute() {
-      global $HTTP_GET_VARS, $oID, $base_url;
+      global $oID, $base_url;
 
       if (!defined('OSCOM_APP_PAYPAL_BRAINTREE_TRANSACTIONS_ORDER_STATUS_ID')) {
         return false;
@@ -56,7 +56,7 @@
 
           $bt_server = (strpos(strtolower($order['payment_method']), 'sandbox') !== false) ? 'sandbox' : 'live';
 
-          $info_button = $this->_app->drawButton($this->_app->getDef('button_details'), tep_href_link(FILENAME_ORDERS, 'page=' . $HTTP_GET_VARS['page'] . '&oID=' . $oID . '&action=edit&tabaction=getTransactionDetails'), 'primary', null, true);
+          $info_button = $this->_app->drawButton($this->_app->getDef('button_details'), tep_href_link(FILENAME_ORDERS, 'page=' . $_GET['page'] . '&oID=' . $oID . '&action=edit&tabaction=getTransactionDetails'), 'primary', null, true);
           $capture_button = $this->getCaptureButton($status, $order);
           $void_button = $this->getVoidButton($status, $order);
           $refund_button = $this->getRefundButton($status, $order);
@@ -84,8 +84,6 @@ EOD;
     }
 
     function getCaptureButton($status, $order) {
-      global $HTTP_GET_VARS;
-
       $output = '';
 
       if ($status['Payment Status'] == 'authorized') {
@@ -100,7 +98,7 @@ EOD;
             $dialog_title = tep_output_string_protected($this->_app->getDef('dialog_capture_title'));
             $dialog_body = $this->_app->getDef('dialog_capture_body');
             $field_amount_title = $this->_app->getDef('dialog_capture_amount_field_title');
-            $capture_link = tep_href_link(FILENAME_ORDERS, 'page=' . $HTTP_GET_VARS['page'] . '&oID=' . $order['orders_id'] . '&action=edit&tabaction=doCapture');
+            $capture_link = tep_href_link(FILENAME_ORDERS, 'page=' . $_GET['page'] . '&oID=' . $order['orders_id'] . '&action=edit&tabaction=doCapture');
             $capture_currency = $order['currency'];
             $capture_total = $this->_app->formatCurrencyRaw($order['total'], $order['currency'], $order['currency_value']);
             $dialog_button_capture = addslashes($this->_app->getDef('dialog_capture_button_capture'));
@@ -151,8 +149,6 @@ EOD;
     }
 
     function getVoidButton($status, $order) {
-      global $HTTP_GET_VARS;
-
       $output = '';
 
       $s_query = tep_db_query("select comments from " . TABLE_ORDERS_STATUS_HISTORY . " where orders_id = '" . (int)$order['orders_id'] . "' and orders_status_id = '" . (int)OSCOM_APP_PAYPAL_BRAINTREE_TRANSACTIONS_ORDER_STATUS_ID . "' and comments like '%Payment Status:%' order by date_added desc limit 1");
@@ -183,7 +179,7 @@ EOD;
 
             $dialog_title = tep_output_string_protected($this->_app->getDef('dialog_void_title'));
             $dialog_body = $this->_app->getDef('dialog_void_body');
-            $void_link = tep_href_link(FILENAME_ORDERS, 'page=' . $HTTP_GET_VARS['page'] . '&oID=' . $order['orders_id'] . '&action=edit&tabaction=doVoid');
+            $void_link = tep_href_link(FILENAME_ORDERS, 'page=' . $_GET['page'] . '&oID=' . $order['orders_id'] . '&action=edit&tabaction=doVoid');
             $dialog_button_void = addslashes($this->_app->getDef('dialog_void_button_void'));
             $dialog_button_cancel = addslashes($this->_app->getDef('dialog_void_button_cancel'));
 
@@ -224,8 +220,6 @@ EOD;
     }
 
     function getRefundButton($status, $order) {
-      global $HTTP_GET_VARS;
-
       $output = '';
 
       $s_query = tep_db_query("select comments from " . TABLE_ORDERS_STATUS_HISTORY . " where orders_id = '" . (int)$order['orders_id'] . "' and orders_status_id = '" . (int)OSCOM_APP_PAYPAL_BRAINTREE_TRANSACTIONS_ORDER_STATUS_ID . "' and comments not like 'Braintree App: Refund (%' and comments like '%Payment Status:%' order by date_added desc limit 1");
@@ -265,7 +259,7 @@ EOD;
             $dialog_title = tep_output_string_protected($this->_app->getDef('dialog_refund_title'));
             $dialog_body = $this->_app->getDef('dialog_refund_body');
             $field_amount_title = $this->_app->getDef('dialog_refund_amount_field_title');
-            $refund_link = tep_href_link(FILENAME_ORDERS, 'page=' . $HTTP_GET_VARS['page'] . '&oID=' . $order['orders_id'] . '&action=edit&tabaction=refundTransaction');
+            $refund_link = tep_href_link(FILENAME_ORDERS, 'page=' . $_GET['page'] . '&oID=' . $order['orders_id'] . '&action=edit&tabaction=refundTransaction');
             $refund_currency = $order['currency'];
             $dialog_button_refund = addslashes($this->_app->getDef('dialog_refund_button_refund'));
             $dialog_button_cancel = addslashes($this->_app->getDef('dialog_refund_button_cancel'));

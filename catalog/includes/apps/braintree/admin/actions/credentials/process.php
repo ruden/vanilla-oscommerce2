@@ -10,14 +10,14 @@
   Released under the GNU General Public License
 */
 
-  $data = array('OSCOM_APP_PAYPAL_BRAINTREE_MERCHANT_ID' => isset($HTTP_POST_VARS['live_merchant_id']) ? tep_db_prepare_input($HTTP_POST_VARS['live_merchant_id']) : '',
-                'OSCOM_APP_PAYPAL_BRAINTREE_PRIVATE_KEY' => isset($HTTP_POST_VARS['live_private_key']) ? tep_db_prepare_input($HTTP_POST_VARS['live_private_key']) : '',
-                'OSCOM_APP_PAYPAL_BRAINTREE_PUBLIC_KEY' => isset($HTTP_POST_VARS['live_public_key']) ? tep_db_prepare_input($HTTP_POST_VARS['live_public_key']) : '',
-                'OSCOM_APP_PAYPAL_BRAINTREE_CURRENCIES_MA' => isset($HTTP_POST_VARS['live_currencies_ma']) ? tep_db_prepare_input($HTTP_POST_VARS['live_currencies_ma']) : '',
-                'OSCOM_APP_PAYPAL_BRAINTREE_SANDBOX_MERCHANT_ID' => isset($HTTP_POST_VARS['sandbox_merchant_id']) ? tep_db_prepare_input($HTTP_POST_VARS['sandbox_merchant_id']) : '',
-                'OSCOM_APP_PAYPAL_BRAINTREE_SANDBOX_PRIVATE_KEY' => isset($HTTP_POST_VARS['sandbox_private_key']) ? tep_db_prepare_input($HTTP_POST_VARS['sandbox_private_key']) : '',
-                'OSCOM_APP_PAYPAL_BRAINTREE_SANDBOX_PUBLIC_KEY' => isset($HTTP_POST_VARS['sandbox_public_key']) ? tep_db_prepare_input($HTTP_POST_VARS['sandbox_public_key']) : '',
-                'OSCOM_APP_PAYPAL_BRAINTREE_SANDBOX_CURRENCIES_MA' => isset($HTTP_POST_VARS['sandbox_currencies_ma']) ? tep_db_prepare_input($HTTP_POST_VARS['sandbox_currencies_ma']) : '');
+  $data = array('OSCOM_APP_PAYPAL_BRAINTREE_MERCHANT_ID' => isset($_POST['live_merchant_id']) ? tep_db_prepare_input($_POST['live_merchant_id']) : '',
+                'OSCOM_APP_PAYPAL_BRAINTREE_PRIVATE_KEY' => isset($_POST['live_private_key']) ? tep_db_prepare_input($_POST['live_private_key']) : '',
+                'OSCOM_APP_PAYPAL_BRAINTREE_PUBLIC_KEY' => isset($_POST['live_public_key']) ? tep_db_prepare_input($_POST['live_public_key']) : '',
+                'OSCOM_APP_PAYPAL_BRAINTREE_CURRENCIES_MA' => isset($_POST['live_currencies_ma']) ? tep_db_prepare_input($_POST['live_currencies_ma']) : '',
+                'OSCOM_APP_PAYPAL_BRAINTREE_SANDBOX_MERCHANT_ID' => isset($_POST['sandbox_merchant_id']) ? tep_db_prepare_input($_POST['sandbox_merchant_id']) : '',
+                'OSCOM_APP_PAYPAL_BRAINTREE_SANDBOX_PRIVATE_KEY' => isset($_POST['sandbox_private_key']) ? tep_db_prepare_input($_POST['sandbox_private_key']) : '',
+                'OSCOM_APP_PAYPAL_BRAINTREE_SANDBOX_PUBLIC_KEY' => isset($_POST['sandbox_public_key']) ? tep_db_prepare_input($_POST['sandbox_public_key']) : '',
+                'OSCOM_APP_PAYPAL_BRAINTREE_SANDBOX_CURRENCIES_MA' => isset($_POST['sandbox_currencies_ma']) ? tep_db_prepare_input($_POST['sandbox_currencies_ma']) : '');
 
   foreach ( $data as $key => $value ) {
     $OSCOM_Braintree->saveParameter($key, $value);

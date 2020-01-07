@@ -21,8 +21,8 @@
   foreach ( $OSCOM_Braintree->getParameters($current_module) as $key ) {
     $p = strtolower(substr($key, $cut_length));
 
-    if ( isset($HTTP_POST_VARS[$p]) ) {
-      $OSCOM_Braintree->saveParameter($key, $HTTP_POST_VARS[$p]);
+    if ( isset($_POST[$p]) ) {
+      $OSCOM_Braintree->saveParameter($key, $_POST[$p]);
     }
   }
 

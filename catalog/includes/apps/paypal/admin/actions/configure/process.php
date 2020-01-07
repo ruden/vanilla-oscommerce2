@@ -21,8 +21,8 @@
   foreach ( $OSCOM_PayPal->getParameters($current_module) as $key ) {
     $p = strtolower(substr($key, $cut_length));
 
-    if ( isset($HTTP_POST_VARS[$p]) ) {
-      $OSCOM_PayPal->saveParameter($key, $HTTP_POST_VARS[$p]);
+    if ( isset($_POST[$p]) ) {
+      $OSCOM_PayPal->saveParameter($key, $_POST[$p]);
     }
   }
 

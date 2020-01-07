@@ -12,9 +12,9 @@
 
   $btUpdateLogResult = array('rpcStatus' => -1);
 
-  if ( isset($HTTP_GET_VARS['v']) && is_numeric($HTTP_GET_VARS['v']) && file_exists(DIR_FS_CATALOG . 'includes/apps/braintree/work/update_log-' . basename($HTTP_GET_VARS['v']) . '.php') ) {
+  if ( isset($_GET['v']) && is_numeric($_GET['v']) && file_exists(DIR_FS_CATALOG . 'includes/apps/braintree/work/update_log-' . basename($_GET['v']) . '.php') ) {
     $btUpdateLogResult['rpcStatus'] = 1;
-    $btUpdateLogResult['log'] = file_get_contents(DIR_FS_CATALOG . 'includes/apps/braintree/work/update_log-' . basename($HTTP_GET_VARS['v']) . '.php');
+    $btUpdateLogResult['log'] = file_get_contents(DIR_FS_CATALOG . 'includes/apps/braintree/work/update_log-' . basename($_GET['v']) . '.php');
   }
 
   echo json_encode($btUpdateLogResult);

@@ -17,13 +17,13 @@
 
   $dir_fs_www_root = dirname(__FILE__);
 
-  if (isset($HTTP_GET_VARS['action']) && !empty($HTTP_GET_VARS['action'])) {
-    switch ($HTTP_GET_VARS['action']) {
+  if (isset($_GET['action']) && !empty($_GET['action'])) {
+    switch ($_GET['action']) {
       case 'dbCheck':
-        $db = array('DB_SERVER' => trim(rawurldecode($HTTP_GET_VARS['server'])),
-                    'DB_SERVER_USERNAME' => trim(rawurldecode($HTTP_GET_VARS['username'])),
-                    'DB_SERVER_PASSWORD' => trim(rawurldecode($HTTP_GET_VARS['password'])),
-                    'DB_DATABASE' => trim(rawurldecode($HTTP_GET_VARS['name']))
+        $db = array('DB_SERVER' => trim(rawurldecode($_GET['server'])),
+                    'DB_SERVER_USERNAME' => trim(rawurldecode($_GET['username'])),
+                    'DB_SERVER_PASSWORD' => trim(rawurldecode($_GET['password'])),
+                    'DB_DATABASE' => trim(rawurldecode($_GET['name']))
                    );
 
         $db_error = false;
@@ -43,11 +43,11 @@
         break;
 
       case 'dbImport':
-        $db = array('DB_SERVER' => trim(rawurldecode($HTTP_GET_VARS['server'])),
-                    'DB_SERVER_USERNAME' => trim(rawurldecode($HTTP_GET_VARS['username'])),
-                    'DB_SERVER_PASSWORD' => trim(rawurldecode($HTTP_GET_VARS['password'])),
-                    'DB_DATABASE' => trim(rawurldecode($HTTP_GET_VARS['name'])),
-                    'DB_IMPORT_SAMPLE' => trim(rawurldecode($HTTP_GET_VARS['importsample']))
+        $db = array('DB_SERVER' => trim(rawurldecode($_GET['server'])),
+                    'DB_SERVER_USERNAME' => trim(rawurldecode($_GET['username'])),
+                    'DB_SERVER_PASSWORD' => trim(rawurldecode($_GET['password'])),
+                    'DB_DATABASE' => trim(rawurldecode($_GET['name'])),
+                    'DB_IMPORT_SAMPLE' => trim(rawurldecode($_GET['importsample']))
                    );
 
         osc_db_connect($db['DB_SERVER'], $db['DB_SERVER_USERNAME'], $db['DB_SERVER_PASSWORD']);

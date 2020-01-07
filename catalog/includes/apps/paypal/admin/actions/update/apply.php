@@ -12,8 +12,8 @@
 
   $ppUpdateApplyResult = array('rpcStatus' => -1);
 
-  if ( isset($HTTP_GET_VARS['v']) && is_numeric($HTTP_GET_VARS['v']) && ($HTTP_GET_VARS['v'] > $OSCOM_PayPal->getVersion()) ) {
-    $update_version = basename($HTTP_GET_VARS['v']);
+  if ( isset($_GET['v']) && is_numeric($_GET['v']) && ($_GET['v'] > $OSCOM_PayPal->getVersion()) ) {
+    $update_version = basename($_GET['v']);
 
     $update_zip = DIR_FS_CATALOG . 'includes/apps/paypal/work/update.zip';
 

@@ -12,10 +12,10 @@
 
   require('includes/application_top.php');
 
-  foreach (array_keys($HTTP_GET_VARS) as $key) {
+  foreach (array_keys($_GET) as $key) {
     switch ($key) {
       case 'banner':
-        $banners_id = tep_db_prepare_input($HTTP_GET_VARS['banner']);
+        $banners_id = tep_db_prepare_input($_GET['banner']);
 
         $banner_query = tep_db_query("select banners_title, banners_image, banners_html_text from " . TABLE_BANNERS . " where banners_id = '" . (int)$banners_id . "'");
         $banner = tep_db_fetch_array($banner_query);

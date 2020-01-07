@@ -30,10 +30,8 @@
     }
 
     function execute() {
-      global $HTTP_GET_VARS, $HTTP_POST_VARS;
-
-      if ( isset($HTTP_GET_VARS['tabaction']) ) {
-        $btstatus_query = tep_db_query("select comments from " . TABLE_ORDERS_STATUS_HISTORY . " where orders_id = '" . (int)$HTTP_GET_VARS['oID'] . "' and orders_status_id = '" . (int)OSCOM_APP_PAYPAL_BRAINTREE_TRANSACTIONS_ORDER_STATUS_ID . "' and comments like 'Transaction ID:%' order by date_added limit 1");
+      if ( isset($_GET['tabaction']) ) {
+        $btstatus_query = tep_db_query("select comments from " . TABLE_ORDERS_STATUS_HISTORY . " where orders_id = '" . (int)$_GET['oID'] . "' and orders_status_id = '" . (int)OSCOM_APP_PAYPAL_BRAINTREE_TRANSACTIONS_ORDER_STATUS_ID . "' and comments like 'Transaction ID:%' order by date_added limit 1");
         if ( tep_db_num_rows($btstatus_query) ) {
           $btstatus = tep_db_fetch_array($btstatus_query);
 
@@ -48,14 +46,14 @@
           }
 
           if ( isset($bt['Transaction ID']) ) {
-            $o_query = tep_db_query("select o.orders_id, o.payment_method, o.currency, o.currency_value, ot.value as total from " . TABLE_ORDERS . " o, " . TABLE_ORDERS_TOTAL . " ot where o.orders_id = '" . (int)$HTTP_GET_VARS['oID'] . "' and o.orders_id = ot.orders_id and ot.class = 'ot_total'");
+            $o_query = tep_db_query("select o.orders_id, o.payment_method, o.currency, o.currency_value, ot.value as total from " . TABLE_ORDERS . " o, " . TABLE_ORDERS_TOTAL . " ot where o.orders_id = '" . (int)$_GET['oID'] . "' and o.orders_id = ot.orders_id and ot.class = 'ot_total'");
             $o = tep_db_fetch_array($o_query);
 
             if ((isset($bt['Server']) && ($bt['Server'] !== 'production')) || (strpos($o['payment_method'], 'Sandbox') !== false)) {
               $this->server = 0;
             }
 
-            switch ( $HTTP_GET_VARS['tabaction'] ) {
+            switch ( $_GET['tabaction'] ) {
               case 'getTransactionDetails':
                 $this->getTransactionDetails($bt, $o);
                 break;
@@ -73,7 +71,7 @@
                 break;
             }
 
-            tep_redirect(tep_href_link(FILENAME_ORDERS, 'page=' . $HTTP_GET_VARS['page'] . '&oID=' . $HTTP_GET_VARS['oID'] . '&action=edit#section_status_history_content'));
+            tep_redirect(tep_href_link(FILENAME_ORDERS, 'page=' . $_GET['page'] . '&oID=' . $_GET['oID'] . '&action=edit#section_status_history_content'));
           }
         }
       }
@@ -139,7 +137,7 @@
     }
 
     function doCapture($comments, $order) {
-      global $HTTP_POST_VARS, $messageStack;
+      global $messageStack;
 
       $capture_value = $this->_app->formatCurrencyRaw($order['total'], $order['currency'], $order['currency_value']);
 
@@ -259,7 +257,7 @@
     }
 
     function refundTransaction($comments, $order) {
-      global $HTTP_POST_VARS, $messageStack;
+      global $messageStack;
 
       $refund_value = (isset($_POST['btRefundAmount']) && !empty($_POST['btRefundAmount'])) ? $this->_app->formatCurrencyRaw($_POST['btRefundAmount'], $order['currency'], 1) : null;
 

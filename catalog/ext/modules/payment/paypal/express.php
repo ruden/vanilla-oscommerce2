@@ -244,7 +244,7 @@
           $counter = 0;
           $cheapest_rate = null;
           $cheapest_counter = $counter;
-          $selected_shipping_id = isset($HTTP_GET_VARS['osc_shipping_id']) ? $HTTP_GET_VARS['osc_shipping_id'] : null;
+          $selected_shipping_id = isset($_GET['osc_shipping_id']) ? $_GET['osc_shipping_id'] : null;
           $selected_shipping_counter = null;
 
           foreach ($quotes_array as $quote) {
@@ -1041,7 +1041,7 @@ EOD;
 
           tep_redirect($paypal_url . 'token=' . $response_array['TOKEN']);
         } else {
-          if ( isset($HTTP_GET_VARS['format']) && ($HTTP_GET_VARS['format'] == 'json') ) {
+          if ( isset($_GET['format']) && ($_GET['format'] == 'json') ) {
             $result = array(
               'token' => ''
             );

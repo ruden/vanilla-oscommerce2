@@ -17,7 +17,7 @@ if (!defined('OSCOM_APP_PAYPAL_BRAINTREE_CC_STATUS') || !in_array(OSCOM_APP_PAYP
   exit;
 }
 
-if (!isset($HTTP_GET_VARS['action'])) {
+if (!isset($_GET['action'])) {
   exit;
 }
 
@@ -39,15 +39,15 @@ if (!class_exists('braintree_cc', false)) {
 
 $pm = new braintree_cc();
 
-switch ($HTTP_GET_VARS['action']) {
+switch ($_GET['action']) {
   case 'paypal':
     if (
       $pm->isPaymentTypeAccepted('paypal') &&
       tep_session_is_registered('appBraintreeCcFormHash') &&
-      isset($HTTP_POST_VARS['bt_paypal_form_hash']) &&
-      $HTTP_POST_VARS['bt_paypal_form_hash'] == $appBraintreeCcFormHash &&
-      isset($HTTP_POST_VARS['bt_paypal_nonce']) &&
-      !empty($HTTP_POST_VARS['bt_paypal_nonce'])
+      isset($_POST['bt_paypal_form_hash']) &&
+      $_POST['bt_paypal_form_hash'] == $appBraintreeCcFormHash &&
+      isset($_POST['bt_paypal_nonce']) &&
+      !empty($_POST['bt_paypal_nonce'])
     ) {
       tep_session_unregister('appBraintreeCcFormHash');
 
@@ -56,7 +56,7 @@ switch ($HTTP_GET_VARS['action']) {
       $bt = null;
 
       try {
-        $bt = Braintree_PaymentMethodNonce::find($HTTP_POST_VARS['bt_paypal_nonce']);
+        $bt = Braintree_PaymentMethodNonce::find($_POST['bt_paypal_nonce']);
       } catch (Exception $e) {
       }
 
@@ -64,7 +64,7 @@ switch ($HTTP_GET_VARS['action']) {
         isset($bt) &&
         is_object($bt) &&
         isset($bt->nonce) &&
-        $bt->nonce == $HTTP_POST_VARS['bt_paypal_nonce'] &&
+        $bt->nonce == $_POST['bt_paypal_nonce'] &&
         $bt->type == 'PayPalAccount' &&
         $bt->consumed === false
       ) {
@@ -376,13 +376,13 @@ switch ($HTTP_GET_VARS['action']) {
       exit;
     }
 
-    if (!isset($HTTP_POST_VARS['card_id']) || !is_numeric($HTTP_POST_VARS['card_id']) || ($HTTP_POST_VARS['card_id'] < 1)) {
+    if (!isset($_POST['card_id']) || !is_numeric($_POST['card_id']) || ($_POST['card_id'] < 1)) {
       exit;
     }
 
     $result = array();
 
-    $card_query = tep_db_query("select braintree_token from customers_braintree_tokens where id = '" . (int)$HTTP_POST_VARS['card_id'] . "' and customers_id = '" . (int)$customer_id . "'");
+    $card_query = tep_db_query("select braintree_token from customers_braintree_tokens where id = '" . (int)$_POST['card_id'] . "' and customers_id = '" . (int)$customer_id . "'");
 
     if (tep_db_num_rows($card_query)) {
       $card = tep_db_fetch_array($card_query);
