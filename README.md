@@ -8,15 +8,15 @@ Changelog
 
 * [x] PHP v7 compatibility fixes.
 * [x] MySQL v5.7 compatibility fixes.
-* [ ] Introduce hooks implementation.
-* [ ] Update layout of the orders and products administration pages to a tabbed
+* [x] Introduce hooks implementation.
+* [x] Update layout of the orders and products administration pages to a tabbed
    layout.
 * [ ] Automatically select the first shipping rate available instead of the
    cheapest rate.
-* [ ] Display the total price of the order in the label of the checkout
+* [x] Display the total price of the order in the label of the checkout
    confirmation button.
-* [ ] Improve session functions.
-* [ ] Disable output of PHP error messages; log errors to a file in the work
+* [x] Improve session functions.
+* [x] Disable output of PHP error messages; log errors to a file in the work
    directory.
 * [ ] Update PayPal modules to the latest PayPal App version (vx.xxx).
 * [ ] Update Braintree module to the latest Braintree App version (vx.xxx).
