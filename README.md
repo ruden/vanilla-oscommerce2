@@ -3,6 +3,8 @@
 Vanilla osCommerce v2.3.5
 =========================
 
+Demo: <http://demo.osclab.com/vanilla-oscommerce/>
+
 Changelog
 ---------
 
