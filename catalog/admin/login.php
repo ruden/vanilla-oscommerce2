@@ -131,7 +131,7 @@
   require(DIR_WS_INCLUDES . 'template_top.php');
 ?>
 
-<table border="0" width="100%" cellspacing="2" cellpadding="2">
+<table border="0" width="100%" cellspacing="2" cellpadding="2" style="width: 320px; margin: auto;">
   <tr>
     <td><table border="0" width="100%" cellspacing="0" cellpadding="0" height="40">
       <tr>
