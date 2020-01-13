@@ -455,7 +455,7 @@ EOD;
 
           $flags_query = tep_db_query("describe orders_status public_flag");
           if (tep_db_num_rows($flags_query) == 1) {
-            tep_db_query("update orders_status set public_flag = 0 and downloads_flag = 0 where orders_status_id = '" . $status_id . "'");
+            tep_db_query("update orders_status set public_flag = 0 and downloads_flag = 0 where orders_status_id = '" . (int)$status_id . "'");
           }
         } else {
           $check = tep_db_fetch_array($check_query);

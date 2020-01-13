@@ -157,7 +157,7 @@
         $output_string .= '  } else if (' . $country . ' == "' . $countries['zone_country_id'] . '") {' . "\n";
       }
 
-      $states_query = tep_db_query("select zone_name, zone_id from zones where zone_country_id = '" . $countries['zone_country_id'] . "' order by zone_name");
+      $states_query = tep_db_query("select zone_name, zone_id from zones where zone_country_id = '" . (int)$countries['zone_country_id'] . "' order by zone_name");
 
       $num_state = 1;
       while ($states = tep_db_fetch_array($states_query)) {

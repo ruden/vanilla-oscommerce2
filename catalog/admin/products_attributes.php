@@ -260,7 +260,7 @@
         echo '<form name="option" action="' . tep_href_link('products_attributes.php', 'action=update_option_name&' . $page_info) . '" method="post">';
         $inputs = '';
         for ($i = 0, $n = sizeof($languages); $i < $n; $i ++) {
-          $option_name = tep_db_query("select products_options_name from products_options where products_options_id = '" . $options_values['products_options_id'] . "' and language_id = '" . $languages[$i]['id'] . "'");
+          $option_name = tep_db_query("select products_options_name from products_options where products_options_id = '" . (int)$options_values['products_options_id'] . "' and language_id = '" . (int)$languages[$i]['id'] . "'");
           $option_name = tep_db_fetch_array($option_name);
           $inputs .= $languages[$i]['code'] . ':&nbsp;<input type="text" name="option_name[' . $languages[$i]['id'] . ']" size="20" value="' . $option_name['products_options_name'] . '">&nbsp;<br />';
         }
@@ -469,7 +469,7 @@
                 <td align="center" class="smallText">&nbsp;<?php echo $next_id; ?>&nbsp;</td>
                 <td align="center" class="smallText">&nbsp;<select name="option_id">
 <?php
-      $options = tep_db_query("select products_options_id, products_options_name from products_options where language_id = '" . $languages_id . "' order by products_options_name");
+      $options = tep_db_query("select products_options_id, products_options_name from products_options where language_id = '" . (int)$languages_id . "' order by products_options_name");
       while ($options_values = tep_db_fetch_array($options)) {
         echo '<option name="' . $options_values['products_options_name'] . '" value="' . $options_values['products_options_id'] . '">' . $options_values['products_options_name'] . '</option>';
       }
@@ -561,7 +561,7 @@
             <td class="smallText">&nbsp;<?php echo $attributes_values['products_attributes_id']; ?><input type="hidden" name="attribute_id" value="<?php echo $attributes_values['products_attributes_id']; ?>">&nbsp;</td>
             <td class="smallText">&nbsp;<select name="products_id">
 <?php
-      $products = tep_db_query("select p.products_id, pd.products_name from products p, products_description pd where pd.products_id = p.products_id and pd.language_id = '" . $languages_id . "' order by pd.products_name");
+      $products = tep_db_query("select p.products_id, pd.products_name from products p, products_description pd where pd.products_id = p.products_id and pd.language_id = '" . (int)$languages_id . "' order by pd.products_name");
       while($products_values = tep_db_fetch_array($products)) {
         if ($attributes_values['products_id'] == $products_values['products_id']) {
           echo "\n" . '<option name="' . $products_values['products_name'] . '" value="' . $products_values['products_id'] . '" SELECTED>' . $products_values['products_name'] . '</option>';
@@ -573,7 +573,7 @@
             </select>&nbsp;</td>
             <td class="smallText">&nbsp;<select name="options_id">
 <?php
-      $options = tep_db_query("select * from products_options where language_id = '" . $languages_id . "' order by products_options_name");
+      $options = tep_db_query("select * from products_options where language_id = '" . (int)$languages_id . "' order by products_options_name");
       while($options_values = tep_db_fetch_array($options)) {
         if ($attributes_values['options_id'] == $options_values['products_options_id']) {
           echo "\n" . '<option name="' . $options_values['products_options_name'] . '" value="' . $options_values['products_options_id'] . '" SELECTED>' . $options_values['products_options_name'] . '</option>';
@@ -669,7 +669,7 @@
             <td class="smallText">&nbsp;<?php echo $next_id; ?>&nbsp;</td>
       	    <td class="smallText">&nbsp;<select name="products_id">
 <?php
-    $products = tep_db_query("select p.products_id, pd.products_name from products p, products_description pd where pd.products_id = p.products_id and pd.language_id = '" . $languages_id . "' order by pd.products_name");
+    $products = tep_db_query("select p.products_id, pd.products_name from products p, products_description pd where pd.products_id = p.products_id and pd.language_id = '" . (int)$languages_id . "' order by pd.products_name");
     while ($products_values = tep_db_fetch_array($products)) {
       echo '<option name="' . $products_values['products_name'] . '" value="' . $products_values['products_id'] . '">' . $products_values['products_name'] . '</option>';
     } 
@@ -677,7 +677,7 @@
             </select>&nbsp;</td>
             <td class="smallText">&nbsp;<select name="options_id">
 <?php
-    $options = tep_db_query("select * from products_options where language_id = '" . $languages_id . "' order by products_options_name");
+    $options = tep_db_query("select * from products_options where language_id = '" . (int)$languages_id . "' order by products_options_name");
     while ($options_values = tep_db_fetch_array($options)) {
       echo '<option name="' . $options_values['products_options_name'] . '" value="' . $options_values['products_options_id'] . '">' . $options_values['products_options_name'] . '</option>';
     } 
@@ -685,7 +685,7 @@
             </select>&nbsp;</td>
             <td class="smallText">&nbsp;<select name="values_id">
 <?php
-    $values = tep_db_query("select * from products_options_values where language_id = '" . $languages_id . "' order by products_options_values_name");
+    $values = tep_db_query("select * from products_options_values where language_id = '" . (int)$languages_id . "' order by products_options_values_name");
     while ($values_values = tep_db_fetch_array($values)) {
       echo '<option name="' . $values_values['products_options_values_name'] . '" value="' . $values_values['products_options_values_id'] . '">' . $values_values['products_options_values_name'] . '</option>';
     } 

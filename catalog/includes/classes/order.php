@@ -47,7 +47,7 @@
       $shipping_method_query = tep_db_query("select title from orders_total where orders_id = '" . (int)$order_id . "' and class = 'ot_shipping'");
       $shipping_method = tep_db_fetch_array($shipping_method_query);
 
-      $order_status_query = tep_db_query("select orders_status_name from orders_status where orders_status_id = '" . $order['orders_status'] . "' and language_id = '" . (int)$languages_id . "'");
+      $order_status_query = tep_db_query("select orders_status_name from orders_status where orders_status_id = '" . (int)$order['orders_status'] . "' and language_id = '" . (int)$languages_id . "'");
       $order_status = tep_db_fetch_array($order_status_query);
 
       $this->info = array('currency' => $order['currency'],
