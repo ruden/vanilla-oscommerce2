@@ -265,18 +265,20 @@
                               'country_id' => $shipping_address['entry_country_id'],
                               'format_id' => $shipping_address['address_format_id']);
 
-      $this->billing = array('firstname' => $billing_address['entry_firstname'],
-                             'lastname' => $billing_address['entry_lastname'],
-                             'company' => $billing_address['entry_company'],
-                             'street_address' => $billing_address['entry_street_address'],
-                             'suburb' => $billing_address['entry_suburb'],
-                             'city' => $billing_address['entry_city'],
-                             'postcode' => $billing_address['entry_postcode'],
-                             'state' => ((tep_not_null($billing_address['entry_state'])) ? $billing_address['entry_state'] : $billing_address['zone_name']),
-                             'zone_id' => $billing_address['entry_zone_id'],
-                             'country' => array('id' => $billing_address['countries_id'], 'title' => $billing_address['countries_name'], 'iso_code_2' => $billing_address['countries_iso_code_2'], 'iso_code_3' => $billing_address['countries_iso_code_3']),
-                             'country_id' => $billing_address['entry_country_id'],
-                             'format_id' => $billing_address['address_format_id']);
+      if (isset($billing_address)) {
+        $this->billing = array('firstname' => $billing_address['entry_firstname'],
+                               'lastname' => $billing_address['entry_lastname'],
+                               'company' => $billing_address['entry_company'],
+                               'street_address' => $billing_address['entry_street_address'],
+                               'suburb' => $billing_address['entry_suburb'],
+                               'city' => $billing_address['entry_city'],
+                               'postcode' => $billing_address['entry_postcode'],
+                               'state' => ((tep_not_null($billing_address['entry_state'])) ? $billing_address['entry_state'] : $billing_address['zone_name']),
+                               'zone_id' => $billing_address['entry_zone_id'],
+                               'country' => array('id' => $billing_address['countries_id'], 'title' => $billing_address['countries_name'], 'iso_code_2' => $billing_address['countries_iso_code_2'], 'iso_code_3' => $billing_address['countries_iso_code_3']),
+                               'country_id' => $billing_address['entry_country_id'],
+                               'format_id' => $billing_address['address_format_id']);
+      }
 
       $index = 0;
       $products = $cart->get_products();
