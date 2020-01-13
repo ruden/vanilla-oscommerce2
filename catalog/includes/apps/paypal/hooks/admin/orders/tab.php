@@ -30,6 +30,10 @@
     function execute() {
       global $oID, $base_url;
 
+      if (!defined('OSCOM_APP_PAYPAL_TRANSACTIONS_ORDER_STATUS_ID')) {
+        return false;
+      }
+
       $output = '';
 
       $status = array();
