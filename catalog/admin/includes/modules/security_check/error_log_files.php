@@ -5,7 +5,7 @@
   osCommerce, Open Source E-Commerce Solutions
   http://www.oscommerce.com
 
-  Copyright (c) 2017 osCommerce
+  Copyright (c) 2020 osCommerce
 
   Released under the GNU General Public License
 */
@@ -32,7 +32,7 @@
     }
 
     function getMessage() {
-      return WARNING_ERROR_LOG_FILES_EXIST;
+      return '<a href="' . tep_href_link('error_log.php') . '">' . WARNING_ERROR_LOG_FILES_EXIST . '</a>';
     }
   }
 ?>
