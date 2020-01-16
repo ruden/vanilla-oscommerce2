@@ -488,4 +488,5 @@
 
   require(DIR_FS_CATALOG . 'includes/classes/hooks.php');
   $OSCOM_Hooks = new hooks('shop');
+  $OSCOM_Hooks->register(basename($PHP_SELF, '.php'));
 ?>
