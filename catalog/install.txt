@@ -1,0 +1,24 @@
+XML Sitemap Generator
+=====================
+
+For all version osCommerce create an XML sitemap for the products, categories and manufacturers, that can be submitted to Google, Bing.
+
+> Important: This addon use Hook System, for versions below < 2.3.5 install Hook System
+
+https://apps.oscommerce.com/p9Yyp&hook-system
+
+Install 
+-------
+
+Unzip the archive and upload the files on server.
+
+Using
+-----
+
+Sign in to Google Search Console or Bing Webmaster Tools and add sitemap URL http://example.com/sitemap.php
+
+For testing run URL http://example.com/sitemap.php in browser.
+
+* license MIT https://www.oscommerce.com/license/mit.txt
+* author Valeriy Rudenko <ruden@osclab.com>
+* copyright (c) 2020 OSCLab: https://osclab.com
