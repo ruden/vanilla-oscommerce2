@@ -138,17 +138,19 @@
 
   init_xml($doc, $root, true);
 
+  $languages = array();
+
   if (SEARCH_ENGINE_FRIENDLY_URLS == 'true' || (defined('SEO_ENABLED') && SEO_ENABLED == 'true')) {
-    $languages = tep_db_fetch_all(tep_db_query("SELECT languages_id, name, code, image, directory FROM languages"));
+    $languages_array = tep_db_query("SELECT code FROM languages");
+    while ($languages = tep_db_fetch_array($languages_array)) {
+      $file_extension = ($languages['code'] == DEFAULT_LANGUAGE ? '' : '-' . $languages['code']);
+
+      create_sitemap($file_extension . '.xml');
+      create_sitemap_catalog($doc, $root, $file_extension . '.xml');
+    }
   } else {
-    $languages[]['code'] = DEFAULT_LANGUAGE;
-  }
-
-  foreach ($languages as $lang) {
-    $file_extension = ($lang['code'] == DEFAULT_LANGUAGE ? '' : '-' . $lang['code']);
-
-    create_sitemap($file_extension . '.xml');
-    create_sitemap_catalog($doc, $root, $file_extension . '.xml');
+    create_sitemap();
+    create_sitemap_catalog($doc, $root);
   }
 
   save_xml($doc, 'sitemap-index.xml');

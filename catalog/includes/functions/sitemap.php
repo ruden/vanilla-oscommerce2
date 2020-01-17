@@ -9,12 +9,6 @@
  * @copyright (c) 2020 OSCLab: https://osclab.com
  */
 
-if (!function_exists('tep_db_fetch_all')) {
-  function tep_db_fetch_all($db_query) {
-    return mysqli_fetch_all($db_query, MYSQLI_ASSOC);
-  }
-}
-
 function init_xml(&$doc, &$root, $index = false) {
   $doc = new DOMDocument('1.0', 'UTF-8');
   // $doc->formatOutput = true; // we want a nice output
