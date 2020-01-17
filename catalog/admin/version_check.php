@@ -129,7 +129,7 @@
 <?php
     }
 ?>
-            </table></rd>
+            </table></td>
           </tr>
         </table></td>
       </tr>
