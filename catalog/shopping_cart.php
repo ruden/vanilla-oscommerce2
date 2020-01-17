@@ -12,8 +12,6 @@
 
   require("includes/application_top.php");
 
-  $OSCOM_Hooks->register('cart');
-
   if ($cart->count_contents() > 0) {
     include(DIR_WS_CLASSES . 'payment.php');
     $payment_modules = new payment;
@@ -136,7 +134,7 @@
   </div>
 
 <?php
-    echo $OSCOM_Hooks->call('cart', 'displayAlternativeCheckoutButtons');
+    echo $OSCOM_Hooks->call('shopping_cart', 'displayAlternativeCheckoutButtons');
 ?>
 
 </div>

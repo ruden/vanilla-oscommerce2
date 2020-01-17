@@ -12,14 +12,12 @@
 
   require('includes/application_top.php');
 
-  $OSCOM_Hooks->register('products');
-
   require(DIR_WS_CLASSES . 'currencies.php');
   $currencies = new currencies();
 
   $action = (isset($_GET['action']) ? $_GET['action'] : '');
 
-  $OSCOM_Hooks->call('products', 'productPreAction');
+  $OSCOM_Hooks->call('categories', 'productPreAction');
 
   if (tep_not_null($action)) {
     switch ($action) {
@@ -166,7 +164,7 @@
           tep_reset_cache_block('also_purchased');
         }
 
-        $OSCOM_Hooks->call('products', 'productActionDelete');
+        $OSCOM_Hooks->call('categories', 'productActionDelete');
 
         tep_redirect(tep_href_link('categories.php', 'cPath=' . $cPath));
         break;
@@ -207,7 +205,7 @@
           tep_reset_cache_block('also_purchased');
         }
 
-        $OSCOM_Hooks->call('products', 'productActionMove');
+        $OSCOM_Hooks->call('categories', 'productActionMove');
 
         tep_redirect(tep_href_link('categories.php', 'cPath=' . $new_parent_id . '&pID=' . $products_id));
         break;
@@ -331,7 +329,7 @@
           tep_reset_cache_block('also_purchased');
         }
 
-        $OSCOM_Hooks->call('products', 'productActionSave');
+        $OSCOM_Hooks->call('categories', 'productActionSave');
 
         tep_redirect(tep_href_link('categories.php', 'cPath=' . $cPath . '&pID=' . $products_id));
         break;
@@ -377,14 +375,14 @@
           }
         }
 
-        $OSCOM_Hooks->call('products', 'productActionCopy');
+        $OSCOM_Hooks->call('categories', 'productActionCopy');
 
         tep_redirect(tep_href_link('categories.php', 'cPath=' . $categories_id . '&pID=' . $products_id));
         break;
     }
   }
 
-  $OSCOM_Hooks->call('products', 'productPostAction');
+  $OSCOM_Hooks->call('categories', 'productPostAction');
 
 // check if the catalog image directory exists
   if (is_dir(DIR_FS_CATALOG_IMAGES)) {
@@ -684,7 +682,7 @@ function showPiDelConfirm(piId) {
   </div>
 
 <?php
-    echo $OSCOM_Hooks->call('products', 'productTab');
+    echo $OSCOM_Hooks->call('categories', 'productTab');
 ?>
 
 </div>
