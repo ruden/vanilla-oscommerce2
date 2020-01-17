@@ -10,7 +10,7 @@
   Released under the GNU General Public License
 */
 
-  class hook_shop_cart_alternative_checkout_buttons {
+  class hook_shop_shopping_cart_alternative_checkout_buttons {
     function listen_displayAlternativeCheckoutButtons() {
       global $payment_modules;
 
