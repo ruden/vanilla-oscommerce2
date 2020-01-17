@@ -7,6 +7,11 @@ For all version osCommerce create an XML sitemap for the products, categories an
 
 https://apps.oscommerce.com/p9Yyp&hook-system
 
+Demonstration
+------------------
+
+http://demo.osclab.com/vanilla-oscommerce/sitemap.php
+
 Install 
 -------
 
