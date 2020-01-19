@@ -220,7 +220,7 @@
                           'cc_number' => '',
                           'cc_expires' => '',
                           'shipping_method' => (isset($shipping['title']) ? $shipping['title'] : ''),
-                          'shipping_cost' => (isset($shipping['cost']) ? $shipping['cost'] : ''),
+                          'shipping_cost' => (isset($shipping['cost']) ? $shipping['cost'] : 0),
                           'subtotal' => 0,
                           'tax' => 0,
                           'tax_groups' => array(),
