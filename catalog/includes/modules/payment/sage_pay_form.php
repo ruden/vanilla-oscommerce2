@@ -28,7 +28,7 @@
       $this->order_status = defined('MODULE_PAYMENT_SAGE_PAY_FORM_ORDER_STATUS_ID') && ((int)MODULE_PAYMENT_SAGE_PAY_FORM_ORDER_STATUS_ID > 0) ? (int)MODULE_PAYMENT_SAGE_PAY_FORM_ORDER_STATUS_ID : 0;
 
       if ( defined('MODULE_PAYMENT_SAGE_PAY_FORM_STATUS') ) {
-        if ( MODULE_PAYMENT_SAGE_PAY_FORM_TRANSACTION_SERVER == 'Test' ) {
+        if ( defined('MODULE_PAYMENT_SAGE_PAY_FORM_TRANSACTION_SERVER') && MODULE_PAYMENT_SAGE_PAY_FORM_TRANSACTION_SERVER == 'Test' ) {
           $this->title .= ' [Test]';
           $this->public_title .= ' (' . $this->code . '; Test)';
         }
@@ -54,7 +54,7 @@
         }
       }
 
-      if ( MODULE_PAYMENT_SAGE_PAY_FORM_TRANSACTION_SERVER == 'Live' ) {
+      if ( defined('MODULE_PAYMENT_SAGE_PAY_FORM_TRANSACTION_SERVER') && MODULE_PAYMENT_SAGE_PAY_FORM_TRANSACTION_SERVER == 'Live' ) {
         $this->form_action_url = 'https://live.sagepay.com/gateway/service/vspform-register.vsp';
       } else {
         $this->form_action_url = 'https://test.sagepay.com/gateway/service/vspform-register.vsp';
