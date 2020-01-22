@@ -31,19 +31,19 @@
     }
 
     function execute() {
-      global $oscTemplate;
+      global $oscTemplate, $languages_id;
 
-      $data = '<div class="ui-widget infoBoxContainer">' .
-              '  <div class="ui-widget-header infoBoxHeading">' . MODULE_BOXES_INFORMATION_BOX_TITLE . '</div>' .
-              '  <div class="ui-widget-content infoBoxContents">' .
-              '    <a href="' . tep_href_link(FILENAME_SHIPPING) . '">' . MODULE_BOXES_INFORMATION_BOX_SHIPPING . '</a><br />' .
-              '    <a href="' . tep_href_link(FILENAME_PRIVACY) . '">' . MODULE_BOXES_INFORMATION_BOX_PRIVACY . '</a><br />' .
-              '    <a href="' . tep_href_link(FILENAME_CONDITIONS) . '">' . MODULE_BOXES_INFORMATION_BOX_CONDITIONS . '</a><br />' .
-              '    <a href="' . tep_href_link('contact_us.php') . '">' . MODULE_BOXES_INFORMATION_BOX_CONTACT . '</a>' .
-              '  </div>' .
-              '</div>';
+      $information_array = array();
 
-      $oscTemplate->addBlock($data, $this->group);
+      $information_query = tep_db_query("select ip.pages_id, ipc.pages_name from information_pages ip, information_pages_content ipc where ip.pages_status = '1' and ip.pages_id = ipc.pages_id and ipc.language_id = '" . (int)$languages_id . "' order by ip.sort_order");
+      while ($information = tep_db_fetch_array($information_query)) {
+        $information_array[] = $information;
+      }
+
+      ob_start();
+      include(DIR_WS_MODULES . 'boxes/templates/tpl_' . basename(__FILE__));
+
+      $oscTemplate->addBlock(ob_get_clean(), $this->group);
     }
 
     function isEnabled() {

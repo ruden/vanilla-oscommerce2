@@ -231,6 +231,26 @@ CREATE TABLE customers_info (
   PRIMARY KEY (customers_info_id)
 ) CHARACTER SET utf8 COLLATE utf8_unicode_ci;
 
+DROP TABLE IF EXISTS information_pages;
+CREATE TABLE information_pages (
+  pages_id int NOT NULL auto_increment,
+  pages_date_added datetime,
+  pages_last_modified datetime,
+  pages_status tinyint(1) default '1' NOT NULL,
+  sort_order int(3),
+  PRIMARY KEY (pages_id)
+) CHARACTER SET utf8 COLLATE utf8_unicode_ci;
+
+DROP TABLE IF EXISTS information_pages_content;
+CREATE TABLE information_pages_content (
+  pages_id int NOT NULL auto_increment,
+  language_id tinyint(1) default '1' NOT NULL,
+  pages_name varchar(255) NOT NULL,
+  pages_content text,
+  PRIMARY KEY (pages_id, language_id),
+  KEY pages_name (pages_name)
+) CHARACTER SET utf8 COLLATE utf8_unicode_ci;
+
 DROP TABLE IF EXISTS languages;
 CREATE TABLE languages (
   languages_id int NOT NULL auto_increment,
@@ -1073,6 +1093,14 @@ INSERT INTO countries VALUES (239,'Zimbabwe','ZW','ZWE','1');
 
 INSERT INTO currencies VALUES (1,'U.S. Dollar','USD','$','','.',',','2','1.0000', now());
 INSERT INTO currencies VALUES (2,'Euro','EUR','','€','.',',','2','1.0000', now());
+
+INSERT INTO information_pages VALUES ('1', now(), null, '1', '3');
+INSERT INTO information_pages VALUES ('2', now(), null, '1', '2');
+INSERT INTO information_pages VALUES ('3', now(), null, '1', '1');
+
+INSERT INTO information_pages_content VALUES ('1', '1', 'Shipping & Returns', 'Put here your Shipping & Returns information.');
+INSERT INTO information_pages_content VALUES ('2', '1', 'Privacy Notice', 'Put here your Privacy Notice information. ');
+INSERT INTO information_pages_content VALUES ('3', '1', 'Conditions of Use', 'Put here your Conditions of Use information.');
 
 INSERT INTO languages VALUES (1,'English','en','icon.gif','english',1);
 
