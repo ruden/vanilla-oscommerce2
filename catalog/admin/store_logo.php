@@ -15,12 +15,12 @@
   $action = (isset($_GET['action']) ? $_GET['action'] : '');
 
   if (tep_not_null($action)) {
-    switch ($action) {
-      case 'save':
-        $error = false;
+    $error = false;
 
+    switch ($action) {
+      case 'save_logo':
         $store_logo = new upload('store_logo');
-        $store_logo->set_extensions('png');
+        $store_logo->set_extensions(array('png', 'jpg', 'jpeg', 'gif', 'svg'));
         $store_logo->set_destination(DIR_FS_CATALOG_IMAGES);
 
         if ($store_logo->parse()) {
@@ -34,11 +34,28 @@
         } else {
           $error = true;
         }
+        break;
+      case 'save_favicon':
+        $store_favicon = new upload('store_favicon');
+        $store_favicon->set_extensions('ico');
+        $store_favicon->set_destination(DIR_FS_CATALOG);
 
-        if ($error == false) {
-          tep_redirect(tep_href_link('store_logo.php'));
+        if ($store_favicon->parse()) {
+          $store_favicon->set_filename('favicon.ico');
+
+          if ($store_favicon->save()) {
+            $messageStack->add_session(SUCCESS_FAVICON_UPDATED, 'success');
+          } else {
+            $error = true;
+          }
+        } else {
+          $error = true;
         }
         break;
+    }
+
+    if ($error == false) {
+      tep_redirect(tep_href_link('store_logo.php'));
     }
   }
 
@@ -59,13 +76,13 @@
         </table></td>
       </tr>
       <tr>
-        <td><?php echo tep_image(HTTP_CATALOG_SERVER . DIR_WS_CATALOG_IMAGES . 'store_logo.png'); ?></td>
+        <td><?php echo tep_image(tep_catalog_href_link('images/store_logo.png')); ?></td>
       </tr>
       <tr>
         <td><?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
       </tr>
       <tr>
-        <td><?php echo tep_draw_form('logo', 'store_logo.php', 'action=save', 'post', 'enctype="multipart/form-data"'); ?>
+        <td><?php echo tep_draw_form('logo', 'store_logo.php', 'action=save_logo', 'post', 'enctype="multipart/form-data"'); ?>
           <table border="0" cellspacing="0" cellpadding="2">
             <tr>
               <td class="main" valign="top"><?php echo TEXT_LOGO_IMAGE; ?></td>
@@ -86,6 +103,38 @@
       </tr>
       <tr>
         <td class="main"><?php echo DIR_FS_CATALOG_IMAGES . 'store_logo.png'; ?></td>
+      </tr>
+      <tr>
+        <td><?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
+      </tr>
+      <tr>
+        <td><?php echo tep_image(tep_catalog_href_link('favicon.ico')); ?></td>
+      </tr>
+      <tr>
+        <td><?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
+      </tr>
+      <tr>
+        <td><?php echo tep_draw_form('favicon', 'store_logo.php', 'action=save_favicon', 'post', 'enctype="multipart/form-data"'); ?>
+          <table border="0" cellspacing="0" cellpadding="2">
+            <tr>
+              <td class="main" valign="top"><?php echo TEXT_FAVICON_IMAGE; ?></td>
+              <td class="main"><?php echo tep_draw_file_field('store_favicon'); ?></td>
+              <td class="smallText"><?php echo tep_draw_button(IMAGE_SAVE, 'disk', null, 'primary'); ?></td>
+            </tr>
+          </table>
+          </form></td>
+      </tr>
+      <tr>
+        <td><?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
+      </tr>
+      <tr>
+        <td class="main"><?php echo TEXT_FAVICON_FORMAT_AND_LOCATION; ?></td>
+      </tr>
+      <tr>
+        <td><?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
+      </tr>
+      <tr>
+        <td class="main"><?php echo DIR_FS_CATALOG . 'favicon.ico'; ?></td>
       </tr>
     </table>
 
