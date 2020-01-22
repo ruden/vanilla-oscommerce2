@@ -77,6 +77,12 @@
           tep_db_query("insert into orders_status (orders_status_id, language_id, orders_status_name, public_flag, downloads_flag) values ('" . (int)$orders_status['orders_status_id'] . "', '" . (int)$insert_id . "', '" . tep_db_input($orders_status['orders_status_name']) . "', '" . tep_db_input($orders_status['public_flag']) . "', '" . tep_db_input($orders_status['downloads_flag']) . "')");
         }
 
+// create additional information_pages_content records
+        $information_query = tep_db_query("select pages_id, pages_name, pages_content from information_pages_content where language_id = '" . (int)$languages_id . "'");
+        while ($information = tep_db_fetch_array($information_query)) {
+          tep_db_query("insert into information_pages_content (pages_id, language_id, pages_name, pages_content) values ('" . (int)$information['pages_id'] . "', '" . (int)$insert_id . "', '" . tep_db_input($information['pages_name']) . "', '" . tep_db_input($information['pages_content']) . "')");
+        }
+
         if (isset($_POST['default']) && ($_POST['default'] == 'on')) {
           tep_db_query("update configuration set configuration_value = '" . tep_db_input($code) . "' where configuration_key = 'DEFAULT_LANGUAGE'");
         }
@@ -109,6 +115,7 @@
         }
 
         tep_db_query("delete from categories_description where language_id = '" . (int)$lID . "'");
+        tep_db_query("delete from information_pages_content where language_id = '" . (int)$lID . "'");
         tep_db_query("delete from products_description where language_id = '" . (int)$lID . "'");
         tep_db_query("delete from products_options where language_id = '" . (int)$lID . "'");
         tep_db_query("delete from products_options_values where language_id = '" . (int)$lID . "'");
