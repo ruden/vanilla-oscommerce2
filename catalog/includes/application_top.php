@@ -470,6 +470,8 @@
     if (tep_db_num_rows($manufacturers_query)) {
       $manufacturers = tep_db_fetch_array($manufacturers_query);
       $breadcrumb->add($manufacturers['manufacturers_name'], tep_href_link('index.php', 'manufacturers_id=' . $_GET['manufacturers_id']));
+    } else  {
+      http_response_code(404);
     }
   }
 
@@ -479,6 +481,8 @@
     if (tep_db_num_rows($model_query)) {
       $model = tep_db_fetch_array($model_query);
       $breadcrumb->add($model['products_model'], tep_href_link('product_info.php', 'cPath=' . $cPath . '&products_id=' . $_GET['products_id']));
+    } else  {
+      http_response_code(404);
     }
   }
 
