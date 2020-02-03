@@ -167,11 +167,13 @@
           $key_value_query = tep_db_query("select configuration_title, configuration_value, configuration_description, use_function, set_function from configuration where configuration_key = '" . tep_db_input($module_keys[$j]) . "'");
           $key_value = tep_db_fetch_array($key_value_query);
 
-          $keys_extra[$module_keys[$j]]['title'] = $key_value['configuration_title'];
-          $keys_extra[$module_keys[$j]]['value'] = $key_value['configuration_value'];
-          $keys_extra[$module_keys[$j]]['description'] = $key_value['configuration_description'];
-          $keys_extra[$module_keys[$j]]['use_function'] = $key_value['use_function'];
-          $keys_extra[$module_keys[$j]]['set_function'] = $key_value['set_function'];
+          if (!empty($key_value)) {
+            $keys_extra[$module_keys[$j]]['title'] = $key_value['configuration_title'];
+            $keys_extra[$module_keys[$j]]['value'] = $key_value['configuration_value'];
+            $keys_extra[$module_keys[$j]]['description'] = $key_value['configuration_description'];
+            $keys_extra[$module_keys[$j]]['use_function'] = $key_value['use_function'];
+            $keys_extra[$module_keys[$j]]['set_function'] = $key_value['set_function'];
+          }
         }
 
         $module_info['keys'] = $keys_extra;
