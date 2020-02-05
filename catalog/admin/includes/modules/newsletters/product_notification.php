@@ -156,8 +156,6 @@ function selectAll(FormName, SelectBox) {
     }
 
     function send($newsletter_id) {
-      global $_POST;
-
       $audience = array();
 
       if (isset($_POST['global']) && ($_POST['global'] == 'true')) {

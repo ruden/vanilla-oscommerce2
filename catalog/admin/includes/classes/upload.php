@@ -33,16 +33,11 @@
     }
 
     function parse() {
-      global $_FILES, $messageStack;
+      global $messageStack;
 
       $file = array();
 
       if (isset($_FILES[$this->file])) {
-        $file = array('name' => $_FILES[$this->file]['name'],
-                      'type' => $_FILES[$this->file]['type'],
-                      'size' => $_FILES[$this->file]['size'],
-                      'tmp_name' => $_FILES[$this->file]['tmp_name']);
-      } elseif (isset($_FILES[$this->file])) {
         $file = array('name' => $_FILES[$this->file]['name'],
                       'type' => $_FILES[$this->file]['type'],
                       'size' => $_FILES[$this->file]['size'],

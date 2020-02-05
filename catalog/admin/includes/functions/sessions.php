@@ -135,8 +135,6 @@
   }
 
   function tep_session_destroy() {
-    global $_COOKIE;
-
     if ( isset($_COOKIE[tep_session_name()]) ) {
       $session_data = session_get_cookie_params();
 

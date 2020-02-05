@@ -716,8 +716,6 @@
     }
 
     function sendDebugEmail($response = array()) {
-      global $_GET;
-
       if (tep_not_null(MODULE_PAYMENT_RBSWORLDPAY_HOSTED_DEBUG_EMAIL)) {
         $email_body = '';
 

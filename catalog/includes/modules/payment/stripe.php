@@ -787,8 +787,6 @@ EOD;
     }
 
     function sendDebugEmail($response = array()) {
-      global $_GET;
-
       if (tep_not_null(MODULE_PAYMENT_STRIPE_DEBUG_EMAIL)) {
         $email_body = '';
 
