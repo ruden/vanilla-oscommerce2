@@ -5,7 +5,7 @@
   osCommerce, Open Source E-Commerce Solutions
   http://www.oscommerce.com
 
-  Copyright (c) 2014 osCommerce
+  Copyright (c) 2020 osCommerce
 
   Released under the GNU General Public License
 */
@@ -37,7 +37,7 @@
   define('PROJECT_VERSION', 'osCommerce Online Merchant v2.3.5');
 
 // some code to solve compatibility issues
-  require(DIR_WS_FUNCTIONS . 'compatibility.php');
+  require('includes/functions/compatibility.php');
 
 // set the type of request (secure or not)
   $request_type = (getenv('HTTPS') == 'on') ? 'SSL' : 'NONSSL';
@@ -53,13 +53,13 @@
   }
 
 // include the list of project filenames
-  require(DIR_WS_INCLUDES . 'filenames.php');
+  require('includes/filenames.php');
 
 // include the list of project database tables
-  require(DIR_WS_INCLUDES . 'database_tables.php');
+  require('includes/database_tables.php');
 
 // include the database functions
-  require(DIR_WS_FUNCTIONS . 'database.php');
+  require('includes/functions/database.php');
 
 // make a connection to the database... now
   tep_db_connect() or die('Unable to connect to database server!');
@@ -112,8 +112,8 @@
   }
 
 // define general functions used application-wide
-  require(DIR_WS_FUNCTIONS . 'general.php');
-  require(DIR_WS_FUNCTIONS . 'html_output.php');
+  require('includes/functions/general.php');
+  require('includes/functions/html_output.php');
 
 // set the cookie domain
   $cookie_domain = (($request_type == 'NONSSL') ? HTTP_COOKIE_DOMAIN : HTTPS_COOKIE_DOMAIN);
@@ -123,13 +123,13 @@
   if (USE_CACHE == 'true') include(DIR_WS_FUNCTIONS . 'cache.php');
 
 // include shopping cart class
-  require(DIR_WS_CLASSES . 'shopping_cart.php');
+  require('includes/classes/shopping_cart.php');
 
 // include navigation history class
-  require(DIR_WS_CLASSES . 'navigation_history.php');
+  require('includes/classes/navigation_history.php');
 
 // define how the session functions will be used
-  require(DIR_WS_FUNCTIONS . 'sessions.php');
+  require('includes/functions/sessions.php');
 
 // set the session name and save path
   tep_session_name('osCsid');
@@ -248,12 +248,12 @@
   $cart->update_content();
 
 // include currencies class and create an instance
-  require(DIR_WS_CLASSES . 'currencies.php');
+  require('includes/classes/currencies.php');
   $currencies = new currencies();
 
 // include the mail classes
-  require(DIR_WS_CLASSES . 'mime.php');
-  require(DIR_WS_CLASSES . 'email.php');
+  require('includes/classes/mime.php');
+  require('includes/classes/email.php');
 
 // set the language
   if (!tep_session_is_registered('language') || isset($_GET['language'])) {
@@ -277,7 +277,7 @@
 
 // include the language translations
   $_system_locale_numeric = setlocale(LC_NUMERIC, 0);
-  require(DIR_WS_LANGUAGES . $language . '.php');
+  require('includes/languages/' . $language . '.php');
   setlocale(LC_NUMERIC, $_system_locale_numeric); // Prevent LC_ALL from setting LC_NUMERIC to a locale with 1,0 float/decimal values instead of 1.0 (see bug #634)
 
 // currency
@@ -403,31 +403,31 @@
   }
 
 // include the who's online functions
-  require(DIR_WS_FUNCTIONS . 'whos_online.php');
+  require('includes/functions/whos_online.php');
   tep_update_whos_online();
 
 // include the password crypto functions
-  require(DIR_WS_FUNCTIONS . 'password_funcs.php');
+  require('includes/functions/password_funcs.php');
 
 // include validation functions (right now only email address)
-  require(DIR_WS_FUNCTIONS . 'validations.php');
+  require('includes/functions/validations.php');
 
 // split-page-results
-  require(DIR_WS_CLASSES . 'split_page_results.php');
+  require('includes/classes/split_page_results.php');
 
 // infobox
-  require(DIR_WS_CLASSES . 'boxes.php');
+  require('includes/classes/boxes.php');
 
 // auto activate and expire banners
-  require(DIR_WS_FUNCTIONS . 'banner.php');
+  require('includes/functions/banner.php');
   tep_activate_banners();
   tep_expire_banners();
 
 // auto expire special products
-  require(DIR_WS_FUNCTIONS . 'specials.php');
+  require('includes/functions/specials.php');
   tep_expire_specials();
 
-  require(DIR_WS_CLASSES . 'osc_template.php');
+  require('includes/classes/osc_template.php');
   $oscTemplate = new oscTemplate();
 
 // calculate category path
@@ -448,7 +448,7 @@
   }
 
 // include the breadcrumb class and start the breadcrumb trail
-  require(DIR_WS_CLASSES . 'breadcrumb.php');
+  require('includes/classes/breadcrumb.php');
   $breadcrumb = new breadcrumb;
 
   $breadcrumb->add(HEADER_TITLE_TOP, HTTP_SERVER);
@@ -487,7 +487,7 @@
   }
 
 // initialize the message stack for output messages
-  require(DIR_WS_CLASSES . 'message_stack.php');
+  require('includes/classes/message_stack.php');
   $messageStack = new messageStack;
 
   require(DIR_FS_CATALOG . 'includes/classes/hooks.php');

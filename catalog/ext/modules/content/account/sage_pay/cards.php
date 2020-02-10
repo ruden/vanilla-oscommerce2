@@ -5,7 +5,7 @@
   osCommerce, Open Source E-Commerce Solutions
   http://www.oscommerce.com
 
-  Copyright (c) 2014 osCommerce
+  Copyright (c) 2020 osCommerce
 
   Released under the GNU General Public License
 */
@@ -33,7 +33,7 @@
     tep_redirect(tep_href_link('account.php', '', 'SSL'));
   }
 
-  require(DIR_WS_LANGUAGES . $language . '/modules/content/account/cm_account_sage_pay_cards.php');
+  require('includes/languages/' . $language . '/modules/content/account/cm_account_sage_pay_cards.php');
   require('includes/modules/content/account/cm_account_sage_pay_cards.php');
   $sage_pay_cards = new cm_account_sage_pay_cards();
 
@@ -60,7 +60,7 @@
   $breadcrumb->add(MODULE_CONTENT_ACCOUNT_SAGE_PAY_CARDS_NAVBAR_TITLE_1, tep_href_link('account.php', '', 'SSL'));
   $breadcrumb->add(MODULE_CONTENT_ACCOUNT_SAGE_PAY_CARDS_NAVBAR_TITLE_2, tep_href_link('ext/modules/content/account/sage_pay/cards.php', '', 'SSL'));
 
-  require(DIR_WS_INCLUDES . 'template_top.php');
+  require('includes/template_top.php');
 ?>
 
 <h1><?php echo MODULE_CONTENT_ACCOUNT_SAGE_PAY_CARDS_HEADING_TITLE; ?></h1>
@@ -111,6 +111,6 @@
 </div>
 
 <?php
-  require(DIR_WS_INCLUDES . 'template_bottom.php');
-  require(DIR_WS_INCLUDES . 'application_bottom.php');
+  require('includes/template_bottom.php');
+  require('includes/application_bottom.php');
 ?>

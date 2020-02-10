@@ -5,7 +5,7 @@
   osCommerce, Open Source E-Commerce Solutions
   http://www.oscommerce.com
 
-  Copyright (c) 2012 osCommerce
+  Copyright (c) 2020 osCommerce
 
   Released under the GNU General Public License
 */
@@ -75,7 +75,7 @@
     function javascript_validation() {
       $js = '';
       if (is_array($this->modules)) {
-        $js = '<script type="text/javascript"><!-- ' . "\n" .
+        $js = '<script> ' . "\n" .
               'function check_form() {' . "\n" .
               '  var error = 0;' . "\n" .
               '  var error_message = "' . JS_ERROR . '";' . "\n" .
@@ -110,7 +110,7 @@
                '    return true;' . "\n" .
                '  }' . "\n" .
                '}' . "\n" .
-               '//--></script>' . "\n";
+               '</script>' . "\n";
       }
 
       return $js;

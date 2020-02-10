@@ -16,7 +16,7 @@
     tep_redirect(tep_href_link('index.php'));
   }
 
-  require(DIR_WS_LANGUAGES . $language . '/information.php');
+  require('includes/languages/' . $language . '/information.php');
 
   $information_query = tep_db_query("select ipc.pages_name, ipc.pages_content from information_pages ip, information_pages_content ipc where ip.pages_status = '1' and ip.pages_id = '" . (int)$_GET['pages_id'] . "' and ip.pages_id = ipc.pages_id and ipc.language_id = '" . (int)$languages_id . "'");
   $information = tep_db_fetch_array($information_query);
@@ -55,6 +55,6 @@
 <?php
   }
 
-  require(DIR_WS_INCLUDES . 'template_bottom.php');
-  require(DIR_WS_INCLUDES . 'application_bottom.php');
+  require('includes/template_bottom.php');
+  require('includes/application_bottom.php');
 ?>

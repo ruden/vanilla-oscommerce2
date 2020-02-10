@@ -5,7 +5,7 @@
   osCommerce, Open Source E-Commerce Solutions
   http://www.oscommerce.com
 
-  Copyright (c) 2010 osCommerce
+  Copyright (c) 2020 osCommerce
 
   Released under the GNU General Public License
 */
@@ -31,7 +31,7 @@
     tep_redirect(tep_href_link('product_info.php', 'products_id=' . (int)$_GET['products_id']));
   }
 
-  require(DIR_WS_LANGUAGES . $language . '/tell_a_friend.php');
+  require('includes/languages/' . $language . '/tell_a_friend.php');
 
   if (isset($_GET['action']) && ($_GET['action'] == 'process') && isset($_POST['formid']) && ($_POST['formid'] == $sessiontoken)) {
     $error = false;
@@ -104,7 +104,7 @@
 
   $breadcrumb->add(NAVBAR_TITLE, tep_href_link('tell_a_friend.php', 'products_id=' . (int)$_GET['products_id']));
 
-  require(DIR_WS_INCLUDES . 'template_top.php');
+  require('includes/template_top.php');
 ?>
 
 <h1><?php echo sprintf(HEADING_TITLE, $product_info['products_name']); ?></h1>
@@ -171,6 +171,6 @@
 </form>
 
 <?php
-  require(DIR_WS_INCLUDES . 'template_bottom.php');
-  require(DIR_WS_INCLUDES . 'application_bottom.php');
+  require('includes/template_bottom.php');
+  require('includes/application_bottom.php');
 ?>

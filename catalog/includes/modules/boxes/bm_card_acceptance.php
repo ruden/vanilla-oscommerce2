@@ -5,7 +5,7 @@
   osCommerce, Open Source E-Commerce Solutions
   http://www.oscommerce.com
 
-  Copyright (c) 2014 osCommerce
+  Copyright (c) 2020 osCommerce
 
   Released under the GNU General Public License
 */
@@ -39,7 +39,7 @@
                   '  <div class="ui-widget-content infoBoxContents" style="text-align: center;">';
 
         foreach ( explode(';', MODULE_BOXES_CARD_ACCEPTANCE_LOGOS) as $logo ) {
-          $output .= tep_image(DIR_WS_IMAGES . 'card_acceptance/' . basename($logo));
+          $output .= tep_image('images/card_acceptance/' . basename($logo));
         }
 
         $output .= '  </div>' .
