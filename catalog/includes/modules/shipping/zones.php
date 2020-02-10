@@ -158,8 +158,8 @@
       $this->quotes = array('id' => $this->code,
                             'module' => MODULE_SHIPPING_ZONES_TEXT_TITLE,
                             'methods' => array(array('id' => $this->code,
-                                                     'title' => $shipping_method,
-                                                     'cost' => $shipping_cost)));
+                                                     'title' => isset($shipping_method) ? $shipping_method : '',
+                                                     'cost' => isset($shipping_cost) ? $shipping_cost : 0)));
 
       if ($this->tax_class > 0) {
         $this->quotes['tax'] = tep_get_tax_rate($this->tax_class, $order->delivery['country']['id'], $order->delivery['zone_id']);
