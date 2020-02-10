@@ -13,17 +13,17 @@
   require('includes/application_top.php');
 
 // the following cPath references come from application_top.php
-  $category_depth = 'top';
+  $category_depth = 'main';
   if (isset($cPath) && tep_not_null($cPath)) {
     $categories_products_query = tep_db_query("select 1 from products_to_categories where categories_id = '" . (int)$current_category_id . "' limit 1");
     if (tep_db_num_rows($categories_products_query)) {
-      $category_depth = 'products'; // display products
+      $category_depth = 'listing'; // display products
     } else {
       $category_parent_query = tep_db_query("select 1 from categories where parent_id = '" . (int)$current_category_id . "' limit 1");
       if (tep_db_num_rows($category_parent_query)) {
-        $category_depth = 'nested'; // navigate through the categories
+        $category_depth = 'categories'; // navigate through the categories
       } else {
-        $category_depth = 'products'; // category has no products, but display the 'no products' message
+        $category_depth = 'listing'; // category has no products, but display the 'no products' message
       }
     }
   }
@@ -32,7 +32,9 @@
 
   require(DIR_WS_INCLUDES . 'template_top.php');
 
-  if ($category_depth == 'nested') {
+  $page_blocks = $oscTemplate->getBlocks('index_listing');
+
+  if ($category_depth == 'categories') {
     $category_query = tep_db_query("select cd.categories_name, c.categories_image from categories c, categories_description cd where c.categories_id = '" . (int)$current_category_id . "' and cd.categories_id = '" . (int)$current_category_id . "' and cd.language_id = '" . (int)$languages_id . "'");
     $category = tep_db_fetch_array($category_query);
 ?>
@@ -69,12 +71,13 @@
     <br />
 
 <?php include(DIR_WS_MODULES . 'new_products.php'); ?>
+<?php echo $page_blocks; ?>
 
   </div>
 </div>
 
 <?php
-  } elseif ($category_depth == 'products' || (isset($_GET['manufacturers_id']) && !empty($_GET['manufacturers_id']))) {
+  } elseif ($category_depth == 'listing' || (isset($_GET['manufacturers_id']) && !empty($_GET['manufacturers_id']))) {
 // create column list
     $define_list = array('PRODUCT_LIST_MODEL' => PRODUCT_LIST_MODEL,
                          'PRODUCT_LIST_NAME' => PRODUCT_LIST_NAME,
@@ -218,6 +221,8 @@
     }
 
     include(DIR_WS_MODULES . 'product_listing.php');
+
+    echo $page_blocks;
 ?>
 
 </div>
@@ -229,23 +234,19 @@
 <h1><?php echo HEADING_TITLE; ?></h1>
 
 <div class="contentContainer">
-  <div class="contentText">
-    <?php echo tep_customer_greeting(); ?>
-  </div>
 
 <?php
     if (tep_not_null(TEXT_MAIN)) {
 ?>
 
-  <div class="contentText">
-    <?php echo TEXT_MAIN; ?>
-  </div>
+      <div class="contentText">
+        <?php echo TEXT_MAIN; ?>
+      </div>
 
 <?php
     }
 
-    include(DIR_WS_MODULES . 'new_products.php');
-    include(DIR_WS_MODULES . FILENAME_UPCOMING_PRODUCTS);
+    echo $page_blocks;
 ?>
 
 </div>

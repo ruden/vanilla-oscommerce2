@@ -1,0 +1,1 @@
+<p align="center"><?php echo FOOTER_TEXT_BODY; ?></p>

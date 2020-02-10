@@ -1436,4 +1436,95 @@
       return is_writable($file);
     }
   }
-?>
+
+  function tep_cfg_select_multioption($select_array, $key_value, $key = null) {
+    $string = '';
+    $key_value = explode(', ', $key_value);
+
+    for ($i = 0, $n = sizeof($select_array); $i < $n; $i++) {
+      $name = (!empty($key) ? 'configuration[' . $key . '][]' : 'configuration_value');
+
+      $string .= '<br />' .  tep_draw_checkbox_field($name, $select_array[$i], in_array($select_array[$i], $key_value)) . $select_array[$i];
+    }
+
+    $string .= tep_draw_hidden_field($name, '--none--');
+
+    return $string;
+  }
+
+  function tep_set_default_pages() {
+    return array('index.php',
+                 'product_info.php',
+                 'products_new.php',
+                 'specials.php');
+  }
+
+  function tep_cfg_show_pages($string) {
+    return nl2br(implode("\n", explode(';', $string)));
+  }
+
+  function tep_cfg_edit_pages($values, $key) {
+    $files_array = array();
+    $exclude_array = array('checkout_process.php',
+                           'download.php',
+                           'opensearch.php',
+                           'redirect.php',
+                           'ssl_check.php');
+
+    if ($dir = @dir(DIR_FS_CATALOG)) {
+      while ($file = $dir->read()) {
+        if (!is_dir(DIR_FS_CATALOG . $file) && !in_array($file, $exclude_array)) {
+          if (substr($file, strrpos($file, '.')) == '.php') {
+            $files_array[] = $file;
+          }
+        }
+      }
+      sort($files_array);
+      $dir->close();
+    }
+
+    $values_array = explode(';', $values);
+
+    $output = '<input type="checkbox" id="checked-all"><b>All</b><br />';
+    foreach ($files_array as $file) {
+      $output .= tep_draw_checkbox_field('page_files[]', $file, in_array($file, $values_array)) . '&nbsp;' . tep_output_string($file) . '<br />';
+    }
+
+    if (!empty($output)) {
+      $output = '<br />' . substr($output, 0, -6);
+    }
+
+    $output .= tep_draw_hidden_field('configuration[' . $key . ']', '', 'id="page-files"');
+
+    $output .= <<<EOT
+<script>
+function module_update_cfg_value() {
+  let module_selected_files = '';
+   
+  if ($('input[name="page_files[]"]').length > 0) {
+    $('input[name="page_files[]"]:checked').each(function() {
+      module_selected_files += $(this).attr('value') + ';';
+    });
+
+    if (module_selected_files.length > 0) {
+      module_selected_files = module_selected_files.substring(0, module_selected_files.length - 1);
+    }
+  }
+
+  $('#page-files').val(module_selected_files);
+}
+
+$(function() {  
+  module_update_cfg_value();
+
+  if ($('input[name="page_files[]"]').length > 0) {
+    $('input[name="page_files[]"]').change(function() {
+      module_update_cfg_value();
+    });
+  }
+});
+</script>
+EOT;
+
+    return $output;
+  }
