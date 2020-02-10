@@ -120,7 +120,7 @@
           </tr>
           <tr>
             <td class="main"><?php echo TEXT_SPECIALS_EXPIRES_DATE; ?>&nbsp;</td>
-            <td class="main"><?php echo tep_draw_input_field('expdate', (tep_not_null($sInfo->expires_date) ? substr($sInfo->expires_date, 0, 4) . '-' . substr($sInfo->expires_date, 5, 2) . '-' . substr($sInfo->expires_date, 8, 2) : ''), 'id="expdate"') . ' <small>(YYYY-MM-DD)</small>'; ?></td>
+            <td class="main"><?php echo tep_draw_input_field('expdate', (isset($sInfo->expires_date) ? substr($sInfo->expires_date, 0, 4) . '-' . substr($sInfo->expires_date, 5, 2) . '-' . substr($sInfo->expires_date, 8, 2) : ''), 'id="expdate"') . ' <small>(YYYY-MM-DD)</small>'; ?></td>
           </tr>
         </table>
 
