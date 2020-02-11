@@ -18,12 +18,10 @@
 */
 
   class messageStack extends tableBox {
-
+     public $messages = array();
 // class constructor
     function __construct() {
       global $messageToStack;
-
-      $this->messages = array();
 
       if (tep_session_is_registered('messageToStack')) {
         for ($i=0, $n=sizeof($messageToStack); $i<$n; $i++) {
