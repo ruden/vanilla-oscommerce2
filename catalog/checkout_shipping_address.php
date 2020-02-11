@@ -348,7 +348,7 @@ function check_form_optional(form_name) {
     <?php echo TEXT_CREATE_NEW_SHIPPING_ADDRESS; ?>
   </div>
 
-  <?php require(DIR_WS_MODULES . 'checkout_new_address.php'); ?>
+  <?php require('includes/modules/checkout_new_address.php'); ?>
 
 <?php
   }

@@ -99,7 +99,7 @@
             $pi_html[] = '<div id="piGalDiv_' . $pi_counter . '">' . $pi['htmlcontent'] . '</div>';
           }
 
-          echo tep_image(DIR_WS_IMAGES . $pi['image'], '', '', '', 'id="piGalImg_' . $pi_counter . '"');
+          echo tep_image('images/' . $pi['image'], '', '', '', 'id="piGalImg_' . $pi_counter . '"');
         }
 ?>
 
@@ -113,7 +113,7 @@
 ?>
 
     <div id="piGal">
-      <?php echo tep_image(DIR_WS_IMAGES . $product_info['products_image'], addslashes($product_info['products_name'])); ?>
+      <?php echo tep_image('images/' . $product_info['products_image'], addslashes($product_info['products_name'])); ?>
     </div>
 
 <?php
@@ -221,7 +221,7 @@ $(function() {
     if ((USE_CACHE == 'true') && empty($SID)) {
       echo tep_cache_also_purchased(3600);
     } else {
-      include(DIR_WS_MODULES . 'also_purchased_products.php');
+      include('includes/modules/also_purchased_products.php');
     }
 ?>
 

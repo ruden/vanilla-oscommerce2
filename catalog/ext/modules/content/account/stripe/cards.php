@@ -20,8 +20,8 @@
 
   if ( defined('MODULE_PAYMENT_INSTALLED') && tep_not_null(MODULE_PAYMENT_INSTALLED) && in_array('stripe.php', explode(';', MODULE_PAYMENT_INSTALLED)) ) {
     if ( !class_exists('stripe') ) {
-      include(DIR_WS_LANGUAGES . $language . '/modules/payment/stripe.php');
-      include(DIR_WS_MODULES . 'payment/stripe.php');
+      include('includes/languages/' . $language . '/modules/payment/stripe.php');
+      include('includes/modules/payment/stripe.php');
     }
 
     $stripe = new stripe();

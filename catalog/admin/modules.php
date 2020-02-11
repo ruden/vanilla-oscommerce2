@@ -268,7 +268,7 @@
             if (preg_match('/->/', $use_function)) {
               $class_method = explode('->', $use_function);
               if (!isset(${$class_method[0]}) || !is_object(${$class_method[0]})) {
-                include(DIR_WS_CLASSES . $class_method[0] . '.php');
+                include('includes/classes/' . $class_method[0] . '.php');
                 ${$class_method[0]} = new $class_method[0]();
               }
               $keys .= tep_call_function($class_method[1], $value['value'], ${$class_method[0]});

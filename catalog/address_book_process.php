@@ -290,7 +290,7 @@
 
 <div class="contentContainer">
 
-<?php include(DIR_WS_MODULES . 'address_book_details.php'); ?>
+<?php include('includes/modules/address_book_details.php'); ?>
 
 <?php
     if (isset($_GET['edit']) && is_numeric($_GET['edit'])) {

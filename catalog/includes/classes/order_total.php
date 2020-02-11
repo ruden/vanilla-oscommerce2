@@ -21,8 +21,8 @@
         $this->modules = explode(';', MODULE_ORDER_TOTAL_INSTALLED);
 
         foreach ($this->modules as $value) {
-          include(DIR_WS_LANGUAGES . $language . '/modules/order_total/' . $value);
-          include(DIR_WS_MODULES . 'order_total/' . $value);
+          include('includes/languages/' . $language . '/modules/order_total/' . $value);
+          include('includes/modules/order_total/' . $value);
 
           $class = substr($value, 0, strrpos($value, '.'));
           $GLOBALS[$class] = new $class;

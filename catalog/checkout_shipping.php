@@ -93,7 +93,7 @@
     if ( ($pass == true) && ($order->info['total'] >= MODULE_ORDER_TOTAL_SHIPPING_FREE_SHIPPING_OVER) ) {
       $free_shipping = true;
 
-      include(DIR_WS_LANGUAGES . $language . '/modules/order_total/ot_shipping.php');
+      include('includes/languages/' . $language . '/modules/order_total/ot_shipping.php');
     }
   } else {
     $free_shipping = false;

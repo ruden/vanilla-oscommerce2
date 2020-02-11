@@ -39,7 +39,7 @@
     }
   }
 
-  include(DIR_WS_LANGUAGES . $language . '/checkout_process.php');
+  include('includes/languages/' . $language . '/checkout_process.php');
 
 // load selected payment module
   require('includes/classes/payment.php');

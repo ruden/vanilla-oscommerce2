@@ -58,7 +58,7 @@
         if (empty($banners_html_text)) {
           if (empty($banners_image_local)) {
             $banners_image = new upload('banners_image');
-            $banners_image->set_destination(DIR_FS_CATALOG_IMAGES . $banners_image_target);
+            $banners_image->set_destination(DIR_FS_CATALOG . 'images/' . $banners_image_target);
             if ( ($banners_image->parse() == false) || ($banners_image->save() == false) ) {
               $banner_error = true;
             }
@@ -119,9 +119,9 @@
           $banner_query = tep_db_query("select banners_image from banners where banners_id = '" . (int)$banners_id . "'");
           $banner = tep_db_fetch_array($banner_query);
 
-          if (is_file(DIR_FS_CATALOG_IMAGES . $banner['banners_image'])) {
-            if (tep_is_writable(DIR_FS_CATALOG_IMAGES . $banner['banners_image'])) {
-              unlink(DIR_FS_CATALOG_IMAGES . $banner['banners_image']);
+          if (is_file(DIR_FS_CATALOG . 'images/' . $banner['banners_image'])) {
+            if (tep_is_writable(DIR_FS_CATALOG . 'images/' . $banner['banners_image'])) {
+              unlink(DIR_FS_CATALOG . 'images/' . $banner['banners_image']);
             } else {
               $messageStack->add_session(ERROR_IMAGE_IS_NOT_WRITEABLE, 'error');
             }
@@ -134,27 +134,27 @@
         tep_db_query("delete from banners_history where banners_id = '" . (int)$banners_id . "'");
 
         if (function_exists('imagecreate') && tep_not_null($banner_extension)) {
-          if (is_file(DIR_WS_IMAGES . 'graphs/banner_infobox-' . $banners_id . '.' . $banner_extension)) {
-            if (tep_is_writable(DIR_WS_IMAGES . 'graphs/banner_infobox-' . $banners_id . '.' . $banner_extension)) {
-              unlink(DIR_WS_IMAGES . 'graphs/banner_infobox-' . $banners_id . '.' . $banner_extension);
+          if (is_file('images/graphs/banner_infobox-' . $banners_id . '.' . $banner_extension)) {
+            if (tep_is_writable('images/graphs/banner_infobox-' . $banners_id . '.' . $banner_extension)) {
+              unlink('images/graphs/banner_infobox-' . $banners_id . '.' . $banner_extension);
             }
           }
 
-          if (is_file(DIR_WS_IMAGES . 'graphs/banner_yearly-' . $banners_id . '.' . $banner_extension)) {
-            if (tep_is_writable(DIR_WS_IMAGES . 'graphs/banner_yearly-' . $banners_id . '.' . $banner_extension)) {
-              unlink(DIR_WS_IMAGES . 'graphs/banner_yearly-' . $banners_id . '.' . $banner_extension);
+          if (is_file('images/graphs/banner_yearly-' . $banners_id . '.' . $banner_extension)) {
+            if (tep_is_writable('images/graphs/banner_yearly-' . $banners_id . '.' . $banner_extension)) {
+              unlink('images/graphs/banner_yearly-' . $banners_id . '.' . $banner_extension);
             }
           }
 
-          if (is_file(DIR_WS_IMAGES . 'graphs/banner_monthly-' . $banners_id . '.' . $banner_extension)) {
-            if (tep_is_writable(DIR_WS_IMAGES . 'graphs/banner_monthly-' . $banners_id . '.' . $banner_extension)) {
-              unlink(DIR_WS_IMAGES . 'graphs/banner_monthly-' . $banners_id . '.' . $banner_extension);
+          if (is_file('images/graphs/banner_monthly-' . $banners_id . '.' . $banner_extension)) {
+            if (tep_is_writable('images/graphs/banner_monthly-' . $banners_id . '.' . $banner_extension)) {
+              unlink('images/graphs/banner_monthly-' . $banners_id . '.' . $banner_extension);
             }
           }
 
-          if (is_file(DIR_WS_IMAGES . 'graphs/banner_daily-' . $banners_id . '.' . $banner_extension)) {
-            if (tep_is_writable(DIR_WS_IMAGES . 'graphs/banner_daily-' . $banners_id . '.' . $banner_extension)) {
-              unlink(DIR_WS_IMAGES . 'graphs/banner_daily-' . $banners_id . '.' . $banner_extension);
+          if (is_file('images/graphs/banner_daily-' . $banners_id . '.' . $banner_extension)) {
+            if (tep_is_writable('images/graphs/banner_daily-' . $banners_id . '.' . $banner_extension)) {
+              unlink('images/graphs/banner_daily-' . $banners_id . '.' . $banner_extension);
             }
           }
         }
@@ -169,8 +169,8 @@
 // check if the graphs directory exists
   $dir_ok = false;
   if (function_exists('imagecreate') && tep_not_null($banner_extension)) {
-    if (is_dir(DIR_WS_IMAGES . 'graphs')) {
-      if (tep_is_writable(DIR_WS_IMAGES . 'graphs')) {
+    if (is_dir('images/graphs')) {
+      if (tep_is_writable('images/graphs')) {
         $dir_ok = true;
       } else {
         $messageStack->add(ERROR_GRAPHS_DIRECTORY_NOT_WRITEABLE, 'error');
@@ -254,14 +254,14 @@ function popupImageWindow(url) {
           </tr>
           <tr>
             <td class="main" valign="top"><?php echo TEXT_BANNERS_IMAGE; ?></td>
-            <td class="main"><?php echo tep_draw_file_field('banners_image') . ' ' . TEXT_BANNERS_IMAGE_LOCAL . '<br />' . DIR_FS_CATALOG_IMAGES . tep_draw_input_field('banners_image_local', (isset($bInfo->banners_image) ? $bInfo->banners_image : '')); ?></td>
+            <td class="main"><?php echo tep_draw_file_field('banners_image') . ' ' . TEXT_BANNERS_IMAGE_LOCAL . '<br />' . DIR_FS_CATALOG . 'images/' . tep_draw_input_field('banners_image_local', (isset($bInfo->banners_image) ? $bInfo->banners_image : '')); ?></td>
           </tr>
           <tr>
             <td colspan="2"><?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
           </tr>
           <tr>
             <td class="main"><?php echo TEXT_BANNERS_IMAGE_TARGET; ?></td>
-            <td class="main"><?php echo DIR_FS_CATALOG_IMAGES . tep_draw_input_field('banners_image_target'); ?></td>
+            <td class="main"><?php echo DIR_FS_CATALOG . 'images/' . tep_draw_input_field('banners_image_target'); ?></td>
           </tr>
           <tr>
             <td colspan="2"><?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
@@ -395,10 +395,10 @@ $('#expires_date').datepicker({
         if ( (function_exists('imagecreate')) && ($dir_ok) && ($banner_extension) ) {
           $banner_id = $bInfo->banners_id;
           $days = '3';
-          include(DIR_WS_INCLUDES . 'graphs/banner_infobox.php');
+          include('includes/graphs/banner_infobox.php');
           $contents[] = array('align' => 'center', 'text' => '<br />' . tep_image('images/graphs/banner_infobox-' . $banner_id . '.' . $banner_extension));
         } else {
-          include(DIR_WS_FUNCTIONS . 'html_graphs.php');
+         include('includes/functions/html_graphs.php');
           $contents[] = array('align' => 'center', 'text' => '<br />' . tep_banner_graph_infoBox($bInfo->banners_id, '3'));
         }
 

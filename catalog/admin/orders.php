@@ -88,7 +88,7 @@
     }
   }
 
-  include(DIR_WS_CLASSES . 'order.php');
+  include('includes/classes/order.php');
 
   $OSCOM_Hooks->call('orders', 'orderAction');
 

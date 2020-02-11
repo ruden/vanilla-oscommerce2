@@ -29,7 +29,7 @@
 
     function getOutput() {
       if (!class_exists('lastRSS')) {
-        include(DIR_WS_CLASSES . 'rss.php');
+        include('includes/classes/rss.php');
       }
 
       $rss = new lastRSS;

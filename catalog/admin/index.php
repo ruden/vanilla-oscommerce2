@@ -59,8 +59,8 @@
       $class = substr($adm, 0, strrpos($adm, '.'));
 
       if ( !class_exists($class) ) {
-        include(DIR_WS_LANGUAGES . $language . '/modules/dashboard/' . $adm);
-        include(DIR_WS_MODULES . 'dashboard/' . $class . '.php');
+        include('includes/languages/' . $language . '/modules/dashboard/' . $adm);
+        include('includes/modules/dashboard/' . $class . '.php');
       }
 
       $ad = new $class();

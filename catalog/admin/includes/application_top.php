@@ -108,7 +108,7 @@
       tep_session_register('languages_id');
     }
 
-    include(DIR_WS_CLASSES . 'language.php');
+    include('includes/classes/language.php');
     $lng = new language();
 
     if (isset($_GET['language']) && tep_not_null($_GET['language'])) {
@@ -170,8 +170,8 @@
   setlocale(LC_NUMERIC, $_system_locale_numeric); // Prevent LC_ALL from setting LC_NUMERIC to a locale with 1,0 float/decimal values instead of 1.0 (see bug #634)
 
   $current_page = basename($PHP_SELF);
-  if (file_exists(DIR_WS_LANGUAGES . $language . '/' . $current_page)) {
-    include(DIR_WS_LANGUAGES . $language . '/' . $current_page);
+  if (file_exists('includes/languages/' . $language . '/' . $current_page)) {
+    include('includes/languages/' . $language . '/' . $current_page);
   }
 
 // define our localization functions

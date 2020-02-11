@@ -19,8 +19,8 @@
 // check if the graphs directory exists
   $dir_ok = false;
   if (function_exists('imagecreate') && tep_not_null($banner_extension)) {
-    if (is_dir(DIR_WS_IMAGES . 'graphs')) {
-      if (tep_is_writable(DIR_WS_IMAGES . 'graphs')) {
+    if (is_dir('images/graphs')) {
+      if (tep_is_writable('images/graphs')) {
         $dir_ok = true;
       } else {
         $messageStack->add(ERROR_GRAPHS_DIRECTORY_NOT_WRITEABLE, 'error');
@@ -90,16 +90,16 @@
 
     switch ($type) {
       case 'yearly':
-        include(DIR_WS_INCLUDES . 'graphs/banner_yearly.php');
+        include('includes/graphs/banner_yearly.php');
         echo tep_image('images/graphs/banner_yearly-' . $banner_id . '.' . $banner_extension);
         break;
       case 'monthly':
-        include(DIR_WS_INCLUDES . 'graphs/banner_monthly.php');
+        include('includes/graphs/banner_monthly.php');
         echo tep_image('images/graphs/banner_monthly-' . $banner_id . '.' . $banner_extension);
         break;
       default:
       case 'daily':
-        include(DIR_WS_INCLUDES . 'graphs/banner_daily.php');
+        include('includes/graphs/banner_daily.php');
         echo tep_image('images/graphs/banner_daily-' . $banner_id . '.' . $banner_extension);
         break;
     }
@@ -122,7 +122,7 @@
           </table>
 <?php
   } else {
-    include(DIR_WS_FUNCTIONS . 'html_graphs.php');
+   include('includes/functions/html_graphs.php');
 
     switch ($type) {
       case 'yearly':

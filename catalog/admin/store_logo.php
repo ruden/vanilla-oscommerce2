@@ -102,7 +102,7 @@
         <td><?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
       </tr>
       <tr>
-        <td class="main"><?php echo DIR_FS_CATALOG_IMAGES . 'store_logo.png'; ?></td>
+        <td class="main"><?php echo DIR_FS_CATALOG . 'images/' . 'store_logo.png'; ?></td>
       </tr>
       <tr>
         <td><?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?></td>

@@ -179,7 +179,7 @@
   </div>
 
 <?php
-  if (DOWNLOAD_ENABLED == 'true') include(DIR_WS_MODULES . 'downloads.php');
+  if (DOWNLOAD_ENABLED == 'true') include('includes/modules/downloads.php');
 ?>
 
   <div class="buttonSet">

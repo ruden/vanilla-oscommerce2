@@ -77,7 +77,7 @@
         if (PHP_VERSION >= '4.0.4') {
           ob_start('ob_gzhandler');
         } elseif (PHP_VERSION >= '4.0.1') {
-          include(DIR_WS_FUNCTIONS . 'gzip_compression.php');
+         include('includes/functions/gzip_compression.php');
           ob_start();
           ob_implicit_flush();
         }
@@ -120,7 +120,7 @@
   $cookie_path = (($request_type == 'NONSSL') ? HTTP_COOKIE_PATH : HTTPS_COOKIE_PATH);
 
 // include cache functions if enabled
-  if (USE_CACHE == 'true') include(DIR_WS_FUNCTIONS . 'cache.php');
+  if (USE_CACHE == 'true')include('includes/functions/cache.php');
 
 // include shopping cart class
   require('includes/classes/shopping_cart.php');
@@ -262,7 +262,7 @@
       tep_session_register('languages_id');
     }
 
-    include(DIR_WS_CLASSES . 'language.php');
+    include('includes/classes/language.php');
     $lng = new language();
 
     if (isset($_GET['language']) && tep_not_null($_GET['language'])) {

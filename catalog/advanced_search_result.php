@@ -309,7 +309,7 @@
 
   $listing_sql = $select_str . $from_str . $where_str . $order_str;
 
-  require(DIR_WS_MODULES . 'product_listing.php');
+  require('includes/modules/product_listing.php');
 ?>
 
   <br />
