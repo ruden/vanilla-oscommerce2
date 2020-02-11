@@ -308,11 +308,9 @@
         if (file_exists(DIR_FS_BACKUP . $file)) {
           tep_remove(DIR_FS_BACKUP . $file);
 
-          if (!$tep_remove_error) {
-            $messageStack->add_session(SUCCESS_BACKUP_DELETED, 'success');
+          $messageStack->add_session(SUCCESS_BACKUP_DELETED, 'success');
 
-            tep_redirect(tep_href_link('backup.php'));
-          }
+          tep_redirect(tep_href_link('backup.php'));
         }
         break;
     }
