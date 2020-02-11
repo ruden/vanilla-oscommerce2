@@ -115,7 +115,7 @@
     $product_query = tep_db_query("select specials_new_products_price from specials where products_id = '" . (int)$product_id . "' and status = 1");
     $product = tep_db_fetch_array($product_query);
 
-    return $product['specials_new_products_price'] ?? false;
+    return isset($product['specials_new_products_price']) ? $product['specials_new_products_price'] : false;
   }
 
 ////
