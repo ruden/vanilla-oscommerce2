@@ -402,10 +402,6 @@
     }
   }
 
-// include the who's online functions
-  require('includes/functions/whos_online.php');
-  tep_update_whos_online();
-
 // include the password crypto functions
   require('includes/functions/password_funcs.php');
 

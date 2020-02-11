@@ -62,11 +62,6 @@
         'code' => 'version_check.php',
         'title' => BOX_TOOLS_VERSION_CHECK,
         'link' => tep_href_link('version_check.php')
-      ),
-      array(
-        'code' => 'whos_online.php',
-        'title' => BOX_TOOLS_WHOS_ONLINE,
-        'link' => tep_href_link('whos_online.php')
       )
     )
   );
