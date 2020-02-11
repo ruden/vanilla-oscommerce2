@@ -12,7 +12,7 @@
 
   include('includes/classes/phplot.php');
 
-  $year = (($_GET['year']) ? $_GET['year'] : date('Y'));
+  $year = (isset($_GET['year']) ? $_GET['year'] : date('Y'));
 
   $stats = array();
   for ($i=1; $i<13; $i++) {
