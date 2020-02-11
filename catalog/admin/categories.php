@@ -505,7 +505,7 @@ function updateNet() {
 
 <?php echo tep_draw_form('new_product', 'categories.php', 'cPath=' . $cPath . (isset($_GET['pID']) ? '&pID=' . $_GET['pID'] : '') . '&action=' . $form_action, 'post', 'enctype="multipart/form-data"'); ?>
 
-<h1 class="pageHeading"><?php echo sprintf(TEXT_NEW_PRODUCT, tep_output_generated_category_path($current_category_id)); ?></h1>
+<h1 class="pageHeading"><?php echo sprintf(TEXT_NEW_PRODUCT, (empty($current_category_id) ? '' : tep_output_generated_category_path($current_category_id))); ?></h1>
 
 <div id="productTabs" style="overflow: auto;">
   <ul id="productTabsMain">
@@ -542,7 +542,7 @@ function updateNet() {
           </tr>
           <tr>
             <td class="main"><?php echo TEXT_PRODUCTS_URL . '<br /><small>' . TEXT_PRODUCTS_URL_WITHOUT_HTTP . '</small>'; ?></td>
-            <td class="main"><?php echo tep_draw_input_field('products_url[' . $languages[$i]['id'] . ']', (isset($products_url[$languages[$i]['id']]) ? stripslashes($products_url[$languages[$i]['id']]) : tep_get_products_url($pInfo->products_id, $languages[$i]['id']))); ?></td>
+            <td class="main"><?php echo tep_draw_input_field('products_url[' . $languages[$i]['id'] . ']', (empty($pInfo->products_id) ? '' : tep_get_products_url($pInfo->products_id, $languages[$i]['id']))); ?></td>
           </tr>
         </table>
       </div>
