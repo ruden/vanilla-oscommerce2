@@ -9,8 +9,6 @@
 
   Released under the GNU General Public License
 */
-
-  require('includes/counter.php');
 ?>
 
 <div class="grid_24 footer">
