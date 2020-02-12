@@ -5,7 +5,7 @@
   osCommerce, Open Source E-Commerce Solutions
   http://www.oscommerce.com
 
-  Copyright (c) 2010 osCommerce
+  Copyright (c) 2020 osCommerce
 
   Released under the GNU General Public License
 */
@@ -16,7 +16,7 @@
 ?>
 
 <div id="header" class="grid_24">
-  <div id="storeLogo"><?php echo '<a href="' . tep_href_link('index.php') . '">' . tep_image(DIR_WS_IMAGES . 'store_logo.png', STORE_NAME) . '</a>'; ?></div>
+  <div id="storeLogo"><?php echo '<a href="' . tep_href_link('index.php') . '">' . tep_image('images/store_logo.png', STORE_NAME) . '</a>'; ?></div>
 
   <div id="headerShortcuts">
 <?php

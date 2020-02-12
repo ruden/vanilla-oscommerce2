@@ -5,14 +5,14 @@
   osCommerce, Open Source E-Commerce Solutions
   http://www.oscommerce.com
 
-  Copyright (c) 2010 osCommerce
+  Copyright (c) 2020 osCommerce
 
   Released under the GNU General Public License
 */
 
   require('includes/application_top.php');
 
-  require(DIR_WS_LANGUAGES . $language . '/contact_us.php');
+  require('includes/languages/' . $language . '/contact_us.php');
 
   if (isset($_GET['action']) && ($_GET['action'] == 'send') && isset($_POST['formid']) && ($_POST['formid'] == $sessiontoken)) {
     $error = false;
@@ -47,7 +47,7 @@
 
   $breadcrumb->add(NAVBAR_TITLE, tep_href_link('contact_us.php'));
 
-  require(DIR_WS_INCLUDES . 'template_top.php');
+  require('includes/template_top.php');
 ?>
 
 <h1><?php echo HEADING_TITLE; ?></h1>
@@ -104,6 +104,6 @@
 <?php
   }
 
-  require(DIR_WS_INCLUDES . 'template_bottom.php');
-  require(DIR_WS_INCLUDES . 'application_bottom.php');
+  require('includes/template_bottom.php');
+  require('includes/application_bottom.php');
 ?>

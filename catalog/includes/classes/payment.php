@@ -5,7 +5,7 @@
   osCommerce, Open Source E-Commerce Solutions
   http://www.oscommerce.com
 
-  Copyright (c) 2012 osCommerce
+  Copyright (c) 2020 osCommerce
 
   Released under the GNU General Public License
 */
@@ -34,8 +34,8 @@
         }
 
         for ($i=0, $n=sizeof($include_modules); $i<$n; $i++) {
-          include(DIR_WS_LANGUAGES . $language . '/modules/payment/' . $include_modules[$i]['file']);
-          include(DIR_WS_MODULES . 'payment/' . $include_modules[$i]['file']);
+          include('includes/languages/' . $language . '/modules/payment/' . $include_modules[$i]['file']);
+          include('includes/modules/payment/' . $include_modules[$i]['file']);
 
           $GLOBALS[$include_modules[$i]['class']] = new $include_modules[$i]['class'];
         }
@@ -75,7 +75,7 @@
     function javascript_validation() {
       $js = '';
       if (is_array($this->modules)) {
-        $js = '<script type="text/javascript"><!-- ' . "\n" .
+        $js = '<script> ' . "\n" .
               'function check_form() {' . "\n" .
               '  var error = 0;' . "\n" .
               '  var error_message = "' . JS_ERROR . '";' . "\n" .
@@ -110,7 +110,7 @@
                '    return true;' . "\n" .
                '  }' . "\n" .
                '}' . "\n" .
-               '//--></script>' . "\n";
+               '</script>' . "\n";
       }
 
       return $js;

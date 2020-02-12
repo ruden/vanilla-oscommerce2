@@ -5,18 +5,18 @@
   osCommerce, Open Source E-Commerce Solutions
   http://www.oscommerce.com
 
-  Copyright (c) 2010 osCommerce
+  Copyright (c) 2020 osCommerce
 
   Released under the GNU General Public License
 */
 
   require('includes/application_top.php');
 
-  require(DIR_WS_LANGUAGES . $language . '/specials.php');
+  require('includes/languages/' . $language . '/specials.php');
 
   $breadcrumb->add(NAVBAR_TITLE, tep_href_link('specials.php'));
 
-  require(DIR_WS_INCLUDES . 'template_top.php');
+  require('includes/template_top.php');
 ?>
 
 <h1><?php echo HEADING_TITLE; ?></h1>
@@ -51,7 +51,7 @@
     while ($specials = tep_db_fetch_array($specials_query)) {
       $row++;
 
-      echo '        <td align="center" width="33%"><a href="' . tep_href_link('product_info.php', 'products_id=' . $specials['products_id']) . '">' . tep_image(DIR_WS_IMAGES . $specials['products_image'], $specials['products_name'], SMALL_IMAGE_WIDTH, SMALL_IMAGE_HEIGHT) . '</a><br /><a href="' . tep_href_link('product_info.php', 'products_id=' . $specials['products_id']) . '">' . $specials['products_name'] . '</a><br /><del>' . $currencies->display_price($specials['products_price'], tep_get_tax_rate($specials['products_tax_class_id'])) . '</del><br /><span class="productSpecialPrice">' . $currencies->display_price($specials['specials_new_products_price'], tep_get_tax_rate($specials['products_tax_class_id'])) . '</span></td>' . "\n";
+      echo '        <td align="center" width="33%"><a href="' . tep_href_link('product_info.php', 'products_id=' . $specials['products_id']) . '">' . tep_image('images/' . $specials['products_image'], $specials['products_name'], SMALL_IMAGE_WIDTH, SMALL_IMAGE_HEIGHT) . '</a><br /><a href="' . tep_href_link('product_info.php', 'products_id=' . $specials['products_id']) . '">' . $specials['products_name'] . '</a><br /><del>' . $currencies->display_price($specials['products_price'], tep_get_tax_rate($specials['products_tax_class_id'])) . '</del><br /><span class="productSpecialPrice">' . $currencies->display_price($specials['specials_new_products_price'], tep_get_tax_rate($specials['products_tax_class_id'])) . '</span></td>' . "\n";
 
       if ((($row / 3) == floor($row / 3))) {
 ?>
@@ -84,6 +84,6 @@
 </div>
 
 <?php
-  require(DIR_WS_INCLUDES . 'template_bottom.php');
-  require(DIR_WS_INCLUDES . 'application_bottom.php');
+  require('includes/template_bottom.php');
+  require('includes/application_bottom.php');
 ?>

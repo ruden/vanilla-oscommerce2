@@ -5,7 +5,7 @@
   osCommerce, Open Source E-Commerce Solutions
   http://www.oscommerce.com
 
-  Copyright (c) 2010 osCommerce
+  Copyright (c) 2020 osCommerce
 
   Released under the GNU General Public License
 */
@@ -24,9 +24,9 @@
   }
 
   // needs to be included earlier to set the success message in the messageStack
-  require(DIR_WS_LANGUAGES . $language . '/checkout_shipping_address.php');
+  require('includes/languages/' . $language . '/checkout_shipping_address.php');
 
-  require(DIR_WS_CLASSES . 'order.php');
+  require('includes/classes/order.php');
   $order = new order;
 
 // if the order contains only virtual products, forward the customer to the billing page as
@@ -206,10 +206,10 @@
 
   $addresses_count = tep_count_customer_address_book_entries();
 
-  require(DIR_WS_INCLUDES . 'template_top.php');
+  require('includes/template_top.php');
 ?>
 
-<script type="text/javascript"><!--
+<script>
 var selected;
 
 function selectRowEffect(object, buttonSelect) {
@@ -254,8 +254,8 @@ function check_form_optional(form_name) {
     return check_form(form_name);
   }
 }
-//--></script>
-<?php require(DIR_WS_INCLUDES . 'form_check.js.php'); ?>
+</script>
+<?php require('includes/form_check.js.php'); ?>
 
 <h1><?php echo HEADING_TITLE; ?></h1>
 
@@ -348,7 +348,7 @@ function check_form_optional(form_name) {
     <?php echo TEXT_CREATE_NEW_SHIPPING_ADDRESS; ?>
   </div>
 
-  <?php require(DIR_WS_MODULES . 'checkout_new_address.php'); ?>
+  <?php require('includes/modules/checkout_new_address.php'); ?>
 
 <?php
   }
@@ -393,6 +393,6 @@ $('#coProgressBar').progressbar({
 </form>
 
 <?php
-  require(DIR_WS_INCLUDES . 'template_bottom.php');
-  require(DIR_WS_INCLUDES . 'application_bottom.php');
+  require('includes/template_bottom.php');
+  require('includes/application_bottom.php');
 ?>

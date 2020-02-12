@@ -5,7 +5,7 @@
   osCommerce, Open Source E-Commerce Solutions
   http://www.oscommerce.com
 
-  Copyright (c) 2014 osCommerce
+  Copyright (c) 2020 osCommerce
 
   Released under the GNU General Public License
 */
@@ -115,7 +115,7 @@
     $product_query = tep_db_query("select specials_new_products_price from specials where products_id = '" . (int)$product_id . "' and status = 1");
     $product = tep_db_fetch_array($product_query);
 
-    return $product['specials_new_products_price'] ?? false;
+    return isset($product['specials_new_products_price']) ? $product['specials_new_products_price'] : false;
   }
 
 ////
@@ -1117,7 +1117,7 @@
     $value = '';
 
     if (!class_exists('PasswordHash')) {
-      include(DIR_WS_CLASSES . 'passwordhash.php');
+      include('includes/classes/passwordhash.php');
     }
 
     $hasher = new PasswordHash(10, true);

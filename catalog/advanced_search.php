@@ -5,22 +5,22 @@
   osCommerce, Open Source E-Commerce Solutions
   http://www.oscommerce.com
 
-  Copyright (c) 2010 osCommerce
+  Copyright (c) 2020 osCommerce
 
   Released under the GNU General Public License
 */
 
   require('includes/application_top.php');
 
-  require(DIR_WS_LANGUAGES . $language . '/advanced_search.php');
+  require('includes/languages/' . $language . '/advanced_search.php');
 
   $breadcrumb->add(NAVBAR_TITLE_1, tep_href_link('advanced_search.php'));
 
-  require(DIR_WS_INCLUDES . 'template_top.php');
+  require('includes/template_top.php');
 ?>
 
 <script type="text/javascript" src="includes/general.js"></script>
-<script type="text/javascript"><!--
+<script>
 function check_form() {
   var error_message = "<?php echo JS_ERROR; ?>";
   var error_found = false;
@@ -105,7 +105,7 @@ function check_form() {
 function popupWindow(url) {
   window.open(url,'popupWindow','toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=yes,resizable=yes,copyhistory=no,width=450,height=280,screenX=150,screenY=150,top=150,left=150')
 }
-//--></script>
+</script>
 
 <h1><?php echo HEADING_TITLE_1; ?></h1>
 
@@ -185,6 +185,6 @@ $('#helpSearch').dialog({
 </form>
 
 <?php
-  require(DIR_WS_INCLUDES . 'template_bottom.php');
-  require(DIR_WS_INCLUDES . 'application_bottom.php');
+  require('includes/template_bottom.php');
+  require('includes/application_bottom.php');
 ?>

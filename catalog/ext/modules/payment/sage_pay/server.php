@@ -5,7 +5,7 @@
   osCommerce, Open Source E-Commerce Solutions
   http://www.oscommerce.com
 
-  Copyright (c) 2014 osCommerce
+  Copyright (c) 2020 osCommerce
 
   Released under the GNU General Public License
 */
@@ -17,7 +17,7 @@
     exit;
   }
 
-  include(DIR_WS_LANGUAGES . $language . '/modules/payment/sage_pay_server.php');
+  include('includes/languages/' . $language . '/modules/payment/sage_pay_server.php');
   include('includes/modules/payment/sage_pay_server.php');
   $sage_pay_server = new sage_pay_server();
 

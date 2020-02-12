@@ -5,7 +5,7 @@
   osCommerce, Open Source E-Commerce Solutions
   http://www.oscommerce.com
 
-  Copyright (c) 2014 osCommerce
+  Copyright (c) 2020 osCommerce
 
   Released under the GNU General Public License
 */
@@ -277,7 +277,7 @@
   }
 
   function tep_info_image($image, $alt, $width = '', $height = '') {
-    if (tep_not_null($image) && (file_exists(DIR_FS_CATALOG_IMAGES . $image)) ) {
+    if (tep_not_null($image) && (file_exists(DIR_FS_CATALOG . 'images/' . $image)) ) {
       $image = tep_image(HTTP_CATALOG_SERVER . DIR_WS_CATALOG_IMAGES . $image, $alt, $width, $height);
     } else {
       $image = TEXT_IMAGE_NONEXISTENT;
@@ -935,8 +935,8 @@
     $duplicate_image = tep_db_fetch_array($duplicate_image_query);
 
     if ($duplicate_image['total'] < 2) {
-      if (file_exists(DIR_FS_CATALOG_IMAGES . $category_image['categories_image'])) {
-        @unlink(DIR_FS_CATALOG_IMAGES . $category_image['categories_image']);
+      if (file_exists(DIR_FS_CATALOG . 'images/' . $category_image['categories_image'])) {
+        @unlink(DIR_FS_CATALOG . 'images/' . $category_image['categories_image']);
       }
     }
 
@@ -958,8 +958,8 @@
     $duplicate_image = tep_db_fetch_array($duplicate_image_query);
 
     if ($duplicate_image['total'] < 2) {
-      if (file_exists(DIR_FS_CATALOG_IMAGES . $product_image['products_image'])) {
-        @unlink(DIR_FS_CATALOG_IMAGES . $product_image['products_image']);
+      if (file_exists(DIR_FS_CATALOG . 'images/' . $product_image['products_image'])) {
+        @unlink(DIR_FS_CATALOG . 'images/' . $product_image['products_image']);
       }
     }
 
@@ -970,8 +970,8 @@
         $duplicate_image = tep_db_fetch_array($duplicate_image_query);
 
         if ($duplicate_image['total'] < 2) {
-          if (file_exists(DIR_FS_CATALOG_IMAGES . $product_images['image'])) {
-            @unlink(DIR_FS_CATALOG_IMAGES . $product_images['image']);
+          if (file_exists(DIR_FS_CATALOG . 'images/' . $product_images['image'])) {
+            @unlink(DIR_FS_CATALOG . 'images/' . $product_images['image']);
           }
         }
       }

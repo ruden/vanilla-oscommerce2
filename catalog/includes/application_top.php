@@ -5,7 +5,7 @@
   osCommerce, Open Source E-Commerce Solutions
   http://www.oscommerce.com
 
-  Copyright (c) 2014 osCommerce
+  Copyright (c) 2020 osCommerce
 
   Released under the GNU General Public License
 */
@@ -37,7 +37,7 @@
   define('PROJECT_VERSION', 'osCommerce Online Merchant v2.3.5');
 
 // some code to solve compatibility issues
-  require(DIR_WS_FUNCTIONS . 'compatibility.php');
+  require('includes/functions/compatibility.php');
 
 // set the type of request (secure or not)
   $request_type = (getenv('HTTPS') == 'on') ? 'SSL' : 'NONSSL';
@@ -53,13 +53,13 @@
   }
 
 // include the list of project filenames
-  require(DIR_WS_INCLUDES . 'filenames.php');
+  require('includes/filenames.php');
 
 // include the list of project database tables
-  require(DIR_WS_INCLUDES . 'database_tables.php');
+  require('includes/database_tables.php');
 
 // include the database functions
-  require(DIR_WS_FUNCTIONS . 'database.php');
+  require('includes/functions/database.php');
 
 // make a connection to the database... now
   tep_db_connect() or die('Unable to connect to database server!');
@@ -77,7 +77,7 @@
         if (PHP_VERSION >= '4.0.4') {
           ob_start('ob_gzhandler');
         } elseif (PHP_VERSION >= '4.0.1') {
-          include(DIR_WS_FUNCTIONS . 'gzip_compression.php');
+         include('includes/functions/gzip_compression.php');
           ob_start();
           ob_implicit_flush();
         }
@@ -112,27 +112,27 @@
   }
 
 // define general functions used application-wide
-  require(DIR_WS_FUNCTIONS . 'general.php');
-  require(DIR_WS_FUNCTIONS . 'html_output.php');
+  require('includes/functions/general.php');
+  require('includes/functions/html_output.php');
 
 // set the cookie domain
   $cookie_domain = (($request_type == 'NONSSL') ? HTTP_COOKIE_DOMAIN : HTTPS_COOKIE_DOMAIN);
   $cookie_path = (($request_type == 'NONSSL') ? HTTP_COOKIE_PATH : HTTPS_COOKIE_PATH);
 
 // include cache functions if enabled
-  if (USE_CACHE == 'true') include(DIR_WS_FUNCTIONS . 'cache.php');
+  if (USE_CACHE == 'true')include('includes/functions/cache.php');
 
 // include shopping cart class
-  require(DIR_WS_CLASSES . 'shopping_cart.php');
+  require('includes/classes/shopping_cart.php');
 
 // include navigation history class
-  require(DIR_WS_CLASSES . 'navigation_history.php');
+  require('includes/classes/navigation_history.php');
 
 // define how the session functions will be used
-  require(DIR_WS_FUNCTIONS . 'sessions.php');
+  require('includes/functions/sessions.php');
 
 // set the session name and save path
-  tep_session_name('osCsid');
+  tep_session_name('OSCOMsid');
   tep_session_save_path(SESSION_WRITE_DIRECTORY);
 
 // set the session cookie parameters
@@ -248,12 +248,12 @@
   $cart->update_content();
 
 // include currencies class and create an instance
-  require(DIR_WS_CLASSES . 'currencies.php');
+  require('includes/classes/currencies.php');
   $currencies = new currencies();
 
 // include the mail classes
-  require(DIR_WS_CLASSES . 'mime.php');
-  require(DIR_WS_CLASSES . 'email.php');
+  require('includes/classes/mime.php');
+  require('includes/classes/email.php');
 
 // set the language
   if (!tep_session_is_registered('language') || isset($_GET['language'])) {
@@ -262,7 +262,7 @@
       tep_session_register('languages_id');
     }
 
-    include(DIR_WS_CLASSES . 'language.php');
+    include('includes/classes/language.php');
     $lng = new language();
 
     if (isset($_GET['language']) && tep_not_null($_GET['language'])) {
@@ -277,7 +277,7 @@
 
 // include the language translations
   $_system_locale_numeric = setlocale(LC_NUMERIC, 0);
-  require(DIR_WS_LANGUAGES . $language . '.php');
+  require('includes/languages/' . $language . '.php');
   setlocale(LC_NUMERIC, $_system_locale_numeric); // Prevent LC_ALL from setting LC_NUMERIC to a locale with 1,0 float/decimal values instead of 1.0 (see bug #634)
 
 // currency
@@ -319,115 +319,34 @@
         $parameters = array('action', 'pid');
       }
     }
-    switch ($_GET['action']) {
-      // customer wants to update the product quantity in their shopping cart
-      case 'update_product' : for ($i=0, $n=sizeof($_POST['products_id']); $i<$n; $i++) {
-                                if (in_array($_POST['products_id'][$i], (is_array($_POST['cart_delete']) ? $_POST['cart_delete'] : array()))) {
-                                  $cart->remove($_POST['products_id'][$i]);
-                                } else {
-                                  $attributes = ($_POST['id'][$_POST['products_id'][$i]]) ? $_POST['id'][$_POST['products_id'][$i]] : '';
-                                  $cart->add_cart($_POST['products_id'][$i], $_POST['cart_quantity'][$i], $attributes, false);
-                                }
-                              }
-                              tep_redirect(tep_href_link($goto, tep_get_all_get_params($parameters)));
-                              break;
-      // customer adds a product from the products page
-      case 'add_product' :    if (isset($_POST['products_id']) && is_numeric($_POST['products_id'])) {
-                                $attributes = isset($_POST['id']) ? $_POST['id'] : '';
-                                $cart->add_cart($_POST['products_id'], $cart->get_quantity(tep_get_uprid($_POST['products_id'], $attributes))+1, $attributes);
-                              }
-                              tep_redirect(tep_href_link($goto, tep_get_all_get_params($parameters)));
-                              break;
-      // customer removes a product from their shopping cart
-      case 'remove_product' : if (isset($_GET['products_id'])) {
-                                $cart->remove($_GET['products_id']);
-                              }
-                              tep_redirect(tep_href_link($goto, tep_get_all_get_params($parameters)));
-                              break;
-      // performed by the 'buy now' button in product listings and review page
-      case 'buy_now' :        if (isset($_GET['products_id'])) {
-                                if (tep_has_product_attributes($_GET['products_id'])) {
-                                  tep_redirect(tep_href_link('product_info.php', 'products_id=' . $_GET['products_id']));
-                                } else {
-                                  $cart->add_cart($_GET['products_id'], $cart->get_quantity($_GET['products_id'])+1);
-                                }
-                              }
-                              tep_redirect(tep_href_link($goto, tep_get_all_get_params($parameters)));
-                              break;
-      case 'notify' :         if (tep_session_is_registered('customer_id')) {
-                                if (isset($_GET['products_id'])) {
-                                  $notify = $_GET['products_id'];
-                                } elseif (isset($_GET['notify'])) {
-                                  $notify = $_GET['notify'];
-                                } elseif (isset($_POST['notify'])) {
-                                  $notify = $_POST['notify'];
-                                } else {
-                                  tep_redirect(tep_href_link($PHP_SELF, tep_get_all_get_params(array('action', 'notify'))));
-                                }
-                                if (!is_array($notify)) $notify = array($notify);
-                                for ($i=0, $n=sizeof($notify); $i<$n; $i++) {
-                                  $check_query = tep_db_query("select count(*) as count from products_notifications where products_id = '" . (int)$notify[$i] . "' and customers_id = '" . (int)$customer_id . "'");
-                                  $check = tep_db_fetch_array($check_query);
-                                  if ($check['count'] < 1) {
-                                    tep_db_query("insert into products_notifications (products_id, customers_id, date_added) values ('" . (int)$notify[$i] . "', '" . (int)$customer_id . "', now())");
-                                  }
-                                }
-                                tep_redirect(tep_href_link($PHP_SELF, tep_get_all_get_params(array('action', 'notify'))));
-                              } else {
-                                $navigation->set_snapshot();
-                                tep_redirect(tep_href_link('login.php', '', 'SSL'));
-                              }
-                              break;
-      case 'notify_remove' :  if (tep_session_is_registered('customer_id') && isset($_GET['products_id'])) {
-                                $check_query = tep_db_query("select count(*) as count from products_notifications where products_id = '" . (int)$_GET['products_id'] . "' and customers_id = '" . (int)$customer_id . "'");
-                                $check = tep_db_fetch_array($check_query);
-                                if ($check['count'] > 0) {
-                                  tep_db_query("delete from products_notifications where products_id = '" . (int)$_GET['products_id'] . "' and customers_id = '" . (int)$customer_id . "'");
-                                }
-                                tep_redirect(tep_href_link($PHP_SELF, tep_get_all_get_params(array('action'))));
-                              } else {
-                                $navigation->set_snapshot();
-                                tep_redirect(tep_href_link('login.php', '', 'SSL'));
-                              }
-                              break;
-      case 'cust_order' :     if (tep_session_is_registered('customer_id') && isset($_GET['pid'])) {
-                                if (tep_has_product_attributes($_GET['pid'])) {
-                                  tep_redirect(tep_href_link('product_info.php', 'products_id=' . $_GET['pid']));
-                                } else {
-                                  $cart->add_cart($_GET['pid'], $cart->get_quantity($_GET['pid'])+1);
-                                }
-                              }
-                              tep_redirect(tep_href_link($goto, tep_get_all_get_params($parameters)));
-                              break;
+
+    if (file_exists('includes/actions/' . basename($_GET['action']) . '.php')) {
+      include('includes/actions/' . basename($_GET['action']) . '.php');
     }
   }
 
-// include the who's online functions
-  require(DIR_WS_FUNCTIONS . 'whos_online.php');
-  tep_update_whos_online();
-
 // include the password crypto functions
-  require(DIR_WS_FUNCTIONS . 'password_funcs.php');
+  require('includes/functions/password_funcs.php');
 
 // include validation functions (right now only email address)
-  require(DIR_WS_FUNCTIONS . 'validations.php');
+  require('includes/functions/validations.php');
 
 // split-page-results
-  require(DIR_WS_CLASSES . 'split_page_results.php');
+  require('includes/classes/split_page_results.php');
 
 // infobox
-  require(DIR_WS_CLASSES . 'boxes.php');
+  require('includes/classes/boxes.php');
 
 // auto activate and expire banners
-  require(DIR_WS_FUNCTIONS . 'banner.php');
+  require('includes/functions/banner.php');
   tep_activate_banners();
   tep_expire_banners();
 
 // auto expire special products
-  require(DIR_WS_FUNCTIONS . 'specials.php');
+  require('includes/functions/specials.php');
   tep_expire_specials();
 
-  require(DIR_WS_CLASSES . 'osc_template.php');
+  require('includes/classes/osc_template.php');
   $oscTemplate = new oscTemplate();
 
 // calculate category path
@@ -448,7 +367,7 @@
   }
 
 // include the breadcrumb class and start the breadcrumb trail
-  require(DIR_WS_CLASSES . 'breadcrumb.php');
+  require('includes/classes/breadcrumb.php');
   $breadcrumb = new breadcrumb;
 
   $breadcrumb->add(HEADER_TITLE_TOP, HTTP_SERVER);
@@ -487,7 +406,7 @@
   }
 
 // initialize the message stack for output messages
-  require(DIR_WS_CLASSES . 'message_stack.php');
+  require('includes/classes/message_stack.php');
   $messageStack = new messageStack;
 
   require(DIR_FS_CATALOG . 'includes/classes/hooks.php');

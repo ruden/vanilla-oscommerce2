@@ -5,7 +5,7 @@
   osCommerce, Open Source E-Commerce Solutions
   http://www.oscommerce.com
 
-  Copyright (c) 2013 osCommerce
+  Copyright (c) 2020 osCommerce
 
   Released under the GNU General Public License
 */
@@ -227,11 +227,11 @@
     }
   }
 
-  require(DIR_WS_INCLUDES . 'template_top.php');
+  require('includes/template_top.php');
 
   if ($action == 'edit' || $action == 'update') {
 ?>
-<script type="text/javascript"><!--
+<script>
 
 function check_form() {
   var error = 0;
@@ -324,7 +324,7 @@ function check_form() {
     return true;
   }
 }
-//--></script>
+</script>
 <?php
   }
 ?>
@@ -718,7 +718,7 @@ function check_form() {
                 <td class="dataTableContent"><?php echo $customers['customers_lastname']; ?></td>
                 <td class="dataTableContent"><?php echo $customers['customers_firstname']; ?></td>
                 <td class="dataTableContent" align="right"><?php echo tep_date_short($info['date_account_created']); ?></td>
-                <td class="dataTableContent" align="right"><?php if (isset($cInfo) && is_object($cInfo) && ($customers['customers_id'] == $cInfo->customers_id)) { echo tep_image(DIR_WS_IMAGES . 'icon_arrow_right.gif', ''); } else { echo '<a href="' . tep_href_link('customers.php', tep_get_all_get_params(array('cID')) . 'cID=' . $customers['customers_id']) . '">' . tep_image(DIR_WS_IMAGES . 'icon_info.gif', IMAGE_ICON_INFO) . '</a>'; } ?>&nbsp;</td>
+                <td class="dataTableContent" align="right"><?php if (isset($cInfo) && is_object($cInfo) && ($customers['customers_id'] == $cInfo->customers_id)) { echo tep_image('images/icon_arrow_right.gif', ''); } else { echo '<a href="' . tep_href_link('customers.php', tep_get_all_get_params(array('cID')) . 'cID=' . $customers['customers_id']) . '">' . tep_image('images/icon_info.gif', IMAGE_ICON_INFO) . '</a>'; } ?>&nbsp;</td>
               </tr>
 <?php
     }
@@ -787,6 +787,6 @@ function check_form() {
     </table>
 
 <?php
-  require(DIR_WS_INCLUDES . 'template_bottom.php');
-  require(DIR_WS_INCLUDES . 'application_bottom.php');
+  require('includes/template_bottom.php');
+  require('includes/application_bottom.php');
 ?>

@@ -3,7 +3,7 @@
 # osCommerce, Open Source E-Commerce Solutions
 # http://www.oscommerce.com
 #
-# Copyright (c) 2017 osCommerce
+# Copyright (c) 2020 osCommerce
 #
 # Released under the GNU General Public License
 #
@@ -137,18 +137,6 @@ CREATE TABLE configuration_group (
   sort_order int(5) NULL,
   visible int(1) DEFAULT '1' NULL,
   PRIMARY KEY (configuration_group_id)
-) CHARACTER SET utf8 COLLATE utf8_unicode_ci;
-
-DROP TABLE IF EXISTS counter;
-CREATE TABLE counter (
-  startdate char(8),
-  counter int(12)
-) CHARACTER SET utf8 COLLATE utf8_unicode_ci;
-
-DROP TABLE IF EXISTS counter_history;
-CREATE TABLE counter_history (
-  month char(8),
-  counter int(12)
 ) CHARACTER SET utf8 COLLATE utf8_unicode_ci;
 
 DROP TABLE IF EXISTS countries;
@@ -611,18 +599,6 @@ CREATE TABLE geo_zones (
   PRIMARY KEY (geo_zone_id)
 ) CHARACTER SET utf8 COLLATE utf8_unicode_ci;
 
-DROP TABLE IF EXISTS whos_online;
-CREATE TABLE whos_online (
-  customer_id int,
-  full_name varchar(255) NOT NULL,
-  session_id varchar(128) NOT NULL,
-  ip_address varchar(15) NOT NULL,
-  time_entry varchar(14) NOT NULL,
-  time_last_click varchar(14) NOT NULL,
-  last_page_url text NOT NULL,
-  KEY idx_whos_online_session_id (session_id)
-) CHARACTER SET utf8 COLLATE utf8_unicode_ci;
-
 DROP TABLE IF EXISTS zones;
 CREATE TABLE zones (
   zone_id int NOT NULL auto_increment,
@@ -826,7 +802,7 @@ INSERT INTO configuration (configuration_title, configuration_key, configuration
 INSERT INTO configuration (configuration_title, configuration_key, configuration_value, configuration_description, configuration_group_id, sort_order, date_added) VALUES ('Compression Level', 'GZIP_LEVEL', '5', 'Use this compression level 0-9 (0 = minimum, 9 = maximum).', '14', '2', now());
 
 INSERT INTO configuration (configuration_title, configuration_key, configuration_value, configuration_description, configuration_group_id, sort_order, date_added) VALUES ('Session Directory', 'SESSION_WRITE_DIRECTORY', '/tmp', 'If sessions are file based, store them in this directory.', '15', '1', now());
-INSERT INTO configuration (configuration_title, configuration_key, configuration_value, configuration_description, configuration_group_id, sort_order, set_function, date_added) VALUES ('Force Cookie Use', 'SESSION_FORCE_COOKIE_USE', 'False', 'Force the use of sessions when cookies are only enabled.', '15', '2', 'tep_cfg_select_option(array(\'True\', \'False\'), ', now());
+INSERT INTO configuration (configuration_title, configuration_key, configuration_value, configuration_description, configuration_group_id, sort_order, set_function, date_added) VALUES ('Force Cookie Use', 'SESSION_FORCE_COOKIE_USE', 'True', 'Force the use of sessions when cookies are only enabled.', '15', '2', 'tep_cfg_select_option(array(\'True\', \'False\'), ', now());
 INSERT INTO configuration (configuration_title, configuration_key, configuration_value, configuration_description, configuration_group_id, sort_order, set_function, date_added) VALUES ('Check SSL Session ID', 'SESSION_CHECK_SSL_SESSION_ID', 'False', 'Validate the SSL_SESSION_ID on every secure HTTPS page request.', '15', '3', 'tep_cfg_select_option(array(\'True\', \'False\'), ', now());
 INSERT INTO configuration (configuration_title, configuration_key, configuration_value, configuration_description, configuration_group_id, sort_order, set_function, date_added) VALUES ('Check User Agent', 'SESSION_CHECK_USER_AGENT', 'False', 'Validate the clients browser user agent on every page request.', '15', '4', 'tep_cfg_select_option(array(\'True\', \'False\'), ', now());
 INSERT INTO configuration (configuration_title, configuration_key, configuration_value, configuration_description, configuration_group_id, sort_order, set_function, date_added) VALUES ('Check IP Address', 'SESSION_CHECK_IP_ADDRESS', 'False', 'Validate the clients IP address on every page request.', '15', '5', 'tep_cfg_select_option(array(\'True\', \'False\'), ', now());

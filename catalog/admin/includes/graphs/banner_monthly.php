@@ -10,9 +10,9 @@
   Released under the GNU General Public License
 */
 
-  include(DIR_WS_CLASSES . 'phplot.php');
+  include('includes/classes/phplot.php');
 
-  $year = (($_GET['year']) ? $_GET['year'] : date('Y'));
+  $year = (isset($_GET['year']) ? $_GET['year'] : date('Y'));
 
   $stats = array();
   for ($i=1; $i<13; $i++) {

@@ -5,7 +5,7 @@
   osCommerce, Open Source E-Commerce Solutions
   http://www.oscommerce.com
 
-  Copyright (c) 2010 osCommerce
+  Copyright (c) 2020 osCommerce
 
   Released under the GNU General Public License
 */
@@ -27,7 +27,7 @@
           $also_pur_prods_content .= '<tr>';
         }
 
-        $also_pur_prods_content .= '<td width="33%" valign="top" align="center"><a href="' . tep_href_link('product_info.php', 'products_id=' . $orders['products_id']) . '">' . tep_image(DIR_WS_IMAGES . $orders['products_image'], $orders['products_name'], SMALL_IMAGE_WIDTH, SMALL_IMAGE_HEIGHT) . '</a><br /><a href="' . tep_href_link('product_info.php', 'products_id=' . $orders['products_id']) . '">' . $orders['products_name'] . '</a></td>';
+        $also_pur_prods_content .= '<td width="33%" valign="top" align="center"><a href="' . tep_href_link('product_info.php', 'products_id=' . $orders['products_id']) . '">' . tep_image('images/' . $orders['products_image'], $orders['products_name'], SMALL_IMAGE_WIDTH, SMALL_IMAGE_HEIGHT) . '</a><br /><a href="' . tep_href_link('product_info.php', 'products_id=' . $orders['products_id']) . '">' . $orders['products_name'] . '</a></td>';
 
         $col ++;
 

@@ -5,7 +5,7 @@
   osCommerce, Open Source E-Commerce Solutions
   http://www.oscommerce.com
 
-  Copyright (c) 2014 osCommerce
+  Copyright (c) 2020 osCommerce
 
   Released under the GNU General Public License
 */
@@ -160,14 +160,9 @@
   function tep_session_recreate() {
     global $SID;
 
-    $old_id = session_id();
-
     session_regenerate_id(true);
 
     if (!empty($SID)) {
       $SID = tep_session_name() . '=' . tep_session_id();
     }
-
-    tep_whos_online_update_session_id($old_id, tep_session_id());
   }
-?>

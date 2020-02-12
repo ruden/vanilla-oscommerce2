@@ -5,7 +5,7 @@
   osCommerce, Open Source E-Commerce Solutions
   http://www.oscommerce.com
 
-  Copyright (c) 2012 osCommerce
+  Copyright (c) 2020 osCommerce
 
   Released under the GNU General Public License
 */
@@ -83,7 +83,7 @@
     if (tep_not_null($banner['banners_html_text'])) {
       $banner_string = $banner['banners_html_text'];
     } else {
-      $banner_string = '<a href="' . tep_href_link('redirect.php', 'action=banner&goto=' . $banner['banners_id']) . '" target="_blank">' . tep_image(DIR_WS_IMAGES . $banner['banners_image'], $banner['banners_title']) . '</a>';
+      $banner_string = '<a href="' . tep_href_link('redirect.php', 'action=banner&goto=' . $banner['banners_id']) . '" target="_blank">' . tep_image('images/' . $banner['banners_image'], $banner['banners_title']) . '</a>';
     }
 
     tep_update_banner_display_count($banner['banners_id']);

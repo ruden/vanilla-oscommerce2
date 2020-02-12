@@ -5,7 +5,7 @@
   osCommerce, Open Source E-Commerce Solutions
   http://www.oscommerce.com
 
-  Copyright (c) 2014 osCommerce
+  Copyright (c) 2020 osCommerce
 
   Released under the GNU General Public License
 */
@@ -35,7 +35,7 @@
       global $oscTemplate;
 
       ob_start();
-      include(DIR_WS_MODULES . 'content/' . $this->group . '/templates/create_account_link.php');
+      include('includes/modules/content/' . $this->group . '/templates/create_account_link.php');
       $template = ob_get_clean();
 
       $oscTemplate->addContent($template, $this->group);

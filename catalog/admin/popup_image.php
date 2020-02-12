@@ -5,7 +5,7 @@
   osCommerce, Open Source E-Commerce Solutions
   http://www.oscommerce.com
 
-  Copyright (c) 2003 osCommerce
+  Copyright (c) 2020 osCommerce
 
   Released under the GNU General Public License
 */
@@ -35,14 +35,14 @@
 <html <?php echo HTML_PARAMS; ?>>
 <head>
 <title><?php echo $page_title; ?></title>
-<script type="text/javascript"><!--
+<script>
 var i=0;
 
 function resize() {
   if (navigator.appName == 'Netscape') i = 40;
   window.resizeTo(document.images[0].width + 30, document.images[0].height + 60 - i);
 }
-//--></script>
+</script>
 </head>
 
 <body onload="resize();">

@@ -5,18 +5,18 @@
   osCommerce, Open Source E-Commerce Solutions
   http://www.oscommerce.com
 
-  Copyright (c) 2010 osCommerce
+  Copyright (c) 2020 osCommerce
 
   Released under the GNU General Public License
 */
 
   require('includes/application_top.php');
 
-  require(DIR_WS_LANGUAGES . $language . '/products_new.php');
+  require('includes/languages/' . $language . '/products_new.php');
 
   $breadcrumb->add(NAVBAR_TITLE, tep_href_link('products_new.php'));
 
-  require(DIR_WS_INCLUDES . 'template_top.php');
+  require('includes/template_top.php');
 ?>
 
 <h1><?php echo HEADING_TITLE; ?></h1>
@@ -61,7 +61,7 @@
       }
 ?>
       <tr>
-        <td width="<?php echo SMALL_IMAGE_WIDTH + 10; ?>" valign="top" class="main"><?php echo '<a href="' . tep_href_link('product_info.php', 'products_id=' . $products_new['products_id']) . '">' . tep_image(DIR_WS_IMAGES . $products_new['products_image'], $products_new['products_name'], SMALL_IMAGE_WIDTH, SMALL_IMAGE_HEIGHT) . '</a>'; ?></td>
+        <td width="<?php echo SMALL_IMAGE_WIDTH + 10; ?>" valign="top" class="main"><?php echo '<a href="' . tep_href_link('product_info.php', 'products_id=' . $products_new['products_id']) . '">' . tep_image('images/' . $products_new['products_image'], $products_new['products_name'], SMALL_IMAGE_WIDTH, SMALL_IMAGE_HEIGHT) . '</a>'; ?></td>
         <td valign="top" class="main"><?php echo '<a href="' . tep_href_link('product_info.php', 'products_id=' . $products_new['products_id']) . '"><strong><u>' . $products_new['products_name'] . '</u></strong></a><br />' . TEXT_DATE_ADDED . ' ' . tep_date_long($products_new['products_date_added']) . '<br />' . TEXT_MANUFACTURER . ' ' . $products_new['manufacturers_name'] . '<br /><br />' . TEXT_PRICE . ' ' . $products_price; ?></td>
         <td align="right" valign="middle" class="smallText"><?php echo tep_draw_button(IMAGE_BUTTON_IN_CART, 'cart', tep_href_link('products_new.php', tep_get_all_get_params(array('action')) . 'action=buy_now&products_id=' . $products_new['products_id'])); ?></td>
       </tr>
@@ -101,6 +101,6 @@
 </div>
 
 <?php
-  require(DIR_WS_INCLUDES . 'template_bottom.php');
-  require(DIR_WS_INCLUDES . 'application_bottom.php');
+  require('includes/template_bottom.php');
+  require('includes/application_bottom.php');
 ?>

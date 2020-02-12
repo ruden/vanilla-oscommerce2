@@ -5,7 +5,7 @@
   osCommerce, Open Source E-Commerce Solutions
   http://www.oscommerce.com
 
-  Copyright (c) 2014 osCommerce
+  Copyright (c) 2020 osCommerce
 
   Released under the GNU General Public License
 */
@@ -67,7 +67,7 @@
       }
 
       ob_start();
-      include(DIR_WS_MODULES . 'content/' . $this->group . '/templates/login_form.php');
+      include('includes/modules/content/' . $this->group . '/templates/login_form.php');
       $template = ob_get_clean();
 
       $oscTemplate->addContent($template, $this->group);

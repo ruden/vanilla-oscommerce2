@@ -10,7 +10,7 @@
   Released under the GNU General Public License
 */
 
-  include(DIR_WS_CLASSES . 'phplot.php');
+  include('includes/classes/phplot.php');
 
   $stats = array();
   $banner_stats_query = tep_db_query("select dayofmonth(banners_history_date) as name, banners_shown as value, banners_clicked as dvalue from banners_history where banners_id = '" . (int)$banner_id . "' and to_days(now()) - to_days(banners_history_date) < " . (int)$days . " order by banners_history_date");

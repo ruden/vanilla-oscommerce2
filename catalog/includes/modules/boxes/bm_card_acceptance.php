@@ -39,7 +39,7 @@
                   '  <div class="ui-widget-content infoBoxContents" style="text-align: center;">';
 
         foreach ( explode(';', MODULE_BOXES_CARD_ACCEPTANCE_LOGOS) as $logo ) {
-          $output .= tep_image(DIR_WS_IMAGES . 'card_acceptance/' . basename($logo));
+          $output .= tep_image('images/card_acceptance/' . basename($logo));
         }
 
         $output .= '  </div>' .
@@ -87,7 +87,7 @@
       $output = '<ul style="list-style-type: none; margin: 0; padding: 5px; margin-bottom: 10px;">';
 
       foreach (explode(';', $text) as $card) {
-        $output .= '<li style="padding: 2px;">' . tep_image(DIR_WS_CATALOG_IMAGES . 'card_acceptance/' . basename($card), basename($card)) . '</li>';
+        $output .= '<li style="padding: 2px;">' . tep_image(DIR_WS_CATALOG . 'images/card_acceptance/' . basename($card), basename($card)) . '</li>';
       }
 
       $output .= '</ul>';
@@ -99,9 +99,9 @@
   function bm_card_acceptance_edit_logos($values, $key) {
     $files_array = array();
 
-    if ( $dir = @dir(DIR_FS_CATALOG . DIR_WS_IMAGES . 'card_acceptance') ) {
+    if ( $dir = @dir(DIR_FS_CATALOG . 'images/card_acceptance') ) {
       while ( $file = $dir->read() ) {
-        if ( !is_dir(DIR_FS_CATALOG . DIR_WS_IMAGES . 'card_acceptance/' . $file) ) {
+        if ( !is_dir(DIR_FS_CATALOG . 'images/card_acceptance/' . $file) ) {
           if ( in_array(substr($file, strrpos($file, '.')+1), array('gif', 'jpg', 'png')) ) {
             $files_array[] = $file;
           }
@@ -119,7 +119,7 @@
               '<ul id="ca_logos" style="list-style-type: none; margin: 0; padding: 5px; margin-bottom: 10px;">';
 
     foreach ($values_array as $file) {
-      $output .= '<li style="padding: 2px;">' . tep_image(DIR_WS_CATALOG_IMAGES . 'card_acceptance/' . $file, $file) . tep_draw_hidden_field('bm_card_acceptance_logos[]', $file) . '</li>';
+      $output .= '<li style="padding: 2px;">' . tep_image(DIR_WS_CATALOG . 'images/card_acceptance/' . $file, $file) . tep_draw_hidden_field('bm_card_acceptance_logos[]', $file) . '</li>';
     }
 
     $output .= '</ul>';
@@ -128,7 +128,7 @@
 
     foreach ($files_array as $file) {
       if ( !in_array($file, $values_array) ) {
-        $output .= '<li style="padding: 2px;">' . tep_image(DIR_WS_CATALOG_IMAGES . 'card_acceptance/' . $file, $file) . tep_draw_hidden_field('bm_card_acceptance_logos[]', $file) . '</li>';
+        $output .= '<li style="padding: 2px;">' . tep_image(DIR_WS_CATALOG . 'images/card_acceptance/' . $file, $file) . tep_draw_hidden_field('bm_card_acceptance_logos[]', $file) . '</li>';
       }
     }
 

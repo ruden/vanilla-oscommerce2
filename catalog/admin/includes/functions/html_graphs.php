@@ -380,8 +380,8 @@
     $bars = array();
     $dbars = array();
     for ($i = 0, $n = sizeof($values); $i < $n; $i++) {
-      $bars[$i] = DIR_WS_IMAGES . 'graph_hbar_blue.gif';
-      $dbars[$i] = DIR_WS_IMAGES . 'graph_hbar_red.gif';
+      $bars[$i] = 'images/graph_hbar_blue.gif';
+      $dbars[$i] = 'images/graph_hbar_red.gif';
     }
 
     $graph_vals = @array('vlabel'=>TEXT_BANNERS_DATA,
@@ -426,8 +426,8 @@
     $bars = array();
     $dbars = array();
     for ($i = 0, $n = sizeof($values); $i < $n; $i++) {
-      $bars[$i] = DIR_WS_IMAGES . 'graph_hbar_blue.gif';
-      $dbars[$i] = DIR_WS_IMAGES . 'graph_hbar_red.gif';
+      $bars[$i] = 'images/graph_hbar_blue.gif';
+      $dbars[$i] = 'images/graph_hbar_red.gif';
     }
 
     $graph_vals = @array('vlabel'=>TEXT_BANNERS_DATA,
@@ -458,9 +458,9 @@
 ////
 // draws a double vertical bar graph for the banner views vs clicks statistics
   function tep_banner_graph_monthly($banner_id) {
-    global $banner, $_GET;
+    global $banner;
 
-    $year = (($_GET['year']) ? $_GET['year'] : date('Y'));
+    $year = (isset($_GET['year']) ? $_GET['year'] : date('Y'));
 
     for ($i=1; $i<13; $i++) {
       $names[] = strftime('%b', mktime(0,0,0,$i));
@@ -480,8 +480,8 @@
     $bars = array();
     $dbars = array();
     for ($i = 0, $n = sizeof($values); $i < $n; $i++) {
-      $bars[$i] = DIR_WS_IMAGES . 'graph_hbar_blue.gif';
-      $dbars[$i] = DIR_WS_IMAGES . 'graph_hbar_red.gif';
+      $bars[$i] = 'images/graph_hbar_blue.gif';
+      $dbars[$i] = 'images/graph_hbar_red.gif';
     }
 
     $graph_vals = @array('vlabel'=>TEXT_BANNERS_DATA,
@@ -537,8 +537,8 @@
     $bars = array();
     $dbars = array();
     for ($i = 0, $n = sizeof($values); $i < $n; $i++) {
-      $bars[$i] = DIR_WS_IMAGES . 'graph_hbar_blue.gif';
-      $dbars[$i] = DIR_WS_IMAGES . 'graph_hbar_red.gif';
+      $bars[$i] = 'images/graph_hbar_blue.gif';
+      $dbars[$i] = 'images/graph_hbar_red.gif';
     }
 
     $graph_vals = @array('vlabel'=>TEXT_BANNERS_DATA,

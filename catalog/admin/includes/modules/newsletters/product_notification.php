@@ -29,7 +29,7 @@
                                   'text' => $products['products_name']);
       }
 
-$choose_audience_string = '<script type="text/javascript"><!--
+$choose_audience_string = '<script>
 function mover(move) {
   if (move == \'remove\') {
     for (x=0; x<(document.notifications.products.length); x++) {
@@ -71,7 +71,7 @@ function selectAll(FormName, SelectBox) {
     return true;
   }
 }
-//--></script>';
+</script>';
 
       $global_button = tep_draw_button(BUTTON_GLOBAL, 'circle-triangle-n', tep_href_link('newsletters.php', 'page=' . $_GET['page'] . '&nID=' . $_GET['nID'] . '&action=confirm&global=true'), 'primary');
 

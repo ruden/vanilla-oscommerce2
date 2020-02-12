@@ -5,7 +5,7 @@
   osCommerce, Open Source E-Commerce Solutions
   http://www.oscommerce.com
 
-  Copyright (c) 2013 osCommerce
+  Copyright (c) 2020 osCommerce
 
   Released under the GNU General Public License
 */
@@ -45,7 +45,7 @@
           $order_subtotal = tep_db_fetch_array($order_subtotal_query);
 
           if (!isset($lng) || (isset($lng) && !is_object($lng))) {
-            include(DIR_WS_CLASSES . 'language.php');
+            include('includes/classes/language.php');
             $lng = new language;
           }
 

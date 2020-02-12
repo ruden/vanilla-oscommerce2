@@ -35,14 +35,14 @@
 
       if (substr(basename($PHP_SELF), 0, 8) != 'checkout') {
         if (!isset($lng) || (isset($lng) && !is_object($lng))) {
-          include(DIR_WS_CLASSES . 'language.php');
+          include('includes/classes/language.php');
           $lng = new language;
         }
 
         if (count($lng->catalog_languages) > 1) {
           $languages_string = '';
           foreach ($lng->catalog_languages as $key => $value) {
-            $languages_string .= ' <a href="' . tep_href_link($PHP_SELF, tep_get_all_get_params(array('language', 'currency')) . 'language=' . $key, $request_type) . '">' . tep_image(DIR_WS_LANGUAGES .  $value['directory'] . '/images/' . $value['image'], $value['name']) . '</a> ';
+            $languages_string .= ' <a href="' . tep_href_link($PHP_SELF, tep_get_all_get_params(array('language', 'currency')) . 'language=' . $key, $request_type) . '">' . tep_image('includes/languages/' .  $value['directory'] . '/images/' . $value['image'], $value['name']) . '</a> ';
           }
 
           $data = '<div class="ui-widget infoBoxContainer">' .

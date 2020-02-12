@@ -5,7 +5,7 @@
   osCommerce, Open Source E-Commerce Solutions
   http://www.oscommerce.com
 
-  Copyright (c) 2010 osCommerce
+  Copyright (c) 2020 osCommerce
 
   Released under the GNU General Public License
 */
@@ -13,15 +13,15 @@
   require("includes/application_top.php");
 
   if ($cart->count_contents() > 0) {
-    include(DIR_WS_CLASSES . 'payment.php');
+    include('includes/classes/payment.php');
     $payment_modules = new payment;
   }
 
-  require(DIR_WS_LANGUAGES . $language . '/shopping_cart.php');
+  require('includes/languages/' . $language . '/shopping_cart.php');
 
   $breadcrumb->add(NAVBAR_TITLE, tep_href_link('shopping_cart.php'));
 
-  require(DIR_WS_INCLUDES . 'template_top.php');
+  require('includes/template_top.php');
 ?>
 
 <h1><?php echo HEADING_TITLE; ?></h1>
@@ -75,7 +75,7 @@
 
       $products_name = '<table border="0" cellspacing="2" cellpadding="2">' .
                        '  <tr>' .
-                       '    <td align="center"><a href="' . tep_href_link('product_info.php', 'products_id=' . $products[$i]['id']) . '">' . tep_image(DIR_WS_IMAGES . $products[$i]['image'], $products[$i]['name'], SMALL_IMAGE_WIDTH, SMALL_IMAGE_HEIGHT) . '</a></td>' .
+                       '    <td align="center"><a href="' . tep_href_link('product_info.php', 'products_id=' . $products[$i]['id']) . '">' . tep_image('images/' . $products[$i]['image'], $products[$i]['name'], SMALL_IMAGE_WIDTH, SMALL_IMAGE_HEIGHT) . '</a></td>' .
                        '    <td valign="top"><a href="' . tep_href_link('product_info.php', 'products_id=' . $products[$i]['id']) . '"><strong>' . $products[$i]['name'] . '</strong></a>';
 
       if (STOCK_CHECK == 'true') {
@@ -156,6 +156,6 @@
 <?php
   }
 
-  require(DIR_WS_INCLUDES . 'template_bottom.php');
-  require(DIR_WS_INCLUDES . 'application_bottom.php');
+  require('includes/template_bottom.php');
+  require('includes/application_bottom.php');
 ?>

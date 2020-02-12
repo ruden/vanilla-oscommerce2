@@ -42,8 +42,8 @@
           $class = substr($sbm, 0, strrpos($sbm, '.'));
 
           if ( !class_exists($class) ) {
-            include(DIR_WS_LANGUAGES . $language . '/modules/social_bookmarks/' . $sbm);
-            include(DIR_WS_MODULES . 'social_bookmarks/' . $class . '.php');
+            include('includes/languages/' . $language . '/modules/social_bookmarks/' . $sbm);
+            include('includes/modules/social_bookmarks/' . $class . '.php');
           }
 
           $sb = new $class();
