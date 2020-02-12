@@ -28,9 +28,9 @@
     }
   }
 
-  require(DIR_WS_LANGUAGES . $language . '/index.php');
+  require('includes/languages/' . $language . '/index.php');
 
-  require(DIR_WS_INCLUDES . 'template_top.php');
+  require('includes/template_top.php');
 
   $page_blocks = $oscTemplate->getBlocks('index_listing');
 
@@ -55,7 +55,7 @@
       $rows++;
       $cPath_new = tep_get_path($categories['categories_id']);
       $width = (int)(100 / MAX_DISPLAY_CATEGORIES_PER_ROW) . '%';
-      echo '        <td align="center" class="smallText" width="' . $width . '" valign="top"><a href="' . tep_href_link('index.php', $cPath_new) . '">' . tep_image(DIR_WS_IMAGES . $categories['categories_image'], $categories['categories_name'], SUBCATEGORY_IMAGE_WIDTH, SUBCATEGORY_IMAGE_HEIGHT) . '<br />' . $categories['categories_name'] . '</a></td>' . "\n";
+      echo '        <td align="center" class="smallText" width="' . $width . '" valign="top"><a href="' . tep_href_link('index.php', $cPath_new) . '">' . tep_image('images/' . $categories['categories_image'], $categories['categories_name'], SUBCATEGORY_IMAGE_WIDTH, SUBCATEGORY_IMAGE_HEIGHT) . '<br />' . $categories['categories_name'] . '</a></td>' . "\n";
       if ((($rows / MAX_DISPLAY_CATEGORIES_PER_ROW) == floor($rows / MAX_DISPLAY_CATEGORIES_PER_ROW)) && ($rows != $number_of_categories)) {
         echo '      </tr>' . "\n";
         echo '      <tr>' . "\n";
@@ -70,7 +70,6 @@
 
     <br />
 
-<?php include(DIR_WS_MODULES . 'new_products.php'); ?>
 <?php echo $page_blocks; ?>
 
   </div>
@@ -220,7 +219,7 @@
       }
     }
 
-    include(DIR_WS_MODULES . 'product_listing.php');
+    include('includes/modules/product_listing.php');
 
     echo $page_blocks;
 ?>
@@ -254,6 +253,6 @@
 <?php
   }
 
-  require(DIR_WS_INCLUDES . 'template_bottom.php');
-  require(DIR_WS_INCLUDES . 'application_bottom.php');
+  require('includes/template_bottom.php');
+  require('includes/application_bottom.php');
 ?>

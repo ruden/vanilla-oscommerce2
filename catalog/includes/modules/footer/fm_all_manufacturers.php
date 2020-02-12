@@ -32,9 +32,9 @@
     }
 
     public function execute() {
-      global $oscTemplate;
+      global $oscTemplate, $languages_id;
 
-      $manufacturers_query = tep_db_query("select m.*, mi.* from manufacturers m left join manufacturers_info mi on (m.manufacturers_id = mi.manufacturers_id and mi.languages_id = '" . (int)$_SESSION['languages_id'] . "')");
+      $manufacturers_query = tep_db_query("select m.*, mi.* from manufacturers m left join manufacturers_info mi on (m.manufacturers_id = mi.manufacturers_id and mi.languages_id = '" . (int)$languages_id . "')");
 
       if (tep_db_num_rows($manufacturers_query)) {
         $manufacturers_array = array();
@@ -44,7 +44,7 @@
         }
 
         ob_start();
-        include(DIR_WS_MODULES . $this->group . '/templates/all_manufacturers.php');
+        include('includes/modules/' . $this->group . '/templates/all_manufacturers.php');
 
         $oscTemplate->addBlock(ob_get_clean(), $this->group);
       }

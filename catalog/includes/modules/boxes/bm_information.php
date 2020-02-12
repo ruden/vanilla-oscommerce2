@@ -41,7 +41,7 @@
       }
 
       ob_start();
-      include('includes/modules/boxes/templates/tpl_' . basename(__FILE__));
+      include('includes/modules/boxes/templates/information.php');
 
       $oscTemplate->addBlock(ob_get_clean(), $this->group);
     }

@@ -36,7 +36,7 @@
 
       if ($banner = tep_banner_exists('dynamic', 'footer')) {
         ob_start();
-        include(DIR_WS_MODULES . $this->group . '/templates/banners.php');
+        include('includes/modules/' . $this->group . '/templates/banners.php');
 
         $oscTemplate->addBlock(ob_get_clean(), $this->group);
       }

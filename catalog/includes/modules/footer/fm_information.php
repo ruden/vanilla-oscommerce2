@@ -35,7 +35,7 @@
       global $oscTemplate;
 
       ob_start();
-      include(DIR_WS_MODULES . $this->group . '/templates/information.php');
+      include('includes/modules/' . $this->group . '/templates/information.php');
 
       $oscTemplate->addBlock(ob_get_clean(), $this->group);
     }
