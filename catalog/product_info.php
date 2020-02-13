@@ -66,10 +66,10 @@
 <div class="contentContainer">
   <div class="contentText">
 
+    <div id="piGal">
 <?php
-    if (!empty($product_info['products_image'])) {
+    if (!empty($product_info['products_image']) && is_file('images/' . $product_info['products_image'])) {
 ?>
-      <div id="piGal">
         <a href="<?php echo tep_href_link('images/' . $product_info['products_image']); ?>" class="lightbox"><?php echo tep_image('images/' . $product_info['products_image'], addslashes($product_info['products_name'])); ?></a>
 <?php
       $pi_query = tep_db_query("select image, htmlcontent from products_images where products_id = '" . (int)$product_info['products_id'] . "' order by sort_order");
@@ -88,7 +88,6 @@
         }
       }
 ?>
-      </div>
 <script>
   const tobi = new Tobi({
     captions: false,
@@ -96,8 +95,12 @@
   })
 </script>
 <?php
+    } else {
+      echo tep_image('images/no_picture.gif');
     }
 ?>
+
+    </div>
 
 <?php echo stripslashes($product_info['products_description']); ?>
 
