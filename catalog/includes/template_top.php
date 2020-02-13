@@ -42,10 +42,8 @@ $.datepicker.setDefaults($.datepicker.regional['<?php echo JQUERY_DATEPICKER_I18
   }
 ?>
 
-<script type="text/javascript" src="ext/photoset-grid/jquery.photoset-grid.min.js"></script>
-
-<link rel="stylesheet" type="text/css" href="ext/colorbox/colorbox.css" />
-<script type="text/javascript" src="ext/colorbox/jquery.colorbox-min.js"></script>
+<link rel="stylesheet" type="text/css" href="ext/Tobi/css/tobi.min.css" />
+<script type="text/javascript" src="ext/Tobi/js/tobi.min.js"></script>
 
 <link rel="stylesheet" type="text/css" href="ext/960gs/<?php echo ((stripos(HTML_PARAMS, 'dir="rtl"') !== false) ? 'rtl_' : ''); ?>960_24_col.css" />
 <link rel="stylesheet" type="text/css" href="stylesheet.css" />

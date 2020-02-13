@@ -103,7 +103,7 @@ INSERT INTO products VALUES (24,17,'PC-DISC','gt_interactive/disciples.gif',90.0
 INSERT INTO products VALUES (25,16,'MSINTKB','microsoft/intkeyboardps2.gif',69.99, now(),null,null,8.00,1,1,2,0);
 INSERT INTO products VALUES (26,10,'MSIMEXP','microsoft/imexplorer.jpg',64.95, now(),null,null,8.00,1,1,2,0);
 INSERT INTO products VALUES (27,8,'HPLJ1100XI','hewlett_packard/lj1100xi.jpg',499.99, now(),null,null,45.00,1,1,9,0);
-INSERT INTO products VALUES (28,100,'GT-P1000','samsung/galaxy_tab.gif',749.99, now(),null,null,1,1,1,10,0);
+INSERT INTO products VALUES (28,100,'GT-P1000','samsung/galaxy_tab_1.jpg',749.99, now(),null,null,1,1,1,10,0);
 
 INSERT INTO products_description VALUES (1,1,'Matrox G200 MMS','Reinforcing its position as a multi-monitor trailblazer, Matrox Graphics Inc. has once again developed the most flexible and highly advanced solution in the industry. Introducing the new Matrox G200 Multi-Monitor Series; the first graphics card ever to support up to four DVI digital flat panel displays on a single 8&quot; PCI board.<br /><br />With continuing demand for digital flat panels in the financial workplace, the Matrox G200 MMS is the ultimate in flexible solutions. The Matrox G200 MMS also supports the new digital video interface (DVI) created by the Digital Display Working Group (DDWG) designed to ease the adoption of digital flat panels. Other configurations include composite video capture ability and onboard TV tuner, making the Matrox G200 MMS the complete solution for business needs.<br /><br />Based on the award-winning MGA-G200 graphics chip, the Matrox G200 Multi-Monitor Series provides superior 2D/3D graphics acceleration to meet the demanding needs of business applications such as real-time stock quotes (Versus), live video feeds (Reuters &amp; Bloombergs), multiple windows applications, word processing, spreadsheets and CAD.','www.matrox.com/mga/products/g200_mms/home.cfm',0);
 INSERT INTO products_description VALUES (2,1,'Matrox G400 32MB','<strong>Dramatically Different High Performance Graphics</strong><br /><br />Introducing the Millennium G400 Series - a dramatically different, high performance graphics experience. Armed with the industry\'s fastest graphics chip, the Millennium G400 Series takes explosive acceleration two steps further by adding unprecedented image quality, along with the most versatile display options for all your 3D, 2D and DVD applications. As the most powerful and innovative tools in your PC\'s arsenal, the Millennium G400 Series will not only change the way you see graphics, but will revolutionize the way you use your computer.<br /><br /><strong>Key features:</strong><ul><li>New Matrox G400 256-bit DualBus graphics chip</li><li>Explosive 3D, 2D and DVD performance</li><li>DualHead Display</li><li>Superior DVD and TV output</li><li>3D Environment-Mapped Bump Mapping</li><li>Vibrant Color Quality rendering </li><li>UltraSharp DAC of up to 360 MHz</li><li>3D Rendering Array Processor</li><li>Support for 16 or 32 MB of memory</li></ul>','www.matrox.com/mga/products/mill_g400/home.htm',0);
@@ -150,10 +150,9 @@ INSERT INTO products_attributes VALUES (27, 22, 5, 13, '0.00', '+');
 
 INSERT INTO products_attributes_download VALUES (26, 'unreal.zip', 7, 3);
 
-INSERT INTO products_images VALUES (1,28,'samsung/galaxy_tab_1.jpg',null,1);
 INSERT INTO products_images VALUES (2,28,'samsung/galaxy_tab_2.jpg',null,2);
 INSERT INTO products_images VALUES (3,28,'samsung/galaxy_tab_3.jpg',null,3);
-INSERT INTO products_images VALUES (4,28,'samsung/galaxy_tab_4.jpg','<iframe width="560" height="315" src="http://www.youtube.com/embed/tAbsmHMAhrQ" frameborder="0" allowfullscreen></iframe>',4);
+INSERT INTO products_images VALUES (4,28,'samsung/galaxy_tab_4.jpg','http://www.youtube.com/embed/tAbsmHMAhrQ',4);
 INSERT INTO products_images VALUES (5,17,'dvd/speed_large.jpg',null,1);
 INSERT INTO products_images VALUES (6,12,'dvd/die_hard_3_large.jpg',null,1);
 INSERT INTO products_images VALUES (7,11,'dvd/fire_down_below_large.jpg',null,1);
