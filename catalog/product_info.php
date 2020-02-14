@@ -70,7 +70,7 @@
 <?php
     if (!empty($product_info['products_image']) && is_file('images/' . $product_info['products_image'])) {
 ?>
-        <a href="<?php echo tep_href_link('images/' . $product_info['products_image']); ?>" class="lightbox"><?php echo tep_image('images/' . $product_info['products_image'], addslashes($product_info['products_name'])); ?></a>
+        <a href="<?php echo tep_href_link('images/' . $product_info['products_image']); ?>" class="lightbox"><?php echo tep_image('images/' . $product_info['products_image'], addslashes($product_info['products_name']), SMALL_IMAGE_WIDTH*2, SMALL_IMAGE_HEIGHT*2); ?></a>
 <?php
       $pi_query = tep_db_query("select image, htmlcontent from products_images where products_id = '" . (int)$product_info['products_id'] . "' order by sort_order");
 
