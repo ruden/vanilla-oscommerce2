@@ -121,6 +121,8 @@ table, p {
 #piGal {
   float: right;
   width: 250px;
+  text-align: center;
+  padding-left: 10px;
 }
 
 #piGal img {

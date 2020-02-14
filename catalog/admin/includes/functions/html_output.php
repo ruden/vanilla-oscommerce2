@@ -95,6 +95,23 @@
       $image .= ' title="' . tep_output_string($alt) . '"';
     }
 
+    if ( (CONFIG_CALCULATE_IMAGE_SIZE == 'true') && (empty($width) || empty($height)) ) {
+      if ($image_size = @getimagesize($src)) {
+        if (empty($width) && tep_not_null($height)) {
+          $ratio = $height / $image_size[1];
+          $width = intval($image_size[0] * $ratio);
+        } elseif (tep_not_null($width) && empty($height)) {
+          $ratio = $width / $image_size[0];
+          $height = intval($image_size[1] * $ratio);
+        } elseif (empty($width) && empty($height)) {
+          $width = $image_size[0];
+          $height = $image_size[1];
+        }
+      } elseif (IMAGE_REQUIRED == 'false') {
+        return false;
+      }
+    }
+
     if (tep_not_null($width) && tep_not_null($height)) {
       $image .= ' width="' . tep_output_string($width) . '" height="' . tep_output_string($height) . '"';
     }
