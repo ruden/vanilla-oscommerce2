@@ -80,7 +80,6 @@
 
     if (!is_file($src)) {
       $src = 'images/no_picture.gif';
-      $alt = 'IMAGE DOES NOT EXIST';
     }
 // alt is added to the img tag even if it is null to prevent browsers from outputting
 // the image filename as default
@@ -104,8 +103,6 @@
         }
       } elseif (IMAGE_REQUIRED == 'false') {
         return false;
-      } else {
-
       }
     }
 
