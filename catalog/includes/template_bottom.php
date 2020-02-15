@@ -39,6 +39,7 @@
 
 </div> <!-- bodyWrapper //-->
 
+<script src="ext/bootstrap/bootstrap.min.js"></script>
 <?php echo $oscTemplate->getBlocks('footer_scripts'); ?>
 
 </body>
