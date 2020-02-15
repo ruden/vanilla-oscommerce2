@@ -153,7 +153,7 @@
       global $SID, $oscTemplate;
 
       if ((USE_CACHE == 'true') && empty($SID)) {
-        $output = tep_cache_categories_box();
+        $output = $this->cache();
       } else {
         $output = $this->getData();
       }
@@ -188,5 +188,19 @@
 
     function keys() {
       return array('MODULE_BOXES_CATEGORIES_STATUS', 'MODULE_BOXES_CATEGORIES_PAGES', 'MODULE_BOXES_CATEGORIES_CONTENT_PLACEMENT', 'MODULE_BOXES_CATEGORIES_SORT_ORDER');
+    }
+
+    function cache($auto_expire = false, $refresh = false) {
+      global $cPath, $language;
+
+      $cache_output = '';
+
+      if (($refresh == true) || !read_cache($cache_output, 'categories_box-' . $language . '.cache' . $cPath, $auto_expire)) {
+        $cache_output = $this->getData();
+
+        write_cache($cache_output, 'categories_box-' . $language . '.cache' . $cPath);
+      }
+
+      return $cache_output;
     }
   }

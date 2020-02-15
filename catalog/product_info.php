@@ -137,14 +137,6 @@
     <?php echo $page_content; ?>
   </div>
 
-<?php
-    if ((USE_CACHE == 'true') && empty($SID)) {
-      echo tep_cache_also_purchased(3600);
-    } else {
-      include('includes/modules/also_purchased_products.php');
-    }
-?>
-
 </div>
 
 </form>

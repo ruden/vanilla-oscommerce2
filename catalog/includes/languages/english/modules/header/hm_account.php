@@ -10,5 +10,5 @@
   Released under the GNU General Public License
 */
 
-  define('MODULE_HEADER_ACCOUNT_TITLE', 'ACCOUNT');
-  define('MODULE_HEADER_ACCOUNT_DESCRIPTION', 'Add account to header');
+define('MODULE_HEADER_ACCOUNT_TITLE', 'ACCOUNT');
+define('MODULE_HEADER_ACCOUNT_DESCRIPTION', 'Add account to header');

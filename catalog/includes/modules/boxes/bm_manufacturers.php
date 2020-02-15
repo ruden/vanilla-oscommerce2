@@ -80,7 +80,7 @@
       global $SID, $oscTemplate;
 
       if ((USE_CACHE == 'true') && empty($SID)) {
-        $output = tep_cache_manufacturers_box();
+        $output = $this->cache();
       } else {
         $output = $this->getData();
       }
@@ -115,5 +115,24 @@
 
     function keys() {
       return array('MODULE_BOXES_MANUFACTURERS_STATUS', 'MODULE_BOXES_MANUFACTURERS_PAGES', 'MODULE_BOXES_MANUFACTURERS_CONTENT_PLACEMENT', 'MODULE_BOXES_MANUFACTURERS_SORT_ORDER');
+    }
+
+    function cache($auto_expire = false, $refresh = false) {
+      global $language;
+
+      $cache_output = '';
+
+      $manufacturers_id = '';
+      if (isset($_GET['manufacturers_id']) && is_numeric($_GET['manufacturers_id'])) {
+        $manufacturers_id = $_GET['manufacturers_id'];
+      }
+
+      if (($refresh == true) || !read_cache($cache_output, 'manufacturers_box-' . $language . '.cache' . $manufacturers_id, $auto_expire)) {
+        $cache_output = $this->getData();
+
+        write_cache($cache_output, 'manufacturers_box-' . $language . '.cache' . $manufacturers_id);
+      }
+
+      return $cache_output;
     }
   }
