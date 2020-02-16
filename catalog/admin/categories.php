@@ -773,7 +773,7 @@ $('#products_date_available').datepicker({
 
     if (isset($_GET['origin'])) {
       $pos_params = strpos($_GET['origin'], '?', 0);
-      if ($pos_params != false) {
+      if ($pos_params !== false) {
         $back_url = substr($_GET['origin'], 0, $pos_params);
         $back_url_params = substr($_GET['origin'], $pos_params + 1);
       } else {
