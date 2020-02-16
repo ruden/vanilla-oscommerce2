@@ -220,7 +220,7 @@
     }
 
     function before_process() {
-      global $customer_id, $order, $currency, $_POST, $stripe_result, $stripe_error;
+      global $customer_id, $order, $currency, $stripe_result, $stripe_error;
 
       $stripe_result = null;
 
