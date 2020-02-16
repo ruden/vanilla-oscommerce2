@@ -394,17 +394,6 @@
     }
   }
 
-// add the products model to the breadcrumb trail
-  if (isset($_GET['products_id'])) {
-    $model_query = tep_db_query("select products_model from products where products_id = '" . (int)$_GET['products_id'] . "'");
-    if (tep_db_num_rows($model_query)) {
-      $model = tep_db_fetch_array($model_query);
-      $breadcrumb->add($model['products_model'], tep_href_link('product_info.php', 'cPath=' . $cPath . '&products_id=' . $_GET['products_id']));
-    } else  {
-      http_response_code(404);
-    }
-  }
-
 // initialize the message stack for output messages
   require('includes/classes/message_stack.php');
   $messageStack = new messageStack;

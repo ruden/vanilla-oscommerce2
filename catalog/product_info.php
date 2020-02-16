@@ -18,12 +18,20 @@
 
   require('includes/languages/' . $language . '/product_info.php');
 
-  $product_check_query = tep_db_query("select count(*) as total from products p, products_description pd where p.products_status = '1' and p.products_id = '" . (int)$_GET['products_id'] . "' and pd.products_id = p.products_id and pd.language_id = '" . (int)$languages_id . "'");
-  $product_check = tep_db_fetch_array($product_check_query);
+  $product_info_query = tep_db_query("select p.*, pd.* from products p, products_description pd where p.products_status = '1' and p.products_id = '" . (int)$_GET['products_id'] . "' and pd.products_id = p.products_id and pd.language_id = '" . (int)$languages_id . "'");
+  $num_product_info = tep_db_num_rows($product_info_query);
+
+  if ($num_product_info > 0) {
+    $product_info = tep_db_fetch_array($product_info_query);
+    $breadcrumb->add($product_info['products_name'], tep_href_link('product_info.php', 'cPath=' . $cPath . '&products_id=' . $_GET['products_id']));
+  } else  {
+    http_response_code(404);
+    $_GET['products_id'] = null;
+  }
 
   require('includes/template_top.php');
 
-  if ($product_check['total'] < 1) {
+  if ($num_product_info < 1) {
 ?>
 
 <div class="contentContainer">
@@ -38,9 +46,6 @@
 
 <?php
   } else {
-    $product_info_query = tep_db_query("select p.products_id, pd.products_name, pd.products_description, p.products_model, p.products_quantity, p.products_image, pd.products_url, p.products_price, p.products_tax_class_id, p.products_date_added, p.products_date_available, p.manufacturers_id from products p, products_description pd where p.products_status = '1' and p.products_id = '" . (int)$_GET['products_id'] . "' and pd.products_id = p.products_id and pd.language_id = '" . (int)$languages_id . "'");
-    $product_info = tep_db_fetch_array($product_info_query);
-
     tep_db_query("update products_description set products_viewed = products_viewed+1 where products_id = '" . (int)$_GET['products_id'] . "' and language_id = '" . (int)$languages_id . "'");
 
     if ($new_price = tep_get_products_special_price($product_info['products_id'])) {
