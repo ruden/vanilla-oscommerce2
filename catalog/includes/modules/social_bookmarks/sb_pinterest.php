@@ -30,31 +30,29 @@
     }
 
     function getOutput() {
-      global $oscTemplate;
+      global $oscTemplate, $product_info;
 
+      if (!isset($product_info['products_id'])) {
+        return null;
+      }
 // add the js in the footer
       $oscTemplate->addBlock('<script type="text/javascript" src="//assets.pinterest.com/js/pinit.js"></script>', 'footer_scripts');
 
       $params = array();
 
 // grab the product name (used for description)
-      $params['description'] = tep_get_products_name($_GET['products_id']);
+      $params['description'] = $product_info['products_name'];
 
 // and image (used for media)
-      $image_query = tep_db_query("select products_image from products where products_id = '" . (int)$_GET['products_id'] . "'");
-      $image = tep_db_fetch_array($image_query);
+      if (tep_not_null($product_info['products_image'])) {
+        $image_file = $product_info['products_image'];
 
-      if (tep_not_null($image['products_image'])) {
-        $image_file = $image['products_image'];
+        $products_images = empty($product_info['products_images']) ? array() : explode(',', $product_info['products_images']);
 
-        $pi_query = tep_db_query("select image from products_images where products_id = '" . (int)$_GET['products_id'] . "' order by sort_order");
-
-        if (tep_db_num_rows($pi_query) > 0) {
-          while ($pi = tep_db_fetch_array($pi_query)) {
-            if (tep_not_null($pi['image'])) {
-              $image_file = $pi['image']; // overwrite image with first multiple product image
-              break;
-            }
+        foreach ($products_images as $pi) {
+          if (tep_not_null($pi)) {
+            $image_file = $pi; // overwrite image with first multiple product image
+            break;
           }
         }
 
@@ -62,7 +60,7 @@
       }
 
 // url
-      $params['url'] = tep_href_link('product_info.php', 'products_id=' . $_GET['products_id'], 'NONSSL', false);
+      $params['url'] = tep_href_link('product_info.php', 'products_id=' . $product_info['products_id'], 'SSL', false);
 
       $output = '<a href="http://pinterest.com/pin/create/button/?';
 
@@ -103,4 +101,3 @@
       return array('MODULE_SOCIAL_BOOKMARKS_PINTEREST_STATUS', 'MODULE_SOCIAL_BOOKMARKS_PINTEREST_BUTTON_COUNT_POSITION', 'MODULE_SOCIAL_BOOKMARKS_PINTEREST_SORT_ORDER');
     }
   }
-?>

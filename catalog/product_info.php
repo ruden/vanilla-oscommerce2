@@ -18,20 +18,9 @@
 
   require('includes/languages/' . $language . '/product_info.php');
 
-  $product_info_query = tep_db_query("select p.*, pd.* from products p, products_description pd where p.products_status = '1' and p.products_id = '" . (int)$_GET['products_id'] . "' and pd.products_id = p.products_id and pd.language_id = '" . (int)$languages_id . "'");
-  $num_product_info = tep_db_num_rows($product_info_query);
-
-  if ($num_product_info > 0) {
-    $product_info = tep_db_fetch_array($product_info_query);
-    $breadcrumb->add($product_info['products_name'], tep_href_link('product_info.php', 'cPath=' . $cPath . '&products_id=' . $_GET['products_id']));
-  } else  {
-    http_response_code(404);
-    $_GET['products_id'] = null;
-  }
-
   require('includes/template_top.php');
 
-  if ($num_product_info < 1) {
+  if (!isset($product_info['products_id'])) {
 ?>
 
 <div class="contentContainer">

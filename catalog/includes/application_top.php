@@ -376,7 +376,7 @@
 // add category names or the manufacturer name to the breadcrumb trail
   if (isset($cPath_array)) {
     for ($i=0, $n=sizeof($cPath_array); $i<$n; $i++) {
-      $categories_query = tep_db_query("select categories_name from categories_description where categories_id = '" . (int)$cPath_array[$i] . "' and language_id = '" . (int)$languages_id . "'");
+      $categories_query = tep_db_query("select c.*, cd.* from categories c left join categories_description cd on (cd.categories_id = c.categories_id and cd.language_id = '" . (int)$languages_id . "') where c.categories_id = '" . (int)$cPath_array[$i] . "'");
       if (tep_db_num_rows($categories_query) > 0) {
         $categories = tep_db_fetch_array($categories_query);
         $breadcrumb->add($categories['categories_name'], tep_href_link('index.php', 'cPath=' . implode('_', array_slice($cPath_array, 0, ($i+1)))));
@@ -385,12 +385,24 @@
       }
     }
   } elseif (isset($_GET['manufacturers_id'])) {
-    $manufacturers_query = tep_db_query("select manufacturers_name from manufacturers where manufacturers_id = '" . (int)$_GET['manufacturers_id'] . "'");
-    if (tep_db_num_rows($manufacturers_query)) {
+    $manufacturers_query = tep_db_query("select m.*, mi.* from manufacturers m left join manufacturers_info mi on (m.manufacturers_id = mi.manufacturers_id and mi.languages_id = '" . (int)$languages_id . "') where m.manufacturers_id = '" . (int)$_GET['manufacturers_id'] . "'");
+    if (tep_db_num_rows($manufacturers_query) > 0) {
       $manufacturers = tep_db_fetch_array($manufacturers_query);
       $breadcrumb->add($manufacturers['manufacturers_name'], tep_href_link('index.php', 'manufacturers_id=' . $_GET['manufacturers_id']));
     } else  {
       http_response_code(404);
+    }
+  }
+
+// add the products name to the breadcrumb trail
+  if (isset($_GET['products_id'])) {
+    $product_info_query = tep_db_query("select p.*, pd.*, group_concat(pi.image) as products_images from products p left join products_description pd on (pd.products_id = p.products_id and pd.language_id = '" . (int)$languages_id . "')  left join products_images pi on pi.products_id = p.products_id  where p.products_status = '1' and p.products_id = '" . (int)$_GET['products_id'] . "'");
+    if (tep_db_num_rows($product_info_query) > 0) {
+      $product_info = tep_db_fetch_array($product_info_query);
+      $breadcrumb->add($product_info['products_name'], tep_href_link('product_info.php', 'cPath=' . $cPath . '&products_id=' . $_GET['products_id']));
+    } else  {
+      http_response_code(404);
+      $_GET['products_id'] = null;
     }
   }
 
@@ -401,4 +413,3 @@
   require(DIR_FS_CATALOG . 'includes/classes/hooks.php');
   $OSCOM_Hooks = new hooks('shop');
   $OSCOM_Hooks->register(basename($PHP_SELF, '.php'));
-?>
