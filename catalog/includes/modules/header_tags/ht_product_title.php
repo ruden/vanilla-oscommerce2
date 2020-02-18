@@ -31,8 +31,11 @@
     function execute() {
       global $PHP_SELF, $oscTemplate, $product_info;
 
-      if (basename($PHP_SELF) == 'product_info.php' && !empty($product_info['products_name'])) {
-        $oscTemplate->setTitle($product_info['products_name'] . ', ' . $oscTemplate->getTitle());
+      if (basename($PHP_SELF) == 'product_info.php') {
+// $product_info is set in application_top.php to add the product to the breadcrumb
+        if (isset($product_info['products_id'])) {
+          $oscTemplate->setTitle($product_info['products_name'] . ', ' . $oscTemplate->getTitle());
+        }
       }
     }
 

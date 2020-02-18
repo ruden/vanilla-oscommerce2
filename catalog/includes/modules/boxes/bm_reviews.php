@@ -31,10 +31,10 @@
     }
 
     function execute() {
-      global $languages_id, $currencies, $oscTemplate;
+      global $languages_id, $currencies, $oscTemplate, $product_info;
 
       $random_select = "select r.reviews_id, r.reviews_rating, p.products_id, p.products_image, pd.products_name from reviews r, reviews_description rd, products p, products_description pd where p.products_status = '1' and p.products_id = r.products_id and r.reviews_id = rd.reviews_id and rd.languages_id = '" . (int)$languages_id . "' and p.products_id = pd.products_id and pd.language_id = '" . (int)$languages_id . "' and r.reviews_status = 1";
-      if (isset($_GET['products_id'])) {
+      if (isset($product_info['products_id'])) {
         $random_select .= " and p.products_id = '" . (int)$_GET['products_id'] . "'";
       }
       $random_select .= " order by r.reviews_id desc limit " . MAX_RANDOM_SELECT_REVIEWS;

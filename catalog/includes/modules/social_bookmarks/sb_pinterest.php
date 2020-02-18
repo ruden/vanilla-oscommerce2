@@ -32,9 +32,6 @@
     function getOutput() {
       global $oscTemplate, $product_info;
 
-      if (!isset($product_info['products_id'])) {
-        return null;
-      }
 // add the js in the footer
       $oscTemplate->addBlock('<script type="text/javascript" src="//assets.pinterest.com/js/pinit.js"></script>', 'footer_scripts');
 
@@ -56,7 +53,7 @@
           }
         }
 
-        $params['media'] = tep_href_link('images/' . $image_file, '', 'NONSSL', false);
+        $params['media'] = tep_href_link('images/' . $image_file, '', 'SSL', false);
       }
 
 // url

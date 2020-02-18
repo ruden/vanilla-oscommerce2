@@ -13,7 +13,7 @@
   require('includes/application_top.php');
 
   if (!isset($_GET['products_id'])) {
-    tep_redirect(tep_href_link('index.php'));
+    tep_redirect(tep_href_link('products_new.php'));
   }
 
   require('includes/languages/' . $language . '/product_info.php');

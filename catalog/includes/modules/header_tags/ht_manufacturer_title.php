@@ -29,22 +29,12 @@
     }
 
     function execute() {
-      global $PHP_SELF, $oscTemplate, $manufacturers, $languages_id;
+      global $PHP_SELF, $oscTemplate, $manufacturers;
 
       if (basename($PHP_SELF) == 'index.php') {
-        if (isset($_GET['manufacturers_id']) && is_numeric($_GET['manufacturers_id'])) {
 // $manufacturers is set in application_top.php to add the manufacturer to the breadcrumb
-          if (isset($manufacturers) && (sizeof($manufacturers) == 1) && isset($manufacturers['manufacturers_name'])) {
-            $oscTemplate->setTitle($manufacturers['manufacturers_name'] . ', ' . $oscTemplate->getTitle());
-          } else {
-// $manufacturers is not set so a database query is needed
-            $manufacturers_query = tep_db_query("select manufacturers_name from manufacturers where manufacturers_id = '" . (int)$_GET['manufacturers_id'] . "'");
-            if (tep_db_num_rows($manufacturers_query)) {
-              $manufacturers = tep_db_fetch_array($manufacturers_query);
-
-              $oscTemplate->setTitle($manufacturers['manufacturers_name'] . ', ' . $oscTemplate->getTitle());
-            }
-          }
+        if (isset($manufacturers['manufacturers_id'])) {
+          $oscTemplate->setTitle($manufacturers['manufacturers_name'] . ', ' . $oscTemplate->getTitle());
         }
       }
     }
