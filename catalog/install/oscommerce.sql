@@ -109,6 +109,7 @@ CREATE TABLE categories_description (
    categories_id int DEFAULT '0' NOT NULL,
    language_id int DEFAULT '1' NOT NULL,
    categories_name varchar(32) NOT NULL,
+   categories_description text,
    PRIMARY KEY (categories_id, language_id),
    KEY idx_categories_name (categories_name)
 ) CHARACTER SET utf8 COLLATE utf8_unicode_ci;
