@@ -396,7 +396,7 @@
 
 // add the products name to the breadcrumb trail
   if (isset($_GET['products_id'])) {
-    $product_info_query = tep_db_query("select p.*, pd.*, group_concat(pi.image) as products_images from products p left join products_description pd on (pd.products_id = p.products_id and pd.language_id = '" . (int)$languages_id . "') left join products_images pi on pi.products_id = p.products_id  where p.products_status = '1' and p.products_id = '" . (int)$_GET['products_id'] . "' limit 1");
+    $product_info_query = tep_db_query("select p.*, pd.*, m.*, group_concat(pi.image) as products_images from products p left join products_description pd on (pd.products_id = p.products_id and pd.language_id = '" . (int)$languages_id . "') left join products_images pi on pi.products_id = p.products_id left join manufacturers m on m.manufacturers_id = p.manufacturers_id where p.products_status = '1' and p.products_id = '" . (int)$_GET['products_id'] . "' limit 1");
     $product_info = tep_db_fetch_array($product_info_query);
     if (isset($product_info['products_id'])) {
       $breadcrumb->add($product_info['products_name'], tep_href_link('product_info.php', 'cPath=' . $cPath . '&products_id=' . $_GET['products_id']));
