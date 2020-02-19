@@ -18,11 +18,14 @@
 
   require('includes/languages/' . $language . '/information.php');
 
-  $information_query = tep_db_query("select ipc.pages_name, ipc.pages_content from information_pages ip, information_pages_content ipc where ip.pages_status = '1' and ip.pages_id = '" . (int)$_GET['pages_id'] . "' and ip.pages_id = ipc.pages_id and ipc.language_id = '" . (int)$languages_id . "'");
+  $information_query = tep_db_query("select ipc.* from information_pages ip, information_pages_content ipc where ip.pages_status = '1' and ip.pages_id = '" . (int)$_GET['pages_id'] . "' and ip.pages_id = ipc.pages_id and ipc.language_id = '" . (int)$languages_id . "'");
   $information = tep_db_fetch_array($information_query);
 
   if (empty($information)) {
     http_response_code(404);
+    $breadcrumb->add(HEADING_TITLE);
+  } else {
+    $breadcrumb->add($information['pages_name'], tep_href_link('information.php', 'pages_id=' . $information['pages_id']));
   }
 
   require 'includes/template_top.php';
