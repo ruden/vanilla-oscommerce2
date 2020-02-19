@@ -5,7 +5,7 @@
   osCommerce, Open Source E-Commerce Solutions
   http://www.oscommerce.com
 
-  Copyright (c) 2010 osCommerce
+  Copyright (c) 2020 osCommerce
 
   Released under the GNU General Public License
 */
@@ -35,11 +35,9 @@
   $page_blocks = $oscTemplate->getBlocks('index_listing');
 
   if ($category_depth == 'categories') {
-    $category_query = tep_db_query("select cd.categories_name, c.categories_image from categories c, categories_description cd where c.categories_id = '" . (int)$current_category_id . "' and cd.categories_id = '" . (int)$current_category_id . "' and cd.language_id = '" . (int)$languages_id . "'");
-    $category = tep_db_fetch_array($category_query);
 ?>
 
-<h1><?php echo $category['categories_name']; ?></h1>
+<h1><?php echo $categories['categories_name']; ?></h1>
 
 <div class="contentContainer">
   <div class="contentText">
@@ -177,14 +175,10 @@
     }
 
     $catname = HEADING_TITLE;
-    if (isset($_GET['manufacturers_id']) && !empty($_GET['manufacturers_id'])) {
-      $image = tep_db_query("select manufacturers_image, manufacturers_name as catname from manufacturers where manufacturers_id = '" . (int)$_GET['manufacturers_id'] . "'");
-      $image = tep_db_fetch_array($image);
-      $catname = $image['catname'];
-    } elseif ($current_category_id) {
-      $image = tep_db_query("select c.categories_image, cd.categories_name as catname from categories c, categories_description cd where c.categories_id = '" . (int)$current_category_id . "' and c.categories_id = cd.categories_id and cd.language_id = '" . (int)$languages_id . "'");
-      $image = tep_db_fetch_array($image);
-      $catname = $image['catname'];
+    if (isset($manufacturers['manufacturers_id'])) {
+      $catname = $manufacturers['manufacturers_name'];
+    } elseif (isset($categories['categories_id'])) {
+      $catname = $categories['categories_name'];
     }
 ?>
 
@@ -234,19 +228,7 @@
 
 <div class="contentContainer">
 
-<?php
-    if (tep_not_null(TEXT_MAIN)) {
-?>
-
-      <div class="contentText">
-        <?php echo TEXT_MAIN; ?>
-      </div>
-
-<?php
-    }
-
-    echo $page_blocks;
-?>
+<?php echo $page_blocks; ?>
 
 </div>
 

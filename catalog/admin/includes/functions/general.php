@@ -1528,3 +1528,10 @@ EOT;
 
     return $output;
   }
+
+  function tep_get_category_description($category_id, $language_id) {
+    $category_query = tep_db_query("select categories_description from categories_description where categories_id = '" . (int)$category_id . "' and language_id = '" . (int)$language_id . "'");
+    $category = tep_db_fetch_array($category_query);
+
+    return $category['categories_description'];
+  }

@@ -22,7 +22,7 @@
       $this->title = MODULE_BOXES_PRODUCT_SOCIAL_BOOKMARKS_TITLE;
       $this->description = MODULE_BOXES_PRODUCT_SOCIAL_BOOKMARKS_DESCRIPTION;
 
-      if ( defined('MODULE_BOXES_PRODUCT_SOCIAL_BOOKMARKS_STATUS') ) {
+      if ($this->check()) {
         $this->sort_order = MODULE_BOXES_PRODUCT_SOCIAL_BOOKMARKS_SORT_ORDER;
         $this->enabled = (MODULE_BOXES_PRODUCT_SOCIAL_BOOKMARKS_STATUS == 'True');
 
@@ -31,9 +31,9 @@
     }
 
     function execute() {
-      global $language, $oscTemplate;
+      global $language, $oscTemplate, $product_info;
 
-      if ( isset($_GET['products_id']) && defined('MODULE_SOCIAL_BOOKMARKS_INSTALLED') && tep_not_null(MODULE_SOCIAL_BOOKMARKS_INSTALLED) ) {
+      if (isset($product_info['products_id']) && defined('MODULE_SOCIAL_BOOKMARKS_INSTALLED') && tep_not_null(MODULE_SOCIAL_BOOKMARKS_INSTALLED)) {
         $sbm_array = explode(';', MODULE_SOCIAL_BOOKMARKS_INSTALLED);
 
         $social_bookmarks = array();

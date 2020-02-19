@@ -13,19 +13,16 @@
   require('includes/application_top.php');
 
   if (!isset($_GET['products_id'])) {
-    tep_redirect(tep_href_link('index.php'));
+    tep_redirect(tep_href_link('products_new.php'));
   }
 
   $page_content = $oscTemplate->getContent('product_info');
 
   require('includes/languages/' . $language . '/product_info.php');
 
-  $product_check_query = tep_db_query("select count(*) as total from products p, products_description pd where p.products_status = '1' and p.products_id = '" . (int)$_GET['products_id'] . "' and pd.products_id = p.products_id and pd.language_id = '" . (int)$languages_id . "'");
-  $product_check = tep_db_fetch_array($product_check_query);
-
   require('includes/template_top.php');
 
-  if ($product_check['total'] < 1) {
+  if (!isset($product_info['products_id'])) {
 ?>
 
 <div class="contentContainer">
@@ -40,9 +37,6 @@
 
 <?php
   } else {
-    $product_info_query = tep_db_query("select p.products_id, pd.products_name, pd.products_description, p.products_model, p.products_quantity, p.products_image, pd.products_url, p.products_price, p.products_tax_class_id, p.products_date_added, p.products_date_available, p.manufacturers_id from products p, products_description pd where p.products_status = '1' and p.products_id = '" . (int)$_GET['products_id'] . "' and pd.products_id = p.products_id and pd.language_id = '" . (int)$languages_id . "'");
-    $product_info = tep_db_fetch_array($product_info_query);
-
     tep_db_query("update products_description set products_viewed = products_viewed+1 where products_id = '" . (int)$_GET['products_id'] . "' and language_id = '" . (int)$languages_id . "'");
 
     if ($new_price = tep_get_products_special_price($product_info['products_id'])) {
