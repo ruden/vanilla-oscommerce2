@@ -11,34 +11,31 @@
 */
 
   class breadcrumb {
-    var $_trail;
+    public $_trail;
 
-    function __construct() {
+    public function __construct() {
       $this->reset();
     }
 
-    function reset() {
+    public function reset() {
       $this->_trail = array();
     }
 
-    function add($title, $link = '') {
+    public function add($title, $link = '') {
       $this->_trail[] = array('title' => $title, 'link' => $link);
     }
 
-    function trail($separator = ' - ') {
-      $trail_string = '';
+    public function trail() {
+      $trail_string = '<ol class="breadcrumb">';
 
-      for ($i=0, $n=sizeof($this->_trail); $i<$n; $i++) {
+      for ($i = 0, $n = sizeof($this->_trail); $i < $n; $i++) {
         if (isset($this->_trail[$i]['link']) && tep_not_null($this->_trail[$i]['link'])) {
-          $trail_string .= '<a href="' . $this->_trail[$i]['link'] . '" class="headerNavigation">' . $this->_trail[$i]['title'] . '</a>';
+          $trail_string .= '<li class="breadcrumb-item"><a href="' . $this->_trail[$i]['link'] . '">' . $this->_trail[$i]['title'] . '</a></li>';
         } else {
-          $trail_string .= $this->_trail[$i]['title'];
+          $trail_string .= '<li class="breadcrumb-item active" aria-current="page">' . $this->_trail[$i]['title'] . '</li>';
         }
-
-        if (($i+1) < $n) $trail_string .= $separator;
       }
 
-      return $trail_string;
+      return $trail_string . '</nav>';
     }
   }
-?>
