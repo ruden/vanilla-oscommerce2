@@ -71,13 +71,13 @@
           $this->data['product:category'] = $categories['categories_name'];
         }
 
-        if (empty($product_info['specials_new_products_price'])) {
-          $products_price = $this->format_raw($product_info['products_price']);
-        } else {
+        if (!empty($product_info['specials_new_products_price'])) {
           $products_price = $this->format_raw($product_info['specials_new_products_price']);
 
           $this->data['product:original_price:amount'] = $this->format_raw($product_info['products_price']);
           $this->data['product:original_price:currency'] = $currency;
+        } else {
+          $products_price = $this->format_raw($product_info['products_price']);
         }
 
         $this->data['product:price:amount'] = $products_price;
