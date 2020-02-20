@@ -36,7 +36,7 @@ if (tep_session_is_registered('customer_id')) {
 
   tep_redirect(tep_href_link($PHP_SELF, tep_get_all_get_params(array('action', 'notify'))));
 } else {
-  $_SESSION['cart']->set_snapshot();
+  $_SESSION['navigation']->set_snapshot();
 
   tep_redirect(tep_href_link('login.php', '', 'SSL'));
 }
