@@ -240,7 +240,7 @@
 
     public function get_og_image($src) {
       if ($image = @getimagesize($src)) {
-        $this->data['og:image'] = tep_href_link($src, '', 'SSL', false);
+        $this->data['og:image'] = tep_href_link($src, '', 'SSL', false, false);
         $this->data['og:image:type'] = $image['mime'];
         $this->data['og:image:width'] = $image[0];
         $this->data['og:image:height'] = $image[1];

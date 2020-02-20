@@ -46,7 +46,7 @@
         $product_description = explode("\n", wordwrap(trim(strip_tags($product_info['products_description'])), 197));
 
         $data['description'] = $product_description[0] . '...';
-        $data['image'] = tep_href_link('images/' . $product_info['products_image'], '', 'SSL', false);
+        $data['image'] = tep_href_link('images/' . $product_info['products_image'], '', 'SSL', false, false);
 
         $result = '';
 
