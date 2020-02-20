@@ -11,7 +11,7 @@
 */
 
   if (isset($_GET['products_id'])) {
-    $orders_query = tep_db_query("select p.products_id, p.products_image from orders_products opa, orders_products opb, orders o, products p where opa.products_id = '" . (int)$_GET['products_id'] . "' and opa.orders_id = opb.orders_id and opb.products_id != '" . (int)$_GET['products_id'] . "' and opb.products_id = p.products_id and opb.orders_id = o.orders_id and p.products_status = '1' group by p.products_id order by o.date_purchased desc limit " . MAX_DISPLAY_ALSO_PURCHASED);
+    $orders_query = tep_db_query("select p.products_id, p.products_image, pd.products_name from orders_products opa, orders_products opb, orders o, products p left join products_description pd on p.products_id = pd.products_id where opa.products_id = '" . (int)$_GET['products_id'] . "' and opa.orders_id = opb.orders_id and opb.products_id != '" . (int)$_GET['products_id'] . "' and opb.products_id = p.products_id and opb.orders_id = o.orders_id and p.products_status = '1' group by p.products_id order by o.date_purchased desc limit " . MAX_DISPLAY_ALSO_PURCHASED);
     $num_products_ordered = tep_db_num_rows($orders_query);
     if ($num_products_ordered >= MIN_DISPLAY_ALSO_PURCHASED) {
       $counter = 0;
@@ -20,8 +20,6 @@
       $also_pur_prods_content = '<table border="0" width="100%" cellspacing="0" cellpadding="2" class="ui-widget-content ui-corner-bottom">';
       while ($orders = tep_db_fetch_array($orders_query)) {
         $counter++;
-
-        $orders['products_name'] = tep_get_products_name($orders['products_id']);
 
         if ($col === 0) {
           $also_pur_prods_content .= '<tr>';
