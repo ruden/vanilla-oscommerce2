@@ -10,7 +10,7 @@
   Released under the GNU General Public License
 */
 
-  class h_account {
+  class hm_account {
     public $code;
     public $group;
     public $title;

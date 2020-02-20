@@ -11,8 +11,6 @@
 */
 ?>
 
-</div> <!-- bodyContent //-->
-
 <?php
   if ($oscTemplate->hasBlocks('boxes_column_left')) {
 ?>
@@ -35,9 +33,12 @@
   }
 ?>
 
-<?php require('includes/footer.php'); ?>
+</main>
 
-</div> <!-- bodyWrapper //-->
+<footer class="footer container">
+  <?php require('includes/footer.php'); ?>
+</footer>
+
 
 <script src="ext/bootstrap/bootstrap.min.js"></script>
 <?php echo $oscTemplate->getBlocks('footer_scripts'); ?>

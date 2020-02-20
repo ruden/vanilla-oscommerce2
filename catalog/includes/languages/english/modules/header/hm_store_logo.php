@@ -9,6 +9,6 @@
 
   Released under the GNU General Public License
 */
-?>
 
-<?php echo $oscTemplate->getBlocks('header'); ?>
+define('MODULE_HEADER_STORE_LOGO_TITLE', 'Store Logo');
+define('MODULE_HEADER_STORE_LOGO_DESCRIPTION', 'Add store logo to header');

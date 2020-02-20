@@ -10,7 +10,7 @@
   Released under the GNU General Public License
 */
 
-  class h_currencies {
+  class hm_currencies {
     public $code;
     public $group;
     public $title;

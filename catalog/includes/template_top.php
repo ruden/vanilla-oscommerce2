@@ -39,8 +39,38 @@
 </head>
 <body>
 
-<div id="bodyWrapper" class="container_<?php echo $oscTemplate->getGridContainerWidth(); ?>">
+<header class="header container">
+  <?php require('includes/header.php'); ?>
+</header>
 
-<?php require('includes/header.php'); ?>
+<nav aria-label="breadcrumb" class="container">
+  <?php echo $breadcrumb->trail(); ?>
+</nav>
 
-<div id="bodyContent" class="grid_<?php echo $oscTemplate->getGridContentWidth(); ?> <?php echo ($oscTemplate->hasBlocks('boxes_column_left') ? 'push_' . $oscTemplate->getGridColumnWidth() : ''); ?>">
+<main class="main container">
+
+<?php
+  if ($messageStack->size('header') > 0) {
+    echo '<div class="grid_24">' . $messageStack->output('header') . '</div>';
+  }
+
+  if (isset($_GET['error_message']) && tep_not_null($_GET['error_message'])) {
+?>
+<table border="0" width="100%" cellspacing="0" cellpadding="2">
+  <tr class="headerError">
+    <td class="headerError"><?php echo htmlspecialchars(stripslashes(urldecode($_GET['error_message']))); ?></td>
+  </tr>
+</table>
+<?php
+  }
+
+  if (isset($_GET['info_message']) && tep_not_null($_GET['info_message'])) {
+?>
+<table border="0" width="100%" cellspacing="0" cellpadding="2">
+  <tr class="headerInfo">
+    <td class="headerInfo"><?php echo htmlspecialchars(stripslashes(urldecode($_GET['info_message']))); ?></td>
+  </tr>
+</table>
+<?php
+  }
+?>

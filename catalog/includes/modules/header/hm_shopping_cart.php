@@ -10,7 +10,7 @@
   Released under the GNU General Public License
 */
 
-  class h_shopping_cart {
+  class hm_shopping_cart {
     public $code;
     public $group;
     public $title;

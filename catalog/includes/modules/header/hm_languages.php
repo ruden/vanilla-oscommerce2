@@ -10,7 +10,7 @@
   Released under the GNU General Public License
 */
 
-  class h_languages {
+  class hm_languages {
     public $code;
     public $group;
     public $title;
