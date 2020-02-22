@@ -376,11 +376,18 @@
 // add category names or the manufacturer name to the breadcrumb trail
   if (isset($cPath_array)) {
     for ($i=0, $n=sizeof($cPath_array); $i<$n; $i++) {
-      $categories_query = tep_db_query("select c.*, cd.* from categories c left join categories_description cd on (cd.categories_id = c.categories_id and cd.language_id = '" . (int)$languages_id . "') where c.categories_id = '" . (int)$cPath_array[$i] . "'");
+      $categories_query = tep_db_query("select c.*, cd.* from categories c left join categories_description cd on (cd.categories_id = c.categories_id and cd.language_id = '" . (int)$languages_id . "') where c.categories_id = '" . (int)$cPath_array[$i] . "' and c.parent_id = '" . ($i > 0 ? (int)$cPath_array[$i - 1] : '0') . "'");
       $categories = tep_db_fetch_array($categories_query);
       if (isset($categories['categories_id'])) {
         $breadcrumb->add($categories['categories_name'], tep_href_link('index.php', 'cPath=' . implode('_', array_slice($cPath_array, 0, ($i+1)))));
       } else {
+        // reset
+        $cPath_array = [];
+        $current_category_id = '-1';
+        $breadcrumb->_trail = array_slice($breadcrumb->_trail, 0, 2);
+
+        http_response_code(404);
+
         break;
       }
     }

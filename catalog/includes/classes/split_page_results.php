@@ -62,7 +62,11 @@
 
       $offset = ($this->number_of_rows_per_page * ($this->current_page_number - 1));
 
-      $this->sql_query .= " limit " . max($offset, 0) . ", " . $this->number_of_rows_per_page;
+      if ($this->number_of_rows == 0) {
+        http_response_code(404);
+      }
+
+      $this->sql_query .= " limit " . $this->number_of_rows_per_page . " offset " . max($offset, 0);
     }
 
 /* class functions */
