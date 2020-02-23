@@ -16,15 +16,16 @@
     tep_redirect(tep_href_link('reviews.php'));
   }
 
-  $product_info_query = tep_db_query("select p.products_id, p.products_model, p.products_image, p.products_price, p.products_tax_class_id, pd.products_name from products p, products_description pd where p.products_id = '" . (int)$_GET['products_id'] . "' and p.products_status = '1' and p.products_id = pd.products_id and pd.language_id = '" . (int)$languages_id . "'");
-  if (!tep_db_num_rows($product_info_query)) {
-    http_response_code(404);
-  } else {
+  $product_info_query = tep_db_query("select p.products_id, p.products_model, p.products_image, p.products_price, p.products_tax_class_id, pd.products_name, IF(s.status, s.specials_new_products_price, NULL) as specials_new_products_price from products p left join specials s on p.products_id = s.products_id, products_description pd where p.products_id = '" . (int)$_GET['products_id'] . "' and p.products_status = '1' and p.products_id = pd.products_id and pd.language_id = '" . (int)$languages_id . "'");
+
+  if (tep_db_num_rows($product_info_query)) {
     $product_info = tep_db_fetch_array($product_info_query);
+  } else {
+    http_response_code(404);
   }
 
-  if ($new_price = tep_get_products_special_price($product_info['products_id'])) {
-    $products_price = '<del>' . $currencies->display_price($product_info['products_price'], tep_get_tax_rate($product_info['products_tax_class_id'])) . '</del> <span class="productSpecialPrice">' . $currencies->display_price($new_price, tep_get_tax_rate($product_info['products_tax_class_id'])) . '</span>';
+  if (!empty($product_info['specials_new_products_price'])) {
+    $products_price = '<del>' . $currencies->display_price($product_info['products_price'], tep_get_tax_rate($product_info['products_tax_class_id'])) . '</del> <span class="productSpecialPrice">' . $currencies->display_price($product_info['specials_new_products_price'], tep_get_tax_rate($product_info['products_tax_class_id'])) . '</span>';
   } else {
     $products_price = $currencies->display_price($product_info['products_price'], tep_get_tax_rate($product_info['products_tax_class_id']));
   }
@@ -48,11 +49,6 @@
   }
 ?>
 
-<div>
-  <h1 style="float: right;"><?php echo $products_price; ?></h1>
-  <h1><?php echo $products_name; ?></h1>
-</div>
-
 <div class="contentContainer">
 
 <?php
@@ -72,6 +68,14 @@
   $reviews_split = new splitPageResults($reviews_query_raw, MAX_DISPLAY_NEW_REVIEWS);
 
   if ($reviews_split->number_of_rows > 0) {
+?>
+
+    <div>
+      <h1 style="float: right;"><?php echo $products_price; ?></h1>
+      <h1><?php echo $products_name; ?></h1>
+    </div>
+
+<?php
     if ((PREV_NEXT_BAR_LOCATION == '1') || (PREV_NEXT_BAR_LOCATION == '3')) {
 ?>
 
