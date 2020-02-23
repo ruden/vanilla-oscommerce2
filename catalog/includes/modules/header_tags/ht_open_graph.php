@@ -57,10 +57,12 @@
         $this->get_og_description($product_info['products_description']);
         $this->get_og_image('images/' . $product_info['products_image']);
 
-        $products_images = empty($product_info['products_images']) ? array() : explode(',', $product_info['products_images']);
+        if (!empty($product_info['products_images'])) {
+          $products_images = explode(',', $product_info['products_images']);
 
-        foreach ($products_images as $pi) {
-          $this->get_og_image('images/' . $pi);
+          foreach ($products_images as $pi) {
+            $this->get_og_image('images/' . $pi);
+          }
         }
 
         if (!empty($product_info['manufacturers_name'])) {
@@ -240,10 +242,10 @@
 
     public function get_og_image($src) {
       if ($image = @getimagesize($src)) {
-        $this->data['og:image'] = tep_href_link($src, '', 'SSL', false, false);
-        $this->data['og:image:type'] = $image['mime'];
-        $this->data['og:image:width'] = $image[0];
-        $this->data['og:image:height'] = $image[1];
+        array_push($this->data, array('og:image' => tep_href_link($src, '', 'SSL', false, false),
+                                       'og:image:type' => $image['mime'],
+                                       'og:image:width' => $image[0],
+                                       'og:image:height' => $image[1]));
 
         return $this;
       }
