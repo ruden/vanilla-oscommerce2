@@ -17,6 +17,9 @@
   $breadcrumb->add(NAVBAR_TITLE, tep_href_link('reviews.php'));
 
   require('includes/template_top.php');
+
+  $reviews_query_raw = "select r.reviews_id, left(rd.reviews_text, 100) as reviews_text, r.reviews_rating, r.date_added, p.products_id, pd.products_name, p.products_image, r.customers_name from reviews r, reviews_description rd, products p, products_description pd where p.products_status = '1' and p.products_id = r.products_id and r.reviews_id = rd.reviews_id and p.products_id = pd.products_id and pd.language_id = '" . (int)$languages_id . "' and rd.languages_id = '" . (int)$languages_id . "' and r.reviews_status = 1 order by r.reviews_id DESC";
+  $reviews_split = new splitPageResults($reviews_query_raw, MAX_DISPLAY_NEW_REVIEWS);
 ?>
 
 <h1><?php echo HEADING_TITLE; ?></h1>
@@ -24,9 +27,6 @@
 <div class="contentContainer">
 
 <?php
-  $reviews_query_raw = "select r.reviews_id, left(rd.reviews_text, 100) as reviews_text, r.reviews_rating, r.date_added, p.products_id, pd.products_name, p.products_image, r.customers_name from reviews r, reviews_description rd, products p, products_description pd where p.products_status = '1' and p.products_id = r.products_id and r.reviews_id = rd.reviews_id and p.products_id = pd.products_id and pd.language_id = '" . (int)$languages_id . "' and rd.languages_id = '" . (int)$languages_id . "' and reviews_status = 1 order by r.reviews_id DESC";
-  $reviews_split = new splitPageResults($reviews_query_raw, MAX_DISPLAY_NEW_REVIEWS);
-
   if ($reviews_split->number_of_rows > 0) {
     if ((PREV_NEXT_BAR_LOCATION == '1') || (PREV_NEXT_BAR_LOCATION == '3')) {
 ?>

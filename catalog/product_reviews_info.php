@@ -25,11 +25,11 @@
 
   tep_db_query("update reviews set reviews_read = reviews_read+1 where reviews_id = '" . (int)$_GET['reviews_id'] . "'");
 
-  $review_query = tep_db_query("select rd.reviews_text, r.reviews_rating, r.reviews_id, r.customers_name, r.date_added, r.reviews_read, p.products_id, p.products_price, p.products_tax_class_id, p.products_image, p.products_model, pd.products_name from reviews r, reviews_description rd, products p, products_description pd where r.reviews_id = '" . (int)$_GET['reviews_id'] . "' and r.reviews_id = rd.reviews_id and rd.languages_id = '" . (int)$languages_id . "' and r.products_id = p.products_id and p.products_status = '1' and p.products_id = pd.products_id and pd.language_id = '". (int)$languages_id . "'");
+  $review_query = tep_db_query("select rd.reviews_text, r.reviews_rating, r.reviews_id, r.customers_name, r.date_added, r.reviews_read, p.products_id, p.products_price, p.products_tax_class_id, p.products_image, p.products_model, pd.products_name, IF(s.status, s.specials_new_products_price, NULL) as specials_new_products_price from reviews r, reviews_description rd, products p left join specials s on p.products_id = s.products_id, products_description pd where r.reviews_id = '" . (int)$_GET['reviews_id'] . "' and r.reviews_id = rd.reviews_id and rd.languages_id = '" . (int)$languages_id . "' and r.products_id = p.products_id and p.products_status = '1' and p.products_id = pd.products_id and pd.language_id = '". (int)$languages_id . "'");
   $review = tep_db_fetch_array($review_query);
 
-  if ($new_price = tep_get_products_special_price($review['products_id'])) {
-    $products_price = '<del>' . $currencies->display_price($review['products_price'], tep_get_tax_rate($review['products_tax_class_id'])) . '</del> <span class="productSpecialPrice">' . $currencies->display_price($new_price, tep_get_tax_rate($review['products_tax_class_id'])) . '</span>';
+  if (!empty($review['specials_new_products_price'])) {
+    $products_price = '<del>' . $currencies->display_price($review['products_price'], tep_get_tax_rate($review['products_tax_class_id'])) . '</del> <span class="productSpecialPrice">' . $currencies->display_price($review['specials_new_products_price'], tep_get_tax_rate($review['products_tax_class_id'])) . '</span>';
   } else {
     $products_price = $currencies->display_price($review['products_price'], tep_get_tax_rate($review['products_tax_class_id']));
   }

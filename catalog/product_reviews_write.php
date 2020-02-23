@@ -23,7 +23,7 @@
     tep_redirect(tep_href_link('product_reviews.php', tep_get_all_get_params(array('action'))));
   }
 
-  $product_info_query = tep_db_query("select p.products_id, p.products_model, p.products_image, p.products_price, p.products_tax_class_id, pd.products_name from products p, products_description pd where p.products_id = '" . (int)$_GET['products_id'] . "' and p.products_status = '1' and p.products_id = pd.products_id and pd.language_id = '" . (int)$languages_id . "'");
+  $product_info_query = tep_db_query("select p.products_id, p.products_model, p.products_image, p.products_price, p.products_tax_class_id, pd.products_name, IF(s.status, s.specials_new_products_price, NULL) as specials_new_products_price from products p left join specials s on p.products_id = s.products_id, products_description pd where p.products_id = '" . (int)$_GET['products_id'] . "' and p.products_status = '1' and p.products_id = pd.products_id and pd.language_id = '" . (int)$languages_id . "'");
   if (!tep_db_num_rows($product_info_query)) {
     tep_redirect(tep_href_link('product_reviews.php', tep_get_all_get_params(array('action'))));
   } else {
@@ -61,8 +61,8 @@
     }
   }
 
-  if ($new_price = tep_get_products_special_price($product_info['products_id'])) {
-    $products_price = '<del>' . $currencies->display_price($product_info['products_price'], tep_get_tax_rate($product_info['products_tax_class_id'])) . '</del> <span class="productSpecialPrice">' . $currencies->display_price($new_price, tep_get_tax_rate($product_info['products_tax_class_id'])) . '</span>';
+  if (!empty($product_info['specials_new_products_price'])) {
+    $products_price = '<del>' . $currencies->display_price($product_info['products_price'], tep_get_tax_rate($product_info['products_tax_class_id'])) . '</del> <span class="productSpecialPrice">' . $currencies->display_price($product_info['specials_new_products_price'], tep_get_tax_rate($product_info['products_tax_class_id'])) . '</span>';
   } else {
     $products_price = $currencies->display_price($product_info['products_price'], tep_get_tax_rate($product_info['products_tax_class_id']));
   }
