@@ -74,3 +74,21 @@
 <?php
   }
 ?>
+
+  <div class="row">
+
+  <?php
+  if ($oscTemplate->hasBlocks('boxes_column_left')) {
+    ?>
+
+    <div id="columnLeft" class="col-md-2">
+      <?php echo $oscTemplate->getBlocks('boxes_column_left'); ?>
+    </div>
+
+    <?php
+  }
+  ?>
+
+    <div class="col">
+
+

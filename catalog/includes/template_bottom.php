@@ -11,21 +11,13 @@
 */
 ?>
 
-<?php
-  if ($oscTemplate->hasBlocks('boxes_column_left')) {
-?>
-
-<div id="columnLeft" class="grid_<?php echo $oscTemplate->getGridColumnWidth(); ?> pull_<?php echo $oscTemplate->getGridContentWidth(); ?>">
-  <?php echo $oscTemplate->getBlocks('boxes_column_left'); ?>
 </div>
 
 <?php
-  }
-
   if ($oscTemplate->hasBlocks('boxes_column_right')) {
 ?>
 
-<div id="columnRight" class="grid_<?php echo $oscTemplate->getGridColumnWidth(); ?>">
+<div id="columnRight" class="col-md-2">
   <?php echo $oscTemplate->getBlocks('boxes_column_right'); ?>
 </div>
 
@@ -33,12 +25,13 @@
   }
 ?>
 
+</div>
+
 </main>
 
 <footer class="footer container">
   <?php require('includes/footer.php'); ?>
 </footer>
-
 
 <script src="ext/bootstrap/bootstrap.min.js"></script>
 <?php echo $oscTemplate->getBlocks('footer_scripts'); ?>
