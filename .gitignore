@@ -3,11 +3,3 @@ catalog/admin/includes/local/configure.php
 catalog/includes/work/*
 catalog/admin/images/graphs/*.png
 catalog/admin/backups/*.sql
-catalog/admin/includes/languages/*
-!catalog/admin/includes/languages/english/*
-!catalog/admin/includes/languages/english.php
-catalog/includes/apps/paypal/languages/*
-!catalog/includes/apps/paypal/english/*
-catalog/includes/languages/*
-!catalog/includes/languages/english/*
-!catalog/includes/languages/english.php
