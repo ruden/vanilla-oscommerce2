@@ -46,7 +46,19 @@
         $product_description = explode("\n", wordwrap(trim(strip_tags($product_info['products_description'])), 197));
 
         $data['description'] = $product_description[0] . '...';
-        $data['image'] = tep_href_link('images/' . $product_info['products_image'], '', 'SSL', false, false);
+
+        $i = '';
+        if (!empty($product_info['products_images'])) {
+          $products_images = explode(',', $product_info['products_images']);
+          $i = count($products_images);
+
+          foreach ($products_images as $pi) {
+            $data['image' . $i] = tep_href_link('images/' . $pi, '', 'SSL', false, false);
+            $i--;
+          }
+        }
+
+        $data['image' . $i] = tep_href_link('images/' . $product_info['products_image'], '', 'SSL', false, false);
 
         $result = '';
 

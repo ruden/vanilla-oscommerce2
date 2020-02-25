@@ -216,7 +216,6 @@
         tep_db_query("delete from customers_info where customers_info_id = '" . (int)$customers_id . "'");
         tep_db_query("delete from customers_basket where customers_id = '" . (int)$customers_id . "'");
         tep_db_query("delete from customers_basket_attributes where customers_id = '" . (int)$customers_id . "'");
-        tep_db_query("delete from whos_online where customer_id = '" . (int)$customers_id . "'");
 
         tep_redirect(tep_href_link('customers.php', tep_get_all_get_params(array('cID', 'action'))));
         break;
