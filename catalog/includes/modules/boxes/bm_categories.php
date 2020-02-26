@@ -144,13 +144,11 @@
     function tep_show_category($counter) {
       global $tree, $categories_string, $cPath_array;
 
-      $categories_string .= '<li class="list-group-item';
-
       for ($i=0; $i<$tree[$counter]['level']; $i++) {
-        $categories_string .= ' bg-light';
+        $categories_string .= "&nbsp;&nbsp;";
       }
 
-      $categories_string .= '"><a href="';
+      $categories_string .= '<a class="card-link" href="';
 
       if ($tree[$counter]['parent'] == 0) {
         $cPath_new = 'cPath=' . $counter;
@@ -183,7 +181,7 @@
         }
       }
 
-      $categories_string .= '</li>';
+      $categories_string .= '<br>';
 
       if ($tree[$counter]['next_id'] != false) {
         $this->tep_show_category($tree[$counter]['next_id']);

@@ -3,8 +3,8 @@
     <?php echo MODULE_BOXES_CATEGORIES_BOX_TITLE; ?>
   </div>
 
-  <ul class="list-group list-group-flush">
+  <div class="card-body">
     <?php echo $categories_string; ?>
-  </ul>
+  </div>
 
 </div>
