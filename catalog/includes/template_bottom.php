@@ -11,21 +11,21 @@
 */
 ?>
 
-</div>
+    </div>
 
 <?php
   if ($oscTemplate->hasBlocks('boxes_column_right')) {
 ?>
 
-<div id="columnRight" class="col-md-2">
+<aside class="aside col-xl-2">
   <?php echo $oscTemplate->getBlocks('boxes_column_right'); ?>
-</div>
+</aside>
 
 <?php
   }
 ?>
 
-</div>
+  </div>
 
 </main>
 

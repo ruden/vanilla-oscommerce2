@@ -25,23 +25,41 @@
       $this->title = MODULE_HEADER_LANGUAGES_TITLE;
       $this->description = MODULE_HEADER_LANGUAGES_DESCRIPTION;
 
-      if ( defined('MODULE_HEADER_LANGUAGES_STATUS') ) {
+      if ($this->check()) {
         $this->sort_order = MODULE_HEADER_LANGUAGES_SORT_ORDER;
         $this->enabled = (MODULE_HEADER_LANGUAGES_STATUS == 'True');
       }
     }
 
     public function execute() {
-      global $oscTemplate;
+      global $PHP_SELF, $lng, $request_type, $oscTemplate;
 
-      ob_start();
-      include('includes/modules/' . $this->group . '/templates/languages.php');
+      if (!isset($lng) || (isset($lng) && !is_object($lng))) {
+        include('includes/classes/language.php');
+        $lng = new language;
+      }
 
-      $oscTemplate->addBlock(ob_get_clean(), $this->group);
+      if (count($lng->catalog_languages) > 1) {
+        $languages_string = '';
+        foreach ($lng->catalog_languages as $key => $value) {
+          $languages_string .= ' <a href="' . tep_href_link($PHP_SELF, tep_get_all_get_params(array('language', 'currency')) . 'language=' . $key, $request_type) . '">' . tep_image('includes/languages/' .  $value['directory'] . '/images/' . $value['image'], $value['name']) . '</a> ';
+        }
+
+        ob_start();
+        include('includes/modules/' . $this->group . '/templates/languages.php');
+
+        $oscTemplate->addBlock(ob_get_clean(), $this->group);
+      }
     }
 
     public function isEnabled() {
-      return $this->enabled;
+      global $PHP_SELF;
+
+      if (substr(basename($PHP_SELF), 0, 8) != 'checkout') {
+        return $this->enabled;
+      }
+
+      return false;
     }
 
     public function check() {

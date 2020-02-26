@@ -81,9 +81,9 @@
   if ($oscTemplate->hasBlocks('boxes_column_left')) {
     ?>
 
-    <div id="columnLeft" class="col-md-2">
+    <aside class="col-xl-2">
       <?php echo $oscTemplate->getBlocks('boxes_column_left'); ?>
-    </div>
+    </aside>
 
     <?php
   }

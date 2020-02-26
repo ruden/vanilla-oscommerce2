@@ -30,54 +30,6 @@
       }
     }
 
-    function tep_show_category($counter) {
-      global $tree, $categories_string, $cPath_array;
-
-      for ($i=0; $i<$tree[$counter]['level']; $i++) {
-        $categories_string .= "&nbsp;&nbsp;";
-      }
-
-      $categories_string .= '<a href="';
-
-      if ($tree[$counter]['parent'] == 0) {
-        $cPath_new = 'cPath=' . $counter;
-      } else {
-        $cPath_new = 'cPath=' . $tree[$counter]['path'];
-      }
-
-      $categories_string .= tep_href_link('index.php', $cPath_new) . '">';
-
-      if (isset($cPath_array) && in_array($counter, $cPath_array)) {
-        $categories_string .= '<strong>';
-      }
-
-// display category name
-      $categories_string .= $tree[$counter]['name'];
-
-      if (isset($cPath_array) && in_array($counter, $cPath_array)) {
-        $categories_string .= '</strong>';
-      }
-
-      if (tep_has_category_subcategories($counter)) {
-        $categories_string .= '-&gt;';
-      }
-
-      $categories_string .= '</a>';
-
-      if (SHOW_COUNTS == 'true') {
-        $products_in_category = tep_count_products_in_category($counter);
-        if ($products_in_category > 0) {
-          $categories_string .= '&nbsp;(' . $products_in_category . ')';
-        }
-      }
-
-      $categories_string .= '<br />';
-
-      if ($tree[$counter]['next_id'] != false) {
-        $this->tep_show_category($tree[$counter]['next_id']);
-      }
-    }
-
     function getData() {
       global $categories_string, $tree, $languages_id, $cPath, $cPath_array;
 
@@ -141,12 +93,10 @@
 
       $this->tep_show_category($first_element);
 
-      $data = '<div class="ui-widget infoBoxContainer">' .
-              '  <div class="ui-widget-header infoBoxHeading">' . MODULE_BOXES_CATEGORIES_BOX_TITLE . '</div>' .
-              '  <div class="ui-widget-content infoBoxContents">' . $categories_string . '</div>' .
-              '</div>';
+      ob_start();
+      include 'includes/modules/boxes/templates/categories.php';
 
-      return $data;
+      return ob_get_clean();
     }
 
     function execute() {
@@ -178,7 +128,8 @@
     function install() {
       tep_db_query("insert into configuration (configuration_title, configuration_key, configuration_value, configuration_description, configuration_group_id, sort_order, set_function, date_added) values ('Enable Categories Module', 'MODULE_BOXES_CATEGORIES_STATUS', 'True', 'Do you want to add the module to your shop?', '6', '1', 'tep_cfg_select_option(array(\'True\', \'False\'), ', now())");
       tep_db_query("insert into configuration (configuration_title, configuration_key, configuration_value, configuration_description, configuration_group_id, sort_order, use_function, set_function, date_added) values ('Show box on pages', 'MODULE_BOXES_CATEGORIES_PAGES', '" . implode(';', tep_set_default_pages()) . "', 'The pages on which box is shown.', '6', '0', 'tep_cfg_show_pages', 'tep_cfg_edit_pages(', now())");
-      tep_db_query("insert into configuration (configuration_title, configuration_key, configuration_value, configuration_description, configuration_group_id, sort_order, set_function, date_added) values ('Content Placement', 'MODULE_BOXES_CATEGORIES_CONTENT_PLACEMENT', 'Left Column', 'Should the module be loaded in the left or right column?', '6', '1', 'tep_cfg_select_option(array(\'Left Column\', \'Right Column\'), ', now())");
+      tep_db_query("insert into configuration (configuration_title, configuration_key, configuration_value, configuration_description, configuration_group_id, sort_order, set_function, date_added) values ('Content Placement', 'MODULE_BOXES_CATEGORIES_CONTENT_PLACEMENT', 'Left Column', 'Should the module be loaded in the left or right column?', '6', '0', 'tep_cfg_select_option(array(\'Left Column\', \'Right Column\'), ', now())");
+      tep_db_query("insert into configuration (configuration_title, configuration_key, configuration_value, configuration_description, configuration_group_id, sort_order, set_function, date_added) values ('Show Category Counts', 'MODULE_BOXES_CATEGORIES_SHOW_COUNTS', 'true', 'Count recursively how many products are in each category', '6', '0', 'tep_cfg_select_option(array(\'true\', \'false\'), ', now())");
       tep_db_query("insert into configuration (configuration_title, configuration_key, configuration_value, configuration_description, configuration_group_id, sort_order, date_added) values ('Sort Order', 'MODULE_BOXES_CATEGORIES_SORT_ORDER', '0', 'Sort order of display. Lowest is displayed first.', '6', '0', now())");
     }
 
@@ -187,7 +138,56 @@
     }
 
     function keys() {
-      return array('MODULE_BOXES_CATEGORIES_STATUS', 'MODULE_BOXES_CATEGORIES_PAGES', 'MODULE_BOXES_CATEGORIES_CONTENT_PLACEMENT', 'MODULE_BOXES_CATEGORIES_SORT_ORDER');
+      return array('MODULE_BOXES_CATEGORIES_STATUS', 'MODULE_BOXES_CATEGORIES_PAGES', 'MODULE_BOXES_CATEGORIES_CONTENT_PLACEMENT', 'MODULE_BOXES_CATEGORIES_SHOW_COUNTS', 'MODULE_BOXES_CATEGORIES_SORT_ORDER');
+    }
+
+    function tep_show_category($counter) {
+      global $tree, $categories_string, $cPath_array;
+
+      $categories_string .= '<li class="list-group-item';
+
+      for ($i=0; $i<$tree[$counter]['level']; $i++) {
+        $categories_string .= ' bg-light';
+      }
+
+      $categories_string .= '"><a href="';
+
+      if ($tree[$counter]['parent'] == 0) {
+        $cPath_new = 'cPath=' . $counter;
+      } else {
+        $cPath_new = 'cPath=' . $tree[$counter]['path'];
+      }
+
+      $categories_string .= tep_href_link('index.php', $cPath_new) . '">';
+
+      if (isset($cPath_array) && in_array($counter, $cPath_array)) {
+        $categories_string .= '<strong>';
+      }
+
+      $categories_string .= $tree[$counter]['name'];
+
+      if (isset($cPath_array) && in_array($counter, $cPath_array)) {
+        $categories_string .= '</strong>';
+      }
+
+      if (tep_has_category_subcategories($counter)) {
+        $categories_string .= '-&gt;';
+      }
+
+      $categories_string .= '</a>';
+
+      if (MODULE_BOXES_CATEGORIES_SHOW_COUNTS == 'true') {
+        $products_in_category = tep_count_products_in_category($counter);
+        if ($products_in_category > 0) {
+          $categories_string .= '&nbsp;(' . $products_in_category . ')';
+        }
+      }
+
+      $categories_string .= '</li>';
+
+      if ($tree[$counter]['next_id'] != false) {
+        $this->tep_show_category($tree[$counter]['next_id']);
+      }
     }
 
     function cache($auto_expire = false, $refresh = false) {
