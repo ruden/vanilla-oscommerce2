@@ -1472,6 +1472,7 @@
                            'download.php',
                            'opensearch.php',
                            'redirect.php',
+                           'sitemap.php',
                            'ssl_check.php');
 
     if ($dir = @dir(DIR_FS_CATALOG)) {
@@ -1503,12 +1504,19 @@
 <script>
 function module_update_cfg_value() {
   let module_selected_files = '';
-   
-  if ($('input[name="page_files[]"]').length > 0) {
+  const pageFiles = $('input[name="page_files[]"]');
+  const checkedAll = $('#checked-all');
+  
+  if (pageFiles.length > 0) {
     $('input[name="page_files[]"]:checked').each(function() {
       module_selected_files += $(this).attr('value') + ';';
+      checkedAll.prop('checked', false);
     });
 
+    if ($('input[name="page_files[]"]:checkbox:not(":checked")').length === 0) {
+      checkedAll.prop('checked', true);
+    }
+      
     if (module_selected_files.length > 0) {
       module_selected_files = module_selected_files.substring(0, module_selected_files.length - 1);
     }
@@ -1518,13 +1526,37 @@ function module_update_cfg_value() {
 }
 
 $(function() {  
+  const pageFiles = $('input[name="page_files[]"]');
+  const checkedAll = $('#checked-all');
+  
   module_update_cfg_value();
 
-  if ($('input[name="page_files[]"]').length > 0) {
-    $('input[name="page_files[]"]').change(function() {
+  if (pageFiles.length > 0) {
+    pageFiles.change(function() {
       module_update_cfg_value();
     });
   }
+  
+  if ($('input[name="page_files[]"]:checkbox:not(":checked")').length === 0) {
+    checkedAll.prop('checked', true);
+  }
+  
+  checkedAll.change(function() {  
+    let module_selected_files = '';
+    const selectedFiles = $('#page-files');
+    
+    pageFiles.each(function() {
+      if (checkedAll.is(':checked')) {
+        module_selected_files += $(this).attr('value') + ';';
+        
+        $(this).prop('checked', true);
+      } else {
+        $(this).prop('checked', false); 
+      }
+    });
+   
+    selectedFiles.val(module_selected_files);
+  });
 });
 </script>
 EOT;
