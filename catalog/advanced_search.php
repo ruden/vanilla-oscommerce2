@@ -129,7 +129,7 @@ function popupWindow(url) {
 
     <div>
       <span><?php echo '<a href="#" target="_blank" onclick="$(\'#helpSearch\').dialog(\'open\'); return false;">' . TEXT_SEARCH_HELP_LINK . '</a>'; ?></span>
-      <span style="float: right;"><?php echo tep_draw_button(IMAGE_BUTTON_SEARCH, 'search', null, 'primary'); ?></span>
+      <span style="float: right;"><?php echo tep_draw_button(IMAGE_BUTTON_SEARCH, 'search', null, 'btn-primary'); ?></span>
     </div>
 
     <div id="helpSearch" title="<?php echo HEADING_SEARCH_HELP; ?>">

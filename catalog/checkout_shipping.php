@@ -353,7 +353,7 @@ function rowOutEffect(object) {
       </table>
     </div>
 
-    <div style="float: right;"><?php echo tep_draw_button(IMAGE_BUTTON_CONTINUE, 'triangle-1-e', null, 'primary'); ?></div>
+    <div style="float: right;"><?php echo tep_draw_button(IMAGE_BUTTON_CONTINUE, 'triangle-1-e', null, 'btn-primary'); ?></div>
   </div>
 </div>
 

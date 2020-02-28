@@ -286,7 +286,7 @@
     echo $payment_modules->process_button();
   }
 
-  echo tep_draw_button(sprintf(IMAGE_BUTTON_PAY_TOTAL_NOW, $currencies->format($order->info['total'], true, $order->info['currency'], $order->info['currency_value'])), null, null, 'primary', array('params' => 'data-button="payNow"'));
+  echo tep_draw_button(sprintf(IMAGE_BUTTON_PAY_TOTAL_NOW, $currencies->format($order->info['total'], true, $order->info['currency'], $order->info['currency_value'])), null, null, 'btn-primary', array('params' => 'data-button="payNow"'));
 ?>
 
   </div>

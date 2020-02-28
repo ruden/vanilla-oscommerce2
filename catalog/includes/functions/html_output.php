@@ -112,7 +112,7 @@
 
     if (tep_not_null($parameters)) $image .= ' ' . $parameters;
 
-    $image .= ' />';
+    $image .= '>';
 
     return $image;
   }
@@ -129,7 +129,7 @@
 
     if (tep_not_null($parameters)) $image_submit .= ' ' . $parameters;
 
-    $image_submit .= ' />';
+    $image_submit .= '>';
 
     return $image_submit;
   }
@@ -160,7 +160,7 @@
     $form .= '>';
 
     if ( ($tokenize == true) && isset($sessiontoken) ) {
-      $form .= '<input type="hidden" name="formid" value="' . tep_output_string($sessiontoken) . '" />';
+      $form .= '<input type="hidden" name="formid" value="' . tep_output_string($sessiontoken) . '">';
     }
 
     return $form;
@@ -185,7 +185,7 @@
 
     if (tep_not_null($parameters)) $field .= ' ' . $parameters;
 
-    $field .= ' />';
+    $field .= '>';
 
     return $field;
   }
@@ -209,7 +209,7 @@
 
     if (tep_not_null($parameters)) $selection .= ' ' . $parameters;
 
-    $selection .= ' />';
+    $selection .= '>';
 
     return $selection;
   }
@@ -229,8 +229,8 @@
 ////
 // Output a form textarea field
 // The $wrap parameter is no longer used in the core xhtml template
-  function tep_draw_textarea_field($name, $wrap, $width, $height, $text = '', $parameters = '', $reinsert_value = true) {
-    $field = '<textarea name="' . tep_output_string($name) . '" cols="' . tep_output_string($width) . '" rows="' . tep_output_string($height) . '"';
+  function tep_draw_textarea_field($name, $text = '', $parameters = '', $reinsert_value = true) {
+    $field = '<textarea name="' . tep_output_string($name) . '"';
 
     if (tep_not_null($parameters)) $field .= ' ' . $parameters;
 
@@ -268,7 +268,7 @@
 
     if (tep_not_null($parameters)) $field .= ' ' . $parameters;
 
-    $field .= ' />';
+    $field .= '>';
 
     return $field;
   }
@@ -334,9 +334,7 @@
 
 ////
 // Output a jQuery UI Button
-  function tep_draw_button($title = null, $icon = null, $link = null, $priority = null, $params = null) {
-    static $button_counter = 1;
-
+  function tep_draw_button($title = null, $icon = null, $link = null, $priority = 'btn-primary', $params = null) {
     $types = array('submit', 'button', 'reset');
 
     if ( !isset($params['type']) ) {
@@ -351,37 +349,17 @@
       $params['type'] = 'button';
     }
 
-    if (!isset($priority)) {
-      $priority = 'secondary';
-    }
-
-    $button = '<span class="tdbLink">';
-
     if ( ($params['type'] == 'button') && isset($link) ) {
-      $button .= '<a id="tdb' . $button_counter . '" href="' . $link . '"';
-
-      if ( isset($params['newwindow']) ) {
-        $button .= ' target="_blank"';
-      }
+      $button = '<a class="btn ' . tep_output_string($priority) . '" href="' . $link . '"';
     } else {
-      $button .= '<button id="tdb' . $button_counter . '" type="' . tep_output_string($params['type']) . '"';
+      $button = '<button class="btn ' . tep_output_string($priority) . '" type="' . tep_output_string($params['type']) . '"';
     }
 
     if ( isset($params['params']) ) {
       $button .= ' ' . $params['params'];
     }
 
-    $button .= '>' . $title;
-
-    if ( ($params['type'] == 'button') && isset($link) ) {
-      $button .= '</a>';
-    } else {
-      $button .= '</button>';
-    }
-
-    $button .= '</span><script type="text/javascript">$("#tdb' . $button_counter . '").button(';
-
-    $args = array();
+    $button .= '>';
 
     if ( isset($icon) ) {
       if ( !isset($params['iconpos']) ) {
@@ -389,24 +367,19 @@
       }
 
       if ( $params['iconpos'] == 'left' ) {
-        $args[] = 'icons:{primary:"ui-icon-' . $icon . '"}';
+        $button .= '<i class="uk-icon-' . $icon . '"></i>' . $title;
       } else {
-        $args[] = 'icons:{secondary:"ui-icon-' . $icon . '"}';
+        $button .= $title . '<i class="uk-icon-' . $icon . '"></i>';
       }
+    } else {
+      $button .= $title;
     }
 
-    if (empty($title)) {
-      $args[] = 'text:false';
+    if ( ($params['type'] == 'button') && isset($link) ) {
+      $button .= '</a>';
+    } else {
+      $button .= '</button>';
     }
-
-    if (!empty($args)) {
-      $button .= '{' . implode(',', $args) . '}';
-    }
-
-    $button .= ').addClass("ui-priority-' . $priority . '").parent().removeClass("tdbLink");</script>';
-
-    $button_counter++;
 
     return $button;
   }
-?>

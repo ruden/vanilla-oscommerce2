@@ -10,100 +10,91 @@
   Released under the GNU General Public License
 */
 
-  require('includes/application_top.php');
+require('includes/application_top.php');
 
-  require('includes/languages/' . $language . '/contact_us.php');
+require('includes/languages/' . $language . '/contact_us.php');
 
-  if (isset($_GET['action']) && ($_GET['action'] == 'send') && isset($_POST['formid']) && ($_POST['formid'] == $sessiontoken)) {
-    $error = false;
+if (isset($_GET['action']) && ($_GET['action'] == 'send') && isset($_POST['formid']) && ($_POST['formid'] == $sessiontoken)) {
+  $error = false;
 
-    $name = tep_db_prepare_input($_POST['name']);
-    $email_address = tep_db_prepare_input($_POST['email']);
-    $enquiry = tep_db_prepare_input($_POST['enquiry']);
+  $name = tep_db_prepare_input($_POST['name']);
+  $email_address = tep_db_prepare_input($_POST['email']);
+  $enquiry = tep_db_prepare_input($_POST['enquiry']);
 
-    if (!tep_validate_email($email_address)) {
-      $error = true;
+  if (!tep_validate_email($email_address)) {
+    $error = true;
 
-      $messageStack->add('contact', ENTRY_EMAIL_ADDRESS_CHECK_ERROR);
-    }
-
-    $actionRecorder = new actionRecorder('ar_contact_us', (tep_session_is_registered('customer_id') ? $customer_id : null), $name);
-    if (!$actionRecorder->canPerform()) {
-      $error = true;
-
-      $actionRecorder->record(false);
-
-      $messageStack->add('contact', sprintf(ERROR_ACTION_RECORDER, (defined('MODULE_ACTION_RECORDER_CONTACT_US_EMAIL_MINUTES') ? (int)MODULE_ACTION_RECORDER_CONTACT_US_EMAIL_MINUTES : 15)));
-    }
-
-    if ($error == false) {
-      tep_mail(STORE_OWNER, STORE_OWNER_EMAIL_ADDRESS, EMAIL_SUBJECT, $enquiry, $name, $email_address);
-
-      $actionRecorder->record();
-
-      tep_redirect(tep_href_link('contact_us.php', 'action=success'));
-    }
+    $messageStack->add('contact', ENTRY_EMAIL_ADDRESS_CHECK_ERROR);
   }
 
-  $breadcrumb->add(NAVBAR_TITLE, tep_href_link('contact_us.php'));
+  $actionRecorder = new actionRecorder('ar_contact_us', (tep_session_is_registered('customer_id') ? $customer_id : null), $name);
+  if (!$actionRecorder->canPerform()) {
+    $error = true;
 
-  require('includes/template_top.php');
-?>
+    $actionRecorder->record(false);
 
-<h1><?php echo HEADING_TITLE; ?></h1>
-
-<?php
-  if ($messageStack->size('contact') > 0) {
-    echo $messageStack->output('contact');
+    $messageStack->add('contact', sprintf(ERROR_ACTION_RECORDER, (defined('MODULE_ACTION_RECORDER_CONTACT_US_EMAIL_MINUTES') ? (int)MODULE_ACTION_RECORDER_CONTACT_US_EMAIL_MINUTES : 15)));
   }
 
-  if (isset($_GET['action']) && ($_GET['action'] == 'success')) {
-?>
+  if ($error == false) {
+    tep_mail(STORE_OWNER, STORE_OWNER_EMAIL_ADDRESS, EMAIL_SUBJECT, $enquiry, $name, $email_address);
 
-<div class="contentContainer">
-  <div class="contentText">
-    <?php echo TEXT_SUCCESS; ?>
-  </div>
+    $actionRecorder->record();
 
-  <div style="float: right;">
-    <?php echo tep_draw_button(IMAGE_BUTTON_CONTINUE, 'triangle-1-e', tep_href_link('index.php')); ?>
-  </div>
-</div>
+    $messageStack->add_session('account', SUCCESS_ACCOUNT_UPDATED, 'success');
 
-<?php
-  } else {
-?>
-
-<?php echo tep_draw_form('contact_us', tep_href_link('contact_us.php', 'action=send'), 'post', '', true); ?>
-
-<div class="contentContainer">
-  <div class="contentText">
-    <table border="0" width="100%" cellspacing="0" cellpadding="2">
-      <tr>
-        <td class="fieldKey"><?php echo ENTRY_NAME; ?></td>
-        <td class="fieldValue"><?php echo tep_draw_input_field('name'); ?></td>
-      </tr>
-      <tr>
-        <td class="fieldKey"><?php echo ENTRY_EMAIL; ?></td>
-        <td class="fieldValue"><?php echo tep_draw_input_field('email'); ?></td>
-      </tr>
-      <tr>
-        <td class="fieldKey" valign="top"><?php echo ENTRY_ENQUIRY; ?></td>
-        <td class="fieldValue"><?php echo tep_draw_textarea_field('enquiry', 'soft', 50, 15); ?></td>
-      </tr>
-    </table>
-  </div>
-
-  <div class="buttonSet">
-    <span class="buttonAction"><?php echo tep_draw_button(IMAGE_BUTTON_CONTINUE, 'triangle-1-e', null, 'primary'); ?></span>
-  </div>
-</div>
-
-</form>
-
-<?php
+    tep_redirect(tep_href_link('contact_us.php', 'action=success'));
   }
+}
 
-  require('includes/template_bottom.php');
-  require('includes/application_bottom.php');
+$breadcrumb->add(NAVBAR_TITLE, tep_href_link('contact_us.php'));
+
+require('includes/template_top.php');
 ?>
+
+  <h1><?php echo HEADING_TITLE; ?></h1>
+
+<?php
+if ($messageStack->size('contact') > 0) {
+  echo $messageStack->output('contact');
+}
+
+if (isset($_GET['action']) && ($_GET['action'] == 'success')) {
+  ?>
+
+  <p><?php echo TEXT_SUCCESS; ?></p>
+
+  <a class="btn btn-primary" href="<?php echo tep_href_link('index.php'); ?>"><i class="uk-icon-triangle-1-e"></i><?php echo IMAGE_BUTTON_CONTINUE; ?></a>
+
+  <?php
+} else {
+  ?>
+
+  <div class="w-50">
+    <?php echo tep_draw_form('contact_us', tep_href_link('contact_us.php', 'action=send'), 'post', '', true); ?>
+
+    <div class="mb-3">
+      <label for="entry-name"><?php echo ENTRY_NAME; ?></label>
+      <?php echo tep_draw_input_field('name', null, 'id="entry-name" class="form-control"'); ?>
+    </div>
+    <div class="mb-3">
+      <label for="entry-email"><?php echo ENTRY_EMAIL; ?></label>
+      <?php echo tep_draw_input_field('email', null, 'id="entry-email" class="form-control"'); ?>
+    </div>
+    <div class="mb-3">
+      <label for="entry-enquiry"><?php echo ENTRY_ENQUIRY; ?></label>
+      <?php echo tep_draw_textarea_field('enquiry', null, 'id="entry-enquiry" class="form-control"'); ?>
+    </div>
+    <div class="mb-3">
+      <button class="btn btn-primary" type="submit"><i class="triangle-1-e"></i><?php echo IMAGE_BUTTON_CONTINUE; ?>
+      </button>
+    </div>
+
+    </form>
+  </div>
+
+  <?php
+}
+
+require('includes/template_bottom.php');
+require('includes/application_bottom.php');

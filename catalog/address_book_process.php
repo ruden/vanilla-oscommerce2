@@ -297,7 +297,7 @@
 ?>
 
   <div>
-    <span style="float: right;"><?php echo tep_draw_hidden_field('action', 'update') . tep_draw_hidden_field('edit', $_GET['edit']) . tep_draw_button(IMAGE_BUTTON_UPDATE, 'refresh', null, 'primary'); ?></span>
+    <span style="float: right;"><?php echo tep_draw_hidden_field('action', 'update') . tep_draw_hidden_field('edit', $_GET['edit']) . tep_draw_button(IMAGE_BUTTON_UPDATE, 'refresh', null, 'btn-primary'); ?></span>
 
     <?php echo tep_draw_button(IMAGE_BUTTON_BACK, 'triangle-1-w', tep_href_link('address_book.php', '', 'SSL')); ?>
   </div>
@@ -312,7 +312,7 @@
 ?>
 
   <div class="buttonSet">
-    <span class="buttonAction"><?php echo tep_draw_hidden_field('action', 'process') . tep_draw_button(IMAGE_BUTTON_CONTINUE, 'triangle-1-e', null, 'primary'); ?></span>
+    <span class="buttonAction"><?php echo tep_draw_hidden_field('action', 'process') . tep_draw_button(IMAGE_BUTTON_CONTINUE, 'triangle-1-e', null, 'btn-primary'); ?></span>
 
     <?php echo tep_draw_button(IMAGE_BUTTON_BACK, 'triangle-1-w', $back_link); ?>
   </div>
