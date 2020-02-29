@@ -139,10 +139,6 @@ class splitPageResults {
       $display_links_string .= '<li class="page-item"><a class="page-link" href="' . tep_href_link($PHP_SELF, $parameters . 'page=' . ($this->current_page_number + 1), $request_type) . '" title=" ' . PREVNEXT_TITLE_NEXT_PAGE . ' ">' . PREVNEXT_BUTTON_NEXT . '</a></li>';
     }
 
-    /*if ($this->number_of_rows > MAX_DISPLAY_SEARCH_RESULTS && $this->number_of_pages != 1) {
-      $display_links_string .= '<li class="page-item"><a href="' . tep_href_link($PHP_SELF, $parameters . 'max=' . $this->number_of_rows, $request_type) . '" title=" ' . TEXT_DISPLAY_ALL_PRODUCTS . ' ">' . TEXT_DISPLAY_ALL_PRODUCTS . '</a></li>';
-    }*/
-
     if (($this->current_page_number == $this->number_of_pages) && ($this->number_of_pages != 1)) {
       $display_links_string .= '<li class="page-item disabled"><span class="page-link">' . PREVNEXT_BUTTON_NEXT . '</span></li>';
     }
