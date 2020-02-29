@@ -29,12 +29,13 @@ define('JQUERY_DATEPICKER_FORMAT', 'mm/dd/yy'); // see http://docs.jquery.com/UI
 // Return date in raw format
 // $date should be in format mm/dd/yyyy
 // raw date is in format YYYYMMDD, or DDMMYYYY
-function tep_date_raw($date, $reverse = false) {
-  if ($reverse) {
-    return substr($date, 3, 2) . substr($date, 0, 2) . substr($date, 6, 4);
-  } else {
-    return substr($date, 6, 4) . substr($date, 0, 2) . substr($date, 3, 2);
-  }
+function tep_date_raw($date, $reverse = false)
+{
+    if ($reverse) {
+        return substr($date, 3, 2) . substr($date, 0, 2) . substr($date, 6, 4);
+    } else {
+        return substr($date, 6, 4) . substr($date, 0, 2) . substr($date, 3, 2);
+    }
 }
 
 // if USE_DEFAULT_LANGUAGE_CURRENCY is true, use the following currency, instead of the applications default currency (used when changing language)
@@ -179,8 +180,8 @@ define('PREVNEXT_TITLE_PAGE_NO', 'Page %d');
 define('PREVNEXT_TITLE_PREV_SET_OF_NO_PAGE', 'Previous Set of %d Pages');
 define('PREVNEXT_TITLE_NEXT_SET_OF_NO_PAGE', 'Next Set of %d Pages');
 define('PREVNEXT_BUTTON_FIRST', '&lt;&lt;FIRST');
-define('PREVNEXT_BUTTON_PREV', '[&lt;&lt;&nbsp;Prev]');
-define('PREVNEXT_BUTTON_NEXT', '[Next&nbsp;&gt;&gt;]');
+define('PREVNEXT_BUTTON_PREV', '&lt;&lt;&nbsp;Prev');
+define('PREVNEXT_BUTTON_NEXT', 'Next&nbsp;&gt;&gt;');
 define('PREVNEXT_BUTTON_LAST', 'LAST&gt;&gt;');
 
 define('IMAGE_BUTTON_ADD_ADDRESS', 'Add Address');
@@ -248,4 +249,3 @@ define('TEXT_CCVAL_ERROR_INVALID_NUMBER', 'The credit card number entered is inv
 define('TEXT_CCVAL_ERROR_UNKNOWN_CARD', 'The first four digits of the number entered are: %s. If that number is correct, we do not accept that type of credit card. If it is wrong, please try again.');
 
 define('FOOTER_TEXT_BODY', 'Copyright &copy; ' . date('Y') . ' <a href="' . tep_href_link('index.php') . '">' . STORE_NAME . '</a><br />Powered by <a href="http://www.oscommerce.com" target="_blank">osCommerce</a>');
-?>
