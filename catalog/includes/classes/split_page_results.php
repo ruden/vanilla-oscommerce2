@@ -88,7 +88,8 @@ class splitPageResults {
   public function display_links($max_page_links, $parameters = '') {
     global $PHP_SELF, $request_type;
 
-    $display_links_string = '';
+    $display_links_string = '<nav aria-label="' . sprintf(PREVNEXT_TITLE_PAGE_NO, $this->current_page_number) . '">
+                               <ul class="pagination justify-content-center justify-content-md-end">';
 
     if (tep_not_null($parameters) && (substr($parameters, -1) != '&')) {
       $parameters .= '&';
@@ -145,6 +146,9 @@ class splitPageResults {
     if (($this->current_page_number == $this->number_of_pages) && ($this->number_of_pages != 1)) {
       $display_links_string .= '<li class="page-item disabled"><span class="page-link">' . PREVNEXT_BUTTON_NEXT . '</span></li>';
     }
+
+    $display_links_string .= '</ul>
+                            </nav>';
 
     return $display_links_string;
   }
