@@ -17,9 +17,9 @@
   if ($oscTemplate->hasBlocks('boxes_column_right')) {
 ?>
 
-<aside class="aside col-xl-2">
-  <?php echo $oscTemplate->getBlocks('boxes_column_right'); ?>
-</aside>
+  <aside class="aside col-xl-2 d-none d-xl-block">
+    <?php echo $oscTemplate->getBlocks('boxes_column_right'); ?>
+  </aside>
 
 <?php
   }
