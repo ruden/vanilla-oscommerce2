@@ -53,12 +53,12 @@
           $i = count($products_images);
 
           foreach ($products_images as $pi) {
-            $data['image' . $i] = tep_href_link('images/' . $pi, '', 'SSL', false, false);
+            $data['image' . $i] = tep_href_link('images/products/originals/' . $pi, '', 'SSL', false, false);
             $i--;
           }
         }
 
-        $data['image' . $i] = tep_href_link('images/' . $product_info['products_image'], '', 'SSL', false, false);
+        $data['image' . $i] = tep_href_link('images/products/originals/' . $product_info['products_image'], '', 'SSL', false, false);
 
         $result = '';
 
