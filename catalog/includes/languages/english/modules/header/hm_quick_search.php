@@ -10,5 +10,5 @@
   Released under the GNU General Public License
 */
 
-  define('MODULE_HEADER_QUICK_SEARCH_TITLE', 'QUICK_SEARCH');
-  define('MODULE_HEADER_QUICK_SEARCH_DESCRIPTION', 'Add quick_search to header');
+define('MODULE_HEADER_QUICK_SEARCH_TITLE', 'Quick Search');
+define('MODULE_HEADER_QUICK_SEARCH_DESCRIPTION', 'Add quick search to header');

@@ -10,5 +10,5 @@
   Released under the GNU General Public License
 */
 
-  define('MODULE_HEADER_SHOPPING_CART_TITLE', 'SHOPPING_CART');
-  define('MODULE_HEADER_SHOPPING_CART_DESCRIPTION', 'Add shopping_cart to header');
+define('MODULE_HEADER_SHOPPING_CART_TITLE', 'Shopping Cart');
+define('MODULE_HEADER_SHOPPING_CART_DESCRIPTION', 'Add shopping cart to header');

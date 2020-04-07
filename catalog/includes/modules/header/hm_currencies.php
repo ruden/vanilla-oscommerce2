@@ -32,7 +32,7 @@
     }
 
     public function execute() {
-      global $oscTemplate;
+      global $oscTemplate, $PHP_SELF, $currencies, $request_type, $currency, $oscTemplate;
 
       ob_start();
       include('includes/modules/' . $this->group . '/templates/currencies.php');
@@ -41,7 +41,13 @@
     }
 
     public function isEnabled() {
-      return $this->enabled;
+      global $PHP_SELF, $currencies;
+
+      if (substr(basename($PHP_SELF), 0, 8) != 'checkout' && (isset($currencies) && is_object($currencies) && (count($currencies->currencies) > 1))) {
+        return $this->enabled;
+      }
+
+      return false;
     }
 
     public function check() {

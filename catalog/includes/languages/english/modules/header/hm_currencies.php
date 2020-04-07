@@ -10,5 +10,7 @@
   Released under the GNU General Public License
 */
 
-  define('MODULE_HEADER_CURRENCIES_TITLE', 'CURRENCIES');
-  define('MODULE_HEADER_CURRENCIES_DESCRIPTION', 'Add currencies to header');
+define('MODULE_HEADER_CURRENCIES_TITLE', 'Currencies');
+define('MODULE_HEADER_CURRENCIES_DESCRIPTION', 'Show available currencies');
+
+define('MODULE_HEADER_CURRENCIES_TEXT_CURRENCIES', 'Currencies');

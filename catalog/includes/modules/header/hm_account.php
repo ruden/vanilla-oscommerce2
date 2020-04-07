@@ -32,7 +32,9 @@
     }
 
     public function execute() {
-      global $oscTemplate;
+      global $oscTemplate, $cart;
+
+      $cart_count_contents = $cart->count_contents();
 
       ob_start();
       include('includes/modules/' . $this->group . '/templates/account.php');
