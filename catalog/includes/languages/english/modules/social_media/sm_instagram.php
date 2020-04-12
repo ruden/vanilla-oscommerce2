@@ -10,5 +10,5 @@
   Released under the GNU General Public License
 */
 
-  define('MODULE_FOOTER_ACCOUNT_TITLE', 'ACCOUNT');
-  define('MODULE_FOOTER_ACCOUNT_DESCRIPTION', 'Add account to footer');
+define('MODULE_SOCIAL_MEDIA_INSTAGRAM_TITLE', 'Instagram');
+define('MODULE_SOCIAL_MEDIA_INSTAGRAM_DESCRIPTION', 'Add Instagram to social media');

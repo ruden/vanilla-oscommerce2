@@ -10,5 +10,5 @@
   Released under the GNU General Public License
 */
 
-  define('MODULE_FOOTER_CATEGORIES_TITLE', 'Categories');
-  define('MODULE_FOOTER_CATEGORIES_DESCRIPTION', 'Add categories links to footer');
+define('MODULE_SOCIAL_MEDIA_FACEBOOK_TITLE', 'Facebook');
+define('MODULE_SOCIAL_MEDIA_FACEBOOK_DESCRIPTION', 'Add facebook to social media');

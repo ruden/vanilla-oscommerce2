@@ -10,5 +10,5 @@
   Released under the GNU General Public License
 */
 
-  define('MODULE_FOOTER_PAYMENT_ICONS_TITLE', 'Payment Icons');
-  define('MODULE_FOOTER_PAYMENT_ICONS_DESCRIPTION', 'Add payment-icons to footer');
+define('MODULE_SOCIAL_MEDIA_YOUTUBE_TITLE', 'Youtube');
+define('MODULE_SOCIAL_MEDIA_YOUTUBE_DESCRIPTION', 'Add Youtube to social media');
