@@ -10,5 +10,5 @@
   Released under the GNU General Public License
 */
 
-  define('MODULE_FOOTER_REVIEWS_TITLE', 'REVIEWS');
-  define('MODULE_FOOTER_REVIEWS_DESCRIPTION', 'Add reviews to footer');
+define('MODULE_FOOTER_REVIEWS_TITLE', 'Reviews');
+define('MODULE_FOOTER_REVIEWS_DESCRIPTION', 'Add reviews to footer');

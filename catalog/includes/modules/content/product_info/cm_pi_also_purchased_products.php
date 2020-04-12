@@ -34,10 +34,9 @@
     public function execute() {
       global $oscTemplate, $languages_id, $currencies;
 
-      $orders_query = tep_db_query("select p.*, pd.* from orders_products opa left join orders_products opb on opa.orders_id = opb.orders_id left join orders o on opb.orders_id = o.orders_id left join products p on opb.products_id = p.products_id left join products_description pd on pd.products_id = p.products_id where opa.products_id = '" . (int)$_GET['products_id'] . "' and opb.products_id != '" . (int)$_GET['products_id'] . "' and pd.language_id = '" . (int)$languages_id . "' and p.products_status = '1' group by p.products_id, o.date_purchased order by o.date_purchased desc limit " . MODULE_CONTENT_ALSO_PURCHASED_PRODUCTS_MAX_DISPLAY_PRODUCTS);
-      $num_products_ordered = tep_db_num_rows($orders_query);
+      $orders_query = tep_db_query("select p.*, pd.* from orders_products opa left join orders_products opb on opa.orders_id = opb.orders_id left join orders o on opb.orders_id = o.orders_id left join products p on opb.products_id = p.products_id left join products_description pd on pd.products_id = p.products_id where opa.products_id = '" . (int)$_GET['products_id'] . "' and opb.products_id != '" . (int)$_GET['products_id'] . "' and pd.language_id = '" . (int)$languages_id . "' and p.products_status = '1' group by p.products_id, o.date_purchased order by o.date_purchased desc limit " . (int)MODULE_CONTENT_ALSO_PURCHASED_PRODUCTS_MAX_DISPLAY_PRODUCTS);
 
-      if ($num_products_ordered >= MODULE_CONTENT_ALSO_PURCHASED_PRODUCTS_MIN_DISPLAY_PRODUCTS) {
+      if (tep_db_num_rows($orders_query) >= MODULE_CONTENT_ALSO_PURCHASED_PRODUCTS_MIN_DISPLAY_PRODUCTS) {
         $orders_array = array();
 
         while ($orders = tep_db_fetch_array($orders_query)) {

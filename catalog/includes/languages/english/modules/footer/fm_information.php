@@ -10,5 +10,7 @@
   Released under the GNU General Public License
 */
 
-  define('MODULE_FOOTER_INFORMATION_TITLE', 'INFORMATION');
-  define('MODULE_FOOTER_INFORMATION_DESCRIPTION', 'Add information to footer');
+define('MODULE_FOOTER_INFORMATION_TITLE', 'Information');
+define('MODULE_FOOTER_INFORMATION_DESCRIPTION', 'Add information to footer');
+
+define('MODULE_FOOTER_INFORMATION_TEXT_CONTACT_US', 'Contact Us');

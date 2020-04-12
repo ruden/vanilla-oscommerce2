@@ -32,7 +32,14 @@
     }
 
     public function execute() {
-      global $oscTemplate;
+      global $oscTemplate, $languages_id;
+
+      $information_array = array();
+
+      $information_query = tep_db_query("select ip.pages_id, ipc.pages_name from information_pages ip, information_pages_content ipc where ip.pages_status = '1' and ip.pages_id = ipc.pages_id and ipc.language_id = '" . (int)$languages_id . "' order by ip.sort_order");
+      while ($information = tep_db_fetch_array($information_query)) {
+        $information_array[] = $information;
+      }
 
       ob_start();
       include('includes/modules/' . $this->group . '/templates/information.php');

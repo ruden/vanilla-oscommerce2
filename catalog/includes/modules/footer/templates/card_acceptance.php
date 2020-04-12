@@ -1,6 +1,6 @@
-<div class="ui-widget infoBoxContainer">' .
-  <div class="ui-widget-header infoBoxHeading"><?php echo MODULE_FOOTER_CARD_ACCEPTANCE_BOX_TITLE; ?></div>
-  <div class="ui-widget-content infoBoxContents">
+<div class="">
+  <div class=""><?php echo MODULE_FOOTER_CARD_ACCEPTANCE_BOX_TITLE; ?></div>
+  <div class="">
 
     <?php
     foreach (explode(';', MODULE_FOOTER_CARD_ACCEPTANCE_LOGOS) as $logo) {

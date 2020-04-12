@@ -10,5 +10,5 @@
   Released under the GNU General Public License
 */
 
-  define('MODULE_FOOTER_COPYRIGHT_TITLE', 'Copyright');
-  define('MODULE_FOOTER_COPYRIGHT_DESCRIPTION', 'Add copyright to footer');
+define('MODULE_FOOTER_COPYRIGHT_TITLE', 'Copyright');
+define('MODULE_FOOTER_COPYRIGHT_DESCRIPTION', 'Add copyright to footer');

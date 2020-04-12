@@ -10,5 +10,5 @@
   Released under the GNU General Public License
 */
 
-  define('MODULE_FOOTER_BACK_TO_TOP_TITLE', 'BACK_TO_TOP');
-  define('MODULE_FOOTER_BACK_TO_TOP_DESCRIPTION', 'Add back_to_top to footer');
+define('MODULE_FOOTER_BACK_TO_TOP_TITLE', 'Back To Top');
+define('MODULE_FOOTER_BACK_TO_TOP_DESCRIPTION', 'Add back to top to footer');
