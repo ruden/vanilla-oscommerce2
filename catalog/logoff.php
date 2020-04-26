@@ -44,6 +44,8 @@
 
   $cart->reset();
 
+  $wishlist->reset();
+
   require('includes/template_top.php');
 ?>
 

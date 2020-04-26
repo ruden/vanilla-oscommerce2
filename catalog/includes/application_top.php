@@ -125,6 +125,8 @@
 // include shopping cart class
   require('includes/classes/shopping_cart.php');
 
+  require('includes/classes/wishlist.php');
+
 // include navigation history class
   require('includes/classes/navigation_history.php');
 
@@ -246,6 +248,14 @@
   }
 
   $cart->update_content();
+
+  if (!tep_session_is_registered('wishlist') || !is_object($wishlist)) {
+    tep_session_register('wishlist');
+    $wishlist = new wishList;
+  }
+
+  $wishlist->update_list();
+  $wishlist->add_products();
 
 // include currencies class and create an instance
   require('includes/classes/currencies.php');

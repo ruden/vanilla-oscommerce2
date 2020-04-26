@@ -85,8 +85,8 @@ DROP TABLE IF EXISTS banners_history;
 CREATE TABLE banners_history (
   banners_history_id int NOT NULL auto_increment,
   banners_id int NOT NULL,
-  banners_shown int(5) NOT NULL DEFAULT '0',
-  banners_clicked int(5) NOT NULL DEFAULT '0',
+  banners_shown int(5) NOT NULL default '0',
+  banners_clicked int(5) NOT NULL default '0',
   banners_history_date datetime NOT NULL,
   PRIMARY KEY (banners_history_id),
   KEY idx_banners_history_banners_id (banners_id)
@@ -218,6 +218,27 @@ CREATE TABLE customers_info (
   password_reset_key char(40),
   password_reset_date datetime,
   PRIMARY KEY (customers_info_id)
+) CHARACTER SET utf8 COLLATE utf8_unicode_ci;
+
+DROP TABLE IF EXISTS customers_wishlist;
+CREATE TABLE customers_wishlist (
+  customers_wishlist_id int NOT NULL auto_increment,
+  customers_id int NOT NULL default '0',
+  products_id tinytext NOT NULL,
+  customers_wishlist_date_added char(8),
+  PRIMARY KEY (customers_wishlist_id),
+  KEY idx_wishlist_customers_id (customers_id)
+) CHARACTER SET utf8 COLLATE utf8_unicode_ci;
+
+DROP TABLE IF EXISTS customers_wishlist_attributes;
+CREATE TABLE customers_wishlist_attributes (
+  customers_wishlist_attributes_id int NOT NULL auto_increment,
+  customers_id int NOT NULL,
+  products_id tinytext NOT NULL,
+  products_options_id int NOT NULL,
+  products_options_value_id int NOT NULL,
+  PRIMARY KEY (customers_wishlist_attributes_id),
+  KEY idx_wishlist_att_customers_id (customers_id)
 ) CHARACTER SET utf8 COLLATE utf8_unicode_ci;
 
 DROP TABLE IF EXISTS information_pages;

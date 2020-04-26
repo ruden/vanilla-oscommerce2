@@ -232,6 +232,8 @@
 // restore cart contents
       $cart->restore_contents();
 
+      $wishlist->restore_list();
+
 // build the message content
       $name = $firstname . ' ' . $lastname;
 
