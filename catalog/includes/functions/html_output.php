@@ -112,7 +112,7 @@
 
     if (tep_not_null($parameters)) $image .= ' ' . $parameters;
 
-    $image .= '>';
+    $image .= ' loading="lazy">';
 
     return $image;
   }
