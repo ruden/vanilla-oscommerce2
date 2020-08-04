@@ -1457,7 +1457,7 @@
     return $string;
   }
 
-  function tep_set_default_pages() {
+  function tep_set_custom_pages() {
     return array('index.php',
                  'product_info.php',
                  'products_new.php',
