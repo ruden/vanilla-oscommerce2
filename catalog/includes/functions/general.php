@@ -137,7 +137,7 @@
     $out_of_stock = '';
 
     if ($stock_left < 0) {
-      $out_of_stock = '<span class="markProductOutOfStock">' . STOCK_MARK_PRODUCT_OUT_OF_STOCK . '</span>';
+      $out_of_stock = '<span class="ml-1 text-danger">' . STOCK_MARK_PRODUCT_OUT_OF_STOCK . '</span>';
     }
 
     return $out_of_stock;
@@ -174,6 +174,10 @@
     $exclude_array[] = 'error';
     $exclude_array[] = 'x';
     $exclude_array[] = 'y';
+
+    $exclude_array[] = 'language';
+    $exclude_array[] = 'currency';
+    $exclude_array[] = 'languages_id';
 
     $get_url = '';
 

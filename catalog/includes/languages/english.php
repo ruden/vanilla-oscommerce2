@@ -29,13 +29,12 @@ define('JQUERY_DATEPICKER_FORMAT', 'mm/dd/yy'); // see http://docs.jquery.com/UI
 // Return date in raw format
 // $date should be in format mm/dd/yyyy
 // raw date is in format YYYYMMDD, or DDMMYYYY
-function tep_date_raw($date, $reverse = false)
-{
-    if ($reverse) {
-        return substr($date, 3, 2) . substr($date, 0, 2) . substr($date, 6, 4);
-    } else {
-        return substr($date, 6, 4) . substr($date, 0, 2) . substr($date, 3, 2);
-    }
+function tep_date_raw($date, $reverse = false) {
+  if ($reverse) {
+    return substr($date, 3, 2) . substr($date, 0, 2) . substr($date, 6, 4);
+  } else {
+    return substr($date, 6, 4) . substr($date, 0, 2) . substr($date, 3, 2);
+  }
 }
 
 // if USE_DEFAULT_LANGUAGE_CURRENCY is true, use the following currency, instead of the applications default currency (used when changing language)
@@ -113,8 +112,8 @@ define('ENTRY_LAST_NAME', 'Last Name:');
 define('ENTRY_LAST_NAME_ERROR', 'Your Last Name must contain a minimum of ' . ENTRY_LAST_NAME_MIN_LENGTH . ' characters.');
 define('ENTRY_LAST_NAME_TEXT', '*');
 define('ENTRY_DATE_OF_BIRTH', 'Date of Birth:');
-define('ENTRY_DATE_OF_BIRTH_ERROR', 'Your Date of Birth must be in this format: MM/DD/YYYY (eg 05/21/1970)');
-define('ENTRY_DATE_OF_BIRTH_TEXT', '* (eg. 05/21/1970)');
+define('ENTRY_DATE_OF_BIRTH_ERROR', 'Your Date of Birth must be in this format: ' . DOB_FORMAT_STRING . ' (eg 05/21/1970)');
+define('ENTRY_DATE_OF_BIRTH_TEXT', '*');
 define('ENTRY_EMAIL_ADDRESS', 'E-Mail Address:');
 define('ENTRY_EMAIL_ADDRESS_ERROR', 'Your E-Mail Address must contain a minimum of ' . ENTRY_EMAIL_ADDRESS_MIN_LENGTH . ' characters.');
 define('ENTRY_EMAIL_ADDRESS_CHECK_ERROR', 'Your E-Mail Address does not appear to be valid - please make any necessary corrections.');
@@ -221,9 +220,9 @@ define('ICON_ERROR', 'Error');
 define('ICON_SUCCESS', 'Success');
 define('ICON_WARNING', 'Warning');
 
-define('TEXT_GREETING_PERSONAL', 'Welcome back <span class="greetUser">%s!</span> Would you like to see which <a href="%s"><u>new products</u></a> are available to purchase?');
+define('TEXT_GREETING_PERSONAL', 'Welcome back <strong>%s!</strong> Would you like to see which <a href="%s"><u>new products</u></a> are available to purchase?');
 define('TEXT_GREETING_PERSONAL_RELOGON', '<small>If you are not %s, please <a href="%s"><u>log yourself in</u></a> with your account information.</small>');
-define('TEXT_GREETING_GUEST', 'Welcome <span class="greetUser">Guest!</span> Would you like to <a href="%s"><u>log yourself in</u></a>? Or would you prefer to <a href="%s"><u>create an account</u></a>?');
+define('TEXT_GREETING_GUEST', 'Welcome <span class="font-weight-bold">Guest!</span> Would you like to <a href="%s"><u>log yourself in</u></a>? Or would you prefer to <a href="%s"><u>create an account</u></a>?');
 
 define('TEXT_SORT_PRODUCTS', 'Sort products ');
 define('TEXT_DESCENDINGLY', 'descendingly');
@@ -240,9 +239,9 @@ define('TEXT_NO_NEW_PRODUCTS', 'There are currently no products.');
 
 define('TEXT_UNKNOWN_TAX_RATE', 'Unknown tax rate');
 
-define('TEXT_REQUIRED', '<span class="errorText">Required</span>');
+define('TEXT_REQUIRED', 'Required');
 
-define('ERROR_TEP_MAIL', '<font face="Verdana, Arial" size="2" color="#ff0000"><strong><small>TEP ERROR:</small> Cannot send the email through the specified SMTP server. Please check your php.ini setting and correct the SMTP server if necessary.</strong></font>');
+define('ERROR_TEP_MAIL', 'TEP ERROR: Cannot send the email through the specified SMTP server. Please check your php.ini setting and correct the SMTP server if necessary.');
 
 define('TEXT_CCVAL_ERROR_INVALID_DATE', 'The expiry date entered for the credit card is invalid. Please check the date and try again.');
 define('TEXT_CCVAL_ERROR_INVALID_NUMBER', 'The credit card number entered is invalid. Please check the number and try again.');

@@ -44,7 +44,7 @@
       ob_start();
       include('includes/modules/' . $this->group . '/templates/information.php');
 
-      $oscTemplate->addBlock(ob_get_clean(), $this->group);
+      $oscTemplate->addBlock(ob_get_clean(), 'footer_bottom');
     }
 
     public function isEnabled() {

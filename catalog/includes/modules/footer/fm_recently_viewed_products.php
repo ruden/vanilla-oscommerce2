@@ -35,19 +35,25 @@
       global $oscTemplate, $currencies, $languages_id;
 
       if (!empty($_SESSION['recently_viewed_products'])) {
-        $recently_viewed_products_query = tep_db_query("SELECT p.*, pd.*, IF(s.status, s.specials_new_products_price, NULL) as specials_new_products_price from products p left join specials s on p.products_id = s.products_id, products_description pd WHERE p.products_status = '1' AND p.products_id = pd.products_id AND pd.language_id = '" . (int)$languages_id . "' AND p.products_id IN ('" . implode("', '", array_slice(tep_db_prepare_input($_SESSION['recently_viewed_products']), 0, (int)MODULE_FOOTER_RECENTLY_VIEWED_PRODUCTS_MAX_DISPLAY_PRODUCTS)) . "')");
+        $recently_viewed_products_query = tep_db_query("select p.*, pd.*, if(s.status, s.specials_new_products_price, null) as specials_new_products_price from products p left join specials s on p.products_id = s.products_id, products_description pd where p.products_status = '1' and p.products_id = pd.products_id and pd.language_id = '" . (int)$languages_id . "' and p.products_id in ('" . implode("', '", array_slice(tep_db_prepare_input($_SESSION['recently_viewed_products']), 0, (int)MODULE_FOOTER_RECENTLY_VIEWED_PRODUCTS_MAX_DISPLAY_PRODUCTS)) . "')");
 
         if (tep_db_num_rows($recently_viewed_products_query) > 0) {
           $recently_viewed_products_array = array();
 
           while ($recently_viewed_products = tep_db_fetch_array($recently_viewed_products_query)) {
+            $recently_viewed_products['products_price'] = $currencies->display_price($recently_viewed_products['products_price'], tep_get_tax_rate($recently_viewed_products['products_tax_class_id']));
+
+            if (!empty($recently_viewed_products['specials_new_products_price'])) {
+              $recently_viewed_products['specials_new_products_price'] = $currencies->display_price($recently_viewed_products['specials_new_products_price'], tep_get_tax_rate($recently_viewed_products['products_tax_class_id']));
+            }
+
             $recently_viewed_products_array[] = $recently_viewed_products;
           }
 
           ob_start();
           include('includes/modules/' . $this->group . '/templates/recently_viewed_products.php');
 
-          $oscTemplate->addBlock(ob_get_clean(), $this->group);
+          $oscTemplate->addBlock(ob_get_clean(), 'footer_top');
         }
       }
     }
@@ -70,8 +76,8 @@
       tep_db_query("insert into configuration (configuration_title, configuration_key, configuration_value, configuration_description, configuration_group_id, sort_order, set_function, date_added) values ('Enable Module', 'MODULE_FOOTER_RECENTLY_VIEWED_PRODUCTS_STATUS', 'True', 'Do you want to add the module to your shop?', '6', '1', 'tep_cfg_select_option(array(\'True\', \'False\'), ', now())");
       tep_db_query("INSERT INTO configuration (configuration_title, configuration_key, configuration_value, configuration_description, configuration_group_id, sort_order, set_function, date_added) VALUES ('Placement in index', 'MODULE_FOOTER_RECENTLY_VIEWED_PRODUCTS_CATEGORY_DEPTH', 'Main', 'Should the module be shown in the main page, category or listing products page?', '6', '0', 'tep_cfg_select_multioption(array(\'Main\', \'Categories\', \'Listing\'), ', now())");
       tep_db_query("INSERT INTO configuration (configuration_title, configuration_key, configuration_value, configuration_description, configuration_group_id, sort_order, date_added) VALUES ('Max number products to display', 'MODULE_FOOTER_RECENTLY_VIEWED_PRODUCTS_MAX_DISPLAY_PRODUCTS', '5', 'Maximum number of recently viewed products to display in page.', '6', '0', now())");
-      tep_db_query("insert into configuration (configuration_title, configuration_key, configuration_value, configuration_description, configuration_group_id, sort_order, use_function, set_function, date_added) values ('Show box on pages', 'MODULE_FOOTER_RECENTLY_VIEWED_PRODUCTS_PAGES', '" . implode(';', tep_set_default_pages()) . "', 'The pages on which box is shown.', '6', '0', 'tep_cfg_show_pages', 'tep_cfg_edit_pages(', now())");
-      tep_db_query("insert into configuration (configuration_title, configuration_key, configuration_value, configuration_description, configuration_group_id, sort_order, date_added) values ('Sort Order', 'MODULE_FOOTER_RECENTLY_VIEWED_PRODUCTS_SORT_ORDER', '0', 'Sort order of display. Lowest is displayed first.', '6', '0', now())");
+      tep_db_query("insert into configuration (configuration_title, configuration_key, configuration_value, configuration_description, configuration_group_id, sort_order, use_function, set_function, date_added) values ('Show box on pages', 'MODULE_FOOTER_RECENTLY_VIEWED_PRODUCTS_PAGES', '" . implode(';', tep_set_custom_pages()) . "', 'The pages on which box is shown.', '6', '0', 'tep_cfg_show_pages', 'tep_cfg_edit_pages(', now())");
+      tep_db_query("insert into configuration (configuration_title, configuration_key, configuration_value, configuration_description, configuration_group_id, sort_order, date_added) values ('Sort Order', 'MODULE_FOOTER_RECENTLY_VIEWED_PRODUCTS_SORT_ORDER', '11', 'Sort order of display. Lowest is displayed first.', '6', '0', now())");
     }
 
     public function remove() {

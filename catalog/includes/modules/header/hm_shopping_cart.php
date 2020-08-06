@@ -12,7 +12,7 @@
 
   class hm_shopping_cart {
     public $code;
-    public $group;
+    public $group = 'header';
     public $title;
     public $description;
     public $sort_order;
@@ -32,7 +32,9 @@
     }
 
     public function execute() {
-      global $oscTemplate;
+      global $oscTemplate, $cart;
+
+      $cart_count_contents = $cart->count_contents();
 
       ob_start();
       include('includes/modules/' . $this->group . '/templates/shopping_cart.php');

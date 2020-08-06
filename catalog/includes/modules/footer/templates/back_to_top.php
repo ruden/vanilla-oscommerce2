@@ -1,56 +1,35 @@
-<style>
-  .back_to_top {
-    position: fixed;
-    bottom: 80px;
-    right: 40px;
-    z-index: 9999;
-    width: 30px;
-    height: 30px;
-    text-align: center;
-    line-height: 30px;
-    background: #dcdcdc;
-    color: #444;
-    cursor: pointer;
-    border-radius: 2px;
-    display: none;
-  }
-
-  .back_to_top:hover {
-    background: #b1b3b4;
-  }
-
-  .back_to_top-show {
-    display: block;
-  }
-</style>
-
-<a class="back_to_top">&uarr;</a>
+<a class="t-back-to-top">&uarr;</a>
 
 <script>
-  (function() {
-    const goTopBtn = document.querySelector('.back_to_top');
+  (function () {
+    const style = document.createElement('style')
+
+    style.innerHTML = '.t-back-to-top{position:fixed;bottom:80px;right:40px;z-index:9999;width:2.5rem;height:2.5rem;text-align:center;line-height:2rem;background:#dcdcdc;color:#444;cursor:pointer;border-radius:2px;display:none}.t-back-to-top:hover{background:#b1b3b4}'
+    document.head.appendChild(style)
+
+    const goTopBtn = document.querySelector('.t-back-to-top')
 
     function trackScroll() {
       let scrolled = window.pageYOffset;
       let coords = document.documentElement.clientHeight;
 
       if (scrolled > coords) {
-        goTopBtn.classList.add('back_to_top-show');
+        goTopBtn.style.display = 'block'
       }
 
       if (scrolled < coords) {
-        goTopBtn.classList.remove('back_to_top-show');
+        goTopBtn.style.display = 'none'
       }
     }
 
     function backToTop() {
       if (window.pageYOffset > 0) {
-        window.scrollBy(0, -80);
-        setTimeout(backToTop, 0);
+        window.scrollBy(0, -80)
+        setTimeout(backToTop, 0)
       }
     }
 
-    window.addEventListener('scroll', trackScroll);
-    goTopBtn.addEventListener('click', backToTop);
-  })();
+    window.addEventListener('scroll', trackScroll)
+    goTopBtn.addEventListener('click', backToTop)
+  })()
 </script>

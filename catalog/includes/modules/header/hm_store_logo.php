@@ -28,10 +28,6 @@
       if ($this->check()) {
         $this->sort_order = MODULE_HEADER_STORE_LOGO_SORT_ORDER;
         $this->enabled = (MODULE_HEADER_STORE_LOGO_STATUS == 'True');
-
-        /*if (MODULE_HEADER_STORE_LOGO_NAVBAR_PLACEMENT == 'True') {
-          $this->group = 'navbar';
-        }*/
       }
     }
 

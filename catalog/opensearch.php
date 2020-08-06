@@ -10,20 +10,20 @@
   Released under the GNU General Public License
 */
 
-  header('Content-Type: text/xml');
+header('Content-Type: text/xml');
 
-  require('includes/application_top.php');
+require('includes/application_top.php');
 
-  if ( !defined('MODULE_HEADER_TAGS_OPENSEARCH_STATUS') || (MODULE_HEADER_TAGS_OPENSEARCH_STATUS != 'True') ) {
-    exit;
-  }
+if (!defined('MODULE_HEADER_TAGS_OPENSEARCH_STATUS') || (MODULE_HEADER_TAGS_OPENSEARCH_STATUS != 'True')) {
+  exit;
+}
 
-  echo '<?xml version="1.0"?>' . "\n";
+echo '<?xml version="1.0"?>' . "\n";
 ?>
-<OpenSearchDescription xmlns="http://a9.com/-/spec/opensearch/1.1/" xmlns:moz="http://www.mozilla.org/2006/browser/search/">
+<OpenSearchDescription xmlns="http://a9.com/-/spec/opensearch/1.1/">
   <ShortName><?php echo tep_output_string(MODULE_HEADER_TAGS_OPENSEARCH_SITE_SHORT_NAME); ?></ShortName>
   <Description><?php echo tep_output_string(MODULE_HEADER_TAGS_OPENSEARCH_SITE_DESCRIPTION); ?></Description>
-<?php
+  <?php
   if (tep_not_null(MODULE_HEADER_TAGS_OPENSEARCH_SITE_CONTACT)) {
     echo '  <Contact>' . tep_output_string(MODULE_HEADER_TAGS_OPENSEARCH_SITE_CONTACT) . '</Contact>' . "\n";
   }
@@ -47,10 +47,10 @@
   if (tep_not_null(MODULE_HEADER_TAGS_OPENSEARCH_SITE_IMAGE)) {
     echo '  <Image height="64" width="64" type="image/png">' . tep_output_string(MODULE_HEADER_TAGS_OPENSEARCH_SITE_IMAGE) . '</Image>' . "\n";
   }
-?>
+  ?>
   <InputEncoding>UTF-8</InputEncoding>
-  <Url type="text/html" method="get" template="<?php echo tep_href_link('advanced_search_result.php', 'keywords={searchTerms}', 'NONSSL', false); ?>" />
+  <Url type="text/html" method="get" template="<?php echo tep_href_link('advanced_search_result.php', 'keywords={searchTerms}', 'NONSSL', false); ?>"/>
 </OpenSearchDescription>
 <?php
-  require('includes/application_bottom.php');
+require('includes/application_bottom.php');
 ?>

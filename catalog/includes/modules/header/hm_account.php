@@ -12,7 +12,7 @@
 
   class hm_account {
     public $code;
-    public $group;
+    public $group = 'header';
     public $title;
     public $description;
     public $sort_order;
@@ -20,7 +20,6 @@
 
     public function __construct() {
       $this->code = get_class($this);
-      $this->group = basename(dirname(__FILE__));
 
       $this->title = MODULE_HEADER_ACCOUNT_TITLE;
       $this->description = MODULE_HEADER_ACCOUNT_DESCRIPTION;
@@ -32,9 +31,7 @@
     }
 
     public function execute() {
-      global $oscTemplate, $cart;
-
-      $cart_count_contents = $cart->count_contents();
+      global $oscTemplate;
 
       ob_start();
       include('includes/modules/' . $this->group . '/templates/account.php');

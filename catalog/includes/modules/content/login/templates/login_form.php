@@ -1,26 +1,22 @@
-<div class="contentContainer <?php echo (MODULE_CONTENT_LOGIN_FORM_CONTENT_WIDTH == 'Half') ? 'grid_8' : 'grid_16'; ?>">
+<div class="t-login-form col-lg-6">
   <h2><?php echo MODULE_CONTENT_LOGIN_HEADING_RETURNING_CUSTOMER; ?></h2>
 
-  <div class="contentText">
-    <p><?php echo MODULE_CONTENT_LOGIN_TEXT_RETURNING_CUSTOMER; ?></p>
+  <p><?php echo MODULE_CONTENT_LOGIN_TEXT_RETURNING_CUSTOMER; ?></p>
 
-    <?php echo tep_draw_form('login', tep_href_link('login.php', 'action=process', 'SSL'), 'post', '', true); ?>
+  <?php echo tep_draw_form('login', tep_href_link('login.php', 'action=process', 'SSL'), 'post', '', true); ?>
 
-    <table border="0" cellspacing="0" cellpadding="2" width="100%">
-      <tr>
-        <td class="fieldKey"><?php echo ENTRY_EMAIL_ADDRESS; ?></td>
-        <td class="fieldValue"><?php echo tep_draw_input_field('email_address'); ?></td>
-      </tr>
-      <tr>
-        <td class="fieldKey"><?php echo ENTRY_PASSWORD; ?></td>
-        <td class="fieldValue"><?php echo tep_draw_password_field('password'); ?></td>
-      </tr>
-    </table>
-
-    <p><?php echo '<a href="' . tep_href_link('password_forgotten.php', '', 'SSL') . '">' . MODULE_CONTENT_LOGIN_TEXT_PASSWORD_FORGOTTEN . '</a>'; ?></p>
-
-    <p align="right"><?php echo tep_draw_button(IMAGE_BUTTON_LOGIN, 'key', null, 'btn-primary'); ?></p>
-
-    </form>
+  <div class="mb-3">
+    <label class="form-label" for="email-address"><?php echo ENTRY_EMAIL_ADDRESS; ?></label>
+    <?php echo tep_draw_input_field('email_address', null, 'id="email-address" class="form-control" required', 'email'); ?>
   </div>
+  <div class="mb-3">
+    <label class="form-label" for="password"><?php echo ENTRY_PASSWORD; ?></label>
+    <?php echo tep_draw_password_field('password', null, 'id="password" class="form-control"'); ?>
+  </div>
+
+  <div class="mb-3"><?php echo '<a href="' . tep_href_link('password_forgotten.php', '', 'SSL') . '">' . MODULE_CONTENT_LOGIN_TEXT_PASSWORD_FORGOTTEN . '</a>'; ?></div>
+
+  <div class="text-right"><?php echo tep_draw_button(IMAGE_BUTTON_LOGIN, 'key', null, 'btn-primary'); ?></div>
+
+  </form>
 </div>

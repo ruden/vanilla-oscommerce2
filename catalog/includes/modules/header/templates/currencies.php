@@ -1,17 +1,11 @@
-<?php
-$currencies_array = array();
+<div class="t-currencies col-auto d-flex align-items-center">
+  <label for="currency" class="mr-2 col-form-label-sm"><?php echo MODULE_HEADER_CURRENCIES_TEXT_CURRENCIES; ?></label>
 
-foreach ($currencies->currencies as $key => $value) {
-  $currencies_array[] = array('id' => $key, 'text' => $value['title']);
-}
+  <?php echo tep_draw_form('currencies', tep_href_link($PHP_SELF, '', $request_type, false), 'get') . $hidden_get_variables . tep_hide_session_id(); ?>
 
-$hidden_get_variables = '';
-foreach ($_GET as $key => $value) {
-  if (is_string($value) && ($key != 'currency') && ($key != tep_session_name()) && ($key != 'x') && ($key != 'y')) {
-    $hidden_get_variables .= tep_draw_hidden_field($key, $value);
-  }
-}
+  <?php echo tep_draw_pull_down_menu('currency', $currencies_array, $currency, 'onchange="this.form.submit();" id="currency" class="form-control form-control-sm w-auto"'); ?>
 
-echo MODULE_HEADER_CURRENCIES_TEXT_CURRENCIES . ' ' . tep_draw_form('currencies', tep_href_link($PHP_SELF, '', $request_type, false), 'get') .
-  '    ' . tep_draw_pull_down_menu('currency', $currencies_array, $currency, 'onchange="this.form.submit();" style="width: 100%"') . $hidden_get_variables . tep_hide_session_id() . '</form>';
+  </form>
+</div>
+
 

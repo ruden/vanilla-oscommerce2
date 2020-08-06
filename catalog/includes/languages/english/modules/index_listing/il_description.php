@@ -10,5 +10,5 @@
   Released under the GNU General Public License
 */
 
-  define('MODULE_INDEX_LISTING_DESCRIPTION_TITLE', 'DESCRIPTION');
-  define('MODULE_INDEX_LISTING_DESCRIPTION_DESCRIPTION', 'Add description to index_listing');
+define('MODULE_INDEX_LISTING_DESCRIPTION_TITLE', 'Category Description');
+define('MODULE_INDEX_LISTING_DESCRIPTION_DESCRIPTION', 'Add category description to category listing.');

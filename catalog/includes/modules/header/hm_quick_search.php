@@ -12,7 +12,7 @@
 
   class hm_quick_search {
     public $code;
-    public $group;
+    public $group = 'header';
     public $title;
     public $description;
     public $sort_order;
@@ -32,7 +32,7 @@
     }
 
     public function execute() {
-      global $oscTemplate;
+      global $request_type, $oscTemplate;
 
       ob_start();
       include('includes/modules/' . $this->group . '/templates/quick_search.php');

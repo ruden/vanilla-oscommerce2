@@ -64,34 +64,37 @@ if (isset($_GET['action']) && ($_GET['action'] == 'success')) {
 
   <p><?php echo TEXT_SUCCESS; ?></p>
 
-  <a class="btn btn-primary" href="<?php echo tep_href_link('index.php'); ?>"><i class="uk-icon-triangle-1-e"></i><?php echo IMAGE_BUTTON_CONTINUE; ?></a>
+  <div class="text-right mb-3">
+    <?php echo tep_draw_button(IMAGE_BUTTON_CONTINUE, 'triangle-1-e', tep_href_link('index.php')); ?>
+  </div>
 
   <?php
 } else {
   ?>
 
-  <div class="w-50">
-    <?php echo tep_draw_form('contact_us', tep_href_link('contact_us.php', 'action=send'), 'post', '', true); ?>
+  <?php echo tep_draw_form('contact_us', tep_href_link('contact_us.php', 'action=send'), 'post', '', true); ?>
+
+  <div class="col-lg-6 mb-5">
 
     <div class="mb-3">
-      <label for="entry-name"><?php echo ENTRY_NAME; ?></label>
-      <?php echo tep_draw_input_field('name', null, 'id="entry-name" class="form-control"'); ?>
+      <label for="name"><?php echo ENTRY_NAME; ?></label>
+      <?php echo tep_draw_input_field('name', null, 'id="name" class="form-control" required'); ?>
     </div>
     <div class="mb-3">
-      <label for="entry-email"><?php echo ENTRY_EMAIL; ?></label>
-      <?php echo tep_draw_input_field('email', null, 'id="entry-email" class="form-control"'); ?>
+      <label for="email"><?php echo ENTRY_EMAIL; ?></label>
+      <?php echo tep_draw_input_field('email', null, 'id="email" class="form-control" required'); ?>
     </div>
     <div class="mb-3">
-      <label for="entry-enquiry"><?php echo ENTRY_ENQUIRY; ?></label>
-      <?php echo tep_draw_textarea_field('enquiry', null, 'id="entry-enquiry" class="form-control"'); ?>
+      <label for="enquiry"><?php echo ENTRY_ENQUIRY; ?></label>
+      <?php echo tep_draw_textarea_field('enquiry', null, 'id="enquiry" class="form-control" rows="5"'); ?>
     </div>
-    <div class="mb-3">
-      <button class="btn btn-primary" type="submit"><i class="triangle-1-e"></i><?php echo IMAGE_BUTTON_CONTINUE; ?>
-      </button>
+    <div class="text-right">
+      <?php echo tep_draw_button(IMAGE_BUTTON_CONTINUE, 'triangle-1-e', null, 'btn-primary'); ?>
     </div>
 
-    </form>
   </div>
+
+  </form>
 
   <?php
 }

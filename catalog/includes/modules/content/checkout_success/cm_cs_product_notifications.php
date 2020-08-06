@@ -25,7 +25,7 @@
       $this->title = MODULE_CONTENT_CHECKOUT_SUCCESS_PRODUCT_NOTIFICATIONS_TITLE;
       $this->description = MODULE_CONTENT_CHECKOUT_SUCCESS_PRODUCT_NOTIFICATIONS_DESCRIPTION;
 
-      if ( defined('MODULE_CONTENT_CHECKOUT_SUCCESS_PRODUCT_NOTIFICATIONS_STATUS') ) {
+      if ($this->check()) {
         $this->sort_order = MODULE_CONTENT_CHECKOUT_SUCCESS_PRODUCT_NOTIFICATIONS_SORT_ORDER;
         $this->enabled = (MODULE_CONTENT_CHECKOUT_SUCCESS_PRODUCT_NOTIFICATIONS_STATUS == 'True');
       }
@@ -60,17 +60,14 @@
           $products_query = tep_db_query("select products_id, products_name from orders_products where orders_id = '" . (int)$order_id . "' order by products_name");
           while ($products = tep_db_fetch_array($products_query)) {
             if ( !isset($products_displayed[$products['products_id']]) ) {
-              $products_displayed[$products['products_id']] = tep_draw_checkbox_field('notify[]', $products['products_id']) . ' ' . $products['products_name'];
+              $products_displayed[$products['products_id']] = $products;
             }
           }
 
-          $products_notifications = implode('<br />', $products_displayed);
-
           ob_start();
           include('includes/modules/content/' . $this->group . '/templates/product_notifications.php');
-          $template = ob_get_clean();
 
-          $oscTemplate->addContent($template, $this->group);
+          $oscTemplate->addContent(ob_get_clean(), $this->group);
         }
       }
     }
@@ -96,4 +93,3 @@
       return array('MODULE_CONTENT_CHECKOUT_SUCCESS_PRODUCT_NOTIFICATIONS_STATUS','MODULE_CONTENT_CHECKOUT_SUCCESS_PRODUCT_NOTIFICATIONS_SORT_ORDER');
     }
   }
-?>

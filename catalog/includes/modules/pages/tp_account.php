@@ -11,9 +11,9 @@
 */
 
   class tp_account {
-    var $group = 'account';
+    public $group = 'account';
 
-    function prepare() {
+    public function prepare() {
       global $oscTemplate;
 
       $oscTemplate->_data[$this->group] = array('account' => array('title' => MY_ACCOUNT_TITLE,
@@ -39,31 +39,28 @@
                                                                                                               'icon' => 'heart'))));
     }
 
-    function build() {
+    public function build() {
       global $oscTemplate;
 
       $output = '';
 
-      foreach ( $oscTemplate->_data[$this->group] as $group ) {
+      foreach ($oscTemplate->_data[$this->group] as $group) {
         $output .= '<h2>' . $group['title'] . '</h2>' .
-                   '<div class="contentText">' .
-                   '  <ul class="accountLinkList">';
+                   '  <ul class="list-unstyled">';
 
-        foreach ( $group['links'] as $entry ) {
-          $output .= '    <li><span class="';
+        foreach ($group['links'] as $entry) {
+          $output .= '    <li>';
 
-          if ( isset($entry['icon']) ) {
-            $output .= ' ui-icon ui-icon-' . $entry['icon'] . ' ';
+          if (isset($entry['icon'])) {
+            $output .= '<span class="ui-icon ui-icon-' . $entry['icon'] . '"></span>';
           }
 
-          $output .= 'accountLinkListEntry"></span><a href="' . $entry['link'] . '">' . $entry['title'] . '</a></li>';
+          $output .= '<a href="' . $entry['link'] . '">' . $entry['title'] . '</a></li>';
         }
 
-        $output .= '  </ul>' .
-                   '</div>';
+        $output .= '  </ul>';
       }
 
       $oscTemplate->addContent($output, $this->group);
     }
   }
-?>

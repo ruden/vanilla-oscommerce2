@@ -12,7 +12,7 @@
 
   class hm_currencies {
     public $code;
-    public $group;
+    public $group = 'header';
     public $title;
     public $description;
     public $sort_order;
@@ -34,10 +34,23 @@
     public function execute() {
       global $oscTemplate, $PHP_SELF, $currencies, $request_type, $currency, $oscTemplate;
 
+      $currencies_array = array();
+
+      foreach ($currencies->currencies as $key => $value) {
+        $currencies_array[] = array('id' => $key, 'text' => $value['title']);
+      }
+
+      $hidden_get_variables = '';
+      foreach ($_GET as $key => $value) {
+        if (is_string($value) && ($key != 'currency') && ($key != tep_session_name()) && ($key != 'x') && ($key != 'y')) {
+          $hidden_get_variables .= tep_draw_hidden_field($key, $value);
+        }
+      }
+
       ob_start();
       include('includes/modules/' . $this->group . '/templates/currencies.php');
 
-      $oscTemplate->addBlock(ob_get_clean(), $this->group);
+      $oscTemplate->addBlock(ob_get_clean(), 'header_top');
     }
 
     public function isEnabled() {
@@ -56,7 +69,7 @@
 
     public function install() {
       tep_db_query("insert into configuration (configuration_title, configuration_key, configuration_value, configuration_description, configuration_group_id, sort_order, set_function, date_added) values ('Enable Module', 'MODULE_HEADER_CURRENCIES_STATUS', 'True', 'Do you want to add the module to your shop?', '6', '1', 'tep_cfg_select_option(array(\'True\', \'False\'), ', now())");
-      tep_db_query("insert into configuration (configuration_title, configuration_key, configuration_value, configuration_description, configuration_group_id, sort_order, date_added) values ('Sort Order', 'MODULE_HEADER_CURRENCIES_SORT_ORDER', '0', 'Sort order of display. Lowest is displayed first.', '6', '0', now())");
+      tep_db_query("insert into configuration (configuration_title, configuration_key, configuration_value, configuration_description, configuration_group_id, sort_order, date_added) values ('Sort Order', 'MODULE_HEADER_CURRENCIES_SORT_ORDER', '12', 'Sort order of display. Lowest is displayed first.', '6', '0', now())");
     }
 
     public function remove() {

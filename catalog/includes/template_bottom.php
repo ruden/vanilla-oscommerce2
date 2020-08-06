@@ -11,25 +11,13 @@
 */
 ?>
 
+        </div>
+      </div>
     </div>
-
-<?php
-  if ($oscTemplate->hasBlocks('boxes_column_right')) {
-?>
-
-  <aside class="aside col-xl-2 d-none d-xl-block">
-    <?php echo $oscTemplate->getBlocks('boxes_column_right'); ?>
-  </aside>
-
-<?php
-  }
-?>
-
   </div>
-
 </main>
 
-<footer class="footer container">
+<footer class="footer">
   <?php require('includes/footer.php'); ?>
 </footer>
 

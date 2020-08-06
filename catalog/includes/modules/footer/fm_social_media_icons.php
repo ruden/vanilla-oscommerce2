@@ -21,7 +21,7 @@
     public function __construct() {
       $this->code = get_class($this);
       $this->group = basename(dirname(__FILE__));
-  
+
       $this->title = MODULE_FOOTER_SOCIAL_MEDIA_ICONS_TITLE;
       $this->description .= MODULE_FOOTER_SOCIAL_MEDIA_ICONS_DESCRIPTION;
       $this->description .= MODULE_FOOTER_SOCIAL_MEDIA_ICONS_LINK;
@@ -59,7 +59,7 @@
           ob_start();
           include('includes/modules/' . $this->group . '/templates/social_media_icons.php');
 
-          $oscTemplate->addBlock(ob_get_clean(), $this->group);;
+          $oscTemplate->addBlock(ob_get_clean(), $this->group);
         }
       }
     }

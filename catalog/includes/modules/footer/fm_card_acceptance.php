@@ -41,9 +41,7 @@
     }
 
     public function isEnabled() {
-      global $PHP_SELF;
-
-      if ((substr(basename($PHP_SELF), 0, 8) != 'checkout') && tep_not_null(MODULE_FOOTER_CARD_ACCEPTANCE_LOGOS)) {
+      if (defined('MODULE_FOOTER_CARD_ACCEPTANCE_LOGOS') && tep_not_null(MODULE_FOOTER_CARD_ACCEPTANCE_LOGOS)) {
         return $this->enabled;
       }
 
@@ -132,7 +130,7 @@
   $(function() {
     var drag_here_li = '{$drag_here_li}';
   
-    if ( $('#ca_logos li').size() < 1 ) {
+    if ( $('#ca_logos li').length < 1 ) {
       $('#ca_logos').append(drag_here_li);
     }
   
@@ -140,7 +138,7 @@
       connectWith: '#new_ca_logos',
       items: 'li:not("#caLogoEmpty")',
       stop: function (event, ui) {
-        if ( $('#ca_logos li').size() < 1 ) {
+        if ( $('#ca_logos li').length < 1 ) {
           $('#ca_logos').append(drag_here_li);
         } else if ( $('#caLogoEmpty').length > 0 ) {
           $('#caLogoEmpty').remove();
@@ -151,7 +149,7 @@
     $('#new_ca_logos').sortable({
       connectWith: '#ca_logos',
       stop: function (event, ui) {
-        if ( $('#ca_logos li').size() < 1 ) {
+        if ( $('#ca_logos li').length < 1 ) {
           $('#ca_logos').append(drag_here_li);
         } else if ( $('#caLogoEmpty').length > 0 ) {
           $('#caLogoEmpty').remove();
@@ -164,7 +162,7 @@
     $('form[name="modules"]').submit(function(event) {
       var ca_selected_cards = '';
   
-      if ( $('#ca_logos li').size() > 0 ) {
+      if ( $('#ca_logos li').length > 0 ) {
         $('#ca_logos li input[name="fm_card_acceptance_logos[]"]').each(function() {
           ca_selected_cards += $(this).attr('value') + ';';
         });

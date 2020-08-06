@@ -8,3 +8,33 @@
 
   Released under the GNU General Public License
 */
+
+a {
+  text-decoration: unset;
+}
+
+h1 {
+  margin-bottom: 2rem;
+}
+
+h2 {
+  font-weight: 300;
+  border-bottom: 1px solid #dee2e6;
+  padding-bottom: 1rem;
+  margin-bottom: 1rem;
+}
+
+.t-wishlist svg, .t-shopping-cart svg, .t-account svg, .t-categories svg  {
+  fill: none;
+  stroke: #0d6efd;
+  stroke-width: 0.1rem;
+  width: 2.25rem;
+  height: 2.25rem;
+}
+
+.t-quick-search svg {
+  fill: #ffffff;
+  stroke: #ffffff;
+  width: 1.5rem;
+  height: 1.5rem;
+}
