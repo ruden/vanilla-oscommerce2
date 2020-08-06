@@ -25,7 +25,7 @@
 ////
 // Auto activate banners
   function tep_activate_banners() {
-    $banners_query = tep_db_query("select banners_id, date_scheduled from banners where date_scheduled != ''");
+    $banners_query = tep_db_query("select banners_id, date_scheduled from banners where date_scheduled is not null");
     if (tep_db_num_rows($banners_query)) {
       while ($banners = tep_db_fetch_array($banners_query)) {
         if (date('Y-m-d H:i:s') >= $banners['date_scheduled']) {
