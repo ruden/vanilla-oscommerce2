@@ -12,7 +12,7 @@
 
   class hm_wishlist {
     public $code;
-    public $group;
+    public $group = 'header';
     public $title;
     public $description;
     public $sort_order;
