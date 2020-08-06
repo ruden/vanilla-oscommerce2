@@ -44,7 +44,20 @@ if (isset($_GET['manufacturers_id']) && !empty($_GET['manufacturers_id'])) {
     $listing_sql = "select p.*, pd.*, m.*, IF(s.status, s.specials_new_products_price, NULL) as specials_new_products_price, IF(s.status, s.specials_new_products_price, p.products_price) as final_price from products p left join specials s on p.products_id = s.products_id, products_description pd, manufacturers m, products_to_categories p2c where p.products_status = '1' and p.manufacturers_id = m.manufacturers_id and m.manufacturers_id = '" . (int)$_GET['filter_id'] . "' and p.products_id = p2c.products_id and pd.products_id = p2c.products_id and pd.language_id = '" . (int)$languages_id . "' and p2c.categories_id = '" . (int)$current_category_id . "'";
   } else {
 // We show them all
-    $listing_sql = "select p.*, pd.*, m.*, if(s.status, s.specials_new_products_price, null) as specials_new_products_price, if(s.status, s.specials_new_products_price, p.products_price) as final_price from products_description pd, products p left join manufacturers m on p.manufacturers_id = m.manufacturers_id left join specials s on p.products_id = s.products_id, products_to_categories p2c where p.products_status = '1' and p.products_id = p2c.products_id and pd.products_id = p2c.products_id and pd.language_id = '" . (int)$languages_id . "' and p2c.categories_id = '" . (int)$current_category_id . "'";
+    $where_str = "(p2c.categories_id = '" . (int)$current_category_id . "'";
+
+    if (tep_has_category_subcategories($current_category_id) === true) {
+      $subcategories_array = array();
+      tep_get_subcategories($subcategories_array, $current_category_id);
+
+      for ($i = 0, $n = sizeof($subcategories_array); $i < $n; $i++) {
+        $where_str .= " or p2c.categories_id = '" . (int)$subcategories_array[$i] . "'";
+      }
+    }
+
+    $where_str .= ")";
+
+    $listing_sql = "select p.*, pd.*, m.*, if(s.status, s.specials_new_products_price, null) as specials_new_products_price, if(s.status, s.specials_new_products_price, p.products_price) as final_price from products_description pd, products p left join manufacturers m on p.manufacturers_id = m.manufacturers_id left join specials s on p.products_id = s.products_id, products_to_categories p2c where p.products_status = '1' and p.products_id = p2c.products_id and pd.products_id = p2c.products_id and pd.language_id = '" . (int)$languages_id . "' and $where_str";
   }
 }
 
@@ -54,22 +67,14 @@ require('includes/template_top.php');
 
 $page_blocks = $oscTemplate->getBlocks('index_listing');
 
-if ($category_depth == 'nested') {
+if ($category_depth != 'top') {
   ?>
 
-  <h1><?php echo $categories['categories_name']; ?></h1>
-
   <div class="mb-5">
-    <div class="mb-3">
-
-      <?php echo $page_blocks; ?>
-
-    </div>
+    <?php echo $page_blocks; ?>
   </div>
 
   <?php
-} elseif ($category_depth == 'products' || (isset($_GET['manufacturers_id']) && !empty($_GET['manufacturers_id']))) {
-  echo $page_blocks;
 
   require('includes/modules/product_listing.php');
 } else { // default page
@@ -78,9 +83,7 @@ if ($category_depth == 'nested') {
   <h1><?php echo HEADING_TITLE; ?></h1>
 
   <div class="mb-5">
-
     <?php echo $page_blocks; ?>
-
   </div>
 
   <?php
