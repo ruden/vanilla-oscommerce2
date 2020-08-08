@@ -70,6 +70,8 @@
     define($configuration['cfgKey'], $configuration['cfgValue']);
   }
 
+  require('includes/vendor/autoload.php');
+
 // if gzip_compression is enabled, start to buffer the output
   if ( (GZIP_COMPRESSION == 'true') && ($ext_zlib_loaded = extension_loaded('zlib')) && !headers_sent() ) {
     if (($ini_zlib_output_compression = (int)ini_get('zlib.output_compression')) < 1) {
