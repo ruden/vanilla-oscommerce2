@@ -23,9 +23,8 @@ Changelog
 * [x] Improve session functions.
 * [x] Disable output of PHP error messages; log errors to a file in the work
    directory.
-* [x] Update PayPal modules to the latest PayPal App version (vx.xxx).
-* [ ] <s>Update Braintree module to the latest Braintree App version (vx.xxx)</s>.
-* [x] Remove Braintree modules.
+* [x] Update PayPal modules to the latest PayPal App version (v5.018).
+* [x] Remove Braintree module to the latest Braintree App version (vx.xxx).
 
 New
 ---
@@ -36,6 +35,19 @@ Todo
 ----
 * [ ] Banner slider and grid.
 * [ ] GDPR.
-* [ ] Recently viewed products.
-* [ ] Related products.
+* [x] Recently viewed products.
+* [ ] <s>Related products.</s>
 * [ ] SEO optimization (not SEO URL).
+* [x] MySQL v8 compatibility fixes.
+* [ ] <s>Featured products.</s>
+* [x] Bootstrap 5 template.
+* [x] New location and control images.
+* [ ] Migration script old osCommerce version.
+* [x] New sorting products in listing and modularized.
+* [x] Add Spanish language.
+* [ ] Modularized the index page.
+* [ ] Update review system.
+* [x] Add wishlist.
+* [ ] Modularized the XML sitemap. 
+* [ ] Modularized the box product filter. 
+* [ ] Quick product updates. 
