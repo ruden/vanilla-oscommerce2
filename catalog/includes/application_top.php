@@ -136,7 +136,7 @@
   require('includes/functions/sessions.php');
 
 // set the session name and save path
-  tep_session_name('OSCOMsid');
+  tep_session_name('osCsid');
   tep_session_save_path(SESSION_WRITE_DIRECTORY);
 
 // set the session cookie parameters
@@ -156,7 +156,7 @@
 // start the session
   $session_started = false;
   if (SESSION_FORCE_COOKIE_USE == 'True') {
-    tep_setcookie('cookie_test', 'please_accept_for_session', time()+60*60*24*30, $cookie_path, $cookie_domain);
+    tep_setcookie('cookie_test', 'please_accept_for_session', time()+60*60*24*30, $cookie_path, $cookie_domain, ($request_type == 'SSL'));
 
     if (isset($_COOKIE['cookie_test'])) {
       tep_session_start();
