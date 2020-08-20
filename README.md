@@ -51,3 +51,4 @@ Todo
 * [ ] Modularized the XML sitemap. 
 * [ ] Modularized the box product filter. 
 * [ ] Quick product updates. 
+* [x] SMTP Authentication.
