@@ -1,8 +1,9 @@
 <div class="t-categories">
+  <link rel="stylesheet" href="includes/modules/header/templates/categories/bootstrap-4/jquery.smartmenus.bootstrap-4.css">
+
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
 
-
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
 
@@ -14,56 +15,47 @@
           <svg>
             <use href="#svg-icon-search"/>
           </svg>
-        </a>
-      </li>
+        </a></li>
       <li class="list-inline-item">
         <a href="<?php echo tep_href_link('login.php'); ?>">
           <svg>
             <use href="#svg-icon-user"/>
           </svg>
-        </a>
-      </li>
+        </a></li>
       <li class="list-inline-item">
         <a href="<?php echo tep_href_link('wishlist.php'); ?>">
           <svg>
             <use href="#svg-icon-heart"/>
           </svg>
-        </a>
-      </li>
+        </a></li>
       <li class="list-inline-item">
         <a href="<?php echo tep_href_link('shopping_cart.php'); ?>">
           <svg>
             <use href="#svg-icon-shopping-cart"/>
           </svg>
-        </a>
-      </li>
+        </a></li>
     </ul>
 
-    <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
-      <ul class="navbar-nav mr-auto mb-2 mb-lg-0">
+    <div class="collapse navbar-collapse" id="navbarNavDropdown">
 
-        <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="#">Home</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Link</a>
-        </li>
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-expanded="false">
-            Dropdown
-          </a>
-          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <li><a class="dropdown-item" href="#">Action</a></li>
-            <li><a class="dropdown-item" href="#">Another action</a></li>
-            <li><a class="dropdown-item" href="#">Something else here</a></li>
-          </ul>
-        </li>
+      <ul class="nav navbar-nav mr-auto">
+
+        <?php
+        if ($special_products) {
+          ?>
+
+          <li class="nav-item">
+            <a class="nav-link text-danger" href="<?php echo tep_href_link('specials.php'); ?>"><?php echo MODULE_HEADER_CATEGORIES_TEXT_SALE; ?></a></li>
+
+          <?php
+        }
+        ?>
+
+        <?php echo $categories_list; ?>
 
       </ul>
+      
     </div>
-
   </nav>
+
 </div>
-
-
-<?php ?>

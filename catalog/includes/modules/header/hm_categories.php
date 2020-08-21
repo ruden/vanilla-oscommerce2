@@ -34,12 +34,27 @@ class hm_categories {
   }
 
   public function getData() {
-    $categories_array = $this->categoryTree(0);
+    global $oscTemplate;
 
-    ob_start();
-    include 'includes/modules/header/templates/categories.php';
+    $special_products = false;
 
-    return ob_get_clean();
+    $specials_query = tep_db_query("SELECT 1 FROM specials WHERE status = '1'");
+
+    if (tep_db_num_rows($specials_query)) {
+      $special_products = true;
+    }
+
+    $categories_list = $this->showCategories();
+
+    if (!empty($categories_list)) {
+      ob_start();
+      include 'includes/modules/header/templates/categories.php';
+
+      $oscTemplate->addBlock('<script src="includes/modules/header/templates/categories/jquery.smartmenus.min.js"></script>
+<script src="includes/modules/header/templates/categories/bootstrap-4/jquery.smartmenus.bootstrap-4.min.js"></script>', 'footer_scripts');
+
+      return ob_get_clean();
+    }
   }
 
   public function execute() {
@@ -75,23 +90,38 @@ class hm_categories {
     return array('MODULE_HEADER_CATEGORIES_STATUS', 'MODULE_HEADER_CATEGORIES_SORT_ORDER');
   }
 
-  public function categoryTree($parent_id) {
+  public function showCategories($parent_id = 0, &$categories_list = '', $path = '') {
     global $languages_id;
 
     $categories_query = tep_db_query("select c.categories_id, cd.categories_name from categories c, categories_description cd where c.categories_id = cd.categories_id and cd.language_id = '" . (int)$languages_id . "' and c.parent_id = '" . (int)$parent_id . "' order by c.sort_order, cd.categories_name");
 
-    $category_tree_array = array();
-
     while ($categories = tep_db_fetch_array($categories_query)) {
-      $category_tree_array[$categories['categories_id']]['categories_name'] = $categories['categories_name'];
-      $category_children_array = $this->categoryTree($categories['categories_id']);
+      $li_dropdown = '';
+      $a_dropdown = '';
 
-      if (count($category_children_array) > 0) {
-        $category_tree_array[$categories['categories_id']]['parent'] = $category_children_array;
+      if ($has_category_subcategories = tep_has_category_subcategories($categories['categories_id'])) {
+        $li_dropdown = 'dropdown';
+        $a_dropdown = 'dropdown-toggle';
+      }
+
+      if ($parent_id == 0) {
+        $path = $categories['categories_id'];
+
+        $categories_list .= '<li class="nav-item ' . $li_dropdown . '"><a class="nav-link ' . $a_dropdown . '" href="' . tep_href_link('index.php', 'cPath=' . $path, 'SSL', false) . '">' . $categories['categories_name'] . '</a>' . ($has_category_subcategories ? '' : '</li>');
+      } else {
+        $path = $parent_id . '_' . $categories['categories_id'];
+
+        $categories_list .= '<li class="' . $li_dropdown . '"><a class="dropdown-item ' . $a_dropdown . '" href="' . tep_href_link('index.php', 'cPath=' . $path, 'SSL', false) . '">' . $categories['categories_name'] . '</a>';
+      }
+
+      if ($has_category_subcategories) {
+        $categories_list .= '<ul class="dropdown-menu">';
+        $this->showCategories($categories['categories_id'], $categories_list, $path);
+        $categories_list .= '</li></ul>';
       }
     }
 
-    return $category_tree_array;
+    return $categories_list;
   }
 
   function cache($auto_expire = false, $refresh = false) {

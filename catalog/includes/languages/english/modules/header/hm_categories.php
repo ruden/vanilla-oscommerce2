@@ -12,3 +12,5 @@
 
 define('MODULE_HEADER_CATEGORIES_TITLE', 'Categories');
 define('MODULE_HEADER_CATEGORIES_DESCRIPTION', 'Add categories to header');
+
+define('MODULE_HEADER_CATEGORIES_TEXT_SALE', 'Sale');
