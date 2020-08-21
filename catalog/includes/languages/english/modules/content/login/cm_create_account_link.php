@@ -11,7 +11,7 @@
 */
 
   define('MODULE_CONTENT_CREATE_ACCOUNT_LINK_TITLE', 'Create Account Link');
-  define('MODULE_CONTENT_CREATE_ACCOUNT_LINK_DESCRIPTION', 'Show a create account container on the login page');
+  define('MODULE_CONTENT_CREATE_ACCOUNT_LINK_DESCRIPTION', 'Show the account container on the login page');
 
   define('MODULE_CONTENT_LOGIN_HEADING_NEW_CUSTOMER', 'New Customer');
   define('MODULE_CONTENT_LOGIN_TEXT_NEW_CUSTOMER', 'I am a new customer.');

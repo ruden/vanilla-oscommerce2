@@ -98,10 +98,11 @@
         foreach ( $modules['installed'] as $m ) {
           if ( $m['code'] == $class ) {
             foreach ($_POST['configuration'] as $key => $value) {
-              $key = tep_db_prepare_input($key);
-              $value = tep_db_prepare_input($value);
+              if (is_array($value)) {
+                $value = preg_replace('/, --none--/', '', implode(', ', $value));
+              }
 
-              tep_db_query("update configuration set configuration_value = '" . tep_db_input($value) . "' where configuration_key = '" . tep_db_input($key) . "'");
+              tep_db_query("update configuration set configuration_value = '" . tep_db_prepare_input(tep_db_input($value)) . "' where configuration_key = '" . tep_db_prepare_input(tep_db_input($key)) . "'");
             }
 
             break;
@@ -109,16 +110,13 @@
         }
 
         tep_redirect(tep_href_link('modules_content.php', 'module=' . $class));
-
         break;
-
       case 'install':
         $class = basename($_GET['module']);
 
         foreach ( $modules['new'] as $m ) {
           if ( $m['code'] == $class ) {
             $module = new $class();
-
             $module->install();
 
             $modules_installed[] = $m['group'] . '/' . $m['code'];
@@ -130,16 +128,13 @@
         }
 
         tep_redirect(tep_href_link('modules_content.php', 'action=list_new&module=' . $class));
-
         break;
-
       case 'remove':
         $class = basename($_GET['module']);
 
         foreach ( $modules['installed'] as $m ) {
           if ( $m['code'] == $class ) {
             $module = new $class();
-
             $module->remove();
 
             $modules_installed = explode(';', MODULE_CONTENT_INSTALLED);
@@ -155,7 +150,6 @@
         }
 
         tep_redirect(tep_href_link('modules_content.php', 'module=' . $class));
-
         break;
     }
   }

@@ -311,7 +311,7 @@ EOD;
 
       if (empty($comments)) {
         $confirmation = array('fields' => array(array('title' => $this->_app->getDef('module_ec_field_comments'),
-                                                      'field' => tep_draw_textarea_field('ppecomments', 'soft', '60', '5', $comments))));
+                                                      'field' => tep_draw_textarea_field('ppecomments', $comments, 'class="form-control" rows="3"'))));
       }
 
       return $confirmation;

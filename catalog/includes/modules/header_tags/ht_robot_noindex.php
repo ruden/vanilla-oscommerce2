@@ -97,7 +97,8 @@
                    'product_reviews_write.php',
                    'shopping_cart.php',
                    'ssl_check.php',
-                   'tell_a_friend.php');
+                   'tell_a_friend.php',
+                   'wishlist.php');
     }
   }
 

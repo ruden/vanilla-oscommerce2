@@ -1,7 +1,7 @@
 <div class="contentContainer <?php echo (OSCOM_APP_PAYPAL_LOGIN_CONTENT_WIDTH == 'Half') ? 'grid_8' : 'grid_16'; ?>">
   <h2><?php echo $cm_paypal_login->_app->getDef('module_login_template_title'); ?></h2>
 
-  <div class="contentText">
+  <div class="mb-3">
 
 <?php
   if ( OSCOM_APP_PAYPAL_LOGIN_STATUS == '0' ) {

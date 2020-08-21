@@ -47,6 +47,10 @@
       $shipping_method_query = tep_db_query("select title from orders_total where orders_id = '" . (int)$order_id . "' and class = 'ot_shipping'");
       $shipping_method = tep_db_fetch_array($shipping_method_query);
 
+      if (!empty($shipping_method)) {
+        $shipping_method = ((substr($shipping_method['title'], -1) == ':') ? substr(strip_tags($shipping_method['title']), 0, -1) : strip_tags($shipping_method['title']));
+      }
+
       $order_status_query = tep_db_query("select orders_status_name from orders_status where orders_status_id = '" . (int)$order['orders_status'] . "' and language_id = '" . (int)$languages_id . "'");
       $order_status = tep_db_fetch_array($order_status_query);
 
@@ -61,7 +65,7 @@
                           'orders_status' => $order_status['orders_status_name'],
                           'last_modified' => $order['last_modified'],
                           'total' => strip_tags($order_total['text']),
-                          'shipping_method' => ((substr($shipping_method['title'], -1) == ':') ? substr(strip_tags($shipping_method['title']), 0, -1) : strip_tags($shipping_method['title'])));
+                          'shipping_method' => $shipping_method);
 
       $this->customer = array('id' => $order['customers_id'],
                               'name' => $order['customers_name'],
@@ -203,9 +207,9 @@
         $billing_address = tep_db_fetch_array($billing_address_query);
       }
 
-      if ($this->content_type == 'virtual') {
-        $tax_address = array('entry_country_id' => $billing_address['entry_country_id'],
-                             'entry_zone_id' => $billing_address['entry_zone_id']);
+      if ($this->content_type == 'virtual') {;
+        $tax_address = array('entry_country_id' => -1,
+                             'entry_zone_id' => -1);
       } else {
         $tax_address = array('entry_country_id' => $shipping_address['entry_country_id'],
                              'entry_zone_id' => $shipping_address['entry_zone_id']);

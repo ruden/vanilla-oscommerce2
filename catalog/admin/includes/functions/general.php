@@ -941,8 +941,8 @@ function tep_remove_category($category_id) {
   $duplicate_image = tep_db_fetch_array($duplicate_image_query);
 
   if ($duplicate_image['total'] < 2) {
-    if (file_exists(DIR_FS_CATALOG . 'images/categories/' . $category_image['categories_image'])) {
-      @unlink(DIR_FS_CATALOG . 'images/categories/' . $category_image['categories_image']);
+    if (file_exists(DIR_FS_CATALOG . 'images/' . $category_image['categories_image'])) {
+      @unlink(DIR_FS_CATALOG . 'images/' . $category_image['categories_image']);
     }
   }
 
@@ -964,12 +964,8 @@ function tep_remove_product($product_id) {
   $duplicate_image = tep_db_fetch_array($duplicate_image_query);
 
   if ($duplicate_image['total'] < 2) {
-    if (file_exists(DIR_FS_CATALOG . 'images/products/originals/' . $product_image['products_image'])) {
-      @unlink(DIR_FS_CATALOG . 'images/products/originals/' . $product_image['products_image']);
-    }
-
-    if (file_exists(DIR_FS_CATALOG . 'images/products/thumbs/' . $product_image['products_image'])) {
-      @unlink(DIR_FS_CATALOG . 'images/products/thumbs/' . $product_image['products_image']);
+    if (file_exists(DIR_FS_CATALOG . 'images/' . $product_image['products_image'])) {
+      @unlink(DIR_FS_CATALOG . 'images/' . $product_image['products_image']);
     }
   }
 
@@ -980,12 +976,8 @@ function tep_remove_product($product_id) {
       $duplicate_image = tep_db_fetch_array($duplicate_image_query);
 
       if ($duplicate_image['total'] < 2) {
-        if (file_exists(DIR_FS_CATALOG . 'images/products/originals/' . $product_images['image'])) {
-          @unlink(DIR_FS_CATALOG . 'images/products/originals/' . $product_images['image']);
-        }
-
-        if (file_exists(DIR_FS_CATALOG . 'images/products/thumbs/' . $product_images['image'])) {
-          @unlink(DIR_FS_CATALOG . 'images/products/thumbs/' . $product_images['image']);
+        if (file_exists(DIR_FS_CATALOG . 'images/' . $product_images['image'])) {
+          @unlink(DIR_FS_CATALOG . 'images/' . $product_images['image']);
         }
       }
     }
@@ -1097,9 +1089,9 @@ function tep_get_file_permissions($mode) {
   if ($mode & 0x200) $world['execute'] = ($world['execute'] == 'x') ? 't' : 'T';
 
   return $type .
-    $owner['read'] . $owner['write'] . $owner['execute'] .
-    $group['read'] . $group['write'] . $group['execute'] .
-    $world['read'] . $world['write'] . $world['execute'];
+         $owner['read'] . $owner['write'] . $owner['execute'] .
+         $group['read'] . $group['write'] . $group['execute'] .
+         $world['read'] . $world['write'] . $world['execute'];
 }
 
 function tep_remove($source) {
@@ -1453,6 +1445,130 @@ function tep_is_writable($file) {
   } else {
     return is_writable($file);
   }
+}
+
+function tep_cfg_select_multioption($select_array, $key_value, $key = null) {
+  $string = '';
+  $key_value = explode(', ', $key_value);
+
+  for ($i = 0, $n = sizeof($select_array); $i < $n; $i++) {
+    $name = (!empty($key) ? 'configuration[' . $key . '][]' : 'configuration_value');
+
+    $string .= '<br />' . tep_draw_checkbox_field($name, $select_array[$i], in_array($select_array[$i], $key_value)) . $select_array[$i];
+  }
+
+  $string .= tep_draw_hidden_field($name, '--none--');
+
+  return $string;
+}
+
+function tep_set_custom_pages() {
+  return array('index.php',
+               'product_info.php',
+               'products_new.php',
+               'specials.php');
+}
+
+function tep_cfg_show_pages($string) {
+  return nl2br(implode("\n", explode(';', $string)));
+}
+
+function tep_cfg_edit_pages($values, $key) {
+  $files_array = array();
+  $exclude_array = array('checkout_process.php',
+                         'download.php',
+                         'opensearch.php',
+                         'redirect.php',
+                         'sitemap.php',
+                         'ssl_check.php');
+
+  if ($dir = @dir(DIR_FS_CATALOG)) {
+    while ($file = $dir->read()) {
+      if (!is_dir(DIR_FS_CATALOG . $file) && !in_array($file, $exclude_array)) {
+        if (substr($file, strrpos($file, '.')) == '.php') {
+          $files_array[] = $file;
+        }
+      }
+    }
+    sort($files_array);
+    $dir->close();
+  }
+
+  $values_array = explode(';', $values);
+
+  $output = '<input type="checkbox" id="checked-all"><b>All</b><br />';
+  foreach ($files_array as $file) {
+    $output .= tep_draw_checkbox_field('page_files[]', $file, in_array($file, $values_array)) . '&nbsp;' . tep_output_string($file) . '<br />';
+  }
+
+  if (!empty($output)) {
+    $output = '<br />' . substr($output, 0, -6);
+  }
+
+  $output .= tep_draw_hidden_field('configuration[' . $key . ']', '', 'id="page-files"');
+
+  $output .= <<<EOT
+<script>
+function module_update_cfg_value() {
+  let module_selected_files = '';
+  const pageFiles = $('input[name="page_files[]"]');
+  const checkedAll = $('#checked-all');
+  
+  if (pageFiles.length > 0) {
+    $('input[name="page_files[]"]:checked').each(function() {
+      module_selected_files += $(this).attr('value') + ';';
+      checkedAll.prop('checked', false);
+    });
+
+    if ($('input[name="page_files[]"]:checkbox:not(":checked")').length === 0) {
+      checkedAll.prop('checked', true);
+    }
+      
+    if (module_selected_files.length > 0) {
+      module_selected_files = module_selected_files.substring(0, module_selected_files.length - 1);
+    }
+  }
+
+  $('#page-files').val(module_selected_files);
+}
+
+$(function() {  
+  const pageFiles = $('input[name="page_files[]"]');
+  const checkedAll = $('#checked-all');
+  
+  module_update_cfg_value();
+
+  if (pageFiles.length > 0) {
+    pageFiles.change(function() {
+      module_update_cfg_value();
+    });
+  }
+  
+  if ($('input[name="page_files[]"]:checkbox:not(":checked")').length === 0) {
+    checkedAll.prop('checked', true);
+  }
+  
+  checkedAll.change(function() {  
+    let module_selected_files = '';
+    const selectedFiles = $('#page-files');
+    
+    pageFiles.each(function() {
+      if (checkedAll.is(':checked')) {
+        module_selected_files += $(this).attr('value') + ';';
+        
+        $(this).prop('checked', true);
+      } else {
+        $(this).prop('checked', false); 
+      }
+    });
+   
+    selectedFiles.val(module_selected_files);
+  });
+});
+</script>
+EOT;
+
+  return $output;
 }
 
 function tep_get_category_description($category_id, $language_id) {

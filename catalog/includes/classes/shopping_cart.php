@@ -317,15 +317,12 @@
 
       $products_array = array();
       foreach (array_keys($this->contents) as $products_id) {
-        $products_query = tep_db_query("select p.products_id, pd.products_name, p.products_model, p.products_image, p.products_price, p.products_weight, p.products_tax_class_id from products p, products_description pd where p.products_id = '" . (int)$products_id . "' and pd.products_id = p.products_id and pd.language_id = '" . (int)$languages_id . "'");
+        $products_query = tep_db_query("select p.products_id, pd.products_name, p.products_model, p.products_image, p.products_price, p.products_weight, p.products_tax_class_id, if(s.status, s.specials_new_products_price, null) as specials_new_products_price from products p left join specials s on p.products_id = s.products_id, products_description pd where p.products_id = '" . (int)$products_id . "' and pd.products_id = p.products_id and pd.language_id = '" . (int)$languages_id . "'");
         if ($products = tep_db_fetch_array($products_query)) {
-          $prid = $products['products_id'];
-          $products_price = $products['products_price'];
-
-          $specials_query = tep_db_query("select specials_new_products_price from specials where products_id = '" . (int)$prid . "' and status = '1'");
-          if (tep_db_num_rows($specials_query)) {
-            $specials = tep_db_fetch_array($specials_query);
-            $products_price = $specials['specials_new_products_price'];
+          if (!empty($products['specials_new_products_price'])) {
+            $products_price = $products['specials_new_products_price'];
+          } else {
+            $products_price = $products['products_price'];
           }
 
           $products_array[] = array('id' => $products_id,

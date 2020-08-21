@@ -17,71 +17,69 @@
   if ($messageStack->size('general') > 0) echo $messageStack->output('general');
 */
 
-  class messageStack extends tableBox {
-     public $messages = array();
-// class constructor
-    function __construct() {
-      global $messageToStack;
+class messageStack {
+  function __construct() {
+    $this->messages = array();
 
-      if (tep_session_is_registered('messageToStack')) {
-        for ($i=0, $n=sizeof($messageToStack); $i<$n; $i++) {
-          $this->add($messageToStack[$i]['class'], $messageToStack[$i]['text'], $messageToStack[$i]['type']);
-        }
-        tep_session_unregister('messageToStack');
-      }
-    }
-
-// class methods
-    function add($class, $message, $type = 'error') {
-      if ($type == 'error') {
-        $this->messages[] = array('params' => 'class="messageStackError"', 'class' => $class, 'text' => tep_image('images/icons/error.gif', ICON_ERROR) . '&nbsp;' . $message);
-      } elseif ($type == 'warning') {
-        $this->messages[] = array('params' => 'class="messageStackWarning"', 'class' => $class, 'text' => tep_image('images/icons/warning.gif', ICON_WARNING) . '&nbsp;' . $message);
-      } elseif ($type == 'success') {
-        $this->messages[] = array('params' => 'class="messageStackSuccess"', 'class' => $class, 'text' => tep_image('images/icons/success.gif', ICON_SUCCESS) . '&nbsp;' . $message);
-      } else {
-        $this->messages[] = array('params' => 'class="messageStackError"', 'class' => $class, 'text' => $message);
-      }
-    }
-
-    function add_session($class, $message, $type = 'error') {
-      global $messageToStack;
-
-      if (!tep_session_is_registered('messageToStack')) {
-        tep_session_register('messageToStack');
-        $messageToStack = array();
+    if (isset($_SESSION['messageToStack'])) {
+      for ($i = 0, $n = sizeof($_SESSION['messageToStack']); $i < $n; $i++) {
+        $this->add($_SESSION['messageToStack'][$i]['class'], $_SESSION['messageToStack'][$i]['text'], $_SESSION['messageToStack'][$i]['type']);
       }
 
-      $messageToStack[] = array('class' => $class, 'text' => $message, 'type' => $type);
-    }
-
-    function reset() {
-      $this->messages = array();
-    }
-
-    function output($class) {
-      $this->table_data_parameters = 'class="messageBox"';
-
-      $output = array();
-      for ($i=0, $n=sizeof($this->messages); $i<$n; $i++) {
-        if ($this->messages[$i]['class'] == $class) {
-          $output[] = $this->messages[$i];
-        }
-      }
-
-      return $this->tableBox($output);
-    }
-
-    function size($class) {
-      $count = 0;
-
-      for ($i=0, $n=sizeof($this->messages); $i<$n; $i++) {
-        if ($this->messages[$i]['class'] == $class) {
-          $count++;
-        }
-      }
-
-      return $count;
+      unset($_SESSION['messageToStack']);
     }
   }
-?>
+
+// class methods
+  function add($class, $message, $type = 'error') {
+    $type = $type == 'error' ? 'danger' : $type;
+
+    $this->messages[] = array('params' => 'class="alert alert-' . htmlspecialchars($type) . '" role="alert"',
+                              'class' => $class,
+                              'text' => $message);
+  }
+
+  function add_session($class, $message, $type = 'error') {
+    if (!isset($_SESSION['messageToStack'])) {
+      $_SESSION['messageToStack'] = [];
+    }
+
+    $_SESSION['messageToStack'][] = array('class' => $class, 'text' => $message, 'type' => $type);
+  }
+
+  function reset() {
+    $this->messages = array();
+  }
+
+  function output($class) {
+    $output = '';
+
+    for ($i = 0, $n = sizeof($this->messages); $i < $n; $i++) {
+      if ($this->messages[$i]['class'] == $class) {
+        if ($i == 0) {
+          $output .= '<div ' . $this->messages[$i]['params'] . '>';
+        }
+
+        $output .= $this->messages[$i]['text'] . '<br>';
+
+        if ($i == ($n - 1)) {
+          $output .= '</div>';
+        }
+      }
+    }
+
+    return $output;
+  }
+
+  function size($class) {
+    $count = 0;
+
+    for ($i = 0, $n = sizeof($this->messages); $i < $n; $i++) {
+      if ($this->messages[$i]['class'] == $class) {
+        $count++;
+      }
+    }
+
+    return $count;
+  }
+}

@@ -384,7 +384,7 @@
         $finished = ($str == $lastLine);
         if (!$finished) {
           list($hdr, $value) = explode(': ', $str, 2);
-// nasty workaround broken multiple same headers (eg. Set-Cookie headers) @FIXME
+// nasty workaround broken multiple same headers (eg. Set-Cookie headers)
           if (isset($headers[$hdr])) {
             $headers[$hdr] .= '; ' . trim($value);
           } else {

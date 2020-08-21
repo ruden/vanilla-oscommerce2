@@ -70,6 +70,8 @@
     define($configuration['cfgKey'], $configuration['cfgValue']);
   }
 
+  require('includes/vendor/autoload.php');
+
 // if gzip_compression is enabled, start to buffer the output
   if ( (GZIP_COMPRESSION == 'true') && ($ext_zlib_loaded = extension_loaded('zlib')) && !headers_sent() ) {
     if (($ini_zlib_output_compression = (int)ini_get('zlib.output_compression')) < 1) {
@@ -125,6 +127,8 @@
 // include shopping cart class
   require('includes/classes/shopping_cart.php');
 
+  require('includes/classes/wishlist.php');
+
 // include navigation history class
   require('includes/classes/navigation_history.php');
 
@@ -132,7 +136,7 @@
   require('includes/functions/sessions.php');
 
 // set the session name and save path
-  tep_session_name('OSCOMsid');
+  tep_session_name('osCsid');
   tep_session_save_path(SESSION_WRITE_DIRECTORY);
 
 // set the session cookie parameters
@@ -152,7 +156,7 @@
 // start the session
   $session_started = false;
   if (SESSION_FORCE_COOKIE_USE == 'True') {
-    tep_setcookie('cookie_test', 'please_accept_for_session', time()+60*60*24*30, $cookie_path, $cookie_domain);
+    tep_setcookie('cookie_test', 'please_accept_for_session', time()+60*60*24*30, $cookie_path, $cookie_domain, ($request_type == 'SSL'));
 
     if (isset($_COOKIE['cookie_test'])) {
       tep_session_start();
@@ -247,6 +251,14 @@
 
   $cart->update_content();
 
+  if (!tep_session_is_registered('wishlist') || !is_object($wishlist)) {
+    tep_session_register('wishlist');
+    $wishlist = new wishList;
+  }
+
+  $wishlist->update_list();
+  $wishlist->add_products();
+
 // include currencies class and create an instance
   require('includes/classes/currencies.php');
   $currencies = new currencies();
@@ -333,9 +345,6 @@
 
 // split-page-results
   require('includes/classes/split_page_results.php');
-
-// infobox
-  require('includes/classes/boxes.php');
 
 // auto activate and expire banners
   require('includes/functions/banner.php');

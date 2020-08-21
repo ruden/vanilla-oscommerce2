@@ -10,35 +10,40 @@
   Released under the GNU General Public License
 */
 
-  class breadcrumb {
-    var $_trail;
+class breadcrumb {
+  public $_trail;
 
-    function __construct() {
-      $this->reset();
-    }
+  public function __construct() {
+    $this->reset();
+  }
 
-    function reset() {
-      $this->_trail = array();
-    }
+  public function reset() {
+    $this->_trail = array();
+  }
 
-    function add($title, $link = '') {
-      $this->_trail[] = array('title' => $title, 'link' => $link);
-    }
+  public function add($title, $link = '') {
+    $this->_trail[] = array('title' => $title, 'link' => $link);
+  }
 
-    function trail($separator = ' - ') {
-      $trail_string = '';
+  public function trail($separator = ' - ') {
+    $trail_string = '';
 
-      for ($i=0, $n=sizeof($this->_trail); $i<$n; $i++) {
-        if (isset($this->_trail[$i]['link']) && tep_not_null($this->_trail[$i]['link'])) {
-          $trail_string .= '<a href="' . $this->_trail[$i]['link'] . '" class="headerNavigation">' . $this->_trail[$i]['title'] . '</a>';
+    for ($i = 0, $n = sizeof($this->_trail); $i < $n; $i++) {
+      if (isset($this->_trail[$i]['link']) && tep_not_null($this->_trail[$i]['link'])) {
+        if ($i == 0) {
+          $trail_string .= '<li class="list-inline-item"><a href="' . $this->_trail[$i]['link'] . '">' . $this->_trail[$i]['title'] . '</a></li>';
         } else {
-          $trail_string .= $this->_trail[$i]['title'];
+          $trail_string .= '<li class="list-inline-item mx-2"><a href="' . $this->_trail[$i]['link'] . '">' . $this->_trail[$i]['title'] . '</a></li>';
         }
-
-        if (($i+1) < $n) $trail_string .= $separator;
+      } else {
+        $trail_string .= '<li class="list-inline-item">' . $this->_trail[$i]['title'] . '</li>';
       }
 
-      return $trail_string;
+      if (($i + 1) < $n) {
+        $trail_string .= $separator;
+      }
     }
+
+    return $trail_string;
   }
-?>
+}

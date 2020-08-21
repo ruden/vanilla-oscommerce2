@@ -69,6 +69,8 @@
     define($configuration['cfgKey'], $configuration['cfgValue']);
   }
 
+  require(DIR_FS_CATALOG . 'includes/vendor/autoload.php');
+
 // define our general functions used application-wide
   require('includes/functions/general.php');
   require('includes/functions/html_output.php');
@@ -91,7 +93,7 @@
   tep_session_save_path(SESSION_WRITE_DIRECTORY);
 
 // set the session cookie parameters
-  session_set_cookie_params(0, $cookie_path, $cookie_domain);
+  session_set_cookie_params(0, $cookie_path, $cookie_domain, ($request_type == 'SSL'));
 
   @ini_set('session.use_only_cookies', (SESSION_FORCE_COOKIE_USE == 'True') ? 1 : 0);
 

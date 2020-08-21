@@ -10,287 +10,285 @@
   Released under the GNU General Public License
 */
 
-  require('includes/application_top.php');
+require('includes/application_top.php');
 
 // if the customer is not logged on, redirect them to the login page
-  if (!tep_session_is_registered('customer_id')) {
-    $navigation->set_snapshot();
-    tep_redirect(tep_href_link('login.php', '', 'SSL'));
-  }
+if (!tep_session_is_registered('customer_id')) {
+  $navigation->set_snapshot();
+  tep_redirect(tep_href_link('login.php', '', 'SSL'));
+}
 
 // if there is nothing in the customers cart, redirect them to the shopping cart page
-  if ($cart->count_contents() < 1) {
-    tep_redirect(tep_href_link('shopping_cart.php'));
-  }
+if ($cart->count_contents() < 1) {
+  tep_redirect(tep_href_link('shopping_cart.php'));
+}
 
 // if no shipping method has been selected, redirect the customer to the shipping method selection page
-  if (!tep_session_is_registered('shipping')) {
-    tep_redirect(tep_href_link('checkout_shipping.php', '', 'SSL'));
-  }
+if (!tep_session_is_registered('shipping')) {
+  tep_redirect(tep_href_link('checkout_shipping.php', '', 'SSL'));
+}
 
 // avoid hack attempts during the checkout procedure by checking the internal cartID
-  if (isset($cart->cartID) && tep_session_is_registered('cartID')) {
-    if ($cart->cartID != $cartID) {
-      tep_redirect(tep_href_link('checkout_shipping.php', '', 'SSL'));
-    }
+if (isset($cart->cartID) && tep_session_is_registered('cartID')) {
+  if ($cart->cartID != $cartID) {
+    tep_redirect(tep_href_link('checkout_shipping.php', '', 'SSL'));
   }
+}
 
 // Stock Check
-  if ( (STOCK_CHECK == 'true') && (STOCK_ALLOW_CHECKOUT != 'true') ) {
-    $products = $cart->get_products();
-    for ($i=0, $n=sizeof($products); $i<$n; $i++) {
-      if (tep_check_stock($products[$i]['id'], $products[$i]['quantity'])) {
-        tep_redirect(tep_href_link('shopping_cart.php'));
-        break;
-      }
+if ((STOCK_CHECK == 'true') && (STOCK_ALLOW_CHECKOUT != 'true')) {
+  $products = $cart->get_products();
+  for ($i = 0, $n = sizeof($products); $i < $n; $i++) {
+    if (tep_check_stock($products[$i]['id'], $products[$i]['quantity'])) {
+      tep_redirect(tep_href_link('shopping_cart.php'));
+      break;
     }
   }
+}
 
 // if no billing destination address was selected, use the customers own address as default
-  if (!tep_session_is_registered('billto')) {
-    tep_session_register('billto');
-    $billto = $customer_default_address_id;
-  } else {
+if (!tep_session_is_registered('billto')) {
+  tep_session_register('billto');
+  $billto = $customer_default_address_id;
+} else {
 // verify the selected billing address
-    if ( (is_array($billto) && empty($billto)) || is_numeric($billto) ) {
-      $check_address_query = tep_db_query("select count(*) as total from address_book where customers_id = '" . (int)$customer_id . "' and address_book_id = '" . (int)$billto . "'");
-      $check_address = tep_db_fetch_array($check_address_query);
+  if ((is_array($billto) && empty($billto)) || is_numeric($billto)) {
+    $check_address_query = tep_db_query("select count(*) as total from address_book where customers_id = '" . (int)$customer_id . "' and address_book_id = '" . (int)$billto . "'");
+    $check_address = tep_db_fetch_array($check_address_query);
 
-      if ($check_address['total'] != '1') {
-        $billto = $customer_default_address_id;
-        if (tep_session_is_registered('payment')) tep_session_unregister('payment');
-      }
+    if ($check_address['total'] != '1') {
+      $billto = $customer_default_address_id;
+      if (tep_session_is_registered('payment')) tep_session_unregister('payment');
     }
   }
+}
 
-  require('includes/classes/order.php');
-  $order = new order;
+require('includes/classes/order.php');
+$order = new order;
 
-  if (!tep_session_is_registered('comments')) tep_session_register('comments');
-  if (isset($_POST['comments']) && tep_not_null($_POST['comments'])) {
-    $comments = tep_db_prepare_input($_POST['comments']);
-  }
+if (!tep_session_is_registered('comments')) tep_session_register('comments');
+if (isset($_POST['comments']) && tep_not_null($_POST['comments'])) {
+  $comments = tep_db_prepare_input($_POST['comments']);
+}
 
-  $total_weight = $cart->show_weight();
-  $total_count = $cart->count_contents();
+$total_weight = $cart->show_weight();
+$total_count = $cart->count_contents();
 
 // load all enabled payment modules
-  require('includes/classes/payment.php');
-  $payment_modules = new payment;
+require('includes/classes/payment.php');
+$payment_modules = new payment;
 
-  require('includes/languages/' . $language . '/checkout_payment.php');
+require('includes/languages/' . $language . '/checkout_payment.php');
 
-  $breadcrumb->add(NAVBAR_TITLE_1, tep_href_link('checkout_shipping.php', '', 'SSL'));
-  $breadcrumb->add(NAVBAR_TITLE_2, tep_href_link('checkout_payment.php', '', 'SSL'));
+$breadcrumb->add(NAVBAR_TITLE_1, tep_href_link('checkout_shipping.php', '', 'SSL'));
+$breadcrumb->add(NAVBAR_TITLE_2, tep_href_link('checkout_payment.php', '', 'SSL'));
 
-  require('includes/template_top.php');
+require('includes/template_top.php');
 ?>
 
-<script>
-var selected;
+  <script>
+    var selected;
 
-function selectRowEffect(object, buttonSelect) {
-  if (!selected) {
-    if (document.getElementById) {
-      selected = document.getElementById('defaultSelected');
-    } else {
-      selected = document.all['defaultSelected'];
-    }
-  }
+    function selectRowEffect(object, buttonSelect) {
+      if (!selected) {
+        if (document.getElementById) {
+          selected = document.getElementById('defaultSelected');
+        } else {
+          selected = document.all['defaultSelected'];
+        }
+      }
 
-  if (selected) selected.className = 'moduleRow';
-  object.className = 'moduleRowSelected';
-  selected = object;
+      if (selected) selected.className = 'moduleRow bg-white';
+      object.className = 'moduleRowSelected bg-light';
+      selected = object;
 
 // one button is not an array
-  if (document.checkout_payment.payment[0]) {
-    document.checkout_payment.payment[buttonSelect].checked=true;
-  } else {
-    document.checkout_payment.payment.checked=true;
-  }
-}
+      if (document.checkout_payment.payment[0]) {
+        document.checkout_payment.payment[buttonSelect].checked = true;
+      } else {
+        document.checkout_payment.payment.checked = true;
+      }
+    }
 
-function rowOverEffect(object) {
-  if (object.className == 'moduleRow') object.className = 'moduleRowOver';
-}
+    function rowOverEffect(object) {
+      if (object.className == 'moduleRow bg-white') object.className = 'moduleRowOver bg-light';
+    }
 
-function rowOutEffect(object) {
-  if (object.className == 'moduleRowOver') object.className = 'moduleRow';
-}
-</script>
+    function rowOutEffect(object) {
+      if (object.className == 'moduleRowOver bg-light') object.className = 'moduleRow bg-white';
+    }
+  </script>
 <?php echo $payment_modules->javascript_validation(); ?>
 
-<h1><?php echo HEADING_TITLE; ?></h1>
+  <h1><?php echo HEADING_TITLE; ?></h1>
+
+  <div class="col-lg-6 mx-auto">
+    <div class="progress mb-3" style="height: 1px;">
+      <div class="progress-bar" style="width: 66%;" aria-valuenow="66" aria-valuemin="0" aria-valuemax="100"></div>
+    </div>
+
+    <div class="row mb-3">
+      <div class="col text-center text-primary"><?php echo CHECKOUT_BAR_DELIVERY; ?> &#8594</div>
+      <div class="col text-center text-primary"><?php echo CHECKOUT_BAR_PAYMENT; ?> &#8594</div>
+      <div class="col text-center text-muted"><?php echo CHECKOUT_BAR_CONFIRMATION; ?></div>
+    </div>
+  </div>
 
 <?php echo tep_draw_form('checkout_payment', tep_href_link('checkout_confirmation.php', '', 'SSL'), 'post', 'onsubmit="return check_form();"', true); ?>
 
-<div class="contentContainer">
+  <div class="mb-5">
 
-<?php
-  if (isset($_GET['payment_error']) && is_object(${$_GET['payment_error']}) && ($error = ${$_GET['payment_error']}->get_error())) {
-?>
+    <?php
+    if (isset($_GET['payment_error']) && is_object(${$_GET['payment_error']}) && ($error = ${$_GET['payment_error']}->get_error())) {
+      ?>
 
-  <div class="contentText">
-    <?php echo '<strong>' . tep_output_string_protected($error['title']) . '</strong>'; ?>
+      <div class="mb-3">
+        <?php echo '<strong>' . tep_output_string_protected($error['title']) . '</strong>'; ?>
 
-    <p class="messageStackError"><?php echo tep_output_string_protected($error['error']); ?></p>
-  </div>
-
-<?php
-  }
-?>
-
-  <h2><?php echo TABLE_HEADING_BILLING_ADDRESS; ?></h2>
-
-  <div class="contentText">
-    <div class="ui-widget infoBoxContainer" style="float: right;">
-      <div class="ui-widget-header infoBoxHeading"><?php echo TITLE_BILLING_ADDRESS; ?></div>
-
-      <div class="ui-widget-content infoBoxContents">
-        <?php echo tep_address_label($customer_id, $billto, true, ' ', '<br />'); ?>
+        <p class="messageStackError"><?php echo tep_output_string_protected($error['error']); ?></p>
       </div>
+
+      <?php
+    }
+    ?>
+
+    <h2><?php echo TABLE_HEADING_BILLING_ADDRESS; ?></h2>
+
+    <div class="mb-3">
+      <div class="float-right">
+        <div class="font-weight-bold"><?php echo TITLE_BILLING_ADDRESS; ?></div>
+
+        <p><?php echo tep_address_label($customer_id, $billto, true, ' ', '<br />'); ?></p>
+      </div>
+
+      <p><?php echo TEXT_SELECTED_BILLING_DESTINATION; ?></p>
+
+      <?php echo tep_draw_button(IMAGE_BUTTON_CHANGE_ADDRESS, 'home', tep_href_link('checkout_payment_address.php', '', 'SSL')); ?>
     </div>
 
-    <?php echo TEXT_SELECTED_BILLING_DESTINATION; ?><br /><br /><?php echo tep_draw_button(IMAGE_BUTTON_CHANGE_ADDRESS, 'home', tep_href_link('checkout_payment_address.php', '', 'SSL')); ?>
-  </div>
+    <div class="clearfix"></div>
 
-  <div style="clear: both;"></div>
+    <h2><?php echo TABLE_HEADING_PAYMENT_METHOD; ?></h2>
 
-  <h2><?php echo TABLE_HEADING_PAYMENT_METHOD; ?></h2>
+    <?php
+    $selection = $payment_modules->selection();
 
-<?php
-  $selection = $payment_modules->selection();
-
-  if (sizeof($selection) > 1) {
-?>
-
-  <div class="contentText">
-    <div style="float: right;">
-      <?php echo '<strong>' . TITLE_PLEASE_SELECT . '</strong>'; ?>
-    </div>
-
-    <?php echo TEXT_SELECT_PAYMENT_METHOD; ?>
-  </div>
-
-<?php
-    } else {
-?>
-
-  <div class="contentText">
-    <?php echo TEXT_ENTER_PAYMENT_INFORMATION; ?>
-  </div>
-
-<?php
-    }
-?>
-
-  <div class="contentText">
-
-<?php
-  $radio_buttons = 0;
-  for ($i=0, $n=sizeof($selection); $i<$n; $i++) {
-?>
-
-    <table border="0" width="100%" cellspacing="0" cellpadding="2">
-
-<?php
-    if ( ($selection[$i]['id'] == $payment) || ($n == 1) ) {
-      echo '      <tr id="defaultSelected" class="moduleRowSelected" onmouseover="rowOverEffect(this)" onmouseout="rowOutEffect(this)" onclick="selectRowEffect(this, ' . $radio_buttons . ')">' . "\n";
-    } else {
-      echo '      <tr class="moduleRow" onmouseover="rowOverEffect(this)" onmouseout="rowOutEffect(this)" onclick="selectRowEffect(this, ' . $radio_buttons . ')">' . "\n";
-    }
-?>
-
-        <td><strong><?php echo $selection[$i]['module']; ?></strong></td>
-        <td align="right">
-
-<?php
     if (sizeof($selection) > 1) {
-      echo tep_draw_radio_field('payment', $selection[$i]['id'], ($selection[$i]['id'] == $payment));
+      ?>
+
+      <div class="mb-3">
+        <div class="float-right font-weight-bold">
+          <?php echo TITLE_PLEASE_SELECT; ?>
+        </div>
+
+        <p><?php echo TEXT_SELECT_PAYMENT_METHOD; ?></p>
+      </div>
+
+      <?php
     } else {
-      echo tep_draw_hidden_field('payment', $selection[$i]['id']);
+      ?>
+
+      <p><?php echo TEXT_ENTER_PAYMENT_INFORMATION; ?></p>
+
+      <?php
     }
-?>
+    ?>
 
-        </td>
-      </tr>
+    <div class="mb-3">
 
-<?php
-    if (isset($selection[$i]['error'])) {
-?>
+      <?php
+      $radio_buttons = 0;
+      for ($i = 0, $n = sizeof($selection); $i < $n; $i++) {
+        ?>
 
-      <tr>
-        <td colspan="2"><?php echo $selection[$i]['error']; ?></td>
-      </tr>
+        <table class="table table-borderless table-sm mb-0">
+          <tbody>
 
-<?php
-    } elseif (isset($selection[$i]['fields']) && is_array($selection[$i]['fields'])) {
-?>
+          <?php
+          if (($selection[$i]['id'] == $payment) || ($n == 1)) {
+            echo '      <tr id="defaultSelected" class="moduleRowSelected bg-light" onmouseover="rowOverEffect(this)" onmouseout="rowOutEffect(this)" onclick="selectRowEffect(this, ' . $radio_buttons . ')">' . "\n";
+          } else {
+            echo '      <tr class="moduleRow bg-white" onmouseover="rowOverEffect(this)" onmouseout="rowOutEffect(this)" onclick="selectRowEffect(this, ' . $radio_buttons . ')">' . "\n";
+          }
+          ?>
 
-      <tr>
-        <td colspan="2"><table border="0" cellspacing="0" cellpadding="2">
+          <td class="font-weight-bold"><?php echo $selection[$i]['module']; ?></td>
+          <td class="text-right form-check">
 
-<?php
-      for ($j=0, $n2=sizeof($selection[$i]['fields']); $j<$n2; $j++) {
-?>
+            <?php
+            if (sizeof($selection) > 1) {
+              echo tep_draw_radio_field('payment', $selection[$i]['id'], ($selection[$i]['id'] == $payment), 'class="form-check-input float-none"');
+            } else {
+              echo tep_draw_hidden_field('payment', $selection[$i]['id']);
+            }
+            ?>
 
-          <tr>
-            <td><?php echo $selection[$i]['fields'][$j]['title']; ?></td>
-            <td><?php echo $selection[$i]['fields'][$j]['field']; ?></td>
+          </td>
           </tr>
 
-<?php
+          <?php
+          if (isset($selection[$i]['error'])) {
+            ?>
+
+            <tr>
+              <td colspan="2"><?php echo $selection[$i]['error']; ?></td>
+            </tr>
+
+            <?php
+          } elseif (isset($selection[$i]['fields']) && is_array($selection[$i]['fields'])) {
+            ?>
+
+            <tr>
+              <td colspan="2">
+                <table>
+                  <tbody>
+
+                  <?php
+                  for ($j = 0, $n2 = sizeof($selection[$i]['fields']); $j < $n2; $j++) {
+                    ?>
+
+                    <tr>
+                      <td><?php echo $selection[$i]['fields'][$j]['title']; ?></td>
+                      <td><?php echo $selection[$i]['fields'][$j]['field']; ?></td>
+                    </tr>
+
+                    <?php
+                  }
+                  ?>
+
+                  </tbody>
+                </table>
+              </td>
+            </tr>
+
+            <?php
+          }
+          ?>
+
+          </tbody>
+        </table>
+
+        <?php
+        $radio_buttons++;
       }
-?>
+      ?>
 
-        </table></td>
-      </tr>
-
-<?php
-    }
-?>
-
-    </table>
-
-<?php
-    $radio_buttons++;
-  }
-?>
-
-  </div>
-
-  <h2><?php echo TABLE_HEADING_COMMENTS; ?></h2>
-
-  <div class="contentText">
-    <?php echo tep_draw_textarea_field('comments', 'soft', '60', '5', $comments); ?>
-  </div>
-
-  <div class="contentText">
-    <div style="float: left; width: 60%; padding-top: 5px; padding-left: 15%;">
-      <div id="coProgressBar" style="height: 5px;"></div>
-
-      <table border="0" width="100%" cellspacing="0" cellpadding="2">
-        <tr>
-          <td align="center" width="33%" class="checkoutBarFrom"><?php echo '<a href="' . tep_href_link('checkout_shipping.php', '', 'SSL') . '" class="checkoutBarFrom">' . CHECKOUT_BAR_DELIVERY . '</a>'; ?></td>
-          <td align="center" width="33%" class="checkoutBarCurrent"><?php echo CHECKOUT_BAR_PAYMENT; ?></td>
-          <td align="center" width="33%" class="checkoutBarTo"><?php echo CHECKOUT_BAR_CONFIRMATION; ?></td>
-        </tr>
-      </table>
     </div>
 
-    <div style="float: right;"><?php echo tep_draw_button(IMAGE_BUTTON_CONTINUE, 'triangle-1-e', null, 'primary'); ?></div>
+    <h2><?php echo TABLE_HEADING_COMMENTS; ?></h2>
+
+    <div class="mb-3 col-lg-6">
+      <?php echo tep_draw_textarea_field('comments', $comments, 'class="form-control" rows="3"'); ?>
+    </div>
+    <div class="btn-toolbar justify-content-between">
+      <?php echo tep_draw_button(IMAGE_BUTTON_BACK, 'triangle-1-w', tep_href_link('checkout_shipping.php', '', 'SSL'), 'btn-light'); ?>
+      <?php echo tep_draw_button(IMAGE_BUTTON_CONTINUE, 'triangle-1-e', null, 'btn-primary'); ?>
+    </div>
+
   </div>
-</div>
 
-<script type="text/javascript">
-$('#coProgressBar').progressbar({
-  value: 66
-});
-</script>
-
-</form>
+  </form>
 
 <?php
-  require('includes/template_bottom.php');
-  require('includes/application_bottom.php');
-?>
+require('includes/template_bottom.php');
+require('includes/application_bottom.php');

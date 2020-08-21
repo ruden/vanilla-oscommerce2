@@ -33,6 +33,10 @@
     switch ($action) {
       case 'save':
         foreach ($_POST['configuration'] as $key => $value) {
+          if (is_array($value)) {
+            $value = preg_replace('/, --none--/', '', implode(', ', $value));
+          }
+
           tep_db_query("update configuration set configuration_value = '" . tep_db_input(tep_db_prepare_input($value)) . "' where configuration_key = '" . tep_db_input(tep_db_prepare_input($key)) . "'");
         }
         tep_redirect(tep_href_link('modules.php', 'set=' . $set . '&module=' . $_GET['module']));

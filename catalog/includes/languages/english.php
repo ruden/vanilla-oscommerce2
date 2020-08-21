@@ -23,7 +23,7 @@ define('DATE_FORMAT_LONG', '%A %d %B, %Y'); // this is used for strftime()
 define('DATE_FORMAT', 'm/d/Y'); // this is used for date()
 define('DATE_TIME_FORMAT', DATE_FORMAT_SHORT . ' %H:%M:%S');
 define('JQUERY_DATEPICKER_I18N_CODE', ''); // leave empty for en_US; see http://jqueryui.com/demos/datepicker/#localization
-define('JQUERY_DATEPICKER_FORMAT', 'mm/dd/yy'); // see http://docs.jquery.com/UI/Datepicker/formatDate
+define('JQUERY_DATEPICKER_FORMAT', 'mm/dd/yyyy'); // see http://docs.jquery.com/UI/Datepicker/formatDate
 
 ////
 // Return date in raw format
@@ -112,8 +112,8 @@ define('ENTRY_LAST_NAME', 'Last Name:');
 define('ENTRY_LAST_NAME_ERROR', 'Your Last Name must contain a minimum of ' . ENTRY_LAST_NAME_MIN_LENGTH . ' characters.');
 define('ENTRY_LAST_NAME_TEXT', '*');
 define('ENTRY_DATE_OF_BIRTH', 'Date of Birth:');
-define('ENTRY_DATE_OF_BIRTH_ERROR', 'Your Date of Birth must be in this format: MM/DD/YYYY (eg 05/21/1970)');
-define('ENTRY_DATE_OF_BIRTH_TEXT', '* (eg. 05/21/1970)');
+define('ENTRY_DATE_OF_BIRTH_ERROR', 'Your Date of Birth must be in this format: ' . DOB_FORMAT_STRING . ' (eg 05/21/1970)');
+define('ENTRY_DATE_OF_BIRTH_TEXT', '*');
 define('ENTRY_EMAIL_ADDRESS', 'E-Mail Address:');
 define('ENTRY_EMAIL_ADDRESS_ERROR', 'Your E-Mail Address must contain a minimum of ' . ENTRY_EMAIL_ADDRESS_MIN_LENGTH . ' characters.');
 define('ENTRY_EMAIL_ADDRESS_CHECK_ERROR', 'Your E-Mail Address does not appear to be valid - please make any necessary corrections.');
@@ -179,8 +179,8 @@ define('PREVNEXT_TITLE_PAGE_NO', 'Page %d');
 define('PREVNEXT_TITLE_PREV_SET_OF_NO_PAGE', 'Previous Set of %d Pages');
 define('PREVNEXT_TITLE_NEXT_SET_OF_NO_PAGE', 'Next Set of %d Pages');
 define('PREVNEXT_BUTTON_FIRST', '&lt;&lt;FIRST');
-define('PREVNEXT_BUTTON_PREV', '[&lt;&lt;&nbsp;Prev]');
-define('PREVNEXT_BUTTON_NEXT', '[Next&nbsp;&gt;&gt;]');
+define('PREVNEXT_BUTTON_PREV', '&lt;&lt;&nbsp;Prev');
+define('PREVNEXT_BUTTON_NEXT', 'Next&nbsp;&gt;&gt;');
 define('PREVNEXT_BUTTON_LAST', 'LAST&gt;&gt;');
 
 define('IMAGE_BUTTON_ADD_ADDRESS', 'Add Address');
@@ -220,9 +220,9 @@ define('ICON_ERROR', 'Error');
 define('ICON_SUCCESS', 'Success');
 define('ICON_WARNING', 'Warning');
 
-define('TEXT_GREETING_PERSONAL', 'Welcome back <span class="greetUser">%s!</span> Would you like to see which <a href="%s"><u>new products</u></a> are available to purchase?');
+define('TEXT_GREETING_PERSONAL', 'Welcome back <strong>%s!</strong> Would you like to see which <a href="%s"><u>new products</u></a> are available to purchase?');
 define('TEXT_GREETING_PERSONAL_RELOGON', '<small>If you are not %s, please <a href="%s"><u>log yourself in</u></a> with your account information.</small>');
-define('TEXT_GREETING_GUEST', 'Welcome <span class="greetUser">Guest!</span> Would you like to <a href="%s"><u>log yourself in</u></a>? Or would you prefer to <a href="%s"><u>create an account</u></a>?');
+define('TEXT_GREETING_GUEST', 'Welcome <span class="font-weight-bold">Guest!</span> Would you like to <a href="%s"><u>log yourself in</u></a>? Or would you prefer to <a href="%s"><u>create an account</u></a>?');
 
 define('TEXT_SORT_PRODUCTS', 'Sort products ');
 define('TEXT_DESCENDINGLY', 'descendingly');
@@ -239,13 +239,12 @@ define('TEXT_NO_NEW_PRODUCTS', 'There are currently no products.');
 
 define('TEXT_UNKNOWN_TAX_RATE', 'Unknown tax rate');
 
-define('TEXT_REQUIRED', '<span class="errorText">Required</span>');
+define('TEXT_REQUIRED', 'Required');
 
-define('ERROR_TEP_MAIL', '<font face="Verdana, Arial" size="2" color="#ff0000"><strong><small>TEP ERROR:</small> Cannot send the email through the specified SMTP server. Please check your php.ini setting and correct the SMTP server if necessary.</strong></font>');
+define('ERROR_TEP_MAIL', 'TEP ERROR: Cannot send the email through the specified SMTP server. Please check your php.ini setting and correct the SMTP server if necessary.');
 
 define('TEXT_CCVAL_ERROR_INVALID_DATE', 'The expiry date entered for the credit card is invalid. Please check the date and try again.');
 define('TEXT_CCVAL_ERROR_INVALID_NUMBER', 'The credit card number entered is invalid. Please check the number and try again.');
 define('TEXT_CCVAL_ERROR_UNKNOWN_CARD', 'The first four digits of the number entered are: %s. If that number is correct, we do not accept that type of credit card. If it is wrong, please try again.');
 
 define('FOOTER_TEXT_BODY', 'Copyright &copy; ' . date('Y') . ' <a href="' . tep_href_link('index.php') . '">' . STORE_NAME . '</a><br />Powered by <a href="http://www.oscommerce.com" target="_blank">osCommerce</a>');
-?>
