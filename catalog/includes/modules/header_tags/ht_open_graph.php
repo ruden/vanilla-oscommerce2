@@ -55,13 +55,13 @@
         $this->data['og:url'] = tep_href_link('product_info.php', 'products_id=' . $product_info['products_id'], 'SSL', false);
         $this->data['og:title'] = $product_info['products_name'];
         $this->get_og_description($product_info['products_description']);
-        $this->get_og_image('images/' . $product_info['products_image']);
+        $this->get_og_image('images/products/originals/' . $product_info['products_image']);
 
         if (!empty($product_info['products_images'])) {
           $products_images = explode(',', $product_info['products_images']);
 
           foreach ($products_images as $pi) {
-            $this->get_og_image('images/' . $pi);
+            $this->get_og_image('images/products/originals/' . $pi);
           }
         }
 
@@ -101,12 +101,12 @@
         $this->data['og:title'] = $categories['categories_name'];
         $this->data['og:url'] = tep_href_link('index.php', 'cPath=' . $cPath, 'SSL', false);
         $this->get_og_description($categories['categories_description']);
-        $this->get_og_image('images/' . $categories['categories_image']);
+        $this->get_og_image('images/categories/' . $categories['categories_image']);
       } elseif (isset($manufacturers['manufacturers_id'])) {
         $this->data['og:type'] = 'product.group';
         $this->data['og:title'] = $manufacturers['manufacturers_name'];
         $this->data['og:url'] = tep_href_link('index.php', 'manufacturers_id=' . $manufacturers['manufacturers_id'], 'SSL', false);
-        $this->get_og_image('images/' . $manufacturers['manufacturers_image']);
+        $this->get_og_image('images/manufacturers/' . $manufacturers['manufacturers_image']);
       } else { // default page
         $this->data['og:type'] = 'product.group';
         $this->data['og:title'] = STORE_NAME;

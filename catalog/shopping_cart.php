@@ -96,7 +96,7 @@ require('includes/template_top.php');
                              </tr>  
                            </table>';
 
-          echo '        <td class="text-center"><a href="' . tep_href_link('product_info.php', 'products_id=' . $products[$i]['id']) . '">' . tep_image('images/' . $products[$i]['image'], $products[$i]['name'], SMALL_IMAGE_WIDTH / 1.8, SMALL_IMAGE_HEIGHT / 1.8, 'class="img-fluid"') . '</a></td>
+          echo '        <td class="text-center"><a href="' . tep_href_link('product_info.php', 'products_id=' . $products[$i]['id']) . '">' . tep_image('images/products/thumbs/' . $products[$i]['image'], $products[$i]['name'], SMALL_IMAGE_WIDTH, SMALL_IMAGE_HEIGHT, 'class="img-fluid"') . '</a></td>
                       <td>' . $products_name . '</td>
                       <td class="text-right"><strong>' . $currencies->display_price($products[$i]['final_price'], tep_get_tax_rate($products[$i]['tax_class_id']), $products[$i]['quantity']) . '</strong></td>
                     </tr>';

@@ -47,7 +47,7 @@ if (isset($manufacturers['manufacturers_id'])) {
         <div class="col-6 col-lg-3">
 
           <div class="text-center mb-5">
-            <a href="<?php echo tep_href_link('product_info.php', 'products_id=' . $listing['products_id']); ?>"><?php echo tep_image('images/' . $listing['products_image'], $listing['products_name'], SMALL_IMAGE_WIDTH, SMALL_IMAGE_HEIGHT, 'class="img-fluid"'); ?></a>
+            <a href="<?php echo tep_href_link('product_info.php', 'products_id=' . $listing['products_id']); ?>"><?php echo tep_image('images/products/thumbs/' . $listing['products_image'], $listing['products_name'], SMALL_IMAGE_WIDTH, SMALL_IMAGE_HEIGHT, 'class="img-fluid"'); ?></a>
 
             <div class="m-2">
               <a href="<?php echo tep_href_link('product_info.php', 'products_id=' . $listing['products_id']); ?>"><?php echo $listing['products_name']; ?></a>
