@@ -28,6 +28,8 @@
   }
   ?>
 
+    <link rel="stylesheet" href="includes/modules/content/product_info/templates/image_lightbox/css/tobi.min.css">
+    <script src="includes/modules/content/product_info/templates/image_lightbox/js/tobi.min.js"></script>
     <script>
       const tobi = new Tobi({
         captions: false,
