@@ -39,7 +39,7 @@ if ($error == false) {
     if (tep_db_num_rows($check_customer_query)) {
       $check_customer = tep_db_fetch_array($check_customer_query);
 
-      if (empty($check_customer['password_reset_key']) || ($check_customer['password_reset_key'] != $password_key) || (strtotime($check_customer['password_reset_date'] . ' +1 day') <= time())) {
+      if (empty($check_customer['password_reset_key']) || ($check_customer['password_reset_key'] !== $password_key) || (strtotime($check_customer['password_reset_date'] . ' +1 day') <= time())) {
         $error = true;
 
         $messageStack->add_session('password_forgotten', TEXT_NO_RESET_LINK_FOUND);
@@ -64,7 +64,7 @@ if (isset($_GET['action']) && ($_GET['action'] == 'process') && isset($_POST['fo
     $error = true;
 
     $messageStack->add('password_reset', ENTRY_PASSWORD_NEW_ERROR);
-  } elseif ($password_new != $password_confirmation) {
+  } elseif ($password_new !== $password_confirmation) {
     $error = true;
 
     $messageStack->add('password_reset', ENTRY_PASSWORD_NEW_ERROR_NOT_MATCHING);

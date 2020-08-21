@@ -63,7 +63,7 @@
             for ($i=0, $n=sizeof($htpasswd_array); $i<$n; $i++) {
               list($ht_username, $ht_password) = explode(':', $htpasswd_array[$i], 2);
 
-              if ($ht_username == $username) {
+              if ($ht_username === $username) {
                 unset($htpasswd_array[$i]);
               }
             }
@@ -106,7 +106,7 @@
         $check = tep_db_fetch_array($check_query);
 
 // update username in current session if changed
-        if ( ($check['id'] == $admin['id']) && ($check['user_name'] != $admin['username']) ) {
+        if ( ($check['id'] === $admin['id']) && ($check['user_name'] !== $admin['username']) ) {
           $admin['username'] = $username;
         }
 
@@ -129,7 +129,7 @@
             for ($i=0, $n=sizeof($htpasswd_array); $i<$n; $i++) {
               list($ht_username, $ht_password) = explode(':', $htpasswd_array[$i], 2);
 
-              if ($ht_username == $username) {
+              if ($ht_username === $username) {
                 unset($htpasswd_array[$i]);
               }
             }
@@ -145,7 +145,7 @@
             for ($i=0, $n=sizeof($htpasswd_array); $i<$n; $i++) {
               list($ht_username, $ht_password) = explode(':', $htpasswd_array[$i], 2);
 
-              if ($ht_username == $username) {
+              if ($ht_username === $username) {
                 unset($htpasswd_array[$i]);
               }
             }
@@ -261,7 +261,7 @@
 <?php
   $admins_query = tep_db_query("select id, user_name from administrators order by user_name");
   while ($admins = tep_db_fetch_array($admins_query)) {
-    if ((!isset($_GET['aID']) || (isset($_GET['aID']) && ($_GET['aID'] == $admins['id']))) && !isset($aInfo) && (substr($action, 0, 3) != 'new')) {
+    if ((!isset($_GET['aID']) || (isset($_GET['aID']) && ($_GET['aID'] === $admins['id']))) && !isset($aInfo) && (substr($action, 0, 3) != 'new')) {
       $aInfo = new objectInfo($admins);
     }
 
@@ -276,7 +276,7 @@
       for ($i=0, $n=sizeof($htpasswd_array); $i<$n; $i++) {
         list($ht_username, $ht_password) = explode(':', $htpasswd_array[$i], 2);
 
-        if ($ht_username == $admins['user_name']) {
+        if ($ht_username === $admins['user_name']) {
           $htpasswd_secured = tep_image('images/icon_status_green.gif', 'Secured', 10, 10);
           break;
         }

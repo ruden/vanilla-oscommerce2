@@ -41,7 +41,7 @@ if (isset($_POST['action']) && $_POST['action'] == 'process' && isset($_POST['fo
     $error = true;
 
     $messageStack->add('account_password', ENTRY_PASSWORD_NEW_ERROR);
-  } elseif ($password_new != $password_confirmation) {
+  } elseif ($password_new !== $password_confirmation) {
     $error = true;
 
     $messageStack->add('account_password', ENTRY_PASSWORD_NEW_ERROR_NOT_MATCHING);
