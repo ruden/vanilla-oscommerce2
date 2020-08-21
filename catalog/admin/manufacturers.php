@@ -39,7 +39,7 @@
         }
 
         $manufacturers_image = new upload('manufacturers_image');
-        $manufacturers_image->set_destination(DIR_FS_CATALOG_IMAGES);
+        $manufacturers_image->set_destination(DIR_FS_CATALOG . 'images/manufacturers/');
 
         if ($manufacturers_image->parse() && $manufacturers_image->save()) {
           tep_db_query("update manufacturers set manufacturers_image = '" . tep_db_input($manufacturers_image->filename) . "' where manufacturers_id = '" . (int)$manufacturers_id . "'");
@@ -77,7 +77,7 @@
           $manufacturer_query = tep_db_query("select manufacturers_image from manufacturers where manufacturers_id = '" . (int)$manufacturers_id . "'");
           $manufacturer = tep_db_fetch_array($manufacturer_query);
 
-          $image_location = DIR_FS_DOCUMENT_ROOT . DIR_WS_CATALOG_IMAGES . $manufacturer['manufacturers_image'];
+          $image_location = DIR_FS_DOCUMENT_ROOT . DIR_WS_CATALOG . 'images/manufacturers/' . $manufacturer['manufacturers_image'];
 
           if (file_exists($image_location)) @unlink($image_location);
         }
@@ -227,7 +227,7 @@
         $contents[] = array('align' => 'center', 'text' => tep_draw_button(IMAGE_EDIT, 'document', tep_href_link('manufacturers.php', 'page=' . $_GET['page'] . '&mID=' . $mInfo->manufacturers_id . '&action=edit')) . tep_draw_button(IMAGE_DELETE, 'trash', tep_href_link('manufacturers.php', 'page=' . $_GET['page'] . '&mID=' . $mInfo->manufacturers_id . '&action=delete')));
         $contents[] = array('text' => '<br />' . TEXT_DATE_ADDED . ' ' . tep_date_short($mInfo->date_added));
         if (tep_not_null($mInfo->last_modified)) $contents[] = array('text' => TEXT_LAST_MODIFIED . ' ' . tep_date_short($mInfo->last_modified));
-        $contents[] = array('text' => '<br />' . tep_info_image($mInfo->manufacturers_image, $mInfo->manufacturers_name));
+        $contents[] = array('text' => '<br />' . tep_info_image('manufacturers/' . $mInfo->manufacturers_image, $mInfo->manufacturers_name));
         $contents[] = array('text' => '<br />' . TEXT_PRODUCTS . ' ' . $mInfo->products_count);
       }
       break;

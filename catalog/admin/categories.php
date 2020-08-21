@@ -82,7 +82,7 @@
         }
 
         $categories_image = new upload('categories_image');
-        $categories_image->set_destination(DIR_FS_CATALOG_IMAGES);
+        $categories_image->set_destination(DIR_FS_CATALOG . 'images/categories/');
 
         if ($categories_image->parse() && $categories_image->save()) {
           tep_db_query("update categories set categories_image = '" . tep_db_input($categories_image->filename) . "' where categories_id = '" . (int)$categories_id . "'");
@@ -228,8 +228,10 @@
                                 'manufacturers_id' => (int)tep_db_prepare_input($_POST['manufacturers_id']));
 
         $products_image = new upload('products_image');
-        $products_image->set_destination(DIR_FS_CATALOG_IMAGES);
+        $products_image->set_destination(DIR_FS_CATALOG . 'images/products/originals/');
         if ($products_image->parse() && $products_image->save()) {
+          tep_resize_image(DIR_FS_CATALOG . 'images/products/originals/'. $products_image->filename, DIR_FS_CATALOG . 'images/products/thumbs/'. $products_image->filename, SMALL_IMAGE_WIDTH, SMALL_IMAGE_HEIGHT, 90);
+
           $sql_data_array['products_image'] = tep_db_prepare_input($products_image->filename);
         }
 
@@ -282,8 +284,10 @@
                                     'sort_order' => $pi_sort_order);
 
             $t = new upload($key);
-            $t->set_destination(DIR_FS_CATALOG_IMAGES);
+            $t->set_destination(DIR_FS_CATALOG . 'images/products/originals/');
             if ($t->parse() && $t->save()) {
+              tep_resize_image(DIR_FS_CATALOG . 'images/products/originals/'. $t->filename, DIR_FS_CATALOG . 'images/products/thumbs/'. $t->filename, SMALL_IMAGE_WIDTH, SMALL_IMAGE_HEIGHT, 90);
+
               $sql_data_array['image'] = tep_db_prepare_input($t->filename);
             }
 
@@ -296,8 +300,10 @@
                                     'htmlcontent' => tep_db_prepare_input($_POST['products_image_htmlcontent_new_' . $matches[1]]));
 
             $t = new upload($key);
-            $t->set_destination(DIR_FS_CATALOG_IMAGES);
+            $t->set_destination(DIR_FS_CATALOG . 'images/products/originals/');
             if ($t->parse() && $t->save()) {
+              tep_resize_image(DIR_FS_CATALOG . 'images/products/originals/'. $t->filename, DIR_FS_CATALOG . 'images/products/thumbs/'. $t->filename, SMALL_IMAGE_WIDTH, SMALL_IMAGE_HEIGHT, 90);
+
               $pi_sort_order++;
 
               $sql_data_array['image'] = tep_db_prepare_input($t->filename);
@@ -317,8 +323,12 @@
             $duplicate_image = tep_db_fetch_array($duplicate_image_query);
 
             if ($duplicate_image['total'] < 2) {
-              if (file_exists(DIR_FS_CATALOG . 'images/' . $product_images['image'])) {
-                @unlink(DIR_FS_CATALOG . 'images/' . $product_images['image']);
+              if (file_exists(DIR_FS_CATALOG . 'images/products/originals/' . $product_images['image'])) {
+                @unlink(DIR_FS_CATALOG . 'images/products/originals/' . $product_images['image']);
+              }
+
+              if (file_exists(DIR_FS_CATALOG . 'images/products/thumbs/' . $product_images['image'])) {
+                @unlink(DIR_FS_CATALOG . 'images/products/thumbs/' . $product_images['image']);
               }
             }
           }
@@ -387,8 +397,8 @@
   $OSCOM_Hooks->call('categories', 'productPostAction');
 
 // check if the catalog image directory exists
-  if (is_dir(DIR_FS_CATALOG_IMAGES)) {
-    if (!tep_is_writable(DIR_FS_CATALOG_IMAGES)) $messageStack->add(ERROR_CATALOG_IMAGE_DIRECTORY_NOT_WRITEABLE, 'error');
+  if (is_dir(DIR_FS_CATALOG . 'images/')) {
+    if (!tep_is_writable(DIR_FS_CATALOG . 'images/')) $messageStack->add(ERROR_CATALOG_IMAGE_DIRECTORY_NOT_WRITEABLE, 'error');
   } else {
     $messageStack->add(ERROR_CATALOG_IMAGE_DIRECTORY_DOES_NOT_EXIST, 'error');
   }
@@ -1050,7 +1060,7 @@ $('#products_date_available').datepicker({
             $contents[] = array('align' => 'center', 'text' => tep_draw_button(IMAGE_EDIT, 'document', tep_href_link('categories.php', 'cPath=' . $category_path_string . '&cID=' . $cInfo->categories_id . '&action=edit_category')) . tep_draw_button(IMAGE_DELETE, 'trash', tep_href_link('categories.php', 'cPath=' . $category_path_string . '&cID=' . $cInfo->categories_id . '&action=delete_category')) . tep_draw_button(IMAGE_MOVE, 'arrow-4', tep_href_link('categories.php', 'cPath=' . $category_path_string . '&cID=' . $cInfo->categories_id . '&action=move_category')));
             $contents[] = array('text' => '<br />' . TEXT_DATE_ADDED . ' ' . tep_date_short($cInfo->date_added));
             if (tep_not_null($cInfo->last_modified)) $contents[] = array('text' => TEXT_LAST_MODIFIED . ' ' . tep_date_short($cInfo->last_modified));
-            $contents[] = array('text' => '<br />' . tep_info_image($cInfo->categories_image, $cInfo->categories_name, HEADING_IMAGE_WIDTH, HEADING_IMAGE_HEIGHT) . '<br />' . $cInfo->categories_image);
+            $contents[] = array('text' => '<br />' . tep_info_image('categories/' . $cInfo->categories_image, $cInfo->categories_name, HEADING_IMAGE_WIDTH, HEADING_IMAGE_HEIGHT) . '<br />' . $cInfo->categories_image);
             $contents[] = array('text' => '<br />' . TEXT_SUBCATEGORIES . ' ' . $cInfo->childs_count . '<br />' . TEXT_PRODUCTS . ' ' . $cInfo->products_count);
           } elseif (isset($pInfo) && is_object($pInfo)) { // product info box contents
             $heading[] = array('text' => '<strong>' . tep_get_products_name($pInfo->products_id, $languages_id) . '</strong>');
@@ -1059,7 +1069,7 @@ $('#products_date_available').datepicker({
             $contents[] = array('text' => '<br />' . TEXT_DATE_ADDED . ' ' . tep_date_short($pInfo->products_date_added));
             if (tep_not_null($pInfo->products_last_modified)) $contents[] = array('text' => TEXT_LAST_MODIFIED . ' ' . tep_date_short($pInfo->products_last_modified));
             if (date('Y-m-d') < $pInfo->products_date_available) $contents[] = array('text' => TEXT_DATE_AVAILABLE . ' ' . tep_date_short($pInfo->products_date_available));
-            $contents[] = array('text' => '<br />' . tep_info_image($pInfo->products_image, $pInfo->products_name, SMALL_IMAGE_WIDTH, SMALL_IMAGE_HEIGHT) . '<br />' . $pInfo->products_image);
+            $contents[] = array('text' => '<br />' . tep_info_image('products/thumbs/' . $pInfo->products_image, $pInfo->products_name, SMALL_IMAGE_WIDTH, SMALL_IMAGE_HEIGHT) . '<br />' . $pInfo->products_image);
             $contents[] = array('text' => '<br />' . TEXT_PRODUCTS_PRICE_INFO . ' ' . $currencies->format($pInfo->products_price) . '<br />' . TEXT_PRODUCTS_QUANTITY_INFO . ' ' . $pInfo->products_quantity);
             $contents[] = array('text' => '<br />' . TEXT_PRODUCTS_AVERAGE_RATING . ' ' . number_format($pInfo->average_rating, 2) . '%');
           }

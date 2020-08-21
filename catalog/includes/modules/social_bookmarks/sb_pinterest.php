@@ -53,7 +53,7 @@
           }
         }
 
-        $params['media'] = tep_href_link('images/' . $image_file, '', 'SSL', false);
+        $params['media'] = tep_href_link('images/products/originals/' . $image_file, '', 'SSL', false, false);
       }
 
 // url

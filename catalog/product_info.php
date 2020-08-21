@@ -62,9 +62,9 @@
 
     <div id="piGal">
 <?php
-    if (!empty($product_info['products_image']) && is_file('images/' . $product_info['products_image'])) {
+    if (!empty($product_info['products_image']) && is_file('images/products/originals/' . $product_info['products_image'])) {
 ?>
-        <a href="<?php echo tep_href_link('images/' . $product_info['products_image']); ?>" class="lightbox"><?php echo tep_image('images/' . $product_info['products_image'], addslashes($product_info['products_name']), SMALL_IMAGE_WIDTH*2, SMALL_IMAGE_HEIGHT*2); ?></a>
+        <a href="<?php echo tep_href_link('images/products/originals/' . $product_info['products_image'], '', 'SSL', false, false); ?>" class="lightbox"><?php echo tep_image('images/products/originals/' . $product_info['products_image'], addslashes($product_info['products_name']), SMALL_IMAGE_WIDTH*2, SMALL_IMAGE_HEIGHT*2); ?></a>
 <?php
       $pi_query = tep_db_query("select image, htmlcontent from products_images where products_id = '" . (int)$product_info['products_id'] . "' order by sort_order");
 
@@ -72,11 +72,11 @@
         while ($pi = tep_db_fetch_array($pi_query)) {
           if (!empty($pi['htmlcontent'])) {
 ?>
-            <a href="<?php echo $pi['htmlcontent']; ?>" data-type="iframe" class="lightbox"><?php echo tep_image('images/' . $pi['image'], addslashes($product_info['products_name']), SMALL_IMAGE_WIDTH/1.5, SMALL_IMAGE_HEIGHT/1.5); ?></a>
+            <a href="<?php echo $pi['htmlcontent']; ?>" data-type="iframe" class="lightbox"><?php echo tep_image('images/products/thumbs/' . $pi['image'], addslashes($product_info['products_name']), SMALL_IMAGE_WIDTH/1.5, SMALL_IMAGE_HEIGHT/1.5); ?></a>
 <?php
           } else {
 ?>
-              <a href="<?php echo tep_href_link('images/' . $pi['image']); ?>" class="lightbox"><?php echo tep_image('images/' . $pi['image'], addslashes($product_info['products_name']), SMALL_IMAGE_WIDTH/1.5, SMALL_IMAGE_HEIGHT/1.5); ?></a>
+              <a href="<?php echo tep_href_link('images/products/originals/' . $pi['image'], '', 'SSL', false, false); ?>" class="lightbox"><?php echo tep_image('images/products/thumbs/' . $pi['image'], addslashes($product_info['products_name']), SMALL_IMAGE_WIDTH/1.5, SMALL_IMAGE_HEIGHT/1.5); ?></a>
 <?php
           }
         }
