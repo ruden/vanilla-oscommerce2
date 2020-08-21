@@ -10,27 +10,27 @@
 # NOTE: * Please make any modifications to this file by hand!
 #       * DO NOT use a mysqldump created file for new changes!
 
-INSERT INTO categories VALUES ('1', 'category_hardware.gif', '0', '1', now(), null);
-INSERT INTO categories VALUES ('2', 'category_software.gif', '0', '2', now(), null);
-INSERT INTO categories VALUES ('3', 'category_dvd_movies.gif', '0', '3', now(), null);
-INSERT INTO categories VALUES ('4', 'subcategory_graphic_cards.gif', '1', '0', now(), null);
-INSERT INTO categories VALUES ('5', 'subcategory_printers.gif', '1', '0', now(), null);
-INSERT INTO categories VALUES ('6', 'subcategory_monitors.gif', '1', '0', now(), null);
-INSERT INTO categories VALUES ('7', 'subcategory_speakers.gif', '1', '0', now(), null);
-INSERT INTO categories VALUES ('8', 'subcategory_keyboards.gif', '1', '0', now(), null);
-INSERT INTO categories VALUES ('9', 'subcategory_mice.gif', '1', '0', now(), null);
-INSERT INTO categories VALUES ('10', 'subcategory_action.gif', '3', '0', now(), null);
-INSERT INTO categories VALUES ('11', 'subcategory_science_fiction.gif', '3', '0', now(), null);
-INSERT INTO categories VALUES ('12', 'subcategory_comedy.gif', '3', '0', now(), null);
-INSERT INTO categories VALUES ('13', 'subcategory_cartoons.gif', '3', '0', now(), null);
-INSERT INTO categories VALUES ('14', 'subcategory_thriller.gif', '3', '0', now(), null);
-INSERT INTO categories VALUES ('15', 'subcategory_drama.gif', '3', '0', now(), null);
-INSERT INTO categories VALUES ('16', 'subcategory_memory.gif', '1', '0', now(), null);
-INSERT INTO categories VALUES ('17', 'subcategory_cdrom_drives.gif', '1', '0', now(), null);
-INSERT INTO categories VALUES ('18', 'subcategory_simulation.gif', '2', '0', now(), null);
-INSERT INTO categories VALUES ('19', 'subcategory_action_games.gif', '2', '0', now(), null);
-INSERT INTO categories VALUES ('20', 'subcategory_strategy.gif', '2', '0', now(), null);
-INSERT INTO categories VALUES ('21', 'category_gadgets.png', '0', '4', now(), null);
+INSERT INTO categories VALUES ('1', 'hardware.gif', '0', '1', now(), null);
+INSERT INTO categories VALUES ('2', 'software.gif', '0', '2', now(), null);
+INSERT INTO categories VALUES ('3', 'dvd_movies.gif', '0', '3', now(), null);
+INSERT INTO categories VALUES ('4', 'graphic_cards.gif', '1', '0', now(), null);
+INSERT INTO categories VALUES ('5', 'printers.gif', '1', '0', now(), null);
+INSERT INTO categories VALUES ('6', 'monitors.gif', '1', '0', now(), null);
+INSERT INTO categories VALUES ('7', 'speakers.gif', '1', '0', now(), null);
+INSERT INTO categories VALUES ('8', 'keyboards.gif', '1', '0', now(), null);
+INSERT INTO categories VALUES ('9', 'mice.gif', '1', '0', now(), null);
+INSERT INTO categories VALUES ('10', 'action.gif', '3', '0', now(), null);
+INSERT INTO categories VALUES ('11', 'science_fiction.gif', '3', '0', now(), null);
+INSERT INTO categories VALUES ('12', 'comedy.gif', '3', '0', now(), null);
+INSERT INTO categories VALUES ('13', 'cartoons.gif', '3', '0', now(), null);
+INSERT INTO categories VALUES ('14', 'thriller.gif', '3', '0', now(), null);
+INSERT INTO categories VALUES ('15', 'drama.gif', '3', '0', now(), null);
+INSERT INTO categories VALUES ('16', 'memory.gif', '1', '0', now(), null);
+INSERT INTO categories VALUES ('17', 'cdrom_drives.gif', '1', '0', now(), null);
+INSERT INTO categories VALUES ('18', 'simulation.gif', '2', '0', now(), null);
+INSERT INTO categories VALUES ('19', 'action_games.gif', '2', '0', now(), null);
+INSERT INTO categories VALUES ('20', 'strategy.gif', '2', '0', now(), null);
+INSERT INTO categories VALUES ('21', 'gadgets.png', '0', '4', now(), null);
 
 INSERT INTO categories_description VALUES ( '1', '1', 'Hardware', '');
 INSERT INTO categories_description VALUES ( '2', '1', 'Software', '');
@@ -54,16 +54,16 @@ INSERT INTO categories_description VALUES ( '19', '1', 'Action', '');
 INSERT INTO categories_description VALUES ( '20', '1', 'Strategy', '');
 INSERT INTO categories_description VALUES ( '21', '1', 'Gadgets', '');
 
-INSERT INTO manufacturers VALUES (1,'Matrox','manufacturer_matrox.gif', now(), null);
-INSERT INTO manufacturers VALUES (2,'Microsoft','manufacturer_microsoft.gif', now(), null);
-INSERT INTO manufacturers VALUES (3,'Warner','manufacturer_warner.gif', now(), null);
-INSERT INTO manufacturers VALUES (4,'Fox','manufacturer_fox.gif', now(), null);
-INSERT INTO manufacturers VALUES (5,'Logitech','manufacturer_logitech.gif', now(), null);
-INSERT INTO manufacturers VALUES (6,'Canon','manufacturer_canon.gif', now(), null);
-INSERT INTO manufacturers VALUES (7,'Sierra','manufacturer_sierra.gif', now(), null);
-INSERT INTO manufacturers VALUES (8,'GT Interactive','manufacturer_gt_interactive.gif', now(), null);
-INSERT INTO manufacturers VALUES (9,'Hewlett Packard','manufacturer_hewlett_packard.gif', now(), null);
-INSERT INTO manufacturers VALUES (10,'Samsung','manufacturer_samsung.png', now(), null);
+INSERT INTO manufacturers VALUES (1,'Matrox','matrox.gif', now(), null);
+INSERT INTO manufacturers VALUES (2,'Microsoft','microsoft.gif', now(), null);
+INSERT INTO manufacturers VALUES (3,'Warner','warner.gif', now(), null);
+INSERT INTO manufacturers VALUES (4,'Fox','fox.gif', now(), null);
+INSERT INTO manufacturers VALUES (5,'Logitech','logitech.gif', now(), null);
+INSERT INTO manufacturers VALUES (6,'Canon','canon.gif', now(), null);
+INSERT INTO manufacturers VALUES (7,'Sierra','sierra.gif', now(), null);
+INSERT INTO manufacturers VALUES (8,'GT Interactive','gt_interactive.gif', now(), null);
+INSERT INTO manufacturers VALUES (9,'Hewlett Packard','hewlett_packard.gif', now(), null);
+INSERT INTO manufacturers VALUES (10,'Samsung','samsung.png', now(), null);
 
 INSERT INTO manufacturers_info VALUES (1, 1, 'http://www.matrox.com', 0, null);
 INSERT INTO manufacturers_info VALUES (2, 1, 'http://www.microsoft.com', 0, null);
