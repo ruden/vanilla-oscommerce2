@@ -25,9 +25,7 @@ h2 {
 }
 
 .t-wishlist svg, .t-shopping-cart svg, .t-account svg, .t-categories svg  {
-  fill: none;
-  stroke: var(--bs-primary);
-  stroke-width: 0.1rem;
+  fill: var(--bs-primary);
   width: 2.25rem;
   height: 2.25rem;
 }

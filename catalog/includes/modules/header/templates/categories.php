@@ -24,12 +24,16 @@
         </a></li>
       <li class="list-inline-item">
         <a href="<?php echo tep_href_link('wishlist.php'); ?>">
+          <span class="badge rounded-pill bg-primary position-absolute ml-4"><?php echo $wishlist_count_list > 0 ? $wishlist_count_list : ''; ?></span>
+
           <svg>
             <use href="#svg-icon-heart"/>
           </svg>
         </a></li>
       <li class="list-inline-item">
         <a href="<?php echo tep_href_link('shopping_cart.php'); ?>">
+          <span class="badge rounded-pill bg-primary position-absolute ml-4"><?php echo $cart_count_contents > 0 ? $cart_count_contents : ''; ?></span>
+
           <svg>
             <use href="#svg-icon-shopping-cart"/>
           </svg>
@@ -45,7 +49,7 @@
           ?>
 
           <li class="nav-item">
-            <a class="nav-link text-danger" href="<?php echo tep_href_link('specials.php'); ?>"><?php echo MODULE_HEADER_CATEGORIES_TEXT_SALE; ?></a></li>
+            <a class="nav-link text-danger font-weight-bold" href="<?php echo tep_href_link('specials.php'); ?>"><?php echo MODULE_HEADER_CATEGORIES_TEXT_SALE; ?></a></li>
 
           <?php
         }

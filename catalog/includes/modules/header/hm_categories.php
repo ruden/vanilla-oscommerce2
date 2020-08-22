@@ -34,7 +34,7 @@ class hm_categories {
   }
 
   public function getData() {
-    global $oscTemplate;
+    global $oscTemplate, $cart, $wishlist;
 
     $special_products = false;
 
@@ -43,6 +43,9 @@ class hm_categories {
     if (tep_db_num_rows($specials_query)) {
       $special_products = true;
     }
+
+    $cart_count_contents = $cart->count_contents();
+    $wishlist_count_list = $wishlist->count_list();
 
     $categories_list = $this->showCategories();
 
