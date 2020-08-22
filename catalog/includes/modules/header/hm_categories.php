@@ -49,15 +49,13 @@ class hm_categories {
 
     $categories_list = $this->showCategories();
 
-    if (!empty($categories_list)) {
-      ob_start();
-      include 'includes/modules/header/templates/categories.php';
+    ob_start();
+    include 'includes/modules/header/templates/categories.php';
 
-      $oscTemplate->addBlock('<script src="includes/modules/header/templates/categories/jquery.smartmenus.min.js"></script>
+    $oscTemplate->addBlock('<script src="includes/modules/header/templates/categories/jquery.smartmenus.min.js"></script>
 <script src="includes/modules/header/templates/categories/bootstrap-4/jquery.smartmenus.bootstrap-4.min.js"></script>', 'footer_scripts');
 
-      return ob_get_clean();
-    }
+    return ob_get_clean();
   }
 
   public function execute() {
