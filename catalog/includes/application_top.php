@@ -264,8 +264,8 @@
   $currencies = new currencies();
 
 // include the mail classes
-  require('includes/classes/mime.php');
-  require('includes/classes/email.php');
+//  require('includes/classes/mime.php');
+//  require('includes/classes/email.php');
 
 // set the language
   if (!tep_session_is_registered('language') || isset($_GET['language'])) {

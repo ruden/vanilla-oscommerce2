@@ -36,21 +36,13 @@
     $subject = tep_db_prepare_input($_POST['subject']);
     $message = tep_db_prepare_input($_POST['message']);
 
-    //Let's build a message object using the email class
-    $mimemessage = new email();
+    $to_name = array();
 
-    // Build the text version
-    $text = strip_tags($message);
-    if (EMAIL_USE_HTML == 'true') {
-      $mimemessage->add_html($message, $text);
-    } else {
-      $mimemessage->add_text($text);
-    }
-
-    $mimemessage->build_message();
     while ($mail = tep_db_fetch_array($mail_query)) {
-      $mimemessage->send($mail['customers_firstname'] . ' ' . $mail['customers_lastname'], $mail['customers_email_address'], '', $from, $subject);
+      $to_name[$mail['customers_email_address']] = $mail['customers_firstname'] . ' ' . $mail['customers_lastname'];
     }
+
+    tep_mail($to_name, null, $subject, $message, $from, null);
 
     tep_redirect(tep_href_link('mail.php', 'mail_sent_to=' . urlencode($mail_sent_to)));
   }
@@ -97,7 +89,7 @@
                 <td><?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
               </tr>
               <tr>
-                <td class="smallText"><strong><?php echo TEXT_CUSTOMER; ?></strong><br /><?php echo $mail_sent_to; ?></td>
+                <td class="smallText"><strong><?php echo TEXT_CUSTOMER; ?></strong><br /><?php echo htmlspecialchars(stripslashes($mail_sent_to)); ?></td>
               </tr>
               <tr>
                 <td><?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
@@ -139,17 +131,20 @@
 <?php
   } else {
 ?>
-          <tr><?php echo tep_draw_form('mail', 'mail.php', 'action=preview'); ?>
+          <tr><?php echo tep_draw_form('mail', 'mail.php', 'action=preview', 'post', 'onsubmit="return check_select();"'); ?>
             <td><table border="0" cellpadding="0" cellspacing="2">
               <tr>
                 <td colspan="2"><?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
               </tr>
 <?php
+    $mail_query = tep_db_query("select customers_email_address, customers_firstname, customers_lastname from customers order by customers_lastname");
+    $mail_newsletter_query = tep_db_query("select customers_firstname, customers_lastname, customers_email_address from customers where customers_newsletter = '1'");
+
     $customers = array();
     $customers[] = array('id' => '', 'text' => TEXT_SELECT_CUSTOMER);
-    $customers[] = array('id' => '***', 'text' => TEXT_ALL_CUSTOMERS);
-    $customers[] = array('id' => '**D', 'text' => TEXT_NEWSLETTER_CUSTOMERS);
-    $mail_query = tep_db_query("select customers_email_address, customers_firstname, customers_lastname from customers order by customers_lastname");
+    $customers[] = array('id' => '***', 'text' => TEXT_ALL_CUSTOMERS . ' (' . tep_db_num_rows($mail_query) . ')');
+    $customers[] = array('id' => '**D', 'text' => TEXT_NEWSLETTER_CUSTOMERS . ' (' . tep_db_num_rows($mail_newsletter_query) . ')');
+
     while($customers_values = tep_db_fetch_array($mail_query)) {
       $customers[] = array('id' => $customers_values['customers_email_address'],
                            'text' => $customers_values['customers_lastname'] . ', ' . $customers_values['customers_firstname'] . ' (' . $customers_values['customers_email_address'] . ')');
@@ -188,6 +183,16 @@
               </tr>
             </table></td>
           </form></tr>
+    <script>
+      function check_select() {
+        const option_value = document.forms.mail.elements['customers_email_address'].value;
+
+        if (option_value === '') {
+          alert('<?php echo TEXT_SELECT_CUSTOMER; ?>');
+          return false;
+        }
+      }
+    </script>
 <?php
   }
 ?>

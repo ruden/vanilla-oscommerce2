@@ -231,7 +231,7 @@ if (isset($_POST['action']) && ($_POST['action'] == 'process') && isset($_POST['
     // restore cart contents
     $cart->restore_contents();
 
-    $wishlist->restore_list();
+    $wishlist->restore_lists();
 
     // build the message content
     $name = $firstname . ' ' . $lastname;

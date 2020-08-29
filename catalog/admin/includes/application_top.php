@@ -197,8 +197,8 @@
   require('includes/classes/object_info.php');
 
 // email classes
-  require('includes/classes/mime.php');
-  require('includes/classes/email.php');
+//  require(DIR_FS_CATALOG . 'includes/classes/mime.php');
+//  require(DIR_FS_CATALOG . 'includes/classes/email.php');
 
 // file uploading class
   require('includes/classes/upload.php');
@@ -235,4 +235,3 @@
   require(DIR_FS_CATALOG . 'includes/classes/hooks.php');
   $OSCOM_Hooks = new hooks('admin');
   $OSCOM_Hooks->register(basename($PHP_SELF, '.php'));
-?>

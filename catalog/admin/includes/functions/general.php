@@ -1164,22 +1164,98 @@ function tep_display_tax_value($value, $padding = TAX_DECIMAL_PLACES) {
 }
 
 function tep_mail($to_name, $to_email_address, $email_subject, $email_text, $from_email_name, $from_email_address) {
-  if (SEND_EMAILS != 'true') return false;
+  if (SEND_EMAILS == 'false') return false;
 
-  // Instantiate a new mail object
-  $message = new email();
+  tep_wrap_smtp($to_name, $to_email_address, $email_subject, $email_text, $from_email_name, $from_email_address);
+}
 
-  // Build the text version
-  $text = strip_tags($email_text);
-  if (EMAIL_USE_HTML == 'true') {
-    $message->add_html($email_text, $text);
+function tep_wrap_smtp($to_name, $to_email_address, $email_subject, $email_text, $from_email_name, $from_email_address) {
+  $numSent = 0;
+  $debug = (EMAIL_SMTP_DEBUG == 'true' && EMAIL_TRANSPORT == 'smtp');
+  $html = (EMAIL_USE_HTML == 'true' || $email_text != strip_tags($email_text));
+
+  if (EMAIL_TRANSPORT == 'smtp') {
+    $transport = (new Swift_SmtpTransport(EMAIL_SMTP_HOST, EMAIL_SMTP_PORT, EMAIL_SMTP_ENCRYPTION))
+      ->setUsername(EMAIL_SMTP_USERNAME)
+      ->setPassword(EMAIL_SMTP_PASSWORD);
   } else {
-    $message->add_text($text);
+    $sendmail_path = @ini_get('sendmail_path');
+
+    if ($sendmail_path === false || $sendmail_path === '') {
+      $sendmail_path = '/usr/sbin/sendmail -bs';
+    }
+
+    $transport = new Swift_SendmailTransport($sendmail_path);
   }
 
-  // Send message
-  $message->build_message();
-  $message->send($to_name, $to_email_address, $from_email_name, $from_email_address, $email_subject);
+  $mailer = new Swift_Mailer($transport);
+
+  if ($debug) {
+    $logger = new Swift_Plugins_Loggers_ArrayLogger();
+    $mailer->registerPlugin(new Swift_Plugins_LoggerPlugin($logger));
+  }
+
+  $message = (new Swift_Message());
+
+  if (is_array($to_name) && empty($to_email_address)) {
+    $to = $to_name;
+
+    if (count($to_name) > count(explode(',', SEND_EXTRA_ORDER_EMAILS_TO))) {
+      $mailer->registerPlugin(new Swift_Plugins_AntiFloodPlugin(SEND_EMAIL_LIMIT, SEND_EMAIL_INTERVAL));
+    }
+  } else {
+    $to = array($to_email_address => $to_name);
+  }
+
+  if (empty($from_email_address)) {
+    $from = $from_email_name;
+  } else {
+    $from = array($from_email_address => $from_email_name);
+  }
+
+  if ($to_email_address == STORE_OWNER_EMAIL_ADDRESS) {  // the page contact us
+    $message->setReplyTo($from);
+    $from = $to;
+  }
+
+  $message->setPriority(5)
+    ->setSubject($email_subject)
+    ->setFrom($from);
+
+  foreach ($to as $address => $name) {
+    if (is_int($address)) { // valid adrress
+      $message->setTo($name);
+    } else {
+      $message->setTo([$address => $name]);
+    }
+
+    if ($html) {
+      $message->setBody($email_text, 'text/html');
+    } else {
+      $message->setBody($email_text, 'text/plain');
+    }
+
+    $numSent += $mailer->send($message);
+  }
+
+  if ($debug) {
+    if (is_writable(DIR_FS_CATALOG . 'includes/work/mail_logs')) {
+      file_put_contents(DIR_FS_CATALOG . 'includes/work/mail_logs/mail-' . date('Ymd') . '.txt', '[' . date('d-M-Y H:i:s') . '] ' . "\n" . $logger->dump() . "\n\n", FILE_APPEND);
+    }
+  }
+
+  return $numSent;
+}
+
+function tep_extra_emails_array($emails) {
+  $emails = explode(',', $emails);
+  $new_emails = [];
+
+  foreach ($emails as $email) {
+    $new_emails[trim(strstr($email, '<'), '<>')] = trim(strstr($email, '<', true));
+  }
+
+  return $new_emails;
 }
 
 function tep_get_tax_class_title($tax_class_id) {

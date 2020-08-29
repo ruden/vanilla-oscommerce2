@@ -41,8 +41,6 @@ if (isset($_GET['action']) && ($_GET['action'] == 'send') && isset($_POST['formi
 
     $actionRecorder->record();
 
-    $messageStack->add_session('account', SUCCESS_ACCOUNT_UPDATED, 'success');
-
     tep_redirect(tep_href_link('contact_us.php', 'action=success'));
   }
 }
