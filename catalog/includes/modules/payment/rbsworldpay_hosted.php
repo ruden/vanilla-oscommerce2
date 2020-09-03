@@ -509,10 +509,9 @@
       tep_mail($order->customer['firstname'] . ' ' . $order->customer['lastname'], $order->customer['email_address'], EMAIL_TEXT_SUBJECT, $email_order, STORE_OWNER, STORE_OWNER_EMAIL_ADDRESS);
 
 // send emails to other people
-      if (SEND_EXTRA_ORDER_EMAILS_TO != '') {
-        tep_mail('', SEND_EXTRA_ORDER_EMAILS_TO, EMAIL_TEXT_SUBJECT, $email_order, STORE_OWNER, STORE_OWNER_EMAIL_ADDRESS);
+      if (!empty(SEND_EXTRA_ORDER_EMAILS_TO)) {
+        tep_mail(tep_extra_emails_array(SEND_EXTRA_ORDER_EMAILS_TO), null, EMAIL_TEXT_SUBJECT, $email_order, STORE_OWNER, STORE_OWNER_EMAIL_ADDRESS);
       }
-
 // load the after_process function from the payment modules
       $this->after_process();
 
