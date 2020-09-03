@@ -941,8 +941,8 @@ function tep_remove_category($category_id) {
   $duplicate_image = tep_db_fetch_array($duplicate_image_query);
 
   if ($duplicate_image['total'] < 2) {
-    if (file_exists(DIR_FS_CATALOG . 'images/' . $category_image['categories_image'])) {
-      @unlink(DIR_FS_CATALOG . 'images/' . $category_image['categories_image']);
+    if (file_exists(DIR_FS_CATALOG . 'images/categories/' . $category_image['categories_image'])) {
+      @unlink(DIR_FS_CATALOG . 'images/categories/' . $category_image['categories_image']);
     }
   }
 
@@ -964,8 +964,12 @@ function tep_remove_product($product_id) {
   $duplicate_image = tep_db_fetch_array($duplicate_image_query);
 
   if ($duplicate_image['total'] < 2) {
-    if (file_exists(DIR_FS_CATALOG . 'images/' . $product_image['products_image'])) {
-      @unlink(DIR_FS_CATALOG . 'images/' . $product_image['products_image']);
+    if (file_exists(DIR_FS_CATALOG . 'images/products/thumbs/' . $product_image['products_image'])) {
+      @unlink(DIR_FS_CATALOG . 'images/products/thumbs/' . $product_image['products_image']);
+    }
+
+    if (file_exists(DIR_FS_CATALOG . 'images/products/originals/' . $product_image['products_image'])) {
+      @unlink(DIR_FS_CATALOG . 'images/products/originals/' . $product_image['products_image']);
     }
   }
 
@@ -976,8 +980,12 @@ function tep_remove_product($product_id) {
       $duplicate_image = tep_db_fetch_array($duplicate_image_query);
 
       if ($duplicate_image['total'] < 2) {
-        if (file_exists(DIR_FS_CATALOG . 'images/' . $product_images['image'])) {
-          @unlink(DIR_FS_CATALOG . 'images/' . $product_images['image']);
+        if (file_exists(DIR_FS_CATALOG . 'images/products/thumbs/' . $product_images['image'])) {
+          @unlink(DIR_FS_CATALOG . 'images/products/thumbs/' . $product_images['image']);
+        }
+
+        if (file_exists(DIR_FS_CATALOG . 'images/products/originals/' . $product_images['image'])) {
+          @unlink(DIR_FS_CATALOG . 'images/products/originals/' . $product_images['image']);
         }
       }
     }
@@ -992,6 +1000,8 @@ function tep_remove_product($product_id) {
   tep_db_query("delete from products_attributes where products_id = '" . (int)$product_id . "'");
   tep_db_query("delete from customers_basket where products_id = '" . (int)$product_id . "' or products_id like '" . (int)$product_id . "{%'");
   tep_db_query("delete from customers_basket_attributes where products_id = '" . (int)$product_id . "' or products_id like '" . (int)$product_id . "{%'");
+  tep_db_query("delete from customers_wishlist where products_id = '" . (int)$product_id . "' or products_id like '" . (int)$product_id . "{%'");
+  tep_db_query("delete from customers_wishlist_attributes where products_id = '" . (int)$product_id . "' or products_id like '" . (int)$product_id . "{%'");
 
   tep_db_query("delete from reviews where products_id = '" . (int)$product_id . "'");
 
