@@ -213,9 +213,7 @@ INSERT INTO products_to_categories VALUES (26,9);
 INSERT INTO products_to_categories VALUES (27,5);
 INSERT INTO products_to_categories VALUES (28,21);
 
-INSERT INTO reviews VALUES (1,19,0,'John Doe',5,now(),null,1,0);
-
-INSERT INTO reviews_description VALUES (1,1, 'This has to be one of the funniest movies released for 1999!');
+INSERT INTO reviews VALUES (1,19,0,'John Doe',5,now(),null,1,'This has to be one of the funniest movies released for 1999!');
 
 INSERT INTO specials VALUES (1,3, 39.99, now(), null, null, null, '1');
 INSERT INTO specials VALUES (2,5, 30.00, now(), null, null, null, '1');

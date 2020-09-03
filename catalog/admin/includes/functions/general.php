@@ -279,7 +279,7 @@ function tep_values_name($values_id) {
   return $values_values['products_options_values_name'];
 }
 
-function tep_info_image($image, $alt, $width = '', $height = '') {
+function tep_info_image($image, $alt = '', $width = '', $height = '') {
   if (tep_not_null($image) && (file_exists(DIR_FS_CATALOG . 'images/' . $image))) {
     $image = tep_image(HTTP_CATALOG_SERVER . DIR_WS_CATALOG . 'images/' . $image, $alt, $width, $height);
   } else {
@@ -993,10 +993,6 @@ function tep_remove_product($product_id) {
   tep_db_query("delete from customers_basket where products_id = '" . (int)$product_id . "' or products_id like '" . (int)$product_id . "{%'");
   tep_db_query("delete from customers_basket_attributes where products_id = '" . (int)$product_id . "' or products_id like '" . (int)$product_id . "{%'");
 
-  $product_reviews_query = tep_db_query("select reviews_id from reviews where products_id = '" . (int)$product_id . "'");
-  while ($product_reviews = tep_db_fetch_array($product_reviews_query)) {
-    tep_db_query("delete from reviews_description where reviews_id = '" . (int)$product_reviews['reviews_id'] . "'");
-  }
   tep_db_query("delete from reviews where products_id = '" . (int)$product_id . "'");
 
   if (USE_CACHE == 'true') {

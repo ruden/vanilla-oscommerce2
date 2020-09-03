@@ -229,8 +229,8 @@ define('TEXT_DESCENDINGLY', 'descendingly');
 define('TEXT_ASCENDINGLY', 'ascendingly');
 define('TEXT_BY', ' by ');
 
+define('TEXT_OF_5_STARS', '%s of 5 Stars!');
 define('TEXT_REVIEW_BY', 'by %s');
-define('TEXT_REVIEW_WORD_COUNT', '%s words');
 define('TEXT_REVIEW_RATING', 'Rating: %s [%s]');
 define('TEXT_REVIEW_DATE_ADDED', 'Date Added: %s');
 define('TEXT_NO_REVIEWS', 'There are currently no product reviews.');

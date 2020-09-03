@@ -201,11 +201,6 @@
         $customers_id = tep_db_prepare_input($_GET['cID']);
 
         if (isset($_POST['delete_reviews']) && ($_POST['delete_reviews'] == 'on')) {
-          $reviews_query = tep_db_query("select reviews_id from reviews where customers_id = '" . (int)$customers_id . "'");
-          while ($reviews = tep_db_fetch_array($reviews_query)) {
-            tep_db_query("delete from reviews_description where reviews_id = '" . (int)$reviews['reviews_id'] . "'");
-          }
-
           tep_db_query("delete from reviews where customers_id = '" . (int)$customers_id . "'");
         } else {
           tep_db_query("update reviews set customers_id = null where customers_id = '" . (int)$customers_id . "'");

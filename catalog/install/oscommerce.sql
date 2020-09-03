@@ -545,18 +545,10 @@ CREATE TABLE reviews (
   date_added datetime,
   last_modified datetime,
   reviews_status tinyint(1) NOT NULL default '0',
-  reviews_read int(5) NOT NULL default '0',
+  reviews_text text NOT NULL,
   PRIMARY KEY (reviews_id),
   KEY idx_reviews_products_id (products_id),
   KEY idx_reviews_customers_id (customers_id)
-) CHARACTER SET utf8 COLLATE utf8_unicode_ci;
-
-DROP TABLE IF EXISTS reviews_description;
-CREATE TABLE reviews_description (
-  reviews_id int NOT NULL,
-  languages_id int NOT NULL,
-  reviews_text text NOT NULL,
-  PRIMARY KEY (reviews_id, languages_id)
 ) CHARACTER SET utf8 COLLATE utf8_unicode_ci;
 
 DROP TABLE IF EXISTS sec_directory_whitelist;

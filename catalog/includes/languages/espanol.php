@@ -229,8 +229,8 @@ define('TEXT_DESCENDINGLY', 'descendentemente');
 define('TEXT_ASCENDINGLY', 'ascendentemente');
 define('TEXT_BY', ' por ');
 
+define('TEXT_OF_5_STARS', '%s de 5 Estrellas!');
 define('TEXT_REVIEW_BY', 'por %s');
-define('TEXT_REVIEW_WORD_COUNT', '%s palabras');
 define('TEXT_REVIEW_RATING', 'Valoraci&oacute;n: %s [%s]');
 define('TEXT_REVIEW_DATE_ADDED', 'Fecha de Alta: %s');
 define('TEXT_NO_REVIEWS', 'En este momento no hay ning&uacute;n comentario.');

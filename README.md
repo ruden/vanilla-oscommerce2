@@ -46,7 +46,7 @@ Todo
 * [x] New sorting products in listing and modularized.
 * [x] Add Spanish language.
 * [ ] Modularized the index page.
-* [ ] Update review system.
+* [x] Update review system.
 * [x] Add wishlist.
 * [ ] Modularized the XML sitemap. 
 * [ ] Modularized the box product filter. 
