@@ -36,7 +36,7 @@
       $rss->items_limit = 5;
       $rss->cache_dir = DIR_FS_CACHE;
       $rss->cache_time = 86400;
-      $feed = $rss->get('http://feeds.feedburner.com/osCommerce_Contributions');
+      $feed = $rss->get('https://osclab.com/?feed=rss');
 
       $output = '<table border="0" width="100%" cellspacing="0" cellpadding="4">' .
                 '  <tr class="dataTableHeadingRow">' .
@@ -58,7 +58,7 @@
       }
 
       $output .= '  <tr class="dataTableRow">' .
-                 '    <td class="dataTableContent" align="right" colspan="2"><a href="http://addons.oscommerce.com" target="_blank">' . tep_image('images/icon_oscommerce.png', MODULE_ADMIN_DASHBOARD_LATEST_ADDONS_ICON_SITE) . '</a>&nbsp;<a href="http://feeds.feedburner.com/osCommerce_Contributions" target="_blank">' . tep_image('images/icon_rss.png', MODULE_ADMIN_DASHBOARD_LATEST_ADDONS_ICON_RSS) . '</a></td>' .
+                 '    <td class="dataTableContent" align="right" colspan="2"><a href="https://osclab.com" target="_blank">' . tep_image('images/icon_osclab.png', MODULE_ADMIN_DASHBOARD_LATEST_ADDONS_ICON_SITE) . '</a>&nbsp;<a href="https://osclab.com/?feed=rss" target="_blank">' . tep_image('images/icon_rss.png', MODULE_ADMIN_DASHBOARD_LATEST_ADDONS_ICON_RSS) . '</a></td>' .
                  '  </tr>' .
                  '</table>';
 

@@ -36,7 +36,7 @@
       $rss->items_limit = 5;
       $rss->cache_dir = DIR_FS_CACHE;
       $rss->cache_time = 86400;
-      $feed = $rss->get('http://feeds.feedburner.com/osCommerceNewsAndBlogs');
+      $feed = $rss->get('https://osclab.com/blog/?feed=rss');
 
       $output = '<table border="0" width="100%" cellspacing="0" cellpadding="4">' .
                 '  <tr class="dataTableHeadingRow">' .
@@ -58,7 +58,7 @@
       }
 
       $output .= '  <tr class="dataTableRow">' .
-                 '    <td class="dataTableContent" align="right" colspan="2"><a href="http://www.oscommerce.com/Us&News" target="_blank">' . tep_image('images/icon_oscommerce.png', MODULE_ADMIN_DASHBOARD_LATEST_NEWS_ICON_NEWS) . '</a>&nbsp;<a href="http://www.oscommerce.com/newsletter/subscribe" target="_blank">' . tep_image('images/icon_newsletter.png', MODULE_ADMIN_DASHBOARD_LATEST_NEWS_ICON_NEWSLETTER) . '</a>&nbsp;<a href="http://plus.google.com/+osCommerce" target="_blank">' . tep_image('images/icon_google_plus.png', MODULE_ADMIN_DASHBOARD_LATEST_NEWS_ICON_GOOGLE_PLUS) . '</a>&nbsp;<a href="http://www.facebook.com/pages/osCommerce/33387373079" target="_blank">' . tep_image('images/icon_facebook.png', MODULE_ADMIN_DASHBOARD_LATEST_NEWS_ICON_FACEBOOK) . '</a>&nbsp;<a href="http://twitter.com/osCommerce" target="_blank">' . tep_image('images/icon_twitter.png', MODULE_ADMIN_DASHBOARD_LATEST_NEWS_ICON_TWITTER) . '</a>&nbsp;<a href="http://feeds.feedburner.com/osCommerceNewsAndBlogs" target="_blank">' . tep_image('images/icon_rss.png', MODULE_ADMIN_DASHBOARD_LATEST_NEWS_ICON_RSS) . '</a></td>' .
+                 '    <td class="dataTableContent" align="right" colspan="2"><a href="https://osclab.com/blog/" target="_blank">' . tep_image('images/icon_osclab.png', MODULE_ADMIN_DASHBOARD_LATEST_NEWS_ICON_NEWS) . '</a>&nbsp;<a href="http://twitter.com/OSCLab" target="_blank">' . tep_image('images/icon_twitter.png', MODULE_ADMIN_DASHBOARD_LATEST_NEWS_ICON_TWITTER) . '</a>&nbsp;<a href="https://osclab.com/blog/?feed=rss" target="_blank">' . tep_image('images/icon_rss.png', MODULE_ADMIN_DASHBOARD_LATEST_NEWS_ICON_RSS) . '</a></td>' .
                  '  </tr>' .
                  '</table>';
 
