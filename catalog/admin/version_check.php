@@ -21,7 +21,7 @@
 
   if (function_exists('curl_init')) {
     $ch = curl_init();
-    curl_setopt($ch, CURLOPT_URL, 'http://www.oscommerce.com/version/online_merchant/' . $major_version);
+    curl_setopt($ch, CURLOPT_URL, 'https://osclab.com/' . $major_version);
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
     $response = trim(curl_exec($ch));
     curl_close($ch);
@@ -30,9 +30,9 @@
       $releases = explode("\n", $response);
     }
   } else {
-    if ($fp = @fsockopen('www.oscommerce.com', 80, $errno, $errstr, 30)) {
-      $header = 'GET /version/online_merchant/' . $major_version . ' HTTP/1.0' . "\r\n" .
-                'Host: www.oscommerce.com' . "\r\n" .
+    if ($fp = @fsockopen('ssl://osclab.com', 443, $errno, $errstr, 30)) {
+      $header = 'GET /' . $major_version . ' HTTP/1.1' . "\r\n" .
+                'Host: osclab.com' . "\r\n" .
                 'Connection: close' . "\r\n\r\n";
 
       fwrite($fp, $header);
