@@ -11,7 +11,7 @@
 */
 
   // The HTML href link wrapper function
-  function tep_href_link($page = '', $parameters = '', $connection = 'NONSSL', $add_session_id = true, $search_engine_safe = true) {
+  function tep_href_link($page = '', $parameters = '', $connection = 'SSL', $add_session_id = true, $search_engine_safe = true) {
     global $request_type, $session_started, $SID;
 
     $page = tep_output_string($page);
@@ -87,16 +87,16 @@
     // the image filename as default
     $image = '<img src="' . tep_output_string($src) . '" alt="' . tep_output_string($alt) . '"';
 
-    if (tep_not_null($alt)) {
+    if (!empty($alt)) {
       $image .= ' title="' . tep_output_string($alt) . '"';
     }
 
     if ((CONFIG_CALCULATE_IMAGE_SIZE == 'true') && (empty($width) || empty($height))) {
       if ($image_size = @getimagesize($src)) {
-        if (empty($width) && tep_not_null($height)) {
+        if (empty($width) && !empty($height)) {
           $ratio = $height / $image_size[1];
           $width = intval($image_size[0] * $ratio);
-        } elseif (tep_not_null($width) && empty($height)) {
+        } elseif (!empty($width) && empty($height)) {
           $ratio = $width / $image_size[0];
           $height = intval($image_size[1] * $ratio);
         } elseif (empty($width) && empty($height)) {
@@ -108,11 +108,11 @@
       }
     }
 
-    if (tep_not_null($width) && tep_not_null($height)) {
+    if (!empty($width) && !empty($height)) {
       $image .= ' width="' . tep_output_string($width) . '" height="' . tep_output_string($height) . '"';
     }
 
-    if (tep_not_null($parameters)) {
+    if (!empty($parameters)) {
       $image .= ' ' . $parameters;
     }
 
