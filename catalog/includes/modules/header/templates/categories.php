@@ -49,7 +49,8 @@
           ?>
 
           <li class="nav-item">
-            <a class="nav-link text-danger font-weight-bold" href="<?php echo tep_href_link('specials.php'); ?>"><?php echo MODULE_HEADER_CATEGORIES_TEXT_SALE; ?></a></li>
+            <a class="nav-link text-danger font-weight-bold" href="<?php echo tep_href_link('specials.php'); ?>"><?php echo MODULE_HEADER_CATEGORIES_TEXT_SALE; ?></a>
+          </li>
 
           <?php
         }
@@ -58,7 +59,7 @@
         <?php echo $categories_list; ?>
 
       </ul>
-      
+
     </div>
   </nav>
 
