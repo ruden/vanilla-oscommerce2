@@ -91,32 +91,21 @@
   function tep_image($src, $alt = '', $width = '', $height = '', $parameters = '') {
     $image = '<img src="' . tep_output_string($src) . '" border="0" alt="' . tep_output_string($alt) . '"';
 
-    if (tep_not_null($alt)) {
+    if (!empty($alt)) {
       $image .= ' title="' . tep_output_string($alt) . '"';
     }
 
-    if ( (CONFIG_CALCULATE_IMAGE_SIZE == 'true') && (empty($width) || empty($height)) ) {
-      if ($image_size = @getimagesize($src)) {
-        if (empty($width) && tep_not_null($height)) {
-          $ratio = $height / $image_size[1];
-          $width = intval($image_size[0] * $ratio);
-        } elseif (tep_not_null($width) && empty($height)) {
-          $ratio = $width / $image_size[0];
-          $height = intval($image_size[1] * $ratio);
-        } elseif (empty($width) && empty($height)) {
-          $width = $image_size[0];
-          $height = $image_size[1];
-        }
-      } elseif (IMAGE_REQUIRED == 'false') {
-        return false;
-      }
+    if (!empty($width)) {
+      $image .= ' width="' . tep_output_string($width) . '"';
     }
 
-    if (tep_not_null($width) && tep_not_null($height)) {
-      $image .= ' width="' . tep_output_string($width) . '" height="' . tep_output_string($height) . '"';
+    if (!empty($height)) {
+      $image .= ' height="' . tep_output_string($height) . '"';
     }
 
-    if (tep_not_null($parameters)) $image .= ' ' . $parameters;
+    if (!empty($parameters)) {
+      $image .= ' ' . $parameters;
+    }
 
     $image .= ' />';
 
