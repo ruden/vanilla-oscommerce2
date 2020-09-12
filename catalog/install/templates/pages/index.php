@@ -25,6 +25,11 @@
     <div class="infoPaneContents">
       <table border="0" width="100%" cellspacing="0" cellpadding="2">
         <tr>
+          <td><strong>HTTPS</strong></td>
+          <td align="right"><?php echo (getenv('HTTPS') == 'on' ? 'On' : 'Off'); ?></td>
+          <td align="right" width="25"><img src="images/<?php echo (getenv('HTTPS') == 'on' ? 'success.gif' : 'failed.gif'); ?>" width="16" height="16" /></td>
+        </tr>
+        <tr>
           <td><strong>PHP Version</strong></td>
           <td align="right"><?php echo PHP_VERSION; ?></td>
           <td align="right" width="25"><img src="images/<?php echo ((PHP_VERSION >= 4) ? 'success.gif' : 'failed.gif'); ?>" width="16" height="16" /></td>
@@ -101,23 +106,10 @@
     <h2>New Installation</h2>
 
 <?php
-  $configfile_array = array();
+  $path_array = array('includes' => 'configure.php',
+                      'admin/includes' => 'configure.php');
 
-  if (file_exists(osc_realpath(dirname(__FILE__) . '/../../../includes') . '/configure.php') && !osc_is_writable(osc_realpath(dirname(__FILE__) . '/../../../includes') . '/configure.php')) {
-    @chmod(osc_realpath(dirname(__FILE__) . '/../../../includes') . '/configure.php', 0777);
-  }
-
-  if (file_exists(osc_realpath(dirname(__FILE__) . '/../../../admin/includes') . '/configure.php') && !osc_is_writable(osc_realpath(dirname(__FILE__) . '/../../../admin/includes') . '/configure.php')) {
-    @chmod(osc_realpath(dirname(__FILE__) . '/../../../admin/includes') . '/configure.php', 0777);
-  }
-
-  if (file_exists(osc_realpath(dirname(__FILE__) . '/../../../includes') . '/configure.php') && !osc_is_writable(osc_realpath(dirname(__FILE__) . '/../../../includes') . '/configure.php')) {
-    $configfile_array[] = osc_realpath(dirname(__FILE__) . '/../../../includes') . '/configure.php';
-  }
-
-  if (file_exists(osc_realpath(dirname(__FILE__) . '/../../../admin/includes') . '/configure.php') && !osc_is_writable(osc_realpath(dirname(__FILE__) . '/../../../admin/includes') . '/configure.php')) {
-    $configfile_array[] = osc_realpath(dirname(__FILE__) . '/../../../admin/includes') . '/configure.php';
-  }
+  $configfile_array = check_permissions($path_array);
 
   $warning_array = array();
 
@@ -216,6 +208,16 @@ $(function() {
 <?php
   }
 ?>
+
+  </div>
+
+  <div class="contentPane">
+    <h2>Upgrade osCommerce</h2>
+
+    <p>The webserver environment has been verified to proceed with a successful installation and configuration of your online store.</p>
+    <p>Please continue to start the installation procedure.</p>
+
+    <p><?php echo osc_draw_button('Start', 'triangle-1-e', 'upgrade.php', 'primary'); ?></p>
 
   </div>
 </div>

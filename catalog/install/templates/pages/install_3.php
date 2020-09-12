@@ -53,23 +53,23 @@
 
     <table border="0" width="99%" cellspacing="0" cellpadding="5" class="inputForm">
       <tr>
-        <td class="inputField"><?php echo 'Store Name<br />' . osc_draw_input_field('CFG_STORE_NAME', null, 'class="text"'); ?></td>
+        <td class="inputField"><?php echo 'Store Name<br />' . osc_draw_input_field('CFG_STORE_NAME', null, 'class="text" required'); ?></td>
         <td class="inputDescription">The name of the online store that is presented to the public.</td>
       </tr>
       <tr>
-        <td class="inputField"><?php echo 'Store Owner Name<br />' . osc_draw_input_field('CFG_STORE_OWNER_NAME', null, 'class="text"'); ?></td>
+        <td class="inputField"><?php echo 'Store Owner Name<br />' . osc_draw_input_field('CFG_STORE_OWNER_NAME', null, 'class="text" required'); ?></td>
         <td class="inputDescription">The name of the store owner that is presented to the public.</td>
       </tr>
       <tr>
-        <td class="inputField"><?php echo 'Store Owner E-Mail Address<br />' . osc_draw_input_field('CFG_STORE_OWNER_EMAIL_ADDRESS', null, 'class="text"'); ?></td>
+        <td class="inputField"><?php echo 'Store Owner E-Mail Address<br />' . osc_draw_input_field('CFG_STORE_OWNER_EMAIL_ADDRESS', null, 'class="text" required'); ?></td>
         <td class="inputDescription">The e-mail address of the store owner that is presented to the public.</td>
       </tr>
       <tr>
-        <td class="inputField"><?php echo 'Administrator Username<br />' . osc_draw_input_field('CFG_ADMINISTRATOR_USERNAME', null, 'class="text"'); ?></td>
+        <td class="inputField"><?php echo 'Administrator Username<br />' . osc_draw_input_field('CFG_ADMINISTRATOR_USERNAME', null, 'class="text" required'); ?></td>
         <td class="inputDescription">The administrator username to use for the administration tool.</td>
       </tr>
       <tr>
-        <td class="inputField"><?php echo 'Administrator Password<br />' . osc_draw_input_field('CFG_ADMINISTRATOR_PASSWORD', null, 'class="text"'); ?></td>
+        <td class="inputField"><?php echo 'Administrator Password<br />' . osc_draw_input_field('CFG_ADMINISTRATOR_PASSWORD', null, 'class="text" required'); ?></td>
         <td class="inputDescription">The password to use for the administrator account.</td>
       </tr>
 
@@ -77,7 +77,7 @@
   if (osc_is_writable($dir_fs_document_root) && osc_is_writable($dir_fs_document_root . 'admin')) {
 ?>
       <tr>
-        <td class="inputField"><?php echo 'Administration Directory Name<br />' . osc_draw_input_field('CFG_ADMIN_DIRECTORY', 'admin', 'class="text"'); ?></td>
+        <td class="inputField"><?php echo 'Administration Directory Name<br />' . osc_draw_input_field('CFG_ADMIN_DIRECTORY', 'admin', 'class="text" required'); ?></td>
         <td class="inputDescription">This is the directory where the administration section will be installed. You should change this for security reasons.</td>
       </tr>
 <?php

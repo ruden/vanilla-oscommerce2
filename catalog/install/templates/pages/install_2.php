@@ -10,7 +10,7 @@
   Released under the GNU General Public License
 */
 
-  $www_location = 'http://' . $_SERVER['HTTP_HOST'];
+  $www_location = (getenv('HTTPS') == 'on' ? 'https://' : 'http://') . $_SERVER['HTTP_HOST'];
 
   if (isset($_SERVER['REQUEST_URI']) && !empty($_SERVER['REQUEST_URI'])) {
     $www_location .= $_SERVER['REQUEST_URI'];
@@ -55,11 +55,11 @@
 
     <table border="0" width="99%" cellspacing="0" cellpadding="5" class="inputForm">
       <tr>
-        <td class="inputField"><?php echo 'WWW Address<br />' . osc_draw_input_field('HTTP_WWW_ADDRESS', $www_location, 'class="text"'); ?></td>
+        <td class="inputField"><?php echo 'WWW Address<br />' . osc_draw_input_field('WWW_ADDRESS', $www_location, 'class="text" required'); ?></td>
         <td class="inputDescription">The web address to the online store.</td>
       </tr>
       <tr>
-        <td class="inputField"><?php echo 'Webserver Root Directory<br />' . osc_draw_input_field('DIR_FS_DOCUMENT_ROOT', $dir_fs_www_root, 'class="text"'); ?></td>
+        <td class="inputField"><?php echo 'Webserver Root Directory<br />' . osc_draw_input_field('DIR_FS_DOCUMENT_ROOT', $dir_fs_www_root, 'class="text" required'); ?></td>
         <td class="inputDescription">The directory where the online store is installed on the server.</td>
       </tr>
     </table>

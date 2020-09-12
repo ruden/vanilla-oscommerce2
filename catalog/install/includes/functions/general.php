@@ -94,4 +94,26 @@
       }
     }
   }
-?>
+
+  function check_permissions(array $path_array) {
+    $configfile_array = array();
+
+    foreach ($path_array as $key => $value) {
+      if (is_int($key)) {
+        $key = $value;
+        $value = '';
+      }
+
+      $realpath = rtrim(osc_realpath(dirname(__FILE__) . '/../../../' . $key) . '/' . $value, '/');
+
+      if (file_exists($realpath) && !osc_is_writable($realpath)) {
+        @chmod($realpath, 0777);
+      }
+
+      if (file_exists($realpath) && !osc_is_writable($realpath)) {
+        $configfile_array[] = $realpath;
+      }
+    }
+
+    return $configfile_array;
+  }

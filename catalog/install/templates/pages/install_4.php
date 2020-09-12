@@ -91,11 +91,18 @@
     closedir($handle);
   }
 
-  $http_url = parse_url($_POST['HTTP_WWW_ADDRESS']);
-  $http_server = $http_url['scheme'] . '://' . $http_url['host'];
-  $http_catalog = $http_url['path'];
-  if (isset($http_url['port']) && !empty($http_url['port'])) {
-    $http_server .= ':' . $http_url['port'];
+  $url = parse_url($_POST['WWW_ADDRESS']);
+  if ($url['scheme'] == 'http') {
+    $http_server = $url['scheme'] . '://' . $url['host'];
+    $https_server = '';
+  } else {
+    $http_server = substr($url['scheme'], 0, -1) . '://' . $url['host'];
+    $https_server = $url['scheme'] . '://' . $url['host'];
+  }
+
+  $http_catalog = $url['path'];
+  if (isset($url['port']) && !empty($url['port'])) {
+    $http_server .= ':' . $url['port'];
   }
 
   if (substr($http_catalog, -1) != '/') {
@@ -113,8 +120,8 @@
 
   $file_contents = '<?php' . "\n" .
                    '  define(\'HTTP_SERVER\', \'' . $http_server . '\');' . "\n" .
-                   '  define(\'HTTPS_SERVER\', \'' . $http_server . '\');' . "\n" .
-                   '  define(\'ENABLE_SSL\', false);' . "\n" .
+                   '  define(\'HTTPS_SERVER\', \'' . $https_server . '\');' . "\n" .
+                   '  define(\'ENABLE_SSL\', ' . json_encode(getenv('HTTPS') == 'on') . ');' . "\n" .
                    '  define(\'HTTP_COOKIE_DOMAIN\', \'\');' . "\n" .
                    '  define(\'HTTPS_COOKIE_DOMAIN\', \'\');' . "\n" .
                    '  define(\'HTTP_COOKIE_PATH\', \'' . $http_catalog . '\');' . "\n" .
@@ -153,15 +160,15 @@
 
   $file_contents = '<?php' . "\n" .
                    '  define(\'HTTP_SERVER\', \'' . $http_server . '\');' . "\n" .
-                   '  define(\'HTTPS_SERVER\', \'' . $http_server . '\');' . "\n" .
-                   '  define(\'ENABLE_SSL\', false);' . "\n" .
+                   '  define(\'HTTPS_SERVER\', \'' . $https_server . '\');' . "\n" .
+                   '  define(\'ENABLE_SSL\', ' . json_encode(getenv('HTTPS') == 'on') . ');' . "\n" .
                    '  define(\'HTTP_COOKIE_DOMAIN\', \'\');' . "\n" .
                    '  define(\'HTTPS_COOKIE_DOMAIN\', \'\');' . "\n" .
                    '  define(\'HTTP_COOKIE_PATH\', \'' . $http_catalog . $admin_folder . '\');' . "\n" .
                    '  define(\'HTTPS_COOKIE_PATH\', \'' . $http_catalog . $admin_folder . '\');' . "\n" .
                    '  define(\'HTTP_CATALOG_SERVER\', \'' . $http_server . '\');' . "\n" .
-                   '  define(\'HTTPS_CATALOG_SERVER\', \'' . $http_server . '\');' . "\n" .
-                   '  define(\'ENABLE_SSL_CATALOG\', \'false\');' . "\n" .
+                   '  define(\'HTTPS_CATALOG_SERVER\', \'' . $https_server . '\');' . "\n" .
+                   '  define(\'ENABLE_SSL_CATALOG\', ' . json_encode(getenv('HTTPS') == 'on') . ');' . "\n" .
                    '  define(\'DIR_FS_DOCUMENT_ROOT\', \'' . $dir_fs_document_root . '\');' . "\n" .
                    '  define(\'DIR_WS_ADMIN\', \'' . $http_catalog .  $admin_folder . '/\');' . "\n" .
                    '  define(\'DIR_WS_HTTPS_ADMIN\', \'' . $http_catalog .  $admin_folder . '/\');' . "\n" .
@@ -215,8 +222,8 @@
 
     <table border="0" width="99%" cellspacing="0" cellpadding="0">
       <tr>
-        <td align="right" width="50%" style="padding-right: 30px;"><?php echo osc_draw_button('Online Store (Frontend)', 'cart', $http_server . $http_catalog . 'index.php', 'primary', array('newwindow' => 1)); ?></td>
-        <td width="50%" style="padding-left: 30px;"><?php echo osc_draw_button('Administration Tool (Backend)', 'locked', $http_server . $http_catalog . $admin_folder . '/index.php', 'primary', array('newwindow' => 1)); ?></td>
+        <td align="right" width="50%" style="padding-right: 30px;"><?php echo osc_draw_button('Online Store (Frontend)', 'cart', (getenv('HTTPS') == 'on' ? $https_server : $http_server) . $http_catalog . 'index.php', 'primary', array('newwindow' => 1)); ?></td>
+        <td width="50%" style="padding-left: 30px;"><?php echo osc_draw_button('Administration Tool (Backend)', 'locked', (getenv('HTTPS') == 'on' ? $https_server : $http_server) . $http_catalog . $admin_folder . '/index.php', 'primary', array('newwindow' => 1)); ?></td>
       </tr>
     </table>
   </div>
