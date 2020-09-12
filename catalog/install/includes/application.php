@@ -21,4 +21,3 @@
   require('includes/functions/general.php');
   require('includes/functions/database.php');
   require('includes/functions/html_output.php');
-?>
