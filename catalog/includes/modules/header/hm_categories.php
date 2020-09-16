@@ -47,7 +47,8 @@ class hm_categories {
     $cart_count_contents = $cart->count_contents();
     $wishlist_count_list = $wishlist->count_list();
 
-    $categories_list = $this->showCategories();
+    $categories = $this->getCategories();
+    $categories_list = $this->showCategories($categories, $categories[0]);
 
     ob_start();
     include 'includes/modules/header/templates/categories.php';
@@ -91,38 +92,49 @@ class hm_categories {
     return array('MODULE_HEADER_CATEGORIES_STATUS', 'MODULE_HEADER_CATEGORIES_SORT_ORDER');
   }
 
-  public function showCategories($parent_id = 0, &$categories_list = '', $path = '') {
-    global $languages_id;
+  public function showCategories(array $tree, array $parent_array, &$categories_list = '', $cPath = array()) {
+    if (empty($parent_array)) {
+      return null;
+    }
 
-    $categories_query = tep_db_query("select c.categories_id, cd.categories_name from categories c, categories_description cd where c.categories_id = cd.categories_id and cd.language_id = '" . (int)$languages_id . "' and c.parent_id = '" . (int)$parent_id . "' order by c.sort_order, cd.categories_name");
-
-    while ($categories = tep_db_fetch_array($categories_query)) {
+    foreach ($parent_array as $categories) {
       $li_dropdown = '';
       $a_dropdown = '';
 
-      if ($has_category_subcategories = tep_has_category_subcategories($categories['categories_id'])) {
+      if (isset($tree[$categories['categories_id']])) {
         $li_dropdown = 'dropdown';
         $a_dropdown = 'dropdown-toggle';
       }
 
-      if ($parent_id == 0) {
-        $path = $categories['categories_id'];
+      $cPath[sizeof($parent_array)] = $categories['categories_id'];
 
-        $categories_list .= '<li class="nav-item ' . $li_dropdown . '"><a class="nav-link ' . $a_dropdown . '" href="' . tep_href_link('index.php', 'cPath=' . $path, 'SSL', false) . '">' . $categories['categories_name'] . '</a>' . ($has_category_subcategories ? '' : '</li>');
+      if ($categories['parent_id'] == 0) {
+        $categories_list .= '<li class="nav-item ' . $li_dropdown . '"><a class="nav-link ' . $a_dropdown . '" href="' . tep_href_link('index.php', 'cPath=' . implode('_', $cPath), 'SSL', false) . '">' . $categories['categories_name'] . '</a>' . (isset($tree[$categories['categories_id']]) ? '' : '</li>');
       } else {
-        $path = $parent_id . '_' . $categories['categories_id'];
-
-        $categories_list .= '<li class="' . $li_dropdown . '"><a class="dropdown-item ' . $a_dropdown . '" href="' . tep_href_link('index.php', 'cPath=' . $path, 'SSL', false) . '">' . $categories['categories_name'] . '</a>';
+        $categories_list .= '<li class="' . $li_dropdown . '"><a class="dropdown-item ' . $a_dropdown . '" href="' . tep_href_link('index.php', 'cPath=' . implode('_', $cPath), 'SSL', false) . '">' . $categories['categories_name'] . '</a>';
       }
 
-      if ($has_category_subcategories) {
+      if (isset($tree[$categories['categories_id']])) {
         $categories_list .= '<ul class="dropdown-menu">';
-        $this->showCategories($categories['categories_id'], $categories_list, $path);
+        $this->showCategories($tree, $tree[$categories['categories_id']], $categories_list, $cPath);
         $categories_list .= '</li></ul>';
       }
     }
 
     return $categories_list;
+  }
+
+  public function getCategories() {
+    global $languages_id;
+
+    $category_tree = array();
+
+    $categories_query = tep_db_query("select c.categories_id, c.parent_id, c.date_added, c.last_modified, cd.categories_name from categories c, categories_description cd where c.categories_id = cd.categories_id and cd.language_id = '" . (int)$languages_id . "' order by c.sort_order, cd.categories_name");
+    while ($categories = tep_db_fetch_array($categories_query)) {
+      $category_tree[$categories['parent_id']][] = $categories;
+    }
+
+    return $category_tree;
   }
 
   function cache($auto_expire = false, $refresh = false) {
