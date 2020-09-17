@@ -48,7 +48,7 @@ Todo
 * [ ] Modularized the index page.
 * [x] Update review system.
 * [x] Add wishlist.
-* [ ] Modularized the XML sitemap. 
+* [x] Modularized the XML sitemap. 
 * [ ] Modularized the box product filter. 
 * [ ] Quick product updates. 
 * [x] SMTP Authentication.

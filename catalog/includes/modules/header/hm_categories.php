@@ -37,10 +37,7 @@ class hm_categories {
     global $oscTemplate, $cart, $wishlist;
 
     $special_products = false;
-
-    $specials_query = tep_db_query("SELECT 1 FROM specials WHERE status = '1'");
-
-    if (tep_db_num_rows($specials_query)) {
+    if (tep_db_num_rows(tep_db_query("SELECT 1 FROM specials WHERE status = '1'"))) {
       $special_products = true;
     }
 
