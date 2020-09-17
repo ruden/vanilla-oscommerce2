@@ -21,23 +21,19 @@ foreach ($languages_array as $languages) {
     $xml .= '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">' . "\n";
 
     while ($products = tep_db_fetch_array($products_query)) {
-      $pi_query = tep_db_query("select image from products_images where products_id = '" . (int)$products['products_id'] . "' order by sort_order");
-
-      if (!empty($products['products_image'])) {
+      if (!empty($products['products_image']) && file_exists('images/products/originals/' . $products['products_image'])) {
         $xml .= '  <url>' . "\n";
         $xml .= '    <loc>' . tep_href_link('product_info.php', 'products_id=' . (int)$products['products_id'], 'SSL', false) . '</loc>' . "\n";
+        $xml .= '    <image:image>' . "\n";
+        $xml .= '      <image:loc>' . $base_url . 'images/products/originals/' . rawurlencode($products['products_image']) . '</image:loc>' . "\n";
+        $xml .= '    </image:image>' . "\n";
 
-        if (file_exists('images/products/originals/' . $products['products_image'])) {
-          $xml .= '    <image:image>' . "\n";
-          $xml .= '      <image:loc>' . $base_url . 'images/products/originals/' . $products['products_image'] . '</image:loc>' . "\n";
-          $xml .= '    </image:image>' . "\n";
-        }
-
+        $pi_query = tep_db_query("select image from products_images where products_id = '" . (int)$products['products_id'] . "' order by sort_order");
         if (tep_db_num_rows($pi_query) > 0) {
           while ($pi = tep_db_fetch_array($pi_query)) {
             if (file_exists('images/products/originals/' . $pi['image'])) {
               $xml .= '    <image:image>' . "\n";
-              $xml .= '      <image:loc>' . $base_url . 'images/products/originals/' . $pi['image'] . '</image:loc>' . "\n";
+              $xml .= '      <image:loc>' . $base_url . 'images/products/originals/' . rawurlencode($pi['image']) . '</image:loc>' . "\n";
               $xml .= '    </image:image>' . "\n";
             }
           }
