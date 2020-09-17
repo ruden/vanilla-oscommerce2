@@ -600,10 +600,8 @@
             <td align="center" class="smallText">&nbsp;<?php echo tep_draw_button(IMAGE_SAVE, 'disk', null, 'primary') . tep_draw_button(IMAGE_CANCEL, 'close', tep_href_link('products_attributes.php', $page_info)); ?>&nbsp;</td>
 <?php
       if (DOWNLOAD_ENABLED == 'true') {
-        $download_query_raw ="select products_attributes_filename, products_attributes_maxdays, products_attributes_maxcount 
-                              from products_attributes_download 
-                              where products_attributes_id='" . $attributes_values['products_attributes_id'] . "'";
-        $download_query = tep_db_query($download_query_raw);
+        $download_query = tep_db_query("select products_attributes_filename, products_attributes_maxdays, products_attributes_maxcount from products_attributes_download where products_attributes_id='" . $attributes_values['products_attributes_id'] . "'");
+        $products_attributes_filename = $products_attributes_maxdays = $products_attributes_maxcount = '';
         if (tep_db_num_rows($download_query) > 0) {
           $download = tep_db_fetch_array($download_query);
           $products_attributes_filename = $download['products_attributes_filename'];
@@ -707,7 +705,7 @@
                 <tr class="<?php echo (!($rows % 2)? 'attributes-even' : 'attributes-odd');?>">
                   <td class="dataTableHeadingContent"><?php echo TABLE_HEADING_DOWNLOAD; ?>&nbsp;</td>
                   <td class="smallText"><?php echo TABLE_TEXT_FILENAME; ?></td>
-                  <td class="smallText"><?php echo tep_draw_input_field('products_attributes_filename', $products_attributes_filename, 'size="15"'); ?>&nbsp;</td>
+                  <td class="smallText"><?php echo tep_draw_input_field('products_attributes_filename', '', 'size="15"'); ?>&nbsp;</td>
                   <td class="smallText"><?php echo TABLE_TEXT_MAX_DAYS; ?></td>
                   <td class="smallText"><?php echo tep_draw_input_field('products_attributes_maxdays', $products_attributes_maxdays, 'size="5"'); ?>&nbsp;</td>
                   <td class="smallText"><?php echo TABLE_TEXT_MAX_COUNT; ?></td>
