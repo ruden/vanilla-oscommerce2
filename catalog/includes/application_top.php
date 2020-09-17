@@ -72,20 +72,12 @@
 
   require('includes/vendor/autoload.php');
 
-// if gzip_compression is enabled, start to buffer the output
-  if ( (GZIP_COMPRESSION == 'true') && ($ext_zlib_loaded = extension_loaded('zlib')) && !headers_sent() ) {
-    if (($ini_zlib_output_compression = (int)ini_get('zlib.output_compression')) < 1) {
-      if (PHP_VERSION < '5.4' || PHP_VERSION > '5.4.5') { // see PHP bug 55544
-        if (PHP_VERSION >= '4.0.4') {
-          ob_start('ob_gzhandler');
-        } elseif (PHP_VERSION >= '4.0.1') {
-         include('includes/functions/gzip_compression.php');
-          ob_start();
-          ob_implicit_flush();
-        }
-      }
-    } elseif (function_exists('ini_set')) {
+// if gzip_compression is enabled
+  if (GZIP_COMPRESSION == 'true' && extension_loaded('zlib') && !headers_sent()) {
+    if ((int)ini_get('zlib.output_compression') == 1) {
       ini_set('zlib.output_compression_level', GZIP_LEVEL);
+    } else {
+      ob_start('ob_gzhandler');
     }
   }
 
