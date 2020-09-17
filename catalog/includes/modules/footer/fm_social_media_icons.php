@@ -23,12 +23,13 @@ class fm_social_media_icons {
     $this->group = basename(dirname(__FILE__));
 
     $this->title = MODULE_FOOTER_SOCIAL_MEDIA_ICONS_TITLE;
-    $this->description .= MODULE_FOOTER_SOCIAL_MEDIA_ICONS_DESCRIPTION;
-    $this->description .= MODULE_FOOTER_SOCIAL_MEDIA_ICONS_LINK;
+    $this->description = MODULE_FOOTER_SOCIAL_MEDIA_ICONS_DESCRIPTION;
 
     if (defined('MODULE_FOOTER_SOCIAL_MEDIA_ICONS_STATUS')) {
       $this->sort_order = MODULE_FOOTER_SOCIAL_MEDIA_ICONS_SORT_ORDER;
       $this->enabled = (MODULE_FOOTER_SOCIAL_MEDIA_ICONS_STATUS == 'True');
+
+      $this->description .= '<br><br><div align="center">' . tep_draw_button(MODULE_FOOTER_SOCIAL_MEDIA_ICONS_ADD_ICONS, 'document', tep_href_link('modules.php', 'set=social_media&list=new')) . '</div>';
     }
   }
 
