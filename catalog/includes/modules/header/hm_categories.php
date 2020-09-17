@@ -50,9 +50,6 @@ class hm_categories {
     ob_start();
     include 'includes/modules/header/templates/categories.php';
 
-    $oscTemplate->addBlock('<script src="includes/modules/header/templates/categories/jquery.smartmenus.min.js"></script>
-<script src="includes/modules/header/templates/categories/bootstrap-4/jquery.smartmenus.bootstrap-4.min.js"></script>', 'footer_scripts');
-
     return ob_get_clean();
   }
 
@@ -66,6 +63,8 @@ class hm_categories {
     }
 
     $oscTemplate->addBlock($output, $this->group);
+    $oscTemplate->addBlock('<script src="includes/modules/header/templates/categories/jquery.smartmenus.min.js"></script>
+<script src="includes/modules/header/templates/categories/bootstrap-4/jquery.smartmenus.bootstrap-4.min.js"></script>', 'footer_scripts');
   }
 
   public function isEnabled() {
