@@ -402,7 +402,7 @@ if ($messageStack->size('create_account') > 0) {
 
     <div class="mb-3">
       <label class="form-label" for="country"><?php echo ENTRY_COUNTRY . (tep_not_null(ENTRY_COUNTRY_TEXT) ? '<span class="text-danger ml-1">' . ENTRY_COUNTRY_TEXT . '</span>' : ''); ?></label>
-      <?php echo tep_get_country_list('country', STORE_COUNTRY, 'id="country" class="form-control"'); ?>
+      <?php echo tep_get_country_list('country', STORE_COUNTRY, 'id="country" class="form-select"'); ?>
     </div>
 
     <h2><?php echo CATEGORY_CONTACT; ?></h2>

@@ -124,7 +124,7 @@
 
 <div class="mb-3">
   <label class="form-label" for="country"><?php echo ENTRY_COUNTRY . (tep_not_null(ENTRY_COUNTRY_TEXT) ? '<span class="text-danger ml-1">' . ENTRY_COUNTRY_TEXT . '</span>' : ''); ?></label>
-  <?php echo tep_get_country_list('country', (isset($entry['entry_country_id']) ? $entry['entry_country_id'] : STORE_COUNTRY), 'id="country" class="form-control"'); ?>
+  <?php echo tep_get_country_list('country', (isset($entry['entry_country_id']) ? $entry['entry_country_id'] : STORE_COUNTRY), 'id="country" class="form-select"'); ?>
 </div>
 
 <?php

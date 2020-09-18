@@ -25,7 +25,7 @@ foreach ($languages_array as $languages) {
         $xml .= '  <url>' . "\n";
         $xml .= '    <loc>' . tep_href_link('product_info.php', 'products_id=' . (int)$products['products_id'], 'SSL', false) . '</loc>' . "\n";
         $xml .= '    <image:image>' . "\n";
-        $xml .= '      <image:loc>' . $base_url . 'images/products/originals/' . rawurlencode($products['products_image']) . '</image:loc>' . "\n";
+        $xml .= '      <image:loc>' . $base_url . 'images/products/originals/' . $products['products_image'] . '</image:loc>' . "\n";
         $xml .= '    </image:image>' . "\n";
 
         $pi_query = tep_db_query("select image from products_images where products_id = '" . (int)$products['products_id'] . "' order by sort_order");
@@ -33,7 +33,7 @@ foreach ($languages_array as $languages) {
           while ($pi = tep_db_fetch_array($pi_query)) {
             if (file_exists('images/products/originals/' . $pi['image'])) {
               $xml .= '    <image:image>' . "\n";
-              $xml .= '      <image:loc>' . $base_url . 'images/products/originals/' . rawurlencode($pi['image']) . '</image:loc>' . "\n";
+              $xml .= '      <image:loc>' . $base_url . 'images/products/originals/' . $pi['image'] . '</image:loc>' . "\n";
               $xml .= '    </image:image>' . "\n";
             }
           }
