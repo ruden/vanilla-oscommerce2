@@ -83,7 +83,7 @@ if (isset($_GET['action']) && ($_GET['action'] == 'process') && isset($_POST['fo
       $email_body .= $message . "\n\n";
     }
 
-    $email_body .= sprintf(TEXT_EMAIL_LINK, tep_href_link('product_info.php', 'products_id=' . (int)$_GET['products_id'], 'NONSSL', false)) . "\n\n" .
+    $email_body .= sprintf(TEXT_EMAIL_LINK, tep_href_link('product_info.php', 'products_id=' . (int)$_GET['products_id'], 'SSL', false)) . "\n\n" .
       sprintf(TEXT_EMAIL_SIGNATURE, STORE_NAME . "\n" . HTTP_SERVER . DIR_WS_CATALOG . "\n");
 
     tep_mail($to_name, $to_email_address, $email_subject, $email_body, $from_name, $from_email_address);

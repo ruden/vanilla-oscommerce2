@@ -121,7 +121,7 @@ if (empty($dfrom) && empty($dto) && empty($pfrom) && empty($pto) && empty($keywo
 }
 
 if ($error == true) {
-  tep_redirect(tep_href_link('advanced_search.php', tep_get_all_get_params(), 'NONSSL', true, false));
+  tep_redirect(tep_href_link('advanced_search.php', tep_get_all_get_params(), 'SSL', true, false));
 }
 
 $breadcrumb->add(NAVBAR_TITLE_1, tep_href_link('advanced_search.php'));

@@ -115,7 +115,7 @@ if ($messageStack->size('search') > 0) {
 }
 ?>
 
-<?php echo tep_draw_form('advanced_search', tep_href_link('advanced_search_result.php', '', 'NONSSL', false), 'get', 'onsubmit="return check_form(this);"') . tep_hide_session_id(); ?>
+<?php echo tep_draw_form('advanced_search', tep_href_link('advanced_search_result.php', '', 'SSL', false), 'get', 'onsubmit="return check_form(this);"') . tep_hide_session_id(); ?>
 
   <div class="col-lg-6 mb-5">
     <h2><?php echo HEADING_SEARCH_CRITERIA; ?></h2>

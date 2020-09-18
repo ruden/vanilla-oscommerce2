@@ -766,7 +766,7 @@ EOD;
             $item_params['L_PAYMENTREQUEST_0_AMT' . $line_item_no] = $product_price;
             $item_params['L_PAYMENTREQUEST_0_NUMBER' . $line_item_no] = $product['id'];
             $item_params['L_PAYMENTREQUEST_0_QTY' . $line_item_no] = $product['qty'];
-            $item_params['L_PAYMENTREQUEST_0_ITEMURL' . $line_item_no] = tep_href_link('product_info.php', 'products_id=' . $product['id'], 'NONSSL', false);
+            $item_params['L_PAYMENTREQUEST_0_ITEMURL' . $line_item_no] = tep_href_link('product_info.php', 'products_id=' . $product['id'], 'SSL', false);
 
             if ( (DOWNLOAD_ENABLED == 'true') && isset($product['attributes']) ) {
               $item_params['L_PAYMENTREQUEST_0_ITEMCATEGORY' . $line_item_no] = $paypal_express->getProductType($product['id'], $product['attributes']);

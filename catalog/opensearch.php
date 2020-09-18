@@ -49,7 +49,7 @@ echo '<?xml version="1.0"?>' . "\n";
   }
   ?>
   <InputEncoding>UTF-8</InputEncoding>
-  <Url type="text/html" method="get" template="<?php echo tep_href_link('advanced_search_result.php', 'keywords={searchTerms}', 'NONSSL', false); ?>"/>
+  <Url type="text/html" method="get" template="<?php echo tep_href_link('advanced_search_result.php', 'keywords={searchTerms}', 'SSL', false); ?>"/>
 </OpenSearchDescription>
 <?php
 require('includes/application_bottom.php');

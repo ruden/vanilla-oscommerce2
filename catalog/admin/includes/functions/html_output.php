@@ -63,7 +63,7 @@
     return $link;
   }
 
-  function tep_catalog_href_link($page = '', $parameters = '', $connection = 'NONSSL') {
+  function tep_catalog_href_link($page = '', $parameters = '', $connection = 'SSL') {
     if ($connection == 'NONSSL') {
       $link = HTTP_CATALOG_SERVER . DIR_WS_CATALOG;
     } elseif ($connection == 'SSL') {
