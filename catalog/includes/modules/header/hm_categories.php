@@ -112,7 +112,7 @@ class hm_categories {
       $cPath[sizeof($parent_array)] = $categories['categories_id'];
 
       if ($categories['parent_id'] == 0) {
-        $categories_list .= '<li class="nav-item ' . $li_dropdown . '"><a class="nav-link ' . $a_dropdown . '" href="' . tep_href_link('index.php', 'cPath=' . implode('_', $cPath), 'SSL', false) . '">' . $categories['categories_name'] . '</a>' . (isset($tree[$categories['categories_id']]) ? '' : '</li>');
+        $categories_list .= '<li class="nav-item ' . $li_dropdown . '"><a class="nav-link font-weight-bold ' . $a_dropdown . '" href="' . tep_href_link('index.php', 'cPath=' . implode('_', $cPath), 'SSL', false) . '">' . $categories['categories_name'] . '</a>' . (isset($tree[$categories['categories_id']]) ? '' : '</li>');
       } else {
         $categories_list .= '<li class="' . $li_dropdown . '"><a class="dropdown-item ' . $a_dropdown . '" href="' . tep_href_link('index.php', 'cPath=' . implode('_', $cPath), 'SSL', false) . '">' . $categories['categories_name'] . '</a>';
       }

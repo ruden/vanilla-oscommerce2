@@ -5,9 +5,8 @@
   <div class="input-group">
     <?php echo tep_draw_input_field('keywords', '', 'class="form-control" placeholder="' . IMAGE_BUTTON_SEARCH . '"'); ?>
 
-
     <button class="btn btn-primary" type="submit">
-      <svg>
+      <svg class="svg-icon-search-form">
         <use href="#svg-icon-search"/>
       </svg>
     </button>

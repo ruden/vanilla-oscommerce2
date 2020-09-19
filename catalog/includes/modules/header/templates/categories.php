@@ -12,13 +12,13 @@
     <ul class="mb-0 list-inline d-lg-none">
       <li class="list-inline-item">
         <a href="<?php echo tep_href_link('advanced_search.php'); ?>">
-          <svg>
+          <svg class="svg-icon-search">
             <use href="#svg-icon-search"/>
           </svg>
         </a></li>
       <li class="list-inline-item">
         <a href="<?php echo tep_href_link('login.php'); ?>">
-          <svg>
+          <svg class="svg-icon-user">
             <use href="#svg-icon-user"/>
           </svg>
         </a></li>
@@ -26,7 +26,7 @@
         <a href="<?php echo tep_href_link('wishlist.php'); ?>">
           <span class="badge rounded-pill bg-primary position-absolute ml-4"><?php echo $wishlist_count_list; ?></span>
 
-          <svg>
+          <svg class="svg-icon-heart">
             <use href="#svg-icon-heart"/>
           </svg>
         </a></li>
@@ -34,7 +34,7 @@
         <a href="<?php echo tep_href_link('shopping_cart.php'); ?>">
           <span class="badge rounded-pill bg-primary position-absolute ml-4"><?php echo $cart_count_contents; ?></span>
 
-          <svg>
+          <svg class="svg-icon-shopping-cart">
             <use href="#svg-icon-shopping-cart"/>
           </svg>
         </a></li>

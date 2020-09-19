@@ -24,13 +24,13 @@ h2 {
   margin-bottom: 1rem;
 }
 
-.t-wishlist svg, .t-shopping-cart svg, .t-account svg, .t-categories svg  {
+.svg-icon-heart, .svg-icon-shopping-cart, .svg-icon-user, .svg-icon-search {
   fill: var(--bs-primary);
   width: 2.25rem;
   height: 2.25rem;
 }
 
-.t-quick-search svg {
+.svg-icon-search-form {
   fill: var(--bs-white);
   stroke: var(--bs-white);
   width: 1.5rem;
