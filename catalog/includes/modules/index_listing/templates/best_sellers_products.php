@@ -1,4 +1,4 @@
-<div class="t-best-sellers-products my-5">
+<div class="my-5">
   <h2><?php echo MODULE_INDEX_LISTING_BEST_SELLERS_PRODUCTS_BOX_TITLE; ?></h2>
 
   <div class="row">

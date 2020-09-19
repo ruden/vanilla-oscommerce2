@@ -1,4 +1,4 @@
-<div class="t-information text-center mb-3">
+<div class="text-center mb-3">
 
   <?php
   foreach ($information_array as $information) {

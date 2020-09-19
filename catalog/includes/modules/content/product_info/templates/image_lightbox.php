@@ -1,4 +1,4 @@
-<div class="t-image-lightbox mb-3 text-center">
+<div class="mb-3 text-center">
 
   <?php
   if (!empty($products_images_array)) {

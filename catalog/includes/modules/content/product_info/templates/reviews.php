@@ -1,4 +1,4 @@
-<div class="t-reviews mb-3">
+<div class="mb-3">
 
   <h2 id="reviews"><?php echo MODULE_CONTENT_PRODUCT_INFO_REVIEWS_TITLE; ?></h2>
 

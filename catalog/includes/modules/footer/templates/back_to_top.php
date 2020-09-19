@@ -1,4 +1,4 @@
-<a class="t-back-to-top">&uarr;</a>
+<a>&uarr;</a>
 
 <script>
   (function () {

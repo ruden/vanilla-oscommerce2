@@ -1,4 +1,4 @@
-<div class="t-categories">
+<div>
   <link rel="stylesheet" href="includes/modules/header/templates/categories/bootstrap-4/jquery.smartmenus.bootstrap-4.css">
 
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -24,7 +24,7 @@
         </a></li>
       <li class="list-inline-item">
         <a href="<?php echo tep_href_link('wishlist.php'); ?>">
-          <span class="badge rounded-pill bg-primary position-absolute ml-4"><?php echo $wishlist_count_list > 0 ? $wishlist_count_list : ''; ?></span>
+          <span class="badge rounded-pill bg-primary position-absolute ml-4"><?php echo $wishlist_count_list; ?></span>
 
           <svg>
             <use href="#svg-icon-heart"/>
@@ -32,7 +32,7 @@
         </a></li>
       <li class="list-inline-item">
         <a href="<?php echo tep_href_link('shopping_cart.php'); ?>">
-          <span class="badge rounded-pill bg-primary position-absolute ml-4"><?php echo $cart_count_contents > 0 ? $cart_count_contents : ''; ?></span>
+          <span class="badge rounded-pill bg-primary position-absolute ml-4"><?php echo $cart_count_contents; ?></span>
 
           <svg>
             <use href="#svg-icon-shopping-cart"/>

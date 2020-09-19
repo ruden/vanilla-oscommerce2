@@ -1,4 +1,4 @@
-<div class="t-also-purchased-products my-5">
+<div class="my-5">
   <h2><?php echo MODULE_CONTENT_ALSO_PURCHASED_PRODUCTS_BOX_TITLE; ?></h2>
 
   <div class="row">

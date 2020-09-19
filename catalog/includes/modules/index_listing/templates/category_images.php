@@ -1,4 +1,4 @@
-<div class="t-category-images my-5">
+<div class="my-5">
 
   <div class="row text-center">
 

@@ -1,4 +1,4 @@
-<div class="t-all-manufacturers row justify-content-center text-center mb-3">
+<div class="row justify-content-center text-center mb-3">
 
   <?php
   foreach ($manufacturers_array as $manufacturers) {

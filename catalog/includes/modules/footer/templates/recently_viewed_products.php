@@ -1,4 +1,4 @@
-<div class="t-recently-viewed-products my-5">
+<div class="my-5">
   <h2><?php echo MODULE_FOOTER_RECENTLY_VIEWED_PRODUCTS_TITLE; ?></h2>
 
   <div class="row">

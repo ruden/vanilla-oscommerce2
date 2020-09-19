@@ -1,4 +1,4 @@
-<div class="t-manufacturer mb-3">
+<div class="mb-3">
 
   <?php
   if (isset($product_info['manufacturers_id'])) {

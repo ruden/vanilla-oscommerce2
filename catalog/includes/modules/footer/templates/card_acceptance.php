@@ -1,4 +1,4 @@
-<div class="t-card-acceptance col-6 col-lg">
+<div class="col-6 col-lg">
   <h5><?php echo MODULE_FOOTER_CARD_ACCEPTANCE_TEXT; ?></h5>
 
   <?php

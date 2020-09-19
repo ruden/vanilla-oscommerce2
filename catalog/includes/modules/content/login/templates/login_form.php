@@ -1,4 +1,4 @@
-<div class="t-login-form col-lg-6">
+<div class="col-lg-6">
   <h2><?php echo MODULE_CONTENT_LOGIN_HEADING_RETURNING_CUSTOMER; ?></h2>
 
   <p><?php echo MODULE_CONTENT_LOGIN_TEXT_RETURNING_CUSTOMER; ?></p>

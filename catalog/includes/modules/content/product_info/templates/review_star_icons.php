@@ -1,4 +1,4 @@
-<div class="t-review-star-icons mb-3">
+<div class="mb-3">
 
   <?php echo tep_draw_stars($rating_data['rating']); ?>
 

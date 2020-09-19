@@ -1,4 +1,4 @@
-<div class="t-new-products my-5">
+<div class="my-5">
   <h2><?php echo sprintf(MODULE_INDEX_LISTING_NEW_PRODUCTS_BOX_TITLE, strftime('%B')); ?></h2>
 
   <div class="row">

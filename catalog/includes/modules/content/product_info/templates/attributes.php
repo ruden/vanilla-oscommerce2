@@ -1,4 +1,4 @@
-<div class="t-attributes mb-3">
+<div class="mb-3">
 
   <?php
   foreach ($products_attributes_array as $products_attributes) {

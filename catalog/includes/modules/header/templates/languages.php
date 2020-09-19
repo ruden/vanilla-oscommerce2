@@ -1,4 +1,4 @@
-<div class="t-languages col-auto">
+<div class="col-auto">
 
   <label class="mr-2 col-form-label-sm"><?php echo MODULE_HEADER_LANGUAGES_TEXT_LANGUAGES; ?></label>
 

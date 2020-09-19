@@ -1,4 +1,4 @@
-<div class="t-create-account-link col-lg-6">
+<div class="col-lg-6">
   <h2><?php echo MODULE_CONTENT_LOGIN_HEADING_NEW_CUSTOMER; ?></h2>
 
   <p><?php echo MODULE_CONTENT_LOGIN_TEXT_NEW_CUSTOMER; ?></p>

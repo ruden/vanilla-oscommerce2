@@ -1,4 +1,4 @@
-<div class="t-price mb-3">
+<div class="mb-3">
 
   <?php
   if (empty($specials_new_products_price)) {

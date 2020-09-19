@@ -1,3 +1,3 @@
-<p class="t-customer-greeting">
+<p>
   <?php echo tep_customer_greeting(); ?>
 </p>

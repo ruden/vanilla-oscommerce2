@@ -1,4 +1,4 @@
-<div class="t-information mr-auto col-auto">
+<div class="mr-auto col-auto">
 
   <?php
   foreach ($information_array as $information) {
