@@ -65,7 +65,7 @@ class oscTemplate {
 
   public function getBlocks($group) {
     if ($this->hasBlocks($group)) {
-      return implode("\n", $this->_blocks[$group]);
+      return '<!-- block ' . $group . ' -->' . "\n" . implode("\n", $this->_blocks[$group]) . "\n" . '<!-- end block ' . $group . ' -->' . "\n";
     }
   }
 
@@ -153,7 +153,7 @@ class oscTemplate {
     }
 
     if ($this->hasContent($group)) {
-      return implode("\n", $this->_content[$group]);
+      return '<!-- block ' . $group . ' -->' . "\n" . implode("\n", $this->_content[$group]) . "\n" . '<!-- end block ' . $group . ' -->' . "\n";
     }
   }
 
