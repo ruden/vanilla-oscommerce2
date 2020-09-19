@@ -1662,7 +1662,7 @@ function tep_get_category_description($category_id, $language_id) {
   return $category['categories_description'];
 }
 
-function tep_resize_image($old_image, $new_image, $width = null, $height = null, $quality = 100) {
+function tep_resize_image($old_image, $new_image, $width = null, $height = null, $quality = 90) {
   $image_type = false;
   $ext = strtolower(substr($old_image, (strrpos($old_image, '.') + 1)));
 
