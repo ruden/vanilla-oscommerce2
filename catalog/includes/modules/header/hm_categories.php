@@ -42,7 +42,14 @@ class hm_categories {
     }
 
     $cart_count_contents = $cart->count_contents();
+    if ($cart_count_contents == 0 ) {
+      $cart_count_contents = '';
+    }
+
     $wishlist_count_list = $wishlist->count_list();
+    if ($wishlist_count_list == 0 ) {
+      $wishlist_count_list = '';
+    }
 
     $categories = $this->getCategories();
     $categories_list = $this->showCategories($categories, $categories[0]);
@@ -134,14 +141,14 @@ class hm_categories {
   }
 
   function cache($auto_expire = false, $refresh = false) {
-    global $cPath, $language;
+    global $language;
 
     $cache_output = '';
 
-    if (($refresh == true) || !read_cache($cache_output, 'categories_box-' . $language . '.cache' . $cPath, $auto_expire)) {
+    if (($refresh == true) || !read_cache($cache_output, 'categories_box-' . $language . '.cache', $auto_expire)) {
       $cache_output = $this->getData();
 
-      write_cache($cache_output, 'categories_box-' . $language . '.cache' . $cPath);
+      write_cache($cache_output, 'categories_box-' . $language . '.cache');
     }
 
     return $cache_output;
