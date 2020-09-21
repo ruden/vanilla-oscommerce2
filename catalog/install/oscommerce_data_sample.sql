@@ -10,6 +10,9 @@
 # NOTE: * Please make any modifications to this file by hand!
 #       * DO NOT use a mysqldump created file for new changes!
 
+INSERT INTO banners VALUES (1, 'osCommerce', 'http://www.oscommerce.com', 'banners/oscommerce.gif', 'footer_bottom', '', 0, null, null, now(), null, 1);
+INSERT INTO banners VALUES (1, 'Header Top', 'http://www.oscommerce.com', '', 'header_top', 'End of season sale - up to 60% off everything! limited time only', 0, null, null, now(), null, 1);
+
 INSERT INTO categories VALUES ('1', 'hardware.gif', '0', '1', now(), null);
 INSERT INTO categories VALUES ('2', 'software.gif', '0', '2', now(), null);
 INSERT INTO categories VALUES ('3', 'dvd_movies.gif', '0', '3', now(), null);

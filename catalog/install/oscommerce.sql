@@ -95,7 +95,7 @@ CREATE TABLE banners_history (
 DROP TABLE IF EXISTS categories;
 CREATE TABLE categories (
    categories_id int NOT NULL auto_increment,
-   categories_image varchar(64),
+   categories_image varchar(255),
    parent_id int DEFAULT '0' NOT NULL,
    sort_order int(3),
    date_added datetime,
@@ -108,7 +108,7 @@ DROP TABLE IF EXISTS categories_description;
 CREATE TABLE categories_description (
    categories_id int DEFAULT '0' NOT NULL,
    language_id int DEFAULT '1' NOT NULL,
-   categories_name varchar(32) NOT NULL,
+   categories_name varchar(255) NOT NULL,
    categories_description text,
    PRIMARY KEY (categories_id, language_id),
    KEY idx_categories_name (categories_name)
@@ -223,7 +223,7 @@ CREATE TABLE customers_info (
 DROP TABLE IF EXISTS customers_wishlist;
 CREATE TABLE customers_wishlist (
   customers_wishlist_id int NOT NULL auto_increment,
-  customers_id int NOT NULL default '0',
+  customers_id int NOT NULL DEFAULT '0',
   products_id tinytext NOT NULL,
   customers_wishlist_date_added char(8),
   PRIMARY KEY (customers_wishlist_id),
@@ -246,7 +246,7 @@ CREATE TABLE information_pages (
   pages_id int NOT NULL auto_increment,
   pages_date_added datetime,
   pages_last_modified datetime,
-  pages_status tinyint(1) default '1' NOT NULL,
+  pages_status tinyint(1) DEFAULT '1' NOT NULL,
   sort_order int(3),
   PRIMARY KEY (pages_id)
 ) CHARACTER SET utf8 COLLATE utf8_unicode_ci;
@@ -276,8 +276,8 @@ CREATE TABLE languages (
 DROP TABLE IF EXISTS manufacturers;
 CREATE TABLE manufacturers (
   manufacturers_id int NOT NULL auto_increment,
-  manufacturers_name varchar(32) NOT NULL,
-  manufacturers_image varchar(64),
+  manufacturers_name varchar(64) NOT NULL,
+  manufacturers_image varchar(255),
   date_added datetime NULL,
   last_modified datetime NULL,
   PRIMARY KEY (manufacturers_id),
@@ -437,7 +437,7 @@ CREATE TABLE products (
   products_id int NOT NULL auto_increment,
   products_quantity int(4) NOT NULL,
   products_model varchar(12),
-  products_image varchar(64),
+  products_image varchar(255),
   products_price decimal(15,4) NOT NULL,
   products_date_added datetime NOT NULL,
   products_last_modified datetime,
@@ -468,8 +468,8 @@ DROP TABLE IF EXISTS products_attributes_download;
 CREATE TABLE products_attributes_download (
   products_attributes_id int NOT NULL,
   products_attributes_filename varchar(255) NOT NULL default '',
-  products_attributes_maxdays int(2) default '0',
-  products_attributes_maxcount int(2) default '0',
+  products_attributes_maxdays int(2) DEFAULT '0',
+  products_attributes_maxcount int(2) DEFAULT '0',
   PRIMARY KEY  (products_attributes_id)
 ) CHARACTER SET utf8 COLLATE utf8_unicode_ci;
 
@@ -477,7 +477,7 @@ DROP TABLE IF EXISTS products_description;
 CREATE TABLE products_description (
   products_id int NOT NULL auto_increment,
   language_id int NOT NULL default '1',
-  products_name varchar(64) NOT NULL default '',
+  products_name varchar(128) NOT NULL default '',
   products_description text,
   products_url varchar(255) default NULL,
   products_viewed int(5) default '0',
@@ -489,7 +489,7 @@ DROP TABLE IF EXISTS products_images;
 CREATE TABLE products_images (
   id int NOT NULL auto_increment,
   products_id int NOT NULL,
-  image varchar(64),
+  image varchar(255),
   htmlcontent text,
   sort_order int NOT NULL,
   PRIMARY KEY (id),
@@ -643,8 +643,6 @@ INSERT INTO address_format VALUES (2, '$firstname $lastname$cr$streets$cr$city, 
 INSERT INTO address_format VALUES (3, '$firstname $lastname$cr$streets$cr$city$cr$postcode - $statecomma$country','$state / $country');
 INSERT INTO address_format VALUES (4, '$firstname $lastname$cr$streets$cr$city ($postcode)$cr$country', '$postcode / $country');
 INSERT INTO address_format VALUES (5, '$firstname $lastname$cr$streets$cr$postcode $city$cr$country','$city / $country');
-
-INSERT INTO banners VALUES (1, 'osCommerce', 'http://www.oscommerce.com', 'banners/oscommerce.gif', 'footer', '', 0, null, null, now(), null, 1);
 
 INSERT INTO configuration (configuration_title, configuration_key, configuration_value, configuration_description, configuration_group_id, sort_order, date_added) VALUES ('Store Name', 'STORE_NAME', 'osCommerce', 'The name of my store', '1', '1', now());
 INSERT INTO configuration (configuration_title, configuration_key, configuration_value, configuration_description, configuration_group_id, sort_order, date_added) VALUES ('Store Owner', 'STORE_OWNER', 'Harald Ponce de Leon', 'The name of my store owner', '1', '2', now());
