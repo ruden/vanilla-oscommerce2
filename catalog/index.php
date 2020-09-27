@@ -71,6 +71,19 @@ if ($category_depth != 'top') {
   ?>
 
   <div class="mb-5">
+
+    <?php
+    if ($banner = tep_banner_exists('dynamic', (int)$current_category_id)) {
+      ?>
+
+      <div class="py-1 text-center">
+        <?php echo tep_display_banner('static', $banner); ?>
+      </div>
+
+      <?php
+    }
+    ?>
+
     <?php echo $page_blocks; ?>
   </div>
 

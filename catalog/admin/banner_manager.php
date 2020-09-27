@@ -180,6 +180,12 @@
     }
   }
 
+  $category_array = array();
+  $categories_query = tep_db_query("select c.categories_id, cd.categories_name from categories c, categories_description cd where c.categories_id = cd.categories_id and cd.language_id = '" . (int)$languages_id . "' and c.parent_id = '0' order by c.sort_order, cd.categories_name");
+  while ($categories = tep_db_fetch_array($categories_query)) {
+    $category_array[$categories['categories_id']] = array('id' => $categories['categories_id'], 'text' => $categories['categories_name']);
+  }
+
   require('includes/template_top.php');
 ?>
 
@@ -229,8 +235,12 @@ function popupImageWindow(url) {
     $groups_array = array();
     $groups_query = tep_db_query("select distinct banners_group from banners order by banners_group");
     while ($groups = tep_db_fetch_array($groups_query)) {
-      $groups_array[] = array('id' => $groups['banners_group'], 'text' => $groups['banners_group']);
+      if (!isset($category_array[$groups['banners_group']])) {
+        $groups_array[] = array('id' => $groups['banners_group'], 'text' => $groups['banners_group']);
+      }
     }
+
+    $groups_array = array_merge($groups_array, $category_array);
 ?>
       <tr>
         <td><?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
@@ -345,7 +355,7 @@ $('#expires_date').datepicker({
       }
 ?>
                 <td class="dataTableContent"><?php echo '<a href="javascript:popupImageWindow(\'' . 'popup_image.php' . '?banner=' . $banners['banners_id'] . '\')">' . tep_image('images/icon_popup.gif', 'View Banner') . '</a>&nbsp;' . $banners['banners_title']; ?></td>
-                <td class="dataTableContent" align="right"><?php echo $banners['banners_group']; ?></td>
+                <td class="dataTableContent" align="right"><?php echo (is_numeric($banners['banners_group']) ? tep_get_category_name($banners['banners_group'], $languages_id) : $banners['banners_group']); ?></td>
                 <td class="dataTableContent" align="right"><?php echo $banners_shown . ' / ' . $banners_clicked; ?></td>
                 <td class="dataTableContent" align="right">
 <?php
