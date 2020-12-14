@@ -5,7 +5,7 @@
 Vanilla osCommerce v2.3.5
 =========================
 
-Supported PHP v7.4
+Supported PHP v7.x and v8.x
 
 Demo: <http://demo.osclab.com/vanilla-oscommerce/>
 
