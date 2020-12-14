@@ -41,7 +41,7 @@
 $(function() {
   $('#appPayPalToolbarMore').hide();
 
-  if ( $('#appPayPalToolbarMore li').size() > 0 ) {
+  if ( $('#appPayPalToolbarMore li').length > 0 ) {
     $('#appPayPalToolbarMore').menu().hover(function() {
       $(this).show();
     }, function() {
