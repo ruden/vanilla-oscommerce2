@@ -69,7 +69,7 @@
         }
       }
 
-      if ( defined(FILENAME_SHOPPING_CART) && (basename($PHP_SELF) == 'shopping_cart.php') ) {
+      if ( defined('FILENAME_SHOPPING_CART') && (basename($PHP_SELF) == 'shopping_cart.php') ) {
         if ( (OSCOM_APP_PAYPAL_GATEWAY == '1') && (OSCOM_APP_PAYPAL_EC_CHECKOUT_FLOW == '1') ) {
           if ( isset($request_type) && ($request_type != 'SSL') && (ENABLE_SSL == true) ) {
             tep_redirect(tep_href_link('shopping_cart.php', tep_get_all_get_params(), 'SSL'));
@@ -80,7 +80,7 @@
       }
 
 // When changing the shipping address due to no shipping rates being available, head straight to the checkout confirmation page
-      if ( defined(FILENAME_CHECKOUT_PAYMENT) && (basename($PHP_SELF) == 'checkout_payment.php') && tep_session_is_registered('appPayPalEcRightTurn') ) {
+      if ( defined('FILENAME_CHECKOUT_PAYMENT') && (basename($PHP_SELF) == 'checkout_payment.php') && tep_session_is_registered('appPayPalEcRightTurn') ) {
         tep_session_unregister('appPayPalEcRightTurn');
 
         if ( tep_session_is_registered('payment') && ($payment == $this->code) ) {
@@ -89,7 +89,7 @@
       }
 
       if ( $this->enabled === true ) {
-        if ( defined(FILENAME_SHOPPING_CART) && (basename($PHP_SELF) == 'shopping_cart.php') ) {
+        if ( defined('FILENAME_SHOPPING_CART') && (basename($PHP_SELF) == 'shopping_cart.php') ) {
           if ( $this->templateClassExists() ) {
             if ( (OSCOM_APP_PAYPAL_GATEWAY == '1') && (OSCOM_APP_PAYPAL_EC_CHECKOUT_FLOW == '1') ) {
               $oscTemplate->addBlock('<style>#ppECButton { display: inline-block; }</style>', 'header_tags');
