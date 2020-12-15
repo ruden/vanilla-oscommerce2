@@ -10,8 +10,8 @@
     const goTopBtn = document.querySelector('.back-to-top')
 
     function trackScroll() {
-      let scrolled = window.pageYOffset;
-      let coords = document.documentElement.clientHeight;
+      let scrolled = window.pageYOffset
+      let coords = document.documentElement.clientHeight
 
       if (scrolled > coords) {
         goTopBtn.style.display = 'block'
@@ -24,8 +24,7 @@
 
     function backToTop() {
       if (window.pageYOffset > 0) {
-        window.scrollBy(0, -80)
-        setTimeout(backToTop, 0)
+        window.scrollTo(0, 0)
       }
     }
 
