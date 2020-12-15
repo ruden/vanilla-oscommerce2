@@ -62,5 +62,3 @@ class cm_create_account_link {
     return array('MODULE_CONTENT_CREATE_ACCOUNT_LINK_STATUS', 'MODULE_CONTENT_CREATE_ACCOUNT_LINK_SORT_ORDER');
   }
 }
-
-?>

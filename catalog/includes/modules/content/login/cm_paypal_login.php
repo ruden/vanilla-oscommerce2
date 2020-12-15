@@ -348,5 +348,3 @@ function cm_paypal_login_get_attributes() {
                                   'language' => 'profile'),
                'checkout' => array('seamless_checkout' => 'https://uri.paypal.com/services/expresscheckout'));
 }
-
-?>

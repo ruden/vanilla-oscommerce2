@@ -94,5 +94,3 @@ class cm_login_form {
     return array('MODULE_CONTENT_LOGIN_FORM_STATUS', 'MODULE_CONTENT_LOGIN_FORM_SORT_ORDER');
   }
 }
-
-?>

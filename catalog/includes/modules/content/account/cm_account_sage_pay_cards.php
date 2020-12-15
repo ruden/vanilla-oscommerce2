@@ -90,5 +90,3 @@ class cm_account_sage_pay_cards {
     return array('MODULE_CONTENT_ACCOUNT_SAGE_PAY_CARDS_STATUS', 'MODULE_CONTENT_ACCOUNT_SAGE_PAY_CARDS_SORT_ORDER');
   }
 }
-
-?>

@@ -90,5 +90,3 @@ class cm_account_stripe_cards {
     return array('MODULE_CONTENT_ACCOUNT_STRIPE_CARDS_STATUS', 'MODULE_CONTENT_ACCOUNT_STRIPE_CARDS_SORT_ORDER');
   }
 }
-
-?>
