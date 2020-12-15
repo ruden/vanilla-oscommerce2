@@ -221,8 +221,8 @@ require('includes/template_top.php');
     <h2><?php echo TABLE_HEADING_SHIPPING_ADDRESS; ?></h2>
 
     <div class="mb-3">
-      <div class="float-right ml-3">
-        <div class="font-weight-bold"><?php echo TITLE_SHIPPING_ADDRESS; ?></div>
+      <div class="float-end ms-3">
+        <div class="fw-bold"><?php echo TITLE_SHIPPING_ADDRESS; ?></div>
 
         <p><?php echo tep_address_label($customer_id, $sendto, true, ' ', '<br />'); ?></p>
       </div>
@@ -245,7 +245,7 @@ require('includes/template_top.php');
         ?>
 
         <div class="mb-3">
-          <div class="float-right font-weight-bold">
+          <div class="float-end fw-bold">
             <?php echo TITLE_PLEASE_SELECT; ?>
           </div>
 
@@ -272,11 +272,11 @@ require('includes/template_top.php');
 
             <tr>
               <td>
-                <span class="font-weight-bold mr-1"><?php echo FREE_SHIPPING_TITLE; ?></span><?php echo $quotes[$i]['icon']; ?>
+                <span class="fw-bold me-1"><?php echo FREE_SHIPPING_TITLE; ?></span><?php echo $quotes[$i]['icon']; ?>
               </td>
             </tr>
             <tr id="defaultSelected" class="moduleRowSelected bg-light" onmouseover="rowOverEffect(this)" onmouseout="rowOutEffect(this)" onclick="selectRowEffect(this, 0)">
-              <td class="ml-3"><?php echo sprintf(FREE_SHIPPING_DESCRIPTION, $currencies->format(MODULE_ORDER_TOTAL_SHIPPING_FREE_SHIPPING_OVER)) . tep_draw_hidden_field('shipping', 'free_free'); ?></td>
+              <td class="ms-3"><?php echo sprintf(FREE_SHIPPING_DESCRIPTION, $currencies->format(MODULE_ORDER_TOTAL_SHIPPING_FREE_SHIPPING_OVER)) . tep_draw_hidden_field('shipping', 'free_free'); ?></td>
             </tr>
 
             <?php
@@ -287,7 +287,7 @@ require('includes/template_top.php');
 
               <tr>
                 <td colspan="3">
-                  <span class="font-weight-bold"><?php echo $quotes[$i]['module']; ?></span>&nbsp;<?php if (isset($quotes[$i]['icon']) && tep_not_null($quotes[$i]['icon'])) {
+                  <span class="fw-bold"><?php echo $quotes[$i]['module']; ?></span>&nbsp;<?php if (isset($quotes[$i]['icon']) && tep_not_null($quotes[$i]['icon'])) {
                     echo $quotes[$i]['icon'];
                   } ?></td>
               </tr>
@@ -313,20 +313,20 @@ require('includes/template_top.php');
                   }
                   ?>
 
-                  <td class="w-75 pl-3"><?php echo $quotes[$i]['methods'][$j]['title']; ?></td>
+                  <td class="w-75 ps-3"><?php echo $quotes[$i]['methods'][$j]['title']; ?></td>
 
                   <?php
                   if (($n > 1) || ($n2 > 1)) {
                     ?>
 
                     <td><?php echo $currencies->format(tep_add_tax($quotes[$i]['methods'][$j]['cost'], (isset($quotes[$i]['tax']) ? $quotes[$i]['tax'] : 0))); ?></td>
-                    <td class="text-right form-check"><?php echo tep_draw_radio_field('shipping', $quotes[$i]['id'] . '_' . $quotes[$i]['methods'][$j]['id'], $checked, 'class="form-check-input float-none"'); ?></td>
+                    <td class="text-end form-check"><?php echo tep_draw_radio_field('shipping', $quotes[$i]['id'] . '_' . $quotes[$i]['methods'][$j]['id'], $checked, 'class="form-check-input float-none"'); ?></td>
 
                     <?php
                   } else {
                     ?>
 
-                    <td class="text-right" colspan="2"><?php echo $currencies->format(tep_add_tax($quotes[$i]['methods'][$j]['cost'], (isset($quotes[$i]['tax']) ? $quotes[$i]['tax'] : 0))) . tep_draw_hidden_field('shipping', $quotes[$i]['id'] . '_' . $quotes[$i]['methods'][$j]['id']); ?></td>
+                    <td class="text-end" colspan="2"><?php echo $currencies->format(tep_add_tax($quotes[$i]['methods'][$j]['cost'], (isset($quotes[$i]['tax']) ? $quotes[$i]['tax'] : 0))) . tep_draw_hidden_field('shipping', $quotes[$i]['id'] . '_' . $quotes[$i]['methods'][$j]['id']); ?></td>
 
                     <?php
                   }
@@ -356,7 +356,7 @@ require('includes/template_top.php');
       <?php echo tep_draw_textarea_field('comments', null, 'class="form-control" rows="3"'); ?>
     </div>
 
-    <div class="text-right"><?php echo tep_draw_button(IMAGE_BUTTON_CONTINUE, 'triangle-1-e', null, 'btn-primary'); ?></div>
+    <div class="text-end"><?php echo tep_draw_button(IMAGE_BUTTON_CONTINUE, 'triangle-1-e', null, 'btn-primary'); ?></div>
 
   </div>
 

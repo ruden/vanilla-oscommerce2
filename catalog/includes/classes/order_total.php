@@ -64,8 +64,8 @@ class order_total {
           $size = sizeof($GLOBALS[$class]->output);
           for ($i = 0; $i < $size; $i++) {
             $output_string .= '<tr>
-                                 <td class="text-right w-100"><span class="mr-2">' . $GLOBALS[$class]->output[$i]['title'] . '</span></td>
-                                 <td class="text-right">' . $GLOBALS[$class]->output[$i]['text'] . '</td>
+                                 <td class="text-end w-100"><span class="me-2">' . $GLOBALS[$class]->output[$i]['title'] . '</span></td>
+                                 <td class="text-end">' . $GLOBALS[$class]->output[$i]['text'] . '</td>
                               </tr>';
           }
         }

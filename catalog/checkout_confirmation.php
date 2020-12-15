@@ -119,7 +119,7 @@ echo tep_draw_form('checkout_confirmation', $form_action_url, 'post');
 
           <div class="mb-3">
 
-            <?php echo '<span class="font-weight-bold">' . HEADING_DELIVERY_ADDRESS . '</span> <a href="' . tep_href_link('checkout_shipping_address.php', '', 'SSL') . '"><span>(' . TEXT_EDIT . ')</span></a>'; ?>
+            <?php echo '<span class="fw-bold">' . HEADING_DELIVERY_ADDRESS . '</span> <a href="' . tep_href_link('checkout_shipping_address.php', '', 'SSL') . '"><span>(' . TEXT_EDIT . ')</span></a>'; ?>
 
             <p><?php echo tep_address_format($order->delivery['format_id'], $order->delivery, 1, ' ', '<br />'); ?></p>
 
@@ -127,7 +127,7 @@ echo tep_draw_form('checkout_confirmation', $form_action_url, 'post');
             if ($order->info['shipping_method']) {
               ?>
 
-              <?php echo '<span class="font-weight-bold">' . HEADING_SHIPPING_METHOD . '</span> <a href="' . tep_href_link('checkout_shipping.php', '', 'SSL') . '"><span>(' . TEXT_EDIT . ')</span></a>'; ?>
+              <?php echo '<span class="fw-bold">' . HEADING_SHIPPING_METHOD . '</span> <a href="' . tep_href_link('checkout_shipping.php', '', 'SSL') . '"><span>(' . TEXT_EDIT . ')</span></a>'; ?>
 
               <p><?php echo $order->info['shipping_method']; ?></p>
 
@@ -166,15 +166,15 @@ echo tep_draw_form('checkout_confirmation', $form_action_url, 'post');
         if (sizeof($order->info['tax_groups']) > 1) {
           ?>
 
-          <th colspan="2"><?php echo HEADING_PRODUCTS . '<a href="' . tep_href_link('shopping_cart.php') . '"><span class="font-weight-normal ml-1">(' . TEXT_EDIT . ')</span></a>'; ?></th>
-          <th class="text-right"><strong><?php echo HEADING_TAX; ?></strong></th>
-          <th class="text-right"><strong><?php echo HEADING_TOTAL; ?></strong></th>
+          <th colspan="2"><?php echo HEADING_PRODUCTS . '<a href="' . tep_href_link('shopping_cart.php') . '"><span class="fw-normal ms-1">(' . TEXT_EDIT . ')</span></a>'; ?></th>
+          <th class="text-end"><strong><?php echo HEADING_TAX; ?></strong></th>
+          <th class="text-end"><strong><?php echo HEADING_TOTAL; ?></strong></th>
 
           <?php
         } else {
           ?>
 
-          <th colspan="3"><?php echo HEADING_PRODUCTS . '<a href="' . tep_href_link('shopping_cart.php') . '"><span class="font-weight-normal ml-1">(' . TEXT_EDIT . ')</span></a>'; ?></th>
+          <th colspan="3"><?php echo HEADING_PRODUCTS . '<a href="' . tep_href_link('shopping_cart.php') . '"><span class="fw-normal ms-1">(' . TEXT_EDIT . ')</span></a>'; ?></th>
 
           <?php
         }
@@ -202,10 +202,10 @@ echo tep_draw_form('checkout_confirmation', $form_action_url, 'post');
         echo '</td>' . "\n";
 
         if (sizeof($order->info['tax_groups']) > 1) {
-          echo '            <td class="text-right">' . tep_display_tax_value($order->products[$i]['tax']) . '%</td>' . "\n";
+          echo '            <td class="text-end">' . tep_display_tax_value($order->products[$i]['tax']) . '%</td>' . "\n";
         }
 
-        echo '            <td class="text-right">' . $currencies->display_price($order->products[$i]['final_price'], $order->products[$i]['tax'], $order->products[$i]['qty']) . '</td>' . "\n" .
+        echo '            <td class="text-end">' . $currencies->display_price($order->products[$i]['final_price'], $order->products[$i]['tax'], $order->products[$i]['qty']) . '</td>' . "\n" .
              '          </tr>' . "\n";
       }
       ?>
@@ -276,7 +276,7 @@ echo tep_draw_form('checkout_confirmation', $form_action_url, 'post');
     }
     ?>
 
-    <div class="text-right">
+    <div class="text-end">
 
       <?php
       if (is_array($payment_modules->modules)) {

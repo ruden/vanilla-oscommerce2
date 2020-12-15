@@ -287,7 +287,7 @@ if (isset($_GET['delete'])) {
   <?php echo tep_draw_form('addressbook', tep_href_link('address_book_process.php', (isset($_GET['edit']) ? 'edit=' . $_GET['edit'] : ''), 'SSL'), 'post', 'onsubmit="return check_form(addressbook);"', true); ?>
 
   <div class="col-lg-6 mb-5">
-    <div class="text-right text-danger small"><?php echo FORM_REQUIRED_INFORMATION; ?></div>
+    <div class="text-end text-danger small"><?php echo FORM_REQUIRED_INFORMATION; ?></div>
 
     <?php include('includes/modules/address_book_details.php'); ?>
 

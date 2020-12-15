@@ -138,7 +138,7 @@ function tep_check_stock($products_id, $products_quantity) {
   $out_of_stock = '';
 
   if ($stock_left < 0) {
-    $out_of_stock = '<span class="ml-1 text-danger">' . STOCK_MARK_PRODUCT_OUT_OF_STOCK . '</span>';
+    $out_of_stock = '<span class="ms-1 text-danger">' . STOCK_MARK_PRODUCT_OUT_OF_STOCK . '</span>';
   }
 
   return $out_of_stock;

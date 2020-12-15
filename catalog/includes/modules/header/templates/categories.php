@@ -24,7 +24,7 @@
         </a></li>
       <li class="list-inline-item">
         <a href="<?php echo tep_href_link('wishlist.php'); ?>">
-          <span class="badge rounded-pill bg-primary position-absolute ml-4"><?php echo $wishlist_count_list; ?></span>
+          <span class="badge rounded-pill bg-primary position-absolute ms-4"><?php echo $wishlist_count_list; ?></span>
 
           <svg class="svg-icon-heart">
             <use href="#svg-icon-heart"/>
@@ -32,7 +32,7 @@
         </a></li>
       <li class="list-inline-item">
         <a href="<?php echo tep_href_link('shopping_cart.php'); ?>">
-          <span class="badge rounded-pill bg-primary position-absolute ml-4"><?php echo $cart_count_contents; ?></span>
+          <span class="badge rounded-pill bg-primary position-absolute ms-4"><?php echo $cart_count_contents; ?></span>
 
           <svg class="svg-icon-shopping-cart">
             <use href="#svg-icon-shopping-cart"/>
@@ -42,14 +42,14 @@
 
     <div class="collapse navbar-collapse" id="navbarNavDropdown">
 
-      <ul class="nav navbar-nav mr-auto">
+      <ul class="nav navbar-nav me-auto">
 
         <?php
         if ($special_products) {
           ?>
 
           <li class="nav-item">
-            <a class="nav-link text-danger font-weight-bold" href="<?php echo tep_href_link('specials.php'); ?>"><?php echo MODULE_HEADER_CATEGORIES_TEXT_SALE; ?></a>
+            <a class="nav-link text-danger fw-bold" href="<?php echo tep_href_link('specials.php'); ?>"><?php echo MODULE_HEADER_CATEGORIES_TEXT_SALE; ?></a>
           </li>
 
           <?php

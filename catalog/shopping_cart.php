@@ -98,7 +98,7 @@ require('includes/template_top.php');
 
           echo '        <td class="text-center"><a href="' . tep_href_link('product_info.php', 'products_id=' . $products[$i]['id']) . '">' . tep_image('images/products/thumbs/' . $products[$i]['image'], $products[$i]['name'], SMALL_IMAGE_WIDTH, SMALL_IMAGE_HEIGHT, 'class="img-fluid"') . '</a></td>
                       <td>' . $products_name . '</td>
-                      <td class="text-right"><strong>' . $currencies->display_price($products[$i]['final_price'], tep_get_tax_rate($products[$i]['tax_class_id']), $products[$i]['quantity']) . '</strong></td>
+                      <td class="text-end"><strong>' . $currencies->display_price($products[$i]['final_price'], tep_get_tax_rate($products[$i]['tax_class_id']), $products[$i]['quantity']) . '</strong></td>
                     </tr>';
         }
         ?>
@@ -106,7 +106,7 @@ require('includes/template_top.php');
         </tbody>
       </table>
 
-      <p class="font-weight-bold text-right"><?php echo SUB_TITLE_SUB_TOTAL; ?><?php echo $currencies->format($cart->show_total()); ?></p>
+      <p class="fw-bold text-end"><?php echo SUB_TITLE_SUB_TOTAL; ?><?php echo $currencies->format($cart->show_total()); ?></p>
 
       <?php
       if ($any_out_of_stock == 1) {
@@ -126,7 +126,7 @@ require('includes/template_top.php');
       }
       ?>
 
-      <div class="text-right"><?php echo tep_draw_button(IMAGE_BUTTON_CHECKOUT, 'triangle-1-e', tep_href_link('checkout_shipping.php', '', 'SSL'), 'btn-primary'); ?></div>
+      <div class="text-end"><?php echo tep_draw_button(IMAGE_BUTTON_CHECKOUT, 'triangle-1-e', tep_href_link('checkout_shipping.php', '', 'SSL'), 'btn-primary'); ?></div>
 
       <?php echo $OSCOM_Hooks->call('shopping_cart', 'displayAlternativeCheckoutButtons'); ?>
 

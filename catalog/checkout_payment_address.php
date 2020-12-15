@@ -264,8 +264,8 @@ if ($messageStack->size('checkout_address') > 0) {
       <h2><?php echo TABLE_HEADING_PAYMENT_ADDRESS; ?></h2>
 
       <div class="mb-3">
-        <div class="float-right ml-3">
-          <div class="font-weight-bold"><?php echo TITLE_PAYMENT_ADDRESS; ?></div>
+        <div class="float-end ms-3">
+          <div class="fw-bold"><?php echo TITLE_PAYMENT_ADDRESS; ?></div>
 
           <p><?php echo tep_address_label($customer_id, $billto, true, ' ', '<br />'); ?></p>
         </div>
@@ -282,7 +282,7 @@ if ($messageStack->size('checkout_address') > 0) {
         <h2><?php echo TABLE_HEADING_ADDRESS_BOOK_ENTRIES; ?></h2>
 
         <div class="mb-3">
-          <div class="float-right font-weight-bold">
+          <div class="float-end fw-bold">
             <?php echo TITLE_PLEASE_SELECT; ?>
           </div>
 
@@ -307,12 +307,12 @@ if ($messageStack->size('checkout_address') > 0) {
               }
               ?>
 
-              <td class="font-weight-bold"><?php echo $addresses['firstname'] . ' ' . $addresses['lastname']; ?></td>
-              <td class="text-right form-check"><?php echo tep_draw_radio_field('address', $addresses['address_book_id'], ($addresses['address_book_id'] == $billto), 'class="form-check-input float-none"'); ?></td>
+              <td class="fw-bold"><?php echo $addresses['firstname'] . ' ' . $addresses['lastname']; ?></td>
+              <td class="text-end form-check"><?php echo tep_draw_radio_field('address', $addresses['address_book_id'], ($addresses['address_book_id'] == $billto), 'class="form-check-input float-none"'); ?></td>
               </tr>
               <tr>
                 <td colspan="2">
-                  <div class="ml-3"><?php echo tep_address_format($format_id, $addresses, true, ' ', ', '); ?></div>
+                  <div class="ms-3"><?php echo tep_address_format($format_id, $addresses, true, ' ', ', '); ?></div>
                 </td>
               </tr>
 
@@ -344,7 +344,7 @@ if ($messageStack->size('checkout_address') > 0) {
       </div>
 
       <div class="col-lg-6">
-        <div class="text-right text-danger small"><?php echo FORM_REQUIRED_INFORMATION; ?></div>
+        <div class="text-end text-danger small"><?php echo FORM_REQUIRED_INFORMATION; ?></div>
 
         <?php require('includes/modules/checkout_new_address.php'); ?>
       </div>

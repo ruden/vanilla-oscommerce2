@@ -51,7 +51,7 @@ if ($messageStack->size('addressbook') > 0) {
         ?>
 
         <div class="col-md-4">
-          <div class="font-weight-bold"><?php echo tep_output_string_protected($addresses['firstname'] . ' ' . $addresses['lastname']); ?><?php if ($addresses['address_book_id'] == $customer_default_address_id) echo '<span class="badge bg-danger ml-2">' . PRIMARY_ADDRESS . '</span>'; ?></div>
+          <div class="fw-bold"><?php echo tep_output_string_protected($addresses['firstname'] . ' ' . $addresses['lastname']); ?><?php if ($addresses['address_book_id'] == $customer_default_address_id) echo '<span class="badge bg-danger ms-2">' . PRIMARY_ADDRESS . '</span>'; ?></div>
 
           <p><?php echo tep_address_format($format_id, $addresses, true, ' ', '<br />'); ?></p>
 
@@ -66,7 +66,7 @@ if ($messageStack->size('addressbook') > 0) {
 
     </div>
 
-    <p class="text-right"><?php echo sprintf(TEXT_MAXIMUM_ENTRIES, MAX_ADDRESS_BOOK_ENTRIES); ?></p>
+    <p class="text-end"><?php echo sprintf(TEXT_MAXIMUM_ENTRIES, MAX_ADDRESS_BOOK_ENTRIES); ?></p>
 
     <div class="btn-toolbar justify-content-between">
 

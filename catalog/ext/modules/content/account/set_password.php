@@ -76,14 +76,14 @@ if ($messageStack->size('account_password') > 0) {
 <?php echo tep_draw_form('account_password', tep_href_link('ext/modules/content/account/set_password.php', '', 'SSL'), 'post', 'onsubmit="return check_form(account_password);"', true) . tep_draw_hidden_field('action', 'process'); ?>
 
   <div class="col-lg-6 mb-5">
-    <div class="text-right text-danger small"><?php echo FORM_REQUIRED_INFORMATION; ?></div>
+    <div class="text-end text-danger small"><?php echo FORM_REQUIRED_INFORMATION; ?></div>
 
     <div class="mb-3">
-      <label class="form-label" for="password_new"><?php echo ENTRY_PASSWORD_NEW . (tep_not_null(ENTRY_PASSWORD_NEW_TEXT) ? '<span class="text-danger ml-1">' . ENTRY_PASSWORD_NEW_TEXT . '</span>' : ''); ?></label>
+      <label class="form-label" for="password_new"><?php echo ENTRY_PASSWORD_NEW . (tep_not_null(ENTRY_PASSWORD_NEW_TEXT) ? '<span class="text-danger ms-1">' . ENTRY_PASSWORD_NEW_TEXT . '</span>' : ''); ?></label>
       <?php echo tep_draw_password_field('password_new', null, 'id="password_new" class="form-control"'); ?>
     </div>
     <div class="mb-3">
-      <label class="form-label" for="password_confirmation"><?php echo ENTRY_PASSWORD_CONFIRMATION . (tep_not_null(ENTRY_PASSWORD_CONFIRMATION_TEXT) ? '<span class="text-danger ml-1">' . ENTRY_PASSWORD_CONFIRMATION_TEXT . '</span>' : ''); ?></label>
+      <label class="form-label" for="password_confirmation"><?php echo ENTRY_PASSWORD_CONFIRMATION . (tep_not_null(ENTRY_PASSWORD_CONFIRMATION_TEXT) ? '<span class="text-danger ms-1">' . ENTRY_PASSWORD_CONFIRMATION_TEXT . '</span>' : ''); ?></label>
       <?php echo tep_draw_password_field('password_confirmation', null, 'id="password_confirmation" class="form-control"'); ?>
     </div>
     <div class="btn-toolbar justify-content-between">

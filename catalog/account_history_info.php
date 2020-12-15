@@ -45,7 +45,7 @@ require('includes/template_top.php');
     <h2><?php echo sprintf(HEADING_ORDER_NUMBER, $_GET['order_id']) . ' <span>(' . $order->info['orders_status'] . ')</span>'; ?></h2>
 
     <p>
-      <span class="font-weight-bold mr-1"><?php echo HEADING_ORDER_DATE; ?></span><?php echo tep_date_long($order->info['date_purchased']); ?>
+      <span class="fw-bold me-1"><?php echo HEADING_ORDER_DATE; ?></span><?php echo tep_date_long($order->info['date_purchased']); ?>
     </p>
 
     <div class="row">
@@ -55,14 +55,14 @@ require('includes/template_top.php');
         ?>
 
         <div class="col">
-          <div class="font-weight-bold"><?php echo HEADING_DELIVERY_ADDRESS; ?></div>
+          <div class="fw-bold"><?php echo HEADING_DELIVERY_ADDRESS; ?></div>
           <p><?php echo tep_address_format($order->delivery['format_id'], $order->delivery, 1, ' ', '<br />'); ?></p>
 
           <?php
           if (tep_not_null($order->info['shipping_method'])) {
             ?>
 
-            <div class="font-weight-bold"><?php echo HEADING_SHIPPING_METHOD; ?></div>
+            <div class="fw-bold"><?php echo HEADING_SHIPPING_METHOD; ?></div>
             <p><?php echo $order->info['shipping_method']; ?></p>
 
             <?php
@@ -76,9 +76,9 @@ require('includes/template_top.php');
       ?>
 
       <div class="col">
-        <div class="font-weight-bold"><?php echo HEADING_BILLING_ADDRESS; ?></div>
+        <div class="fw-bold"><?php echo HEADING_BILLING_ADDRESS; ?></div>
         <p><?php echo tep_address_format($order->billing['format_id'], $order->billing, 1, ' ', '<br />'); ?></p>
-        <div class="font-weight-bold"><?php echo HEADING_PAYMENT_METHOD; ?></div>
+        <div class="fw-bold"><?php echo HEADING_PAYMENT_METHOD; ?></div>
         <p><?php echo $order->info['payment_method']; ?></p>
       </div>
 
@@ -93,15 +93,15 @@ require('includes/template_top.php');
           ?>
 
           <th colspan="2"><strong><?php echo HEADING_PRODUCTS; ?></strong></th>
-          <th class="text-right"><strong><?php echo HEADING_TAX; ?></strong></th>
-          <th class="text-right"><strong><?php echo HEADING_TOTAL; ?></strong></th>
+          <th class="text-end"><strong><?php echo HEADING_TAX; ?></strong></th>
+          <th class="text-end"><strong><?php echo HEADING_TOTAL; ?></strong></th>
 
           <?php
         } else {
           ?>
 
           <th colspan="2"><?php echo HEADING_PRODUCTS; ?></th>
-          <th class="text-right"><?php echo HEADING_TOTAL; ?></th>
+          <th class="text-end"><?php echo HEADING_TOTAL; ?></th>
 
           <?php
         }
@@ -114,7 +114,7 @@ require('includes/template_top.php');
       <?php
       for ($i = 0, $n = sizeof($order->products); $i < $n; $i++) {
         echo '<tr>
-                <td class="text-right" style="width: 30px;">' . $order->products[$i]['qty'] . '&nbsp;x&nbsp;</td>
+                <td class="text-end" style="width: 30px;">' . $order->products[$i]['qty'] . '&nbsp;x&nbsp;</td>
                 <td>' . $order->products[$i]['name'];
 
         if ((isset($order->products[$i]['attributes'])) && (sizeof($order->products[$i]['attributes']) > 0)) {
@@ -126,10 +126,10 @@ require('includes/template_top.php');
         echo '  </td>';
 
         if (sizeof($order->info['tax_groups']) > 1) {
-          echo '  <td class="text-right">' . tep_display_tax_value($order->products[$i]['tax']) . '%</td>';
+          echo '  <td class="text-end">' . tep_display_tax_value($order->products[$i]['tax']) . '%</td>';
         }
 
-        echo '  <td class="text-right">' . $currencies->format(tep_add_tax($order->products[$i]['final_price'], $order->products[$i]['tax']) * $order->products[$i]['qty'], true, $order->info['currency'], $order->info['currency_value']) . '</td>
+        echo '  <td class="text-end">' . $currencies->format(tep_add_tax($order->products[$i]['final_price'], $order->products[$i]['tax']) * $order->products[$i]['qty'], true, $order->info['currency'], $order->info['currency_value']) . '</td>
             </tr>';
       }
       ?>
@@ -143,8 +143,8 @@ require('includes/template_top.php');
       <?php
       for ($i = 0, $n = sizeof($order->totals); $i < $n; $i++) {
         echo '<tr>
-                <td class="text-right w-100"><span class="mr-2">' . $order->totals[$i]['title'] . '</span></td>
-                <td class="text-right">' . $order->totals[$i]['text'] . '</td>
+                <td class="text-end w-100"><span class="me-2">' . $order->totals[$i]['title'] . '</span></td>
+                <td class="text-end">' . $order->totals[$i]['text'] . '</td>
               </tr>';
       }
       ?>

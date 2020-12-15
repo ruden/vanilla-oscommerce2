@@ -83,7 +83,7 @@ require('includes/template_top.php');
     <div class="mb-3">
       <div class="form-check">
         <?php echo tep_draw_checkbox_field('product_global', '1', ($global['global_product_notifications'] == '1' ? true : false), 'id="product_global" class="form-check-input"'); ?>
-        <label class="form-check-label font-weight-bold" for="product_global"><?php echo GLOBAL_NOTIFICATIONS_TITLE; ?></label>
+        <label class="form-check-label fw-bold" for="product_global"><?php echo GLOBAL_NOTIFICATIONS_TITLE; ?></label>
       </div>
     </div>
 

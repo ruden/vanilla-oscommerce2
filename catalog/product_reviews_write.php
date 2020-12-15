@@ -86,7 +86,7 @@ if (isset($_GET['action']) && ($_GET['action'] == 'success')) {
 
   <p><?php echo TEXT_REVIEW_RECEIVED; ?></p>
 
-  <div class="text-right mb-3">
+  <div class="text-end mb-3">
     <?php echo tep_draw_button(IMAGE_BUTTON_CONTINUE, 'triangle-1-e', tep_href_link('product_info.php', 'products_id=' . $_GET['products_id'])); ?>
   </div>
 

@@ -375,9 +375,9 @@
         $params['iconpos'] = 'left';
       }
       if ($params['iconpos'] == 'left') {
-        $button .= '<i class="ml-1 icon-' . $icon . '"></i>' . $title;
+        $button .= '<i class="ms-1 icon-' . $icon . '"></i>' . $title;
       } else {
-        $button .= $title . '<i class="ml-1 icon-' . $icon . '"></i>';
+        $button .= $title . '<i class="ms-1 icon-' . $icon . '"></i>';
       }
     } else {
       $button .= $title;

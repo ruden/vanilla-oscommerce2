@@ -39,7 +39,7 @@ class cm_pi_image_lightbox {
 
     if (!empty($product_info['products_image']) && is_file('images/products/originals/' . $product_info['products_image'])) {
       $products_images_array[] = array('image' => $product_info['products_image'],
-                              'htmlcontent' => '');
+                                       'htmlcontent' => '');
 
       $pi_query = tep_db_query("select image, htmlcontent from products_images where products_id = '" . (int)$product_info['products_id'] . "' order by sort_order");
 

@@ -155,8 +155,8 @@ require('includes/template_top.php');
     <h2><?php echo TABLE_HEADING_BILLING_ADDRESS; ?></h2>
 
     <div class="mb-3">
-      <div class="float-right">
-        <div class="font-weight-bold"><?php echo TITLE_BILLING_ADDRESS; ?></div>
+      <div class="float-end">
+        <div class="fw-bold"><?php echo TITLE_BILLING_ADDRESS; ?></div>
 
         <p><?php echo tep_address_label($customer_id, $billto, true, ' ', '<br />'); ?></p>
       </div>
@@ -177,7 +177,7 @@ require('includes/template_top.php');
       ?>
 
       <div class="mb-3">
-        <div class="float-right font-weight-bold">
+        <div class="float-end fw-bold">
           <?php echo TITLE_PLEASE_SELECT; ?>
         </div>
 
@@ -212,8 +212,8 @@ require('includes/template_top.php');
           }
           ?>
 
-          <td class="font-weight-bold"><?php echo $selection[$i]['module']; ?></td>
-          <td class="text-right form-check">
+          <td class="fw-bold"><?php echo $selection[$i]['module']; ?></td>
+          <td class="text-end form-check">
 
             <?php
             if (sizeof($selection) > 1) {

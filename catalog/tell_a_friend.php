@@ -118,7 +118,7 @@ if ($messageStack->size('friend') > 0) {
 <?php echo tep_draw_form('email_friend', tep_href_link('tell_a_friend.php', 'action=process&products_id=' . (int)$_GET['products_id']), 'post', '', true); ?>
 
   <div class="col-lg-6 mb-5">
-    <div class="text-right text-danger small"><?php echo FORM_REQUIRED_INFORMATION; ?></div>
+    <div class="text-end text-danger small"><?php echo FORM_REQUIRED_INFORMATION; ?></div>
 
     <div class="mb-3">
       <label class="form-label" for="from_name"><?php echo FORM_FIELD_CUSTOMER_NAME; ?></label>
@@ -132,11 +132,11 @@ if ($messageStack->size('friend') > 0) {
     <h2><?php echo FORM_TITLE_FRIEND_DETAILS; ?></h2>
 
     <div class="mb-3">
-      <label class="form-label" for="to_name"><?php echo ENTRY_FIRST_NAME . '<span class="text-danger ml-1">' . ENTRY_FIRST_NAME_TEXT . '</span>'; ?></label>
+      <label class="form-label" for="to_name"><?php echo ENTRY_FIRST_NAME . '<span class="text-danger ms-1">' . ENTRY_FIRST_NAME_TEXT . '</span>'; ?></label>
       <?php echo tep_draw_input_field('to_name', null, 'id="to_name" class="form-control"'); ?>
     </div>
     <div class="mb-3">
-      <label class="form-label" for="to_email_address"><?php echo FORM_FIELD_FRIEND_EMAIL . '<span class="text-danger ml-1">' . ENTRY_EMAIL_ADDRESS_TEXT . '</span>'; ?></label>
+      <label class="form-label" for="to_email_address"><?php echo FORM_FIELD_FRIEND_EMAIL . '<span class="text-danger ms-1">' . ENTRY_EMAIL_ADDRESS_TEXT . '</span>'; ?></label>
       <?php echo tep_draw_input_field('to_email_address', null, 'id="to_email_address" class="form-control"'); ?>
     </div>
 

@@ -30,7 +30,7 @@ require('includes/template_top.php');
       <p><?php echo BOX_INFORMATION; ?></p>
     </div>
 
-    <div class="text-right">
+    <div class="text-end">
       <?php echo tep_draw_button(IMAGE_BUTTON_CONTINUE, 'triangle-1-e', tep_href_link('index.php')); ?>
     </div>
   </div>

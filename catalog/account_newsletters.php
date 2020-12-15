@@ -58,7 +58,7 @@ require('includes/template_top.php');
     <div class="mb-3">
       <div class="form-check">
         <?php echo tep_draw_checkbox_field('newsletter_general', '1', ($newsletter['customers_newsletter'] == '1' ? true : false), 'id="newsletter_general" class="form-check-input"'); ?>
-        <label class="form-check-label font-weight-bold" for="newsletter_general"><?php echo MY_NEWSLETTERS_GENERAL_NEWSLETTER; ?></label>
+        <label class="form-check-label fw-bold" for="newsletter_general"><?php echo MY_NEWSLETTERS_GENERAL_NEWSLETTER; ?></label>
       </div>
     </div>
     <div class="btn-toolbar justify-content-between">

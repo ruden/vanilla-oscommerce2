@@ -62,7 +62,7 @@ if (isset($_GET['action']) && ($_GET['action'] == 'success')) {
 
   <p><?php echo TEXT_SUCCESS; ?></p>
 
-  <div class="text-right mb-3">
+  <div class="text-end mb-3">
     <?php echo tep_draw_button(IMAGE_BUTTON_CONTINUE, 'triangle-1-e', tep_href_link('index.php')); ?>
   </div>
 
@@ -86,7 +86,7 @@ if (isset($_GET['action']) && ($_GET['action'] == 'success')) {
       <label for="enquiry"><?php echo ENTRY_ENQUIRY; ?></label>
       <?php echo tep_draw_textarea_field('enquiry', null, 'id="enquiry" class="form-control" rows="5"'); ?>
     </div>
-    <div class="text-right">
+    <div class="text-end">
       <?php echo tep_draw_button(IMAGE_BUTTON_CONTINUE, 'triangle-1-e', null, 'btn-primary'); ?>
     </div>
 

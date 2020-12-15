@@ -134,7 +134,7 @@ if ($messageStack->size('account_edit') > 0) {
 <?php echo tep_draw_form('account_edit', tep_href_link('account_edit.php', '', 'SSL'), 'post', 'onsubmit="return check_form(account_edit);"', true) . tep_draw_hidden_field('action', 'process'); ?>
 
   <div class="col-lg-6 mb-5">
-    <div class="text-right text-danger small"><?php echo FORM_REQUIRED_INFORMATION; ?></div>
+    <div class="text-end text-danger small"><?php echo FORM_REQUIRED_INFORMATION; ?></div>
 
     <?php
     if (ACCOUNT_GENDER == 'true') {
@@ -147,7 +147,7 @@ if ($messageStack->size('account_edit') > 0) {
       ?>
 
       <div class="mb-3">
-        <label class="form-check-label mr-2" for="gender"><?php echo ENTRY_GENDER . (tep_not_null(ENTRY_GENDER_TEXT) ? '<span class="text-danger ml-1">' . ENTRY_GENDER_TEXT . '</span>' : ''); ?></label>
+        <label class="form-check-label me-2" for="gender"><?php echo ENTRY_GENDER . (tep_not_null(ENTRY_GENDER_TEXT) ? '<span class="text-danger ms-1">' . ENTRY_GENDER_TEXT . '</span>' : ''); ?></label>
         <div class="form-check-inline">
           <label class="form-check-label">
             <?php echo tep_draw_radio_field('gender', 'm', $male, 'class="form-check-input"') . ' ' . MALE; ?>
@@ -165,11 +165,11 @@ if ($messageStack->size('account_edit') > 0) {
     ?>
 
     <div class="mb-3">
-      <label class="form-label" for="firstname"><?php echo ENTRY_FIRST_NAME . (tep_not_null(ENTRY_FIRST_NAME_TEXT) ? '<span class="text-danger ml-1">' . ENTRY_FIRST_NAME_TEXT . '</span>' : ''); ?></label>
+      <label class="form-label" for="firstname"><?php echo ENTRY_FIRST_NAME . (tep_not_null(ENTRY_FIRST_NAME_TEXT) ? '<span class="text-danger ms-1">' . ENTRY_FIRST_NAME_TEXT . '</span>' : ''); ?></label>
       <?php echo tep_draw_input_field('firstname', $account['customers_firstname'], 'id="firstname" class="form-control"'); ?>
     </div>
     <div class="mb-3">
-      <label class="form-label" for="lastname"><?php echo ENTRY_LAST_NAME . (tep_not_null(ENTRY_LAST_NAME_TEXT) ? '<span class="text-danger ml-1">' . ENTRY_LAST_NAME_TEXT . '</span>' : ''); ?></label>
+      <label class="form-label" for="lastname"><?php echo ENTRY_LAST_NAME . (tep_not_null(ENTRY_LAST_NAME_TEXT) ? '<span class="text-danger ms-1">' . ENTRY_LAST_NAME_TEXT . '</span>' : ''); ?></label>
       <?php echo tep_draw_input_field('lastname', $account['customers_lastname'], 'id="lastname" class="form-control"'); ?>
     </div>
 
@@ -178,7 +178,7 @@ if ($messageStack->size('account_edit') > 0) {
       ?>
 
       <div class="mb-3">
-        <label class="form-label" for="dob"><?php echo ENTRY_DATE_OF_BIRTH . (tep_not_null(ENTRY_DATE_OF_BIRTH_TEXT) ? '<span class="text-danger ml-1">' . ENTRY_DATE_OF_BIRTH_TEXT . '</span>' : ''); ?></label>
+        <label class="form-label" for="dob"><?php echo ENTRY_DATE_OF_BIRTH . (tep_not_null(ENTRY_DATE_OF_BIRTH_TEXT) ? '<span class="text-danger ms-1">' . ENTRY_DATE_OF_BIRTH_TEXT . '</span>' : ''); ?></label>
         <?php echo tep_draw_input_field('dob', tep_date_short($account['customers_dob']), 'id="dob" class="form-control" placeholder="' . htmlspecialchars(DOB_FORMAT_STRING) . '"'); ?>
       </div>
 
@@ -188,15 +188,15 @@ if ($messageStack->size('account_edit') > 0) {
 
 
     <div class="mb-3">
-      <label class="form-label" for="email-address"><?php echo ENTRY_EMAIL_ADDRESS . (tep_not_null(ENTRY_EMAIL_ADDRESS_TEXT) ? '<span class="text-danger ml-1">' . ENTRY_EMAIL_ADDRESS_TEXT . '</span>' : ''); ?></label>
+      <label class="form-label" for="email-address"><?php echo ENTRY_EMAIL_ADDRESS . (tep_not_null(ENTRY_EMAIL_ADDRESS_TEXT) ? '<span class="text-danger ms-1">' . ENTRY_EMAIL_ADDRESS_TEXT . '</span>' : ''); ?></label>
       <?php echo tep_draw_input_field('email_address', $account['customers_email_address'], 'id="email-address" class="form-control"', 'email'); ?>
     </div>
     <div class="mb-3">
-      <label class="form-label" for="telephone"><?php echo ENTRY_TELEPHONE_NUMBER . (tep_not_null(ENTRY_TELEPHONE_NUMBER_TEXT) ? '<span class="text-danger ml-1">' . ENTRY_TELEPHONE_NUMBER_TEXT . '</span>' : ''); ?></label>
+      <label class="form-label" for="telephone"><?php echo ENTRY_TELEPHONE_NUMBER . (tep_not_null(ENTRY_TELEPHONE_NUMBER_TEXT) ? '<span class="text-danger ms-1">' . ENTRY_TELEPHONE_NUMBER_TEXT . '</span>' : ''); ?></label>
       <?php echo tep_draw_input_field('telephone', $account['customers_telephone'], 'id="telephone" class="form-control"'); ?>
     </div>
     <div class="mb-3">
-      <label class="form-label" for="fax"><?php echo ENTRY_FAX_NUMBER . (tep_not_null(ENTRY_FAX_NUMBER_TEXT) ? '<span class="text-danger ml-1">' . ENTRY_FAX_NUMBER_TEXT . '</span>' : ''); ?></label>
+      <label class="form-label" for="fax"><?php echo ENTRY_FAX_NUMBER . (tep_not_null(ENTRY_FAX_NUMBER_TEXT) ? '<span class="text-danger ms-1">' . ENTRY_FAX_NUMBER_TEXT . '</span>' : ''); ?></label>
       <?php echo tep_draw_input_field('fax', $account['customers_fax'], 'id="fax" class="form-control"'); ?>
     </div>
     <div class="btn-toolbar justify-content-between">

@@ -1,6 +1,6 @@
 <div class="col-auto">
 
-  <label class="mr-2 col-form-label-sm"><?php echo MODULE_HEADER_LANGUAGES_TEXT_LANGUAGES; ?></label>
+  <label class="me-2 col-form-label-sm"><?php echo MODULE_HEADER_LANGUAGES_TEXT_LANGUAGES; ?></label>
 
   <?php
   foreach ($languages_array as $key => $value) {

@@ -7,13 +7,13 @@
 
     ?>
 
-    <a href="<?php echo tep_href_link('product_info.php', tep_get_all_get_params(['rsort'])); ?>#reviews"><?php echo $rating_data['count']; ?> <?php echo IMAGE_BUTTON_REVIEWS; ?></a>
+    <a href="<?php echo tep_href_link('product_info.php', tep_get_all_get_params(['rsort'])); ?>#reviews"><?php echo $rating_data['count']; ?><?php echo IMAGE_BUTTON_REVIEWS; ?></a>
 
     <?php
   } else {
     ?>
 
-    <span class="text-primary"><?php echo $rating_data['count']; ?> <?php echo IMAGE_BUTTON_REVIEWS; ?></span>
+    <span class="text-primary"><?php echo $rating_data['count']; ?><?php echo IMAGE_BUTTON_REVIEWS; ?></span>
 
     <?php
   }

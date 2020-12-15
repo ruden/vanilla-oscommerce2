@@ -19,7 +19,7 @@ $breadcrumb->add(NAVBAR_TITLE_1, tep_href_link('advanced_search.php'));
 require('includes/template_top.php');
 ?>
 
-  <script type="text/javascript" src="includes/general.js"></script>
+  <script src="includes/general.js"></script>
   <script>
     function check_form() {
       var error_message = "<?php echo JS_ERROR; ?>";
@@ -133,7 +133,7 @@ if ($messageStack->size('search') > 0) {
     <div class="modal fade" id="help">
       <div class="modal-dialog">
         <div class="modal-content">
-          <div class="text-right m-3">
+          <div class="text-end m-3">
             <a href="advanced_search.php#modal" class="text-danger" data-dismiss="modal">
               <?php echo TEXT_CLOSE_WINDOW; ?>
             </a>

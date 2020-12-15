@@ -51,7 +51,7 @@ if (tep_db_num_rows($downloads_query) > 0) {
         }
 
         echo '  <td>' . TABLE_HEADING_DOWNLOAD_DATE . tep_date_long($download_expiry) . '</td> 
-                <td class="text-right">' . $downloads['download_count'] . TABLE_HEADING_DOWNLOAD_COUNT . '</td> 
+                <td class="text-end">' . $downloads['download_count'] . TABLE_HEADING_DOWNLOAD_COUNT . '</td> 
               </tr>';
       }
       ?>

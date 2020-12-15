@@ -110,7 +110,7 @@ if ($messageStack->size('password_reset') > 0) {
       <label class="form-label" for="confirmation"><?php echo ENTRY_PASSWORD_CONFIRMATION; ?></label>
       <?php echo tep_draw_password_field('confirmation', null, 'id="confirmation" class="form-control"'); ?>
     </div>
-    <div class="text-right">
+    <div class="text-end">
       <?php echo tep_draw_button(IMAGE_BUTTON_CONTINUE, 'triangle-1-e', null, 'btn-primary'); ?>
     </div>
 
