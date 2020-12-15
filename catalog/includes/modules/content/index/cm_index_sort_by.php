@@ -10,7 +10,7 @@
   Released under the GNU General Public License
 */
 
-class il_sort_by {
+class cm_index_sort_by {
   public $code;
   public $group;
   public $title;
@@ -22,12 +22,12 @@ class il_sort_by {
     $this->code = get_class($this);
     $this->group = basename(dirname(__FILE__));
 
-    $this->title = MODULE_INDEX_LISTING_SORT_BY_TITLE;
-    $this->description = MODULE_INDEX_LISTING_SORT_BY_DESCRIPTION;
+    $this->title = MODULE_CONTENT_INDEX_SORT_BY_TITLE;
+    $this->description = MODULE_CONTENT_INDEX_SORT_BY_DESCRIPTION;
 
     if ($this->check() === true) {
-      $this->sort_order = MODULE_INDEX_LISTING_SORT_BY_SORT_ORDER;
-      $this->enabled = (MODULE_INDEX_LISTING_SORT_BY_STATUS == 'True');
+      $this->sort_order = MODULE_CONTENT_INDEX_SORT_BY_SORT_ORDER;
+      $this->enabled = (MODULE_CONTENT_INDEX_SORT_BY_STATUS == 'True');
     }
   }
 
@@ -85,7 +85,7 @@ class il_sort_by {
       }
 
       ob_start();
-      include('includes/modules/' . $this->group . '/templates/sort_by.php');
+      include('includes/modules/content/' . $this->group . '/templates/sort_by.php');
 
       $oscTemplate->addBlock(ob_get_clean(), 'sort_by');
     }
@@ -96,12 +96,12 @@ class il_sort_by {
   }
 
   public function check() {
-    return defined('MODULE_INDEX_LISTING_SORT_BY_STATUS');
+    return defined('MODULE_CONTENT_INDEX_SORT_BY_STATUS');
   }
 
   public function install() {
-    tep_db_query("INSERT INTO configuration (configuration_title, configuration_key, configuration_value, configuration_description, configuration_group_id, sort_order, set_function, date_added) VALUES ('Enable Module', 'MODULE_INDEX_LISTING_SORT_BY_STATUS', 'True', 'Do you want to add the module to your shop?', '6', '1', 'tep_cfg_select_option(array(\'True\', \'False\'), ', now())");
-    tep_db_query("INSERT INTO configuration (configuration_title, configuration_key, configuration_value, configuration_description, configuration_group_id, sort_order, date_added) VALUES ('Sort Order', 'MODULE_INDEX_LISTING_SORT_BY_SORT_ORDER', '0', 'Sort order of display. Lowest is displayed first.', '6', '0', now())");
+    tep_db_query("INSERT INTO configuration (configuration_title, configuration_key, configuration_value, configuration_description, configuration_group_id, sort_order, set_function, date_added) VALUES ('Enable Module', 'MODULE_CONTENT_INDEX_SORT_BY_STATUS', 'True', 'Do you want to add the module to your shop?', '6', '1', 'tep_cfg_select_option(array(\'True\', \'False\'), ', now())");
+    tep_db_query("INSERT INTO configuration (configuration_title, configuration_key, configuration_value, configuration_description, configuration_group_id, sort_order, date_added) VALUES ('Sort Order', 'MODULE_CONTENT_INDEX_SORT_BY_SORT_ORDER', '0', 'Sort order of display. Lowest is displayed first.', '6', '0', now())");
   }
 
   public function remove() {
@@ -109,6 +109,6 @@ class il_sort_by {
   }
 
   public function keys() {
-    return array('MODULE_INDEX_LISTING_SORT_BY_STATUS', 'MODULE_INDEX_LISTING_SORT_BY_SORT_ORDER');
+    return array('MODULE_CONTENT_INDEX_SORT_BY_STATUS', 'MODULE_CONTENT_INDEX_SORT_BY_SORT_ORDER');
   }
 }

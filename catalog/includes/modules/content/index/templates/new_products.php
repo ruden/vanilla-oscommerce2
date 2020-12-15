@@ -1,5 +1,5 @@
 <div class="my-5">
-  <h2><?php echo sprintf(MODULE_INDEX_LISTING_NEW_PRODUCTS_BOX_TITLE, strftime('%B')); ?></h2>
+  <h2><?php echo sprintf(MODULE_CONTENT_INDEX_NEW_PRODUCTS_BOX_TITLE, strftime('%B')); ?></h2>
 
   <div class="row">
 

@@ -1,10 +1,10 @@
 <div class="my-5">
-  <h2><?php echo MODULE_INDEX_LISTING_BEST_SELLERS_PRODUCTS_BOX_TITLE; ?></h2>
+  <h2><?php echo MODULE_CONTENT_INDEX_SPECIAL_PRODUCTS_BOX_TITLE; ?></h2>
 
   <div class="row">
 
     <?php
-    foreach ($best_sellers_products_array as $products) {
+    foreach ($special_products_array as $products) {
       ?>
 
       <div class="col-6 col-lg">
@@ -17,20 +17,8 @@
           </div>
 
           <div class="mb-2">
-
-            <?php
-            if (empty($products['specials_new_products_price'])) {
-              echo $products['products_price'];
-            } else {
-              ?>
-
-              <del class="text-muted"><?php echo $products['products_price']; ?></del>
-              <span class="text-danger"><?php echo $products['specials_new_products_price']; ?></span>
-
-              <?php
-            }
-            ?>
-
+            <del class="text-muted"><?php echo $products['products_price']; ?></del>
+            <span class="text-danger"><?php echo $products['products_special_price']; ?></span>
           </div>
         </div>
 

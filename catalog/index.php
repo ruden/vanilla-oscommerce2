@@ -65,7 +65,7 @@ require('includes/languages/' . $language . '/index.php');
 
 require('includes/template_top.php');
 
-$page_blocks = $oscTemplate->getBlocks('index_listing');
+$page_blocks = $oscTemplate->getContent('index');
 
 if ($category_depth != 'top') {
   ?>

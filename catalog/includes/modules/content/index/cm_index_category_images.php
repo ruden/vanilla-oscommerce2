@@ -10,7 +10,7 @@
   Released under the GNU General Public License
 */
 
-class il_category_images {
+class cm_index_category_images {
   public $code;
   public $group;
   public $title;
@@ -22,12 +22,12 @@ class il_category_images {
     $this->code = get_class($this);
     $this->group = basename(dirname(__FILE__));
 
-    $this->title = MODULE_INDEX_LISTING_CATEGORY_IMAGES_TITLE;
-    $this->description = MODULE_INDEX_LISTING_CATEGORY_IMAGES_DESCRIPTION;
+    $this->title = MODULE_CONTENT_INDEX_CATEGORY_IMAGES_TITLE;
+    $this->description = MODULE_CONTENT_INDEX_CATEGORY_IMAGES_DESCRIPTION;
 
     if ($this->check()) {
-      $this->sort_order = MODULE_INDEX_LISTING_CATEGORY_IMAGES_SORT_ORDER;
-      $this->enabled = (MODULE_INDEX_LISTING_CATEGORY_IMAGES_STATUS == 'True');
+      $this->sort_order = MODULE_CONTENT_INDEX_CATEGORY_IMAGES_SORT_ORDER;
+      $this->enabled = (MODULE_CONTENT_INDEX_CATEGORY_IMAGES_STATUS == 'True');
     }
   }
 
@@ -44,9 +44,9 @@ class il_category_images {
       }
 
       ob_start();
-      include('includes/modules/' . $this->group . '/templates/category_images.php');
+      include('includes/modules/content/' . $this->group . '/templates/category_images.php');
 
-      $oscTemplate->addBlock(ob_get_clean(), $this->group);
+      $oscTemplate->addContent(ob_get_clean(), $this->group);
     }
   }
 
@@ -61,12 +61,12 @@ class il_category_images {
   }
 
   public function check() {
-    return defined('MODULE_INDEX_LISTING_CATEGORY_IMAGES_STATUS');
+    return defined('MODULE_CONTENT_INDEX_CATEGORY_IMAGES_STATUS');
   }
 
   public function install() {
-    tep_db_query("INSERT INTO configuration (configuration_title, configuration_key, configuration_value, configuration_description, configuration_group_id, sort_order, set_function, date_added) VALUES ('Enable Module', 'MODULE_INDEX_LISTING_CATEGORY_IMAGES_STATUS', 'True', 'Do you want to add the module to your shop?', '6', '1', 'tep_cfg_select_option(array(\'True\', \'False\'), ', now())");
-    tep_db_query("INSERT INTO configuration (configuration_title, configuration_key, configuration_value, configuration_description, configuration_group_id, sort_order, date_added) VALUES ('Sort Order', 'MODULE_INDEX_LISTING_CATEGORY_IMAGES_SORT_ORDER', '0', 'Sort order of display. Lowest is displayed first.', '6', '0', now())");
+    tep_db_query("INSERT INTO configuration (configuration_title, configuration_key, configuration_value, configuration_description, configuration_group_id, sort_order, set_function, date_added) VALUES ('Enable Module', 'MODULE_CONTENT_INDEX_CATEGORY_IMAGES_STATUS', 'True', 'Do you want to add the module to your shop?', '6', '1', 'tep_cfg_select_option(array(\'True\', \'False\'), ', now())");
+    tep_db_query("INSERT INTO configuration (configuration_title, configuration_key, configuration_value, configuration_description, configuration_group_id, sort_order, date_added) VALUES ('Sort Order', 'MODULE_CONTENT_INDEX_CATEGORY_IMAGES_SORT_ORDER', '0', 'Sort order of display. Lowest is displayed first.', '6', '0', now())");
   }
 
   public function remove() {
@@ -74,6 +74,6 @@ class il_category_images {
   }
 
   public function keys() {
-    return array('MODULE_INDEX_LISTING_CATEGORY_IMAGES_STATUS', 'MODULE_INDEX_LISTING_CATEGORY_IMAGES_SORT_ORDER');
+    return array('MODULE_CONTENT_INDEX_CATEGORY_IMAGES_STATUS', 'MODULE_CONTENT_INDEX_CATEGORY_IMAGES_SORT_ORDER');
   }
 }

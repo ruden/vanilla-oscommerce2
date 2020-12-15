@@ -16,7 +16,7 @@ class cfgm_product_filters {
   public $language_directory = DIR_FS_CATALOG_LANGUAGES;
   public $key = 'MODULE_PRODUCT_FILTERS_INSTALLED';
   public $title;
-  public $template_integration = true;
+  public $template_integration = false;
 
   function __construct() {
     $this->directory = DIR_FS_CATALOG_MODULES . 'product_filters/';
