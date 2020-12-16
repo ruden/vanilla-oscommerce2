@@ -5,7 +5,7 @@
 Vanilla osCommerce v2.3.5
 =========================
 
-Supported PHP v7.x and v8.x
+Supported PHP v7.x or v8.x
 
 Demo: <http://demo.osclab.com/vanilla-oscommerce/>
 
@@ -50,5 +50,4 @@ Todo
 * [x] Add wishlist.
 * [x] Modularized the XML sitemap. 
 * [ ] Modularized the box product filter. 
-* [ ] Quick product updates. 
 * [x] SMTP Authentication.
