@@ -126,6 +126,12 @@ class cm_paypal_login {
 
           $force_login = false;
 
+          if (!isset($response['given_name'], $response['family_name'])) {
+            preg_match('/(?:\w+\. )?(\w+).*?(\w+)(?: \w+\.)?$/', $response['name'], $result);
+            $response['given_name'] = $result[1];
+            $response['family_name'] = $result[2];
+          }
+
 // check if e-mail address exists in database and login or create customer account
           if (!tep_session_is_registered('customer_id')) {
             $customer_id = 0;
@@ -156,6 +162,10 @@ class cm_paypal_login {
                 $customers_telephone = tep_db_prepare_input($response['phone_number']);
 
                 $sql_data_array['customers_telephone'] = $customers_telephone;
+              }
+
+              if ($this->hasAttribute('date_of_birth') && isset($response['birthday']) && !empty($response['birthday'])) {
+                $sql_data_array['customers_dob'] = tep_db_prepare_input($response['birthday']);
               }
 
               tep_db_perform('customers', $sql_data_array);
