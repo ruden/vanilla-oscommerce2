@@ -31,7 +31,7 @@
   define('PROJECT_VERSION', 'osCommerce Online Merchant v2.3.5');
 
 // some code to solve compatibility issues
-  require('includes/functions/compatibility.php');
+  require(DIR_FS_CATALOG . 'includes/functions/compatibility.php');
 
 // set the type of request (secure or not)
   $request_type = (getenv('HTTPS') == 'on') ? 'SSL' : 'NONSSL';
@@ -82,7 +82,7 @@
   require('includes/classes/shopping_cart.php');
 
 // define how the session functions will be used
-  require('includes/functions/sessions.php');
+  require(DIR_FS_CATALOG . 'includes/functions/sessions.php');
 
 // set the cookie domain
   $cookie_domain = (($request_type == 'NONSSL') ? HTTP_COOKIE_DOMAIN : HTTPS_COOKIE_DOMAIN);
@@ -110,7 +110,7 @@
       tep_session_register('languages_id');
     }
 
-    include('includes/classes/language.php');
+    include(DIR_FS_CATALOG . 'includes/classes/language.php');
     $lng = new language();
 
     if (isset($_GET['language']) && tep_not_null($_GET['language'])) {
@@ -180,7 +180,7 @@
   require('includes/functions/localization.php');
 
 // Include validation functions (right now only email address)
-  require('includes/functions/validations.php');
+  require(DIR_FS_CATALOG . 'includes/functions/validations.php');
 
 // setup our boxes
   require('includes/classes/table_block.php');

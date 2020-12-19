@@ -13,7 +13,7 @@
   $login_request = true;
 
   require('includes/application_top.php');
-  require('includes/functions/password_funcs.php');
+  require(DIR_FS_CATALOG . 'includes/functions/password_funcs.php');
 
   $action = (isset($_GET['action']) ? $_GET['action'] : '');
 

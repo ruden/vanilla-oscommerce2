@@ -49,7 +49,7 @@
   if (tep_not_null($action)) {
     switch ($action) {
       case 'insert':
-        require('includes/functions/password_funcs.php');
+        require(DIR_FS_CATALOG . 'includes/functions/password_funcs.php');
 
         $username = tep_db_prepare_input($_POST['username']);
         $password = tep_db_prepare_input($_POST['password']);
@@ -97,7 +97,7 @@
         tep_redirect(tep_href_link('administrators.php'));
         break;
       case 'save':
-        require('includes/functions/password_funcs.php');
+        require(DIR_FS_CATALOG . 'includes/functions/password_funcs.php');
 
         $username = tep_db_prepare_input($_POST['username']);
         $password = tep_db_prepare_input($_POST['password']);
