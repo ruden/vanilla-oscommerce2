@@ -10,37 +10,37 @@
   Released under the GNU General Public License
 */
 
-  if (!isset($process)) $process = false;
-?>
+if (!isset($process)) {
+  $process = false;
+}
 
-<?php
-  if (ACCOUNT_GENDER == 'true') {
-    $male = $female = false;
-    if (isset($gender)) {
-      $male = ($gender == 'm') ? true : false;
-      $female = !$male;
-    } elseif (isset($entry['entry_gender'])) {
-      $male = ($entry['entry_gender'] == 'm') ? true : false;
-      $female = !$male;
-    }
-?>
-
-    <div class="mb-3">
-      <label class="form-check-label me-2" for="gender"><?php echo ENTRY_GENDER . (tep_not_null(ENTRY_GENDER_TEXT) ? '<span class="text-danger ms-1">' . ENTRY_GENDER_TEXT . '</span>' : ''); ?></label>
-      <div class="form-check-inline">
-        <label class="form-check-label">
-          <?php echo tep_draw_radio_field('gender', 'm', $male, 'class="form-check-input"') . ' ' . MALE; ?>
-        </label>
-      </div>
-      <div class="form-check-inline">
-        <label class="form-check-label">
-          <?php echo tep_draw_radio_field('gender', 'f', $female, 'class="form-check-input"') . ' ' . FEMALE; ?>
-        </label>
-      </div>
-    </div>
-
-<?php
+if (ACCOUNT_GENDER == 'true') {
+  $male = $female = false;
+  if (isset($gender)) {
+    $male = ($gender == 'm') ? true : false;
+    $female = !$male;
+  } elseif (isset($entry['entry_gender'])) {
+    $male = ($entry['entry_gender'] == 'm') ? true : false;
+    $female = !$male;
   }
+  ?>
+
+  <div class="mb-3">
+    <label class="form-check-label me-2" for="gender"><?php echo ENTRY_GENDER . (tep_not_null(ENTRY_GENDER_TEXT) ? '<span class="text-danger ms-1">' . ENTRY_GENDER_TEXT . '</span>' : ''); ?></label>
+    <div class="form-check-inline">
+      <label class="form-check-label">
+        <?php echo tep_draw_radio_field('gender', 'm', $male, 'class="form-check-input"') . ' ' . MALE; ?>
+      </label>
+    </div>
+    <div class="form-check-inline">
+      <label class="form-check-label">
+        <?php echo tep_draw_radio_field('gender', 'f', $female, 'class="form-check-input"') . ' ' . FEMALE; ?>
+      </label>
+    </div>
+  </div>
+
+  <?php
+}
 ?>
 
 <div class="mb-3">
@@ -53,16 +53,16 @@
 </div>
 
 <?php
-  if (ACCOUNT_COMPANY == 'true') {
-?>
+if (ACCOUNT_COMPANY == 'true') {
+  ?>
 
-    <div class="mb-3">
-      <label class="form-label" for="company"><?php echo ENTRY_COMPANY . (tep_not_null(ENTRY_COMPANY_TEXT) ? '<span class="text-danger ms-1">' . ENTRY_COMPANY_TEXT . '</span>' : ''); ?></label>
-      <?php echo tep_draw_input_field('company', (isset($entry['entry_company']) ? $entry['entry_company'] : ''), 'id="company" class="form-control"'); ?>
-    </div>
+  <div class="mb-3">
+    <label class="form-label" for="company"><?php echo ENTRY_COMPANY . (tep_not_null(ENTRY_COMPANY_TEXT) ? '<span class="text-danger ms-1">' . ENTRY_COMPANY_TEXT . '</span>' : ''); ?></label>
+    <?php echo tep_draw_input_field('company', (isset($entry['entry_company']) ? $entry['entry_company'] : ''), 'id="company" class="form-control"'); ?>
+  </div>
 
-<?php
-  }
+  <?php
+}
 ?>
 
 <div class="mb-3">
@@ -71,16 +71,16 @@
 </div>
 
 <?php
-  if (ACCOUNT_SUBURB == 'true') {
-?>
+if (ACCOUNT_SUBURB == 'true') {
+  ?>
 
-    <div class="mb-3">
-      <label class="form-label" for="suburb"><?php echo ENTRY_SUBURB . (tep_not_null(ENTRY_SUBURB_TEXT) ? '<span class="text-danger ms-1">' . ENTRY_SUBURB_TEXT . '</span>' : ''); ?></label>
-      <?php echo tep_draw_input_field('suburb', (isset($entry['entry_suburb']) ? $entry['entry_suburb'] : ''), 'id="suburb" class="form-control"'); ?>
-    </div>
+  <div class="mb-3">
+    <label class="form-label" for="suburb"><?php echo ENTRY_SUBURB . (tep_not_null(ENTRY_SUBURB_TEXT) ? '<span class="text-danger ms-1">' . ENTRY_SUBURB_TEXT . '</span>' : ''); ?></label>
+    <?php echo tep_draw_input_field('suburb', (isset($entry['entry_suburb']) ? $entry['entry_suburb'] : ''), 'id="suburb" class="form-control"'); ?>
+  </div>
 
-<?php
-  }
+  <?php
+}
 ?>
 
 <div class="mb-3">
@@ -93,13 +93,13 @@
 </div>
 
 <?php
-  if (ACCOUNT_STATE == 'true') {
-?>
+if (ACCOUNT_STATE == 'true') {
+  ?>
 
-    <div class="mb-3">
-      <label class="form-label" for="state"><?php echo ENTRY_STATE . (tep_not_null(ENTRY_STATE_TEXT) ? '<span class="text-danger ms-1">' . ENTRY_STATE_TEXT . '</span>' : ''); ?></label>
+  <div class="mb-3">
+    <label class="form-label" for="state"><?php echo ENTRY_STATE . (tep_not_null(ENTRY_STATE_TEXT) ? '<span class="text-danger ms-1">' . ENTRY_STATE_TEXT . '</span>' : ''); ?></label>
 
-<?php
+    <?php
     if ($process == true) {
       if ($entry_state_has_zones == true) {
         $zones_array = array();
@@ -114,28 +114,15 @@
     } else {
       echo tep_draw_input_field('state', (isset($entry['entry_country_id']) ? tep_get_zone_name($entry['entry_country_id'], $entry['entry_zone_id'], $entry['entry_state']) : ''), 'id="state" class="form-control"');
     }
-?>
+    ?>
 
-    </div>
+  </div>
 
-<?php
-  }
+  <?php
+}
 ?>
 
 <div class="mb-3">
   <label class="form-label" for="country"><?php echo ENTRY_COUNTRY . (tep_not_null(ENTRY_COUNTRY_TEXT) ? '<span class="text-danger ms-1">' . ENTRY_COUNTRY_TEXT . '</span>' : ''); ?></label>
   <?php echo tep_get_country_list('country', (isset($entry['entry_country_id']) ? $entry['entry_country_id'] : STORE_COUNTRY), 'id="country" class="form-select"'); ?>
 </div>
-
-<?php
-  if ((isset($_GET['edit']) && ($customer_default_address_id != $_GET['edit'])) || (isset($_GET['edit']) == false) ) {
-?>
-
-    <div class="mb-3">
-      <?php echo tep_draw_checkbox_field('primary', 'on', false, 'class="form-check-input" id="primary"'); ?>
-      <label class="form-check-label" for="primary"><?php echo SET_AS_PRIMARY; ?></label>
-    </div>
-
-<?php
-  }
-?>

@@ -357,7 +357,9 @@ if ($messageStack->size('checkout_address') > 0) {
       <div class="col-lg-6">
         <div class="text-end text-danger small"><?php echo FORM_REQUIRED_INFORMATION; ?></div>
 
-        <?php require('includes/modules/checkout_new_address.php'); ?>
+        <div class="mb-3">
+          <?php require('includes/modules/address_book_details.php'); ?>
+        </div>
       </div>
 
       <?php

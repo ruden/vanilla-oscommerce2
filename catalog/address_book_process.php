@@ -292,6 +292,17 @@ if (isset($_GET['delete'])) {
     <?php include('includes/modules/address_book_details.php'); ?>
 
     <?php
+    if ((isset($_GET['edit']) && $customer_default_address_id != $_GET['edit']) || !isset($_GET['edit'])) {
+      ?>
+
+      <div class="mb-3">
+        <?php echo tep_draw_checkbox_field('primary', 'on', false, 'class="form-check-input" id="primary"'); ?>
+        <label class="form-check-label" for="primary"><?php echo SET_AS_PRIMARY; ?></label>
+      </div>
+
+      <?php
+    }
+
     if (isset($_GET['edit']) && is_numeric($_GET['edit'])) {
       ?>
 
