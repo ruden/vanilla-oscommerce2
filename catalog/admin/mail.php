@@ -42,7 +42,7 @@
       $to_name[$mail['customers_email_address']] = $mail['customers_firstname'] . ' ' . $mail['customers_lastname'];
     }
 
-    tep_mail($to_name, null, $subject, $message, $from, null);
+    tep_mail($to_name, null, $subject, $message, tep_extra_emails_array($from), null);
 
     tep_redirect(tep_href_link('mail.php', 'mail_sent_to=' . urlencode($mail_sent_to)));
   }
