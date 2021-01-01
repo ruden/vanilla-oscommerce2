@@ -17,27 +17,15 @@ require('includes/languages/' . $language . '/advanced_search.php');
 $error = false;
 
 if ((isset($_GET['keywords']) && empty($_GET['keywords'])) &&
-    (isset($_GET['dfrom']) && (empty($_GET['dfrom']) || ($_GET['dfrom'] == DOB_FORMAT_STRING))) &&
-    (isset($_GET['dto']) && (empty($_GET['dto']) || ($_GET['dto'] == DOB_FORMAT_STRING))) &&
     (isset($_GET['pfrom']) && !is_numeric($_GET['pfrom'])) &&
     (isset($_GET['pto']) && !is_numeric($_GET['pto']))) {
   $error = true;
 
   $messageStack->add_session('search', ERROR_AT_LEAST_ONE_INPUT);
 } else {
-  $dfrom = '';
-  $dto = '';
   $pfrom = '';
   $pto = '';
   $keywords = '';
-
-  if (isset($_GET['dfrom'])) {
-    $dfrom = (($_GET['dfrom'] == DOB_FORMAT_STRING) ? '' : $_GET['dfrom']);
-  }
-
-  if (isset($_GET['dto'])) {
-    $dto = (($_GET['dto'] == DOB_FORMAT_STRING) ? '' : $_GET['dto']);
-  }
 
   if (isset($_GET['pfrom'])) {
     $pfrom = $_GET['pfrom'];
@@ -49,33 +37,6 @@ if ((isset($_GET['keywords']) && empty($_GET['keywords'])) &&
 
   if (isset($_GET['keywords'])) {
     $keywords = tep_db_prepare_input($_GET['keywords']);
-  }
-
-  $date_check_error = false;
-  if (tep_not_null($dfrom)) {
-    if (!tep_checkdate($dfrom, DOB_FORMAT_STRING, $dfrom_array)) {
-      $error = true;
-      $date_check_error = true;
-
-      $messageStack->add_session('search', ERROR_INVALID_FROM_DATE);
-    }
-  }
-
-  if (tep_not_null($dto)) {
-    if (!tep_checkdate($dto, DOB_FORMAT_STRING, $dto_array)) {
-      $error = true;
-      $date_check_error = true;
-
-      $messageStack->add_session('search', ERROR_INVALID_TO_DATE);
-    }
-  }
-
-  if (($date_check_error == false) && tep_not_null($dfrom) && tep_not_null($dto)) {
-    if (mktime(0, 0, 0, $dfrom_array[1], $dfrom_array[2], $dfrom_array[0]) > mktime(0, 0, 0, $dto_array[1], $dto_array[2], $dto_array[0])) {
-      $error = true;
-
-      $messageStack->add_session('search', ERROR_TO_DATE_LESS_THAN_FROM_DATE);
-    }
   }
 
   $price_check_error = false;
@@ -114,7 +75,7 @@ if ((isset($_GET['keywords']) && empty($_GET['keywords'])) &&
   }
 }
 
-if (empty($dfrom) && empty($dto) && empty($pfrom) && empty($pto) && empty($keywords)) {
+if (empty($pfrom) && empty($pto) && empty($keywords)) {
   $error = true;
 
   $messageStack->add_session('search', ERROR_AT_LEAST_ONE_INPUT);
@@ -187,14 +148,6 @@ if (isset($search_keywords) && (sizeof($search_keywords) > 0)) {
     }
   }
   $where_str .= " )";
-}
-
-if (tep_not_null($dfrom)) {
-  $where_str .= " and p.products_date_added >= '" . tep_date_raw($dfrom) . "'";
-}
-
-if (tep_not_null($dto)) {
-  $where_str .= " and p.products_date_added <= '" . tep_date_raw($dto) . "'";
 }
 
 if (tep_not_null($pfrom)) {
