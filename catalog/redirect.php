@@ -13,16 +13,6 @@
 require('includes/application_top.php');
 
 switch ($_GET['action']) {
-  case 'banner':
-    $banner_query = tep_db_query("select banners_url from banners where banners_id = '" . (int)$_GET['goto'] . "'");
-    if (tep_db_num_rows($banner_query)) {
-      $banner = tep_db_fetch_array($banner_query);
-      tep_update_banner_click_count($_GET['goto']);
-
-      tep_redirect($banner['banners_url']);
-    }
-    break;
-
   case 'url':
     if (isset($_GET['goto']) && tep_not_null($_GET['goto'])) {
       $check_query = tep_db_query("select products_url from products_description where products_url = '" . tep_db_input($_GET['goto']) . "' limit 1");
@@ -31,7 +21,6 @@ switch ($_GET['action']) {
       }
     }
     break;
-
   case 'manufacturer':
     if (isset($_GET['manufacturers_id']) && tep_not_null($_GET['manufacturers_id'])) {
       $manufacturer_query = tep_db_query("select manufacturers_url from manufacturers_info where manufacturers_id = '" . (int)$_GET['manufacturers_id'] . "' and languages_id = '" . (int)$languages_id . "'");

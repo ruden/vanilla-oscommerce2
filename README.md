@@ -33,7 +33,6 @@ New
 
 Todo
 ----
-* [ ] Banner slider and grid.
 * [ ] GDPR.
 * [x] Recently viewed products.
 * [ ] <s>Related products.</s>

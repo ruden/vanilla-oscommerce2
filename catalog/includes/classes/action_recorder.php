@@ -74,6 +74,9 @@
     function record($success = true) {
       if (tep_not_null($this->_module)) {
         tep_db_query("insert into action_recorder (module, user_id, user_name, identifier, success, date_added) values ('" . tep_db_input($this->_module) . "', '" . (int)$this->_user_id . "', '" . tep_db_input($this->_user_name) . "', '" . tep_db_input($this->getIdentifier()) . "', '" . ($success == true ? 1 : 0) . "', now())");
+
+        // reset session token
+        return $GLOBALS['sessiontoken'] = md5(tep_rand() . tep_rand() . tep_rand() . tep_rand());
       }
     }
 

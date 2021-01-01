@@ -335,19 +335,7 @@ function tep_get_zone_name($country_id, $zone_id, $default_zone) {
 }
 
 function tep_not_null($value) {
-  if (is_array($value)) {
-    if (sizeof($value) > 0) {
-      return true;
-    } else {
-      return false;
-    }
-  } else {
-    if ((is_string($value) || is_int($value)) && ($value != '') && ($value != 'NULL') && (strlen(trim($value)) > 0)) {
-      return true;
-    } else {
-      return false;
-    }
-  }
+  return !empty($value);
 }
 
 function tep_browser_detect($component) {
@@ -739,18 +727,6 @@ function tep_cfg_get_zone_name($zone_id) {
     $zone = tep_db_fetch_array($zone_query);
 
     return $zone['zone_name'];
-  }
-}
-
-////
-// Sets the status of a banner
-function tep_set_banner_status($banners_id, $status) {
-  if ($status == '1') {
-    return tep_db_query("update banners set status = '1', expires_impressions = NULL, expires_date = NULL, date_status_change = NULL where banners_id = '" . (int)$banners_id . "'");
-  } elseif ($status == '0') {
-    return tep_db_query("update banners set status = '0', date_status_change = now() where banners_id = '" . (int)$banners_id . "'");
-  } else {
-    return -1;
   }
 }
 
