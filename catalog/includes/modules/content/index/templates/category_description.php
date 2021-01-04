@@ -1,3 +1,3 @@
-<p class="my-5">
+<p class="mb-5">
   <?php echo $description; ?>
 </p>

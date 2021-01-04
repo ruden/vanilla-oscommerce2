@@ -51,9 +51,9 @@ class fm_all_manufacturers {
   }
 
   public function isEnabled() {
-    global $category_depth;
+    global $cPath_array;
 
-    if ($category_depth == 'top') {
+    if (!isset($cPath_array)) {
       return $this->enabled;
     }
 

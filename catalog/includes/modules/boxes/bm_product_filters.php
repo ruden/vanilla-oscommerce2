@@ -32,9 +32,9 @@ class bm_product_filters {
   }
 
   public function execute() {
-    global $oscTemplate, $language;
+    global $oscTemplate, $language, $cPath;
 
-    if (defined('MODULE_PRODUCT_FILTERS_INSTALLED') && tep_not_null(MODULE_PRODUCT_FILTERS_INSTALLED)) {
+    if (defined('MODULE_PRODUCT_FILTERS_INSTALLED') && !empty(MODULE_PRODUCT_FILTERS_INSTALLED)) {
       $sbm_array = explode(';', MODULE_PRODUCT_FILTERS_INSTALLED);
 
       $product_filters = array();
@@ -58,11 +58,17 @@ class bm_product_filters {
     ob_start();
     include('includes/modules/' . $this->group . '/templates/product_filters.php');
 
-    $oscTemplate->addBlock(ob_get_clean(), $this->group);
+    $oscTemplate->addBlock(ob_get_clean(), 'boxes_column_left');
   }
 
   public function isEnabled() {
-    return $this->enabled;
+    global $cPath_array;
+
+    if (isset($cPath_array) && !empty($cPath_array)) {
+      return $this->enabled;
+    }
+
+    return null;
   }
 
   public function check() {

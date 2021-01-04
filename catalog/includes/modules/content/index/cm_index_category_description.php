@@ -32,11 +32,11 @@ class cm_index_category_description {
   }
 
   public function execute() {
-    global $oscTemplate, $categories, $category_depth;
+    global $oscTemplate, $categories, $cPath_array;
 
     $description = '';
 
-    if ($category_depth != 'top' && isset($categories['categories_description'])) {
+    if (isset($cPath_array) && isset($categories['categories_description'])) {
       $description = $categories['categories_description'];
     } elseif (defined('TEXT_MAIN') && !empty(TEXT_MAIN)) {
       $description = TEXT_MAIN;

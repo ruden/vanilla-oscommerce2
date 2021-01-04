@@ -63,11 +63,10 @@ class cm_index_sort_by {
         }
       }
 
-      $GLOBALS['listing_sql'] = $listing_sql . $order;
+      $oscTemplate->_data[$this->group] = array('order' => $order);
     }
 
     if (!empty($sort_array)) {
-       //var_dump($sort_array);die;
       $hidden_get_params = '';
       $exclude_array = array(session_name(),
                              'page',

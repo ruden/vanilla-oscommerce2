@@ -93,7 +93,7 @@ if (isset($_GET['info_message']) && tep_not_null($_GET['info_message'])) {
     <div class="row">
 
       <?php
-      if ($oscTemplate->hasBlocks('boxes_column_left') && isset($category_depth) && $category_depth == 'products') {
+      if ($oscTemplate->hasBlocks('boxes_column_left') && isset($cPath_array)) {
         ?>
 
         <aside class="aside col-lg-2 d-none d-lg-block">

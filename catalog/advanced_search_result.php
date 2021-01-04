@@ -179,6 +179,12 @@ if ((DISPLAY_PRICE_WITH_TAX == 'true') && (tep_not_null($pfrom) || tep_not_null(
 $listing_sql = $select_str . $from_str . $where_str;
 
 require('includes/template_top.php');
+?>
+
+  <h1><?php echo HEADING_TITLE_2; ?></h1>
+
+<?php
+$listing_split = new splitPageResults($listing_sql, MAX_DISPLAY_SEARCH_RESULTS, 'p.products_id');
 
 require('includes/modules/product_listing.php');
 

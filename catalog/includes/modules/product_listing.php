@@ -9,29 +9,7 @@
 
   Released under the GNU General Public License
 */
-
-echo $oscTemplate->getBlocks('sort_by');
-
-$listing_split = new splitPageResults($listing_sql, MAX_DISPLAY_SEARCH_RESULTS, 'p.products_id');
-
-$catname = '';
-
-if (defined('HEADING_TITLE')) {
-  $catname = HEADING_TITLE;
-} elseif (defined('HEADING_TITLE_2')) {
-  $catname = HEADING_TITLE_2;
-} elseif (defined('HEADING_TITLE_1')) {
-  $catname = HEADING_TITLE_1;
-}
-
-if (isset($manufacturers['manufacturers_id'])) {
-  $catname = $manufacturers['manufacturers_name'];
-} elseif (isset($categories['categories_id'])) {
-  $catname = $categories['categories_name'];
-}
 ?>
-
-<h1><?php echo $catname; ?></h1>
 
 <div class="mb-5">
 
@@ -69,6 +47,7 @@ if (isset($manufacturers['manufacturers_id'])) {
               ?>
 
             </div>
+
             <div class="mb-2">
               <?php echo tep_draw_button(IMAGE_BUTTON_BUY_NOW, 'cart', tep_href_link($PHP_SELF, tep_get_all_get_params(array('action')) . 'action=buy_now&products_id=' . $listing['products_id'])); ?>
             </div>

@@ -40,20 +40,25 @@ class cm_index_category_images {
       $categories_array = array();
 
       while ($categories = tep_db_fetch_array($categories_query)) {
-        $categories_array[tep_get_path($categories['categories_id'])] = $categories;
+        if (!empty($categories['categories_image'])) {
+          $categories_array[$categories['categories_id']] = $categories;
+          $categories_array[$categories['categories_id']]['cPath'] = tep_get_path($categories['categories_id']);
+        }
       }
 
-      ob_start();
-      include('includes/modules/content/' . $this->group . '/templates/category_images.php');
+      if (!empty($categories_array)) {
+        ob_start();
+        include('includes/modules/content/' . $this->group . '/templates/category_images.php');
 
-      $oscTemplate->addContent(ob_get_clean(), $this->group);
+        $oscTemplate->addContent(ob_get_clean(), $this->group);
+      }
     }
   }
 
   public function isEnabled() {
-    global $category_depth;
+    global $cPath_array;
 
-    if ($category_depth == 'nested') {
+    if (isset($cPath_array)) {
       return $this->enabled;
     }
 

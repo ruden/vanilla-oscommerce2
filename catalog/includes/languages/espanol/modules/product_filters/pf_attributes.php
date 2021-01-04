@@ -10,5 +10,5 @@
   Released under the GNU General Public License
 */
 
-define('NAVBAR_TITLE', 'Ofertas');
-define('HEADING_TITLE', 'Ofertas');
+define('MODULE_PRODUCT_FILTERS_ATTRIBUTES_TITLE', 'Attributes');
+define('MODULE_PRODUCT_FILTERS_ATTRIBUTES_DESCRIPTION', 'Add attributes to product filters');

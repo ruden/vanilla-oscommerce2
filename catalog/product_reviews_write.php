@@ -65,6 +65,8 @@ if (isset($_GET['action']) && ($_GET['action'] == 'process') && isset($_POST['fo
   if ($error == false) {
     tep_db_query("insert into reviews (products_id, customers_id, customers_name, reviews_rating, date_added, reviews_text) values ('" . (int)$product_info['products_id'] . "', '" . (int)$customer_id . "', '" . tep_db_input($customer['customers_firstname']) . ' ' . tep_db_input($customer['customers_lastname']) . "', '" . tep_db_input($rating) . "', now(), '" . tep_db_input($review) . "')");
 
+    $actionRecorder->record();
+
     tep_redirect(tep_href_link('product_reviews_write.php', 'action=success&products_id=' . $product_info['products_id']));
   }
 }

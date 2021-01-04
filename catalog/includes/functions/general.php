@@ -185,7 +185,11 @@ function tep_get_all_get_params($exclude_array = '') {
   if (is_array($_GET) && (!empty($_GET))) {
     foreach ($_GET as $key => $value) {
       if (!in_array($key, $exclude_array)) {
-        $get_url .= $key . '=' . rawurlencode(stripslashes($value)) . '&';
+        if (is_array($value)) {
+          $get_url .= $key . '[]=' . rawurlencode(stripslashes($value[0])) . '&';
+        }else{
+          $get_url .= $key . '=' . rawurlencode(stripslashes($value)) . '&';
+        }
       }
     }
   }
@@ -1249,19 +1253,7 @@ function tep_array_to_string($array, $exclude = '', $equals = '=', $separator = 
 }
 
 function tep_not_null($value) {
-  if (is_array($value)) {
-    if (sizeof($value) > 0) {
-      return true;
-    } else {
-      return false;
-    }
-  } else {
-    if (($value != '') && (strtolower($value) != 'null') && (strlen(trim($value)) > 0)) {
-      return true;
-    } else {
-      return false;
-    }
-  }
+  return !empty($value);
 }
 
 ////
