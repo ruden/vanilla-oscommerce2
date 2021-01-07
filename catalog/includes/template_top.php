@@ -65,7 +65,7 @@ if ($messageStack->size('header') > 0) {
 if (isset($_GET['error_message']) && tep_not_null($_GET['error_message'])) {
   ?>
 
-  <div class="p-1 bg-danger text-white text-center mb-3">
+  <div class="p-3 mb-3 bg-danger text-white text-center">
     <?php echo htmlspecialchars(stripslashes(urldecode($_GET['error_message']))); ?>
   </div>
 
@@ -75,7 +75,7 @@ if (isset($_GET['error_message']) && tep_not_null($_GET['error_message'])) {
 if (isset($_GET['info_message']) && tep_not_null($_GET['info_message'])) {
   ?>
 
-  <div class="p-1 bg-info text-white text-center mb-3">
+  <div class="p-3 mb-3 bg-info text-white text-center">
     <?php echo htmlspecialchars(stripslashes(urldecode($_GET['info_message']))); ?>
   </div>
 
