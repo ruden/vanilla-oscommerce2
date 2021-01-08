@@ -18,7 +18,6 @@
 <title><?php echo TITLE; ?></title>
 <base href="<?php echo ($request_type == 'SSL') ? HTTPS_SERVER . DIR_WS_HTTPS_ADMIN : HTTP_SERVER . DIR_WS_ADMIN; ?>" />
 <link rel="shortcut icon" href="<?php echo tep_catalog_href_link('favicon.ico'); ?>" />
-<!--[if IE]><script src="<?php echo tep_catalog_href_link('ext/flot/excanvas.min.js'); ?>"></script><![endif]-->
 <link rel="stylesheet" href="<?php echo tep_catalog_href_link('ext/jquery/ui/redmond/jquery-ui.min.css'); ?>">
 <script src="<?php echo tep_catalog_href_link('ext/jquery/jquery.min.js'); ?>"></script>
 <script src="<?php echo tep_catalog_href_link('ext/jquery/ui/jquery-ui.min.js'); ?>"></script>
@@ -34,8 +33,9 @@ $.datepicker.setDefaults($.datepicker.regional['<?php echo JQUERY_DATEPICKER_I18
   }
 ?>
 
-<script src="<?php echo tep_catalog_href_link('ext/flot/jquery.flot.min.js'); ?>"></script>
-<script src="<?php echo tep_catalog_href_link('ext/flot/jquery.flot.time.min.js'); ?>"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/flot/0.8.3/jquery.flot.min.js" integrity="sha512-eO1AKNIv7KSFl5n81oHCKnYLMi8UV4wWD1TcLYKNTssoECDuiGhoRsQkdiZkl8VUjoms2SeJY7zTSw5noGSqbQ==" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/flot/0.8.3/jquery.flot.time.min.js" integrity="sha512-lcRowrkiQvFli9HkuJ2Yr58iEwAtzhFNJ1Galsko4SJDhcZfUub8UxGlMQIsMvARiTqx2pm7g6COxJozihOixA==" crossorigin="anonymous"></script>
+
 <link rel="stylesheet" href="includes/stylesheet.css">
 <script src="includes/general.js"></script>
 </head>
