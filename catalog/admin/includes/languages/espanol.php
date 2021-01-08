@@ -201,7 +201,7 @@ define('IMAGE_DETAILS', 'Detalle');
 define('IMAGE_DELETE', 'Eliminar');
 define('IMAGE_EDIT', 'Editar');
 define('IMAGE_EMAIL', 'Email');
-define('IMAGE_FILE_MANAGER', 'Ficheros');
+define('IMAGE_EXPORT', 'Export');
 define('IMAGE_ICON_STATUS_GREEN', 'Activado');
 define('IMAGE_ICON_STATUS_GREEN_LIGHT', 'Activar');
 define('IMAGE_ICON_STATUS_RED', 'Desactivado');

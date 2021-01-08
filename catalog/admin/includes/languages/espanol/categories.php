@@ -30,7 +30,6 @@ define('TEXT_PRODUCTS_QUANTITY_INFO', 'Cantidad:');
 define('TEXT_DATE_ADDED', 'Añadido el:');
 define('TEXT_DATE_AVAILABLE', 'Fecha de Disponibilidad:');
 define('TEXT_LAST_MODIFIED', 'Modificado el:');
-define('TEXT_IMAGE_NONEXISTENT', 'NO EXISTE IMAGEN');
 define('TEXT_NO_CHILD_CATEGORIES_OR_PRODUCTS', 'Inserte una nueva categoría o producto en este nivel');
 define('TEXT_PRODUCT_MORE_INFORMATION', 'Si quiere más información, visite la <a href="http://%s" target="blank"><u>página</u></a> de este producto.');
 define('TEXT_PRODUCT_DATE_ADDED', 'Este producto se añadió a nuestro catálogo el %s.');
@@ -68,6 +67,10 @@ define('TEXT_CATEGORIES_NAME', 'Nombre categoría:');
 define('TEXT_CATEGORIES_IMAGE', 'Imagen categoría:');
 define('TEXT_SORT_ORDER', 'Orden:');
 
+define('SECTION_HEADING_GENERAL', 'General');
+define('SECTION_HEADING_DATA', 'Data');
+define('SECTION_HEADING_IMAGES', 'Images');
+
 define('TEXT_PRODUCTS_STATUS', 'Estado de los Productos:');
 define('TEXT_PRODUCTS_DATE_AVAILABLE', 'Fecha de Disponibilidad:');
 define('TEXT_PRODUCT_AVAILABLE', 'Disponible');
@@ -103,15 +106,3 @@ define('ERROR_CANNOT_MOVE_CATEGORY_TO_PARENT', 'Error: La categoría NO puede se
 
 define('TEXT_CATEGORIES_DESCRIPTION', 'Descripción de la categoría:<br><small>se muestra en la página de la categoría</small>');
 define('TEXT_EDIT_CATEGORIES_DESCRIPTION', 'Editar la Descripción de la Categoría:');
-
-define('TEXT_CATEGORIES_SEO_DESCRIPTION', 'Descripción de la Categoría para SEO:<br><small>Añadir un elemento Meta &lt;description&gt;.</small>');
-define('TEXT_EDIT_CATEGORIES_SEO_DESCRIPTION', 'Editar la Descripción de la Categoría para SEO:<br><small>Cambia el elemento Meta &lt;description&gt;.</small>');
-define('TEXT_CATEGORIES_SEO_KEYWORDS', 'Palabras clave Meta de la categoría para SEO:<br><small>Añadir un elemento Meta &lt;keyword&gt;.<br>Deben estar separados por comas.</small>');
-define('TEXT_EDIT_CATEGORIES_SEO_KEYWORDS', 'Editar las Palabras clave para SEO:<br><small>Cambia el elemento Meta &lt;keyword&gt;.<br>Deben estar separados por comas.</small>');
- 
-const TEXT_PRODUCTS_GTIN = 'Producto <abbr title="GTIN debe ser almacenado como 14 Dígitos. Cualquier GTIN inferior a esto se rellenará con ceros a la izquierda para cumplir con las especificaciones GTIN.">GTIN</abbr>:<br><small>1 de los siguientes<br>Códigos de Barra: UPC, EAN, ISBN etc</small>';
-const TEXT_PRODUCTS_SEO_DESCRIPTION = 'Descripción Meta para SEO:<br><small>Añadir un elemento Meta<br>&lt;description&gt;.<br>HTML no está permitido.</small>';
-const TEXT_PRODUCTS_SEO_KEYWORDS = 'Palabras clave Meta de producto para SEO:<br><small>Añadir un elemento Meta<br>&lt;keyword&gt;.<br>Deben estar separados por comas.<br>HTML no está permitido.</small>';
-const TEXT_PRODUCTS_SEO_TITLE = 'Titulo del producto para SEO:<br><small>Reemplaza el título del producto<br>en la etiqueta Meta Element &lt;title&gt; y opcionalmente<br>en la ruta de navegación.<br>Dejar en blanco para usar por defecto el nombre del producto.</small>';
-const TEXT_CATEGORIES_SEO_TITLE = 'Título de la Categoría para SEO:<br><small>Reemplaza el título de la categoría en la etiqueta Meta Element &lt;title&gt;.<br>Dejar en blanco para usar por defecto el nombre de la categoría.</small>';
-const TEXT_EDIT_CATEGORIES_SEO_TITLE = 'Editar el título de la categoría para SEO:<br><small>Reemplaza el título de la categoría en la etiqueta Meta Element &lt;title&gt;<br>y opcionalmente en la ruta de navegación.<br>Dejar en blanco para usar por defecto el nombre de la categoría.</small>';
