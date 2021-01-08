@@ -10,14 +10,14 @@
   Released under the GNU General Public License
 */
 
-  $dir_fs_document_root = $_POST['DIR_FS_DOCUMENT_ROOT'];
-  if ((substr($dir_fs_document_root, -1) != '\\') && (substr($dir_fs_document_root, -1) != '/')) {
-    if (strrpos($dir_fs_document_root, '\\') !== false) {
-      $dir_fs_document_root .= '\\';
-    } else {
-      $dir_fs_document_root .= '/';
-    }
+$dir_fs_document_root = $_POST['DIR_FS_DOCUMENT_ROOT'];
+if ((substr($dir_fs_document_root, -1) != '\\') && (substr($dir_fs_document_root, -1) != '/')) {
+  if (strrpos($dir_fs_document_root, '\\') !== false) {
+    $dir_fs_document_root .= '\\';
+  } else {
+    $dir_fs_document_root .= '/';
   }
+}
 ?>
 
 <div class="mainBlock">
@@ -51,59 +51,53 @@
 
     <form name="install" id="installForm" action="install.php?step=4" method="post">
 
-    <table border="0" width="99%" cellspacing="0" cellpadding="5" class="inputForm">
-      <tr>
-        <td class="inputField"><?php echo 'Store Name<br />' . osc_draw_input_field('CFG_STORE_NAME', null, 'class="text" required'); ?></td>
-        <td class="inputDescription">The name of the online store that is presented to the public.</td>
-      </tr>
-      <tr>
-        <td class="inputField"><?php echo 'Store Owner Name<br />' . osc_draw_input_field('CFG_STORE_OWNER_NAME', null, 'class="text" required'); ?></td>
-        <td class="inputDescription">The name of the store owner that is presented to the public.</td>
-      </tr>
-      <tr>
-        <td class="inputField"><?php echo 'Store Owner E-Mail Address<br />' . osc_draw_input_field('CFG_STORE_OWNER_EMAIL_ADDRESS', null, 'class="text" required'); ?></td>
-        <td class="inputDescription">The e-mail address of the store owner that is presented to the public.</td>
-      </tr>
-      <tr>
-        <td class="inputField"><?php echo 'Administrator Username<br />' . osc_draw_input_field('CFG_ADMINISTRATOR_USERNAME', null, 'class="text" required'); ?></td>
-        <td class="inputDescription">The administrator username to use for the administration tool.</td>
-      </tr>
-      <tr>
-        <td class="inputField"><?php echo 'Administrator Password<br />' . osc_draw_input_field('CFG_ADMINISTRATOR_PASSWORD', null, 'class="text" required'); ?></td>
-        <td class="inputDescription">The password to use for the administrator account.</td>
-      </tr>
+      <table border="0" width="99%" cellspacing="0" cellpadding="5" class="inputForm">
+        <tr>
+          <td class="inputField"><?php echo 'Store Name<br />' . osc_draw_input_field('CFG_STORE_NAME', null, 'class="text" required'); ?></td>
+          <td class="inputDescription">The name of the online store that is presented to the public.</td>
+        </tr>
+        <tr>
+          <td class="inputField"><?php echo 'Store Owner Name<br />' . osc_draw_input_field('CFG_STORE_OWNER_NAME', null, 'class="text" required'); ?></td>
+          <td class="inputDescription">The name of the store owner that is presented to the public.</td>
+        </tr>
+        <tr>
+          <td class="inputField"><?php echo 'Store Owner E-Mail Address<br />' . osc_draw_input_field('CFG_STORE_OWNER_EMAIL_ADDRESS', null, 'class="text" required'); ?></td>
+          <td class="inputDescription">The e-mail address of the store owner that is presented to the public.</td>
+        </tr>
+        <tr>
+          <td class="inputField"><?php echo 'Administrator Username<br />' . osc_draw_input_field('CFG_ADMINISTRATOR_USERNAME', null, 'class="text" required'); ?></td>
+          <td class="inputDescription">The administrator username to use for the administration tool.</td>
+        </tr>
+        <tr>
+          <td class="inputField"><?php echo 'Administrator Password<br />' . osc_draw_input_field('CFG_ADMINISTRATOR_PASSWORD', null, 'class="text" required'); ?></td>
+          <td class="inputDescription">The password to use for the administrator account.</td>
+        </tr>
 
-<?php
-  if (osc_is_writable($dir_fs_document_root) && osc_is_writable($dir_fs_document_root . 'admin')) {
-?>
-      <tr>
-        <td class="inputField"><?php echo 'Administration Directory Name<br />' . osc_draw_input_field('CFG_ADMIN_DIRECTORY', 'admin', 'class="text" required'); ?></td>
-        <td class="inputDescription">This is the directory where the administration section will be installed. You should change this for security reasons.</td>
-      </tr>
-<?php
-  }
+        <?php
+        if (osc_is_writable($dir_fs_document_root) && osc_is_writable($dir_fs_document_root . 'admin')) {
+          ?>
+          <tr>
+            <td class="inputField"><?php echo 'Administration Directory Name<br />' . osc_draw_input_field('CFG_ADMIN_DIRECTORY', 'admin', 'class="text" required'); ?></td>
+            <td class="inputDescription">This is the directory where the administration section will be installed. You should change this for security reasons.</td>
+          </tr>
+          <?php
+        }
+        ?>
+        <tr>
+          <td class="inputField"><?php echo 'Time Zone<br />' . osc_draw_time_zone_select_menu('CFG_TIME_ZONE'); ?></td>
+          <td class="inputDescription">The time zone to base the date and time on.</td>
+        </tr>
+      </table>
 
-  if (PHP_VERSION >= '5.2') {
-?>
-      <tr>
-        <td class="inputField"><?php echo 'Time Zone<br />' . osc_draw_time_zone_select_menu('CFG_TIME_ZONE'); ?></td>
-        <td class="inputDescription">The time zone to base the date and time on.</td>
-      </tr>
-<?php
-  }
-?>
+      <p><?php echo osc_draw_button('Continue', 'triangle-1-e', null, 'primary'); ?></p>
 
-    </table>
-
-    <p><?php echo osc_draw_button('Continue', 'triangle-1-e', null, 'primary'); ?></p>
-
-<?php
-  foreach ( $_POST as $key => $value ) {
-    if (($key != 'x') && ($key != 'y')) {
-      echo osc_draw_hidden_field($key, $value);
-    }
-  }
-?>
+      <?php
+      foreach ($_POST as $key => $value) {
+        if (($key != 'x') && ($key != 'y')) {
+          echo osc_draw_hidden_field($key, $value);
+        }
+      }
+      ?>
 
     </form>
   </div>
