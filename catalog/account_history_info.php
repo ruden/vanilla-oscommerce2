@@ -14,23 +14,23 @@ require('includes/application_top.php');
 
 if (!tep_session_is_registered('customer_id')) {
   $navigation->set_snapshot();
-  tep_redirect(tep_href_link('login.php', '', 'SSL'));
+  tep_redirect(tep_href_link('login.php'));
 }
 
 if (!isset($_GET['order_id']) || (isset($_GET['order_id']) && !is_numeric($_GET['order_id']))) {
-  tep_redirect(tep_href_link('account_history.php', '', 'SSL'));
+  tep_redirect(tep_href_link('account_history.php'));
 }
 
 $customer_info_query = tep_db_query("select o.customers_id from orders o, orders_status s where o.orders_id = '" . (int)$_GET['order_id'] . "' and o.orders_status = s.orders_status_id and s.language_id = '" . (int)$languages_id . "' and s.public_flag = '1'");
 $customer_info = tep_db_fetch_array($customer_info_query);
 if ($customer_info['customers_id'] != $customer_id) {
-  tep_redirect(tep_href_link('account_history.php', '', 'SSL'));
+  tep_redirect(tep_href_link('account_history.php'));
 }
 
 require('includes/languages/' . $language . '/account_history_info.php');
 
-$breadcrumb->add(NAVBAR_TITLE_1, tep_href_link('account.php', '', 'SSL'));
-$breadcrumb->add(NAVBAR_TITLE_2, tep_href_link('account_history.php', '', 'SSL'));
+$breadcrumb->add(NAVBAR_TITLE_1, tep_href_link('account.php'));
+$breadcrumb->add(NAVBAR_TITLE_2, tep_href_link('account_history.php'));
 $breadcrumb->add(sprintf(NAVBAR_TITLE_3, $_GET['order_id']), tep_href_link('account_history_info.php', 'order_id=' . $_GET['order_id'], 'SSL'));
 
 require('includes/classes/order.php');

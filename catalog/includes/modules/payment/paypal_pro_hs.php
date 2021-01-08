@@ -305,12 +305,12 @@
         $order_id = substr($cart_PayPal_Pro_HS_ID, strpos($cart_PayPal_Pro_HS_ID, '-')+1);
 
         $params = array('buyer_email' => $order->customer['email_address'],
-                        'cancel_return' => tep_href_link('checkout_payment.php', '', 'SSL'),
+                        'cancel_return' => tep_href_link('checkout_payment.php'),
                         'currency_code' => $currency,
                         'invoice' => $order_id,
                         'custom' => $customer_id,
                         'paymentaction' => OSCOM_APP_PAYPAL_HS_TRANSACTION_METHOD == '1' ? 'sale' : 'authorization',
-                        'return' => tep_href_link('checkout_process.php', '', 'SSL'),
+                        'return' => tep_href_link('checkout_process.php'),
                         'notify_url' => tep_href_link('ext/modules/payment/paypal/pro_hosted_ipn.php', '', 'SSL', false, false),
                         'shipping' => $this->_app->formatCurrencyRaw($order->info['shipping_cost']),
                         'tax' => $this->_app->formatCurrencyRaw($order->info['tax']),
@@ -592,7 +592,7 @@ EOD;
       tep_session_unregister('pphs_result');
       tep_session_unregister('pphs_key');
 
-      tep_redirect(tep_href_link('checkout_success.php', '', 'SSL'));
+      tep_redirect(tep_href_link('checkout_success.php'));
     }
 
     function after_process() {

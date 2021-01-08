@@ -63,7 +63,7 @@ if (tep_db_num_rows($downloads_query) > 0) {
     if (!strstr($PHP_SELF, 'account_history_info.php')) {
       ?>
 
-      <p><?php printf(FOOTER_DOWNLOAD, '<a href="' . tep_href_link('account.php', '', 'SSL') . '">' . HEADER_TITLE_MY_ACCOUNT . '</a>'); ?></p>
+      <p><?php printf(FOOTER_DOWNLOAD, '<a href="' . tep_href_link('account.php') . '">' . HEADER_TITLE_MY_ACCOUNT . '</a>'); ?></p>
 
       <?php
     } ?>

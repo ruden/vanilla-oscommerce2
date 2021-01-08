@@ -99,7 +99,7 @@ class cm_paypal_login {
   function preLogin() {
     global $paypal_login_access_token, $paypal_login_customer_id, $sendto, $billto;
 
-    $return_url = tep_href_link('login.php', '', 'SSL');
+    $return_url = tep_href_link('login.php');
 
     if (isset($_GET['code'])) {
       $paypal_login_customer_id = false;

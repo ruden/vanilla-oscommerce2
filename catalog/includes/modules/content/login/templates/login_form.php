@@ -14,7 +14,7 @@
     <?php echo tep_draw_password_field('password', null, 'id="password" class="form-control"'); ?>
   </div>
 
-  <div class="mb-3"><?php echo '<a href="' . tep_href_link('password_forgotten.php', '', 'SSL') . '">' . MODULE_CONTENT_LOGIN_TEXT_PASSWORD_FORGOTTEN . '</a>'; ?></div>
+  <div class="mb-3"><?php echo '<a href="' . tep_href_link('password_forgotten.php') . '">' . MODULE_CONTENT_LOGIN_TEXT_PASSWORD_FORGOTTEN . '</a>'; ?></div>
 
   <div class="text-end"><?php echo tep_draw_button(IMAGE_BUTTON_LOGIN, 'key', null, 'btn-primary'); ?></div>
 

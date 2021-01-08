@@ -254,7 +254,7 @@
 
             $sage_pay_server_nexturl = $return['NextURL'];
 
-            tep_redirect(tep_href_link('ext/modules/payment/sage_pay/checkout.php', '', 'SSL'));
+            tep_redirect(tep_href_link('ext/modules/payment/sage_pay/checkout.php'));
           }
         } else {
           $error = $this->getErrorMessageNumber($return['StatusDetail']);
@@ -291,7 +291,7 @@
 
         tep_session_unregister('sage_pay_server_nexturl');
 
-        tep_redirect(tep_href_link('ext/modules/payment/sage_pay/redirect.php', '', 'SSL'));
+        tep_redirect(tep_href_link('ext/modules/payment/sage_pay/redirect.php'));
       }
     }
 

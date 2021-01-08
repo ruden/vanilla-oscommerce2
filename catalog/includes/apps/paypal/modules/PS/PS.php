@@ -40,7 +40,7 @@
       }
 
       $this->_req_notes[] = $OSCOM_PayPal->getDef('module_ps_info_auto_return_url', array(
-        'auto_return_url' => tep_catalog_href_link('checkout_process.php', '', 'SSL')
+        'auto_return_url' => tep_catalog_href_link('checkout_process.php')
       ));
     }
 

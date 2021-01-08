@@ -15,7 +15,7 @@ require('includes/application_top.php');
 
 if (!tep_session_is_registered('customer_id')) {
   $navigation->set_snapshot();
-  tep_redirect(tep_href_link('login.php', '', 'SSL'));
+  tep_redirect(tep_href_link('login.php'));
 }
 
 if (defined('MODULE_PAYMENT_INSTALLED') && tep_not_null(MODULE_PAYMENT_INSTALLED) && in_array('sage_pay_direct.php', explode(';', MODULE_PAYMENT_INSTALLED))) {
@@ -27,10 +27,10 @@ if (defined('MODULE_PAYMENT_INSTALLED') && tep_not_null(MODULE_PAYMENT_INSTALLED
   $sage_pay_direct = new sage_pay_direct();
 
   if (!$sage_pay_direct->enabled) {
-    tep_redirect(tep_href_link('account.php', '', 'SSL'));
+    tep_redirect(tep_href_link('account.php'));
   }
 } else {
-  tep_redirect(tep_href_link('account.php', '', 'SSL'));
+  tep_redirect(tep_href_link('account.php'));
 }
 
 require('includes/languages/' . $language . '/modules/content/account/cm_account_sage_pay_cards.php');
@@ -38,7 +38,7 @@ require('includes/modules/content/account/cm_account_sage_pay_cards.php');
 $sage_pay_cards = new cm_account_sage_pay_cards();
 
 if (!$sage_pay_cards->isEnabled()) {
-  tep_redirect(tep_href_link('account.php', '', 'SSL'));
+  tep_redirect(tep_href_link('account.php'));
 }
 
 if (isset($_GET['action'])) {
@@ -54,11 +54,11 @@ if (isset($_GET['action'])) {
     }
   }
 
-  tep_redirect(tep_href_link('ext/modules/content/account/sage_pay/cards.php', '', 'SSL'));
+  tep_redirect(tep_href_link('ext/modules/content/account/sage_pay/cards.php'));
 }
 
-$breadcrumb->add(MODULE_CONTENT_ACCOUNT_SAGE_PAY_CARDS_NAVBAR_TITLE_1, tep_href_link('account.php', '', 'SSL'));
-$breadcrumb->add(MODULE_CONTENT_ACCOUNT_SAGE_PAY_CARDS_NAVBAR_TITLE_2, tep_href_link('ext/modules/content/account/sage_pay/cards.php', '', 'SSL'));
+$breadcrumb->add(MODULE_CONTENT_ACCOUNT_SAGE_PAY_CARDS_NAVBAR_TITLE_1, tep_href_link('account.php'));
+$breadcrumb->add(MODULE_CONTENT_ACCOUNT_SAGE_PAY_CARDS_NAVBAR_TITLE_2, tep_href_link('ext/modules/content/account/sage_pay/cards.php'));
 
 require('includes/template_top.php');
 ?>
@@ -108,7 +108,7 @@ if ($messageStack->size('cards') > 0) {
     </div>
 
     <div class="text-end">
-      <?php echo tep_draw_button(IMAGE_BUTTON_BACK, 'triangle-1-w', tep_href_link('account.php', '', 'SSL')); ?>
+      <?php echo tep_draw_button(IMAGE_BUTTON_BACK, 'triangle-1-w', tep_href_link('account.php')); ?>
     </div>
   </div>
 

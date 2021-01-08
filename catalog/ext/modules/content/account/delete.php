@@ -18,7 +18,7 @@ if (!tep_session_is_registered('customer_id')) {
 }
 
 if (defined('MODULE_CONTENT_ACCOUNT_DELETE_STATUS') && MODULE_CONTENT_ACCOUNT_DELETE_STATUS == 'False') {
-  tep_redirect(tep_href_link('account.php', '', 'SSL'));
+  tep_redirect(tep_href_link('account.php'));
 }
 
 require('includes/languages/' . $language . '/modules/content/account/cm_account_delete.php');

@@ -16,7 +16,7 @@ require('includes/languages/' . $language . '/product_reviews_write.php');
 
 if (!tep_session_is_registered('customer_id')) {
   $navigation->set_snapshot();
-  tep_redirect(tep_href_link('login.php', '', 'SSL'));
+  tep_redirect(tep_href_link('login.php'));
 }
 
 $valid_product = false;

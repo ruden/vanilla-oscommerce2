@@ -15,7 +15,7 @@ require('includes/application_top.php');
 // if the customer is not logged on, redirect them to the login page
 if (!tep_session_is_registered('customer_id')) {
   $navigation->set_snapshot(array('mode' => 'SSL', 'page' => 'checkout_payment.php'));
-  tep_redirect(tep_href_link('login.php', '', 'SSL'));
+  tep_redirect(tep_href_link('login.php'));
 }
 
 // if there is nothing in the customers cart, redirect them to the shopping cart page
@@ -26,13 +26,13 @@ if ($cart->count_contents() < 1) {
 // avoid hack attempts during the checkout procedure by checking the internal cartID
 if (isset($cart->cartID) && tep_session_is_registered('cartID')) {
   if ($cart->cartID != $cartID) {
-    tep_redirect(tep_href_link('checkout_shipping.php', '', 'SSL'));
+    tep_redirect(tep_href_link('checkout_shipping.php'));
   }
 }
 
 // if no shipping method has been selected, redirect the customer to the shipping method selection page
 if (!tep_session_is_registered('shipping')) {
-  tep_redirect(tep_href_link('checkout_shipping.php', '', 'SSL'));
+  tep_redirect(tep_href_link('checkout_shipping.php'));
 }
 
 if (!tep_session_is_registered('payment')) tep_session_register('payment');
@@ -84,7 +84,7 @@ if (STOCK_CHECK == 'true') {
 
 require('includes/languages/' . $language . '/checkout_confirmation.php');
 
-$breadcrumb->add(NAVBAR_TITLE_1, tep_href_link('checkout_shipping.php', '', 'SSL'));
+$breadcrumb->add(NAVBAR_TITLE_1, tep_href_link('checkout_shipping.php'));
 $breadcrumb->add(NAVBAR_TITLE_2);
 
 require('includes/template_top.php');
@@ -100,7 +100,7 @@ if ($messageStack->size('checkout_confirmation') > 0) {
 if (isset($$payment->form_action_url)) {
   $form_action_url = $$payment->form_action_url;
 } else {
-  $form_action_url = tep_href_link('checkout_process.php', '', 'SSL');
+  $form_action_url = tep_href_link('checkout_process.php');
 }
 
 echo tep_draw_form('checkout_confirmation', $form_action_url, 'post');
@@ -119,7 +119,7 @@ echo tep_draw_form('checkout_confirmation', $form_action_url, 'post');
 
           <div class="mb-3">
 
-            <?php echo '<span class="fw-bold">' . HEADING_DELIVERY_ADDRESS . '</span> <a href="' . tep_href_link('checkout_shipping_address.php', '', 'SSL') . '"><span>(' . TEXT_EDIT . ')</span></a>'; ?>
+            <?php echo '<span class="fw-bold">' . HEADING_DELIVERY_ADDRESS . '</span> <a href="' . tep_href_link('checkout_shipping_address.php') . '"><span>(' . TEXT_EDIT . ')</span></a>'; ?>
 
             <p><?php echo tep_address_format($order->delivery['format_id'], $order->delivery, 1, ' ', '<br />'); ?></p>
 
@@ -127,7 +127,7 @@ echo tep_draw_form('checkout_confirmation', $form_action_url, 'post');
             if ($order->info['shipping_method']) {
               ?>
 
-              <?php echo '<span class="fw-bold">' . HEADING_SHIPPING_METHOD . '</span> <a href="' . tep_href_link('checkout_shipping.php', '', 'SSL') . '"><span>(' . TEXT_EDIT . ')</span></a>'; ?>
+              <?php echo '<span class="fw-bold">' . HEADING_SHIPPING_METHOD . '</span> <a href="' . tep_href_link('checkout_shipping.php') . '"><span>(' . TEXT_EDIT . ')</span></a>'; ?>
 
               <p><?php echo $order->info['shipping_method']; ?></p>
 
@@ -146,11 +146,11 @@ echo tep_draw_form('checkout_confirmation', $form_action_url, 'post');
         <h2><?php echo HEADING_BILLING_INFORMATION; ?></h2>
 
         <div class="mb-3">
-          <?php echo '<strong>' . HEADING_BILLING_ADDRESS . '</strong> <a href="' . tep_href_link('checkout_payment_address.php', '', 'SSL') . '"><span>(' . TEXT_EDIT . ')</span></a>'; ?>
+          <?php echo '<strong>' . HEADING_BILLING_ADDRESS . '</strong> <a href="' . tep_href_link('checkout_payment_address.php') . '"><span>(' . TEXT_EDIT . ')</span></a>'; ?>
 
           <p><?php echo tep_address_format($order->billing['format_id'], $order->billing, 1, ' ', '<br />'); ?></p>
 
-          <?php echo '<strong>' . HEADING_PAYMENT_METHOD . '</strong> <a href="' . tep_href_link('checkout_payment.php', '', 'SSL') . '"><span>(' . TEXT_EDIT . ')</span></a>'; ?>
+          <?php echo '<strong>' . HEADING_PAYMENT_METHOD . '</strong> <a href="' . tep_href_link('checkout_payment.php') . '"><span>(' . TEXT_EDIT . ')</span></a>'; ?>
 
           <p><?php echo $order->info['payment_method']; ?></p>
         </div>
@@ -266,7 +266,7 @@ echo tep_draw_form('checkout_confirmation', $form_action_url, 'post');
     if (tep_not_null($order->info['comments'])) {
       ?>
 
-      <h2><?php echo HEADING_ORDER_COMMENTS . ' <a href="' . tep_href_link('checkout_payment.php', '', 'SSL') . '"><span class="h6">(' . TEXT_EDIT . ')</span></a>'; ?></h2>
+      <h2><?php echo HEADING_ORDER_COMMENTS . ' <a href="' . tep_href_link('checkout_payment.php') . '"><span class="h6">(' . TEXT_EDIT . ')</span></a>'; ?></h2>
 
       <div class="mb-3">
         <?php echo nl2br(tep_output_string_protected($order->info['comments'])) . tep_draw_hidden_field('comments', $order->info['comments']); ?>

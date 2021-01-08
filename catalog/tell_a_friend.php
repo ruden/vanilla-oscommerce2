@@ -14,7 +14,7 @@ require('includes/application_top.php');
 
 if (!tep_session_is_registered('customer_id') && (ALLOW_GUEST_TO_TELL_A_FRIEND == 'false')) {
   $navigation->set_snapshot();
-  tep_redirect(tep_href_link('login.php', '', 'SSL'));
+  tep_redirect(tep_href_link('login.php'));
 }
 
 $valid_product = false;
@@ -146,7 +146,7 @@ if ($messageStack->size('friend') > 0) {
       <?php echo tep_draw_textarea_field('message', null, 'class="form-control" rows="5"'); ?>
     </div>
     <div class="btn-toolbar justify-content-between">
-      <?php echo tep_draw_button(IMAGE_BUTTON_BACK, 'triangle-1-w', tep_href_link('account.php', '', 'SSL'), 'btn-light'); ?>
+      <?php echo tep_draw_button(IMAGE_BUTTON_BACK, 'triangle-1-w', tep_href_link('account.php'), 'btn-light'); ?>
       <?php echo tep_draw_button(IMAGE_BUTTON_CONTINUE, 'triangle-1-e', null, 'btn-primary'); ?>
     </div>
 

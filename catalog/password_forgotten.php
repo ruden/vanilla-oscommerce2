@@ -51,8 +51,8 @@ if (isset($_GET['action']) && ($_GET['action'] == 'process') && isset($_POST['fo
   }
 }
 
-$breadcrumb->add(NAVBAR_TITLE_1, tep_href_link('login.php', '', 'SSL'));
-$breadcrumb->add(NAVBAR_TITLE_2, tep_href_link('password_forgotten.php', '', 'SSL'));
+$breadcrumb->add(NAVBAR_TITLE_1, tep_href_link('login.php'));
+$breadcrumb->add(NAVBAR_TITLE_2, tep_href_link('password_forgotten.php'));
 
 require('includes/template_top.php');
 ?>
@@ -84,7 +84,7 @@ if ($password_reset_initiated == true) {
       <?php echo tep_draw_input_field('email_address', null, 'id="email-address" class="form-control"', 'email'); ?>
     </div>
     <div class="btn-toolbar justify-content-between">
-      <?php echo tep_draw_button(IMAGE_BUTTON_BACK, 'triangle-1-w', tep_href_link('login.php', '', 'SSL'), 'btn-light'); ?>
+      <?php echo tep_draw_button(IMAGE_BUTTON_BACK, 'triangle-1-w', tep_href_link('login.php'), 'btn-light'); ?>
       <?php echo tep_draw_button(IMAGE_BUTTON_CONTINUE, 'triangle-1-e', null, 'btn-primary'); ?>
     </div>
 

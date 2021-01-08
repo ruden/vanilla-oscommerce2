@@ -15,7 +15,7 @@ require('includes/application_top.php');
 // if the customer is not logged on, redirect them to the login page
 if (!tep_session_is_registered('customer_id')) {
   $navigation->set_snapshot();
-  tep_redirect(tep_href_link('login.php', '', 'SSL'));
+  tep_redirect(tep_href_link('login.php'));
 }
 
 // if there is nothing in the customers cart, redirect them to the shopping cart page
@@ -36,7 +36,7 @@ if ($order->content_type == 'virtual') {
   $shipping = false;
   if (!tep_session_is_registered('sendto')) tep_session_register('sendto');
   $sendto = false;
-  tep_redirect(tep_href_link('checkout_payment.php', '', 'SSL'));
+  tep_redirect(tep_href_link('checkout_payment.php'));
 }
 
 $error = false;
@@ -162,7 +162,7 @@ if (isset($_POST['action']) && ($_POST['action'] == 'submit') && isset($_POST['f
 
       if (tep_session_is_registered('shipping')) tep_session_unregister('shipping');
 
-      tep_redirect(tep_href_link('checkout_shipping.php', '', 'SSL'));
+      tep_redirect(tep_href_link('checkout_shipping.php'));
     }
 // process the selected shipping destination
   } elseif (isset($_POST['address'])) {
@@ -184,7 +184,7 @@ if (isset($_POST['action']) && ($_POST['action'] == 'submit') && isset($_POST['f
 
     if ($check_address['total'] == '1') {
       if ($reset_shipping == true) tep_session_unregister('shipping');
-      tep_redirect(tep_href_link('checkout_shipping.php', '', 'SSL'));
+      tep_redirect(tep_href_link('checkout_shipping.php'));
     } else {
       tep_session_unregister('sendto');
     }
@@ -192,7 +192,7 @@ if (isset($_POST['action']) && ($_POST['action'] == 'submit') && isset($_POST['f
     if (!tep_session_is_registered('sendto')) tep_session_register('sendto');
     $sendto = $customer_default_address_id;
 
-    tep_redirect(tep_href_link('checkout_shipping.php', '', 'SSL'));
+    tep_redirect(tep_href_link('checkout_shipping.php'));
   }
 }
 
@@ -201,8 +201,8 @@ if (!tep_session_is_registered('sendto')) {
   $sendto = $customer_default_address_id;
 }
 
-$breadcrumb->add(NAVBAR_TITLE_1, tep_href_link('checkout_shipping.php', '', 'SSL'));
-$breadcrumb->add(NAVBAR_TITLE_2, tep_href_link('checkout_shipping_address.php', '', 'SSL'));
+$breadcrumb->add(NAVBAR_TITLE_1, tep_href_link('checkout_shipping.php'));
+$breadcrumb->add(NAVBAR_TITLE_2, tep_href_link('checkout_shipping_address.php'));
 
 $addresses_count = tep_count_customer_address_book_entries();
 
@@ -265,7 +265,7 @@ if ($messageStack->size('checkout_address') > 0) {
 }
 ?>
 
-<?php echo tep_draw_form('checkout_address', tep_href_link('checkout_shipping_address.php', '', 'SSL'), 'post', 'onsubmit="return check_form_optional(checkout_address);"', true); ?>
+<?php echo tep_draw_form('checkout_address', tep_href_link('checkout_shipping_address.php'), 'post', 'onsubmit="return check_form_optional(checkout_address);"', true); ?>
 
   <div class="mb-5">
 
@@ -339,7 +339,7 @@ if ($messageStack->size('checkout_address') > 0) {
         </div>
 
         <div class="btn-toolbar justify-content-between mb-3">
-          <?php echo tep_draw_button(IMAGE_BUTTON_BACK, 'triangle-1-w', tep_href_link(($process == true ? 'checkout_shipping_address.php' : 'checkout_shipping.php'), '', 'SSL'), 'btn-light'); ?>
+          <?php echo tep_draw_button(IMAGE_BUTTON_BACK, 'triangle-1-w', tep_href_link(($process == true ? 'checkout_shipping_address.php' : 'checkout_shipping.php')), 'btn-light'); ?>
           <?php echo tep_draw_hidden_field('action', 'submit') . tep_draw_button(IMAGE_BUTTON_CONTINUE, 'triangle-1-e', null, 'btn-primary'); ?>
         </div>
 
@@ -367,7 +367,7 @@ if ($messageStack->size('checkout_address') > 0) {
     ?>
 
     <div class="btn-toolbar justify-content-between">
-      <?php echo tep_draw_button(IMAGE_BUTTON_BACK, 'triangle-1-w', tep_href_link(($process == true ? 'checkout_shipping_address.php' : 'checkout_shipping.php'), '', 'SSL'), 'btn-light'); ?>
+      <?php echo tep_draw_button(IMAGE_BUTTON_BACK, 'triangle-1-w', tep_href_link(($process == true ? 'checkout_shipping_address.php' : 'checkout_shipping.php')), 'btn-light'); ?>
       <?php echo tep_draw_hidden_field('action', 'submit') . tep_draw_button(IMAGE_BUTTON_CONTINUE, 'triangle-1-e', null, 'btn-primary'); ?>
     </div>
 

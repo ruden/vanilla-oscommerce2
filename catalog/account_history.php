@@ -14,13 +14,13 @@ require('includes/application_top.php');
 
 if (!tep_session_is_registered('customer_id')) {
   $navigation->set_snapshot();
-  tep_redirect(tep_href_link('login.php', '', 'SSL'));
+  tep_redirect(tep_href_link('login.php'));
 }
 
 require('includes/languages/' . $language . '/account_history.php');
 
-$breadcrumb->add(NAVBAR_TITLE_1, tep_href_link('account.php', '', 'SSL'));
-$breadcrumb->add(NAVBAR_TITLE_2, tep_href_link('account_history.php', '', 'SSL'));
+$breadcrumb->add(NAVBAR_TITLE_1, tep_href_link('account.php'));
+$breadcrumb->add(NAVBAR_TITLE_2, tep_href_link('account_history.php'));
 
 require('includes/template_top.php');
 ?>
@@ -103,7 +103,7 @@ require('includes/template_top.php');
     }
     ?>
 
-    <?php echo tep_draw_button(IMAGE_BUTTON_BACK, 'triangle-1-w', tep_href_link('account.php', '', 'SSL'), 'btn-light'); ?>
+    <?php echo tep_draw_button(IMAGE_BUTTON_BACK, 'triangle-1-w', tep_href_link('account.php'), 'btn-light'); ?>
 
   </div>
 

@@ -526,7 +526,7 @@
 
       tep_session_unregister('cart_RBS_Worldpay_Hosted_ID');
 
-      tep_redirect(tep_href_link('checkout_success.php', '', 'SSL'));
+      tep_redirect(tep_href_link('checkout_success.php'));
     }
 
     function after_process() {

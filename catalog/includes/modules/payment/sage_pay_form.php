@@ -124,7 +124,7 @@ class sage_pay_form {
                    'Amount' => $this->format_raw($order->info['total']),
                    'Currency' => $currency,
                    'Description' => substr(STORE_NAME, 0, 100),
-                   'SuccessURL' => tep_href_link('checkout_process.php', '', 'SSL'),
+                   'SuccessURL' => tep_href_link('checkout_process.php'),
                    'FailureURL' => tep_href_link('checkout_payment.php', 'payment_error=' . $this->code, 'SSL'),
                    'CustomerName' => substr($order->billing['firstname'] . ' ' . $order->billing['lastname'], 0, 100),
                    'CustomerEMail' => substr($order->customer['email_address'], 0, 255),

@@ -65,7 +65,7 @@ class cm_account_stripe_cards {
     global $oscTemplate;
 
     $oscTemplate->_data['account']['account']['links']['stripe_cards'] = array('title' => $this->public_title,
-                                                                               'link' => tep_href_link('ext/modules/content/account/stripe/cards.php', '', 'SSL'),
+                                                                               'link' => tep_href_link('ext/modules/content/account/stripe/cards.php'),
                                                                                'icon' => 'newwin');
   }
 

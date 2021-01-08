@@ -70,7 +70,7 @@ if (is_int($login_customer_id) && ($login_customer_id > 0)) {
 
 require('includes/languages/' . $language . '/login.php');
 
-$breadcrumb->add(NAVBAR_TITLE, tep_href_link('login.php', '', 'SSL'));
+$breadcrumb->add(NAVBAR_TITLE, tep_href_link('login.php'));
 
 require('includes/template_top.php');
 ?>

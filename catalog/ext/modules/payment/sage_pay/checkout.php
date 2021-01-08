@@ -16,7 +16,7 @@
 // if the customer is not logged on, redirect them to the login page
   if (!tep_session_is_registered('customer_id')) {
     $navigation->set_snapshot(array('mode' => 'SSL', 'page' => 'checkout_payment.php'));
-    tep_redirect(tep_href_link('login.php', '', 'SSL'));
+    tep_redirect(tep_href_link('login.php'));
   }
 
 // if there is nothing in the customers cart, redirect them to the shopping cart page
@@ -27,17 +27,17 @@
 // avoid hack attempts during the checkout procedure by checking the internal cartID
   if (isset($cart->cartID) && tep_session_is_registered('cartID')) {
     if ($cart->cartID != $cartID) {
-      tep_redirect(tep_href_link('checkout_shipping.php', '', 'SSL'));
+      tep_redirect(tep_href_link('checkout_shipping.php'));
     }
   }
 
 // if no shipping method has been selected, redirect the customer to the shipping method selection page
   if (!tep_session_is_registered('shipping')) {
-    tep_redirect(tep_href_link('checkout_shipping.php', '', 'SSL'));
+    tep_redirect(tep_href_link('checkout_shipping.php'));
   }
 
   if (!tep_session_is_registered('payment') || (($payment != 'sage_pay_direct') && ($payment != 'sage_pay_server')) || (($payment == 'sage_pay_server') && !tep_session_is_registered('sage_pay_server_nexturl'))) {
-    tep_redirect(tep_href_link('checkout_payment.php', '', 'SSL'));
+    tep_redirect(tep_href_link('checkout_payment.php'));
   }
 
 // load the selected payment module
@@ -81,11 +81,11 @@
 
   require('includes/languages/' . $language . '/checkout_confirmation.php');
 
-  $breadcrumb->add(NAVBAR_TITLE_1, tep_href_link('checkout_shipping.php', '', 'SSL'));
+  $breadcrumb->add(NAVBAR_TITLE_1, tep_href_link('checkout_shipping.php'));
   $breadcrumb->add(NAVBAR_TITLE_2);
 
   if ($payment == 'sage_pay_direct') {
-    $iframe_url = tep_href_link('ext/modules/payment/sage_pay/direct_3dauth.php', '', 'SSL');
+    $iframe_url = tep_href_link('ext/modules/payment/sage_pay/direct_3dauth.php');
   } else {
     $iframe_url = $sage_pay_server_nexturl;
   }

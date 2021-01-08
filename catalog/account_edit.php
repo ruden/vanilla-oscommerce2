@@ -14,7 +14,7 @@ require('includes/application_top.php');
 
 if (!tep_session_is_registered('customer_id')) {
   $navigation->set_snapshot();
-  tep_redirect(tep_href_link('login.php', '', 'SSL'));
+  tep_redirect(tep_href_link('login.php'));
 }
 
 // needs to be included earlier to set the success message in the messageStack
@@ -109,15 +109,15 @@ if (isset($_POST['action']) && ($_POST['action'] == 'process') && isset($_POST['
 
     $messageStack->add_session('account', SUCCESS_ACCOUNT_UPDATED, 'success');
 
-    tep_redirect(tep_href_link('account.php', '', 'SSL'));
+    tep_redirect(tep_href_link('account.php'));
   }
 }
 
 $account_query = tep_db_query("select customers_gender, customers_firstname, customers_lastname, customers_dob, customers_email_address, customers_telephone, customers_fax from customers where customers_id = '" . (int)$customer_id . "'");
 $account = tep_db_fetch_array($account_query);
 
-$breadcrumb->add(NAVBAR_TITLE_1, tep_href_link('account.php', '', 'SSL'));
-$breadcrumb->add(NAVBAR_TITLE_2, tep_href_link('account_edit.php', '', 'SSL'));
+$breadcrumb->add(NAVBAR_TITLE_1, tep_href_link('account.php'));
+$breadcrumb->add(NAVBAR_TITLE_2, tep_href_link('account_edit.php'));
 
 require('includes/template_top.php');
 require('includes/form_check.js.php');
@@ -131,7 +131,7 @@ if ($messageStack->size('account_edit') > 0) {
 }
 ?>
 
-<?php echo tep_draw_form('account_edit', tep_href_link('account_edit.php', '', 'SSL'), 'post', 'onsubmit="return check_form(account_edit);"', true) . tep_draw_hidden_field('action', 'process'); ?>
+<?php echo tep_draw_form('account_edit', tep_href_link('account_edit.php'), 'post', 'onsubmit="return check_form(account_edit);"', true) . tep_draw_hidden_field('action', 'process'); ?>
 
   <div class="col-lg-6 mb-5">
     <div class="text-end text-danger small"><?php echo FORM_REQUIRED_INFORMATION; ?></div>
@@ -200,7 +200,7 @@ if ($messageStack->size('account_edit') > 0) {
       <?php echo tep_draw_input_field('fax', $account['customers_fax'], 'id="fax" class="form-control"'); ?>
     </div>
     <div class="btn-toolbar justify-content-between">
-      <?php echo tep_draw_button(IMAGE_BUTTON_BACK, 'triangle-1-w', tep_href_link('account.php', '', 'SSL'), 'btn-light'); ?>
+      <?php echo tep_draw_button(IMAGE_BUTTON_BACK, 'triangle-1-w', tep_href_link('account.php'), 'btn-light'); ?>
       <?php echo tep_draw_button(IMAGE_BUTTON_CONTINUE, 'triangle-1-e', null, 'btn-primary'); ?>
     </div>
 

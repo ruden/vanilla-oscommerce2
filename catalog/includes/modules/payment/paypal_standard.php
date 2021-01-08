@@ -365,8 +365,8 @@
                           'custom' => $customer_id,
                           'notify_url' => tep_href_link('ext/modules/payment/paypal/standard_ipn.php', (isset($ipn_language) ? 'language=' . $ipn_language : ''), 'SSL', false, false),
                           'rm' => '2',
-                          'return' => tep_href_link('checkout_process.php', '', 'SSL'),
-                          'cancel_return' => tep_href_link('checkout_payment.php', '', 'SSL'),
+                          'return' => tep_href_link('checkout_process.php'),
+                          'cancel_return' => tep_href_link('checkout_payment.php'),
                           'bn' => $this->_app->getIdentifier(),
                           'paymentaction' => (OSCOM_APP_PAYPAL_PS_TRANSACTION_METHOD == '1') ? 'sale' : 'authorization');
 
@@ -822,7 +822,7 @@
 
       tep_session_unregister('cart_PayPal_Standard_ID');
 
-      tep_redirect(tep_href_link('checkout_success.php', '', 'SSL'));
+      tep_redirect(tep_href_link('checkout_success.php'));
     }
 
     function get_error() {

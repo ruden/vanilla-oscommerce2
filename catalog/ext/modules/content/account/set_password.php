@@ -14,18 +14,18 @@ chdir('../../../../');
 require('includes/application_top.php');
 
 if (!tep_session_is_registered('customer_id')) {
-  tep_redirect(tep_href_link('login.php', '', 'SSL'));
+  tep_redirect(tep_href_link('login.php'));
 }
 
 if (MODULE_CONTENT_ACCOUNT_SET_PASSWORD_ALLOW_PASSWORD != 'True') {
-  tep_redirect(tep_href_link('account.php', '', 'SSL'));
+  tep_redirect(tep_href_link('account.php'));
 }
 
 $check_customer_query = tep_db_query("select customers_password from customers where customers_id = '" . (int)$customer_id . "'");
 $check_customer = tep_db_fetch_array($check_customer_query);
 
 if (!empty($check_customer['customers_password'])) {
-  tep_redirect(tep_href_link('account.php', '', 'SSL'));
+  tep_redirect(tep_href_link('account.php'));
 }
 
 // needs to be included earlier to set the success message in the messageStack
@@ -54,12 +54,12 @@ if (isset($_POST['action']) && $_POST['action'] == 'process' && isset($_POST['fo
 
     $messageStack->add_session('account', MODULE_CONTENT_ACCOUNT_SET_PASSWORD_SUCCESS_PASSWORD_SET, 'success');
 
-    tep_redirect(tep_href_link('account.php', '', 'SSL'));
+    tep_redirect(tep_href_link('account.php'));
   }
 }
 
-$breadcrumb->add(MODULE_CONTENT_ACCOUNT_SET_PASSWORD_NAVBAR_TITLE_1, tep_href_link('account.php', '', 'SSL'));
-$breadcrumb->add(MODULE_CONTENT_ACCOUNT_SET_PASSWORD_NAVBAR_TITLE_2, tep_href_link('ext/modules/content/account/set_password.php', '', 'SSL'));
+$breadcrumb->add(MODULE_CONTENT_ACCOUNT_SET_PASSWORD_NAVBAR_TITLE_1, tep_href_link('account.php'));
+$breadcrumb->add(MODULE_CONTENT_ACCOUNT_SET_PASSWORD_NAVBAR_TITLE_2, tep_href_link('ext/modules/content/account/set_password.php'));
 
 require('includes/template_top.php');
 require('includes/form_check.js.php');
@@ -73,7 +73,7 @@ if ($messageStack->size('account_password') > 0) {
 }
 ?>
 
-<?php echo tep_draw_form('account_password', tep_href_link('ext/modules/content/account/set_password.php', '', 'SSL'), 'post', 'onsubmit="return check_form(account_password);"', true) . tep_draw_hidden_field('action', 'process'); ?>
+<?php echo tep_draw_form('account_password', tep_href_link('ext/modules/content/account/set_password.php'), 'post', 'onsubmit="return check_form(account_password);"', true) . tep_draw_hidden_field('action', 'process'); ?>
 
   <div class="col-lg-6 mb-5">
     <div class="text-end text-danger small"><?php echo FORM_REQUIRED_INFORMATION; ?></div>
@@ -87,7 +87,7 @@ if ($messageStack->size('account_password') > 0) {
       <?php echo tep_draw_password_field('password_confirmation', null, 'id="password_confirmation" class="form-control"'); ?>
     </div>
     <div class="btn-toolbar justify-content-between">
-      <?php echo tep_draw_button(IMAGE_BUTTON_BACK, 'triangle-1-w', tep_href_link('account.php', '', 'SSL'), 'btn-light'); ?>
+      <?php echo tep_draw_button(IMAGE_BUTTON_BACK, 'triangle-1-w', tep_href_link('account.php'), 'btn-light'); ?>
       <?php echo tep_draw_button(IMAGE_BUTTON_CONTINUE, 'triangle-1-e', null, 'btn-primary'); ?>
     </div>
 

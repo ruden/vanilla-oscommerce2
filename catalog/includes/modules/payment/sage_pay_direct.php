@@ -274,7 +274,7 @@ class sage_pay_direct {
 
           $transaction_response = $this->sendTransactionToGateway($gateway_url, $post_string);
         } elseif (isset($_POST['StatusDetail']) && ($_POST['StatusDetail'] == 'Paypal transaction cancelled by client.')) {
-          tep_redirect(tep_href_link('checkout_confirmation.php', '', 'SSL'));
+          tep_redirect(tep_href_link('checkout_confirmation.php'));
         }
       }
     } else {
@@ -526,7 +526,7 @@ class sage_pay_direct {
       tep_session_register('sage_pay_direct_md');
       $sage_pay_direct_md = $sage_pay_response['MD'];
 
-      tep_redirect(tep_href_link('ext/modules/payment/sage_pay/checkout.php', '', 'SSL'));
+      tep_redirect(tep_href_link('ext/modules/payment/sage_pay/checkout.php'));
     }
 
     if ($sage_pay_response['Status'] == 'PPREDIRECT') {

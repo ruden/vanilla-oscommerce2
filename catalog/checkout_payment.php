@@ -15,7 +15,7 @@ require('includes/application_top.php');
 // if the customer is not logged on, redirect them to the login page
 if (!tep_session_is_registered('customer_id')) {
   $navigation->set_snapshot();
-  tep_redirect(tep_href_link('login.php', '', 'SSL'));
+  tep_redirect(tep_href_link('login.php'));
 }
 
 // if there is nothing in the customers cart, redirect them to the shopping cart page
@@ -25,13 +25,13 @@ if ($cart->count_contents() < 1) {
 
 // if no shipping method has been selected, redirect the customer to the shipping method selection page
 if (!tep_session_is_registered('shipping')) {
-  tep_redirect(tep_href_link('checkout_shipping.php', '', 'SSL'));
+  tep_redirect(tep_href_link('checkout_shipping.php'));
 }
 
 // avoid hack attempts during the checkout procedure by checking the internal cartID
 if (isset($cart->cartID) && tep_session_is_registered('cartID')) {
   if ($cart->cartID != $cartID) {
-    tep_redirect(tep_href_link('checkout_shipping.php', '', 'SSL'));
+    tep_redirect(tep_href_link('checkout_shipping.php'));
   }
 }
 
@@ -80,8 +80,8 @@ $payment_modules = new payment;
 
 require('includes/languages/' . $language . '/checkout_payment.php');
 
-$breadcrumb->add(NAVBAR_TITLE_1, tep_href_link('checkout_shipping.php', '', 'SSL'));
-$breadcrumb->add(NAVBAR_TITLE_2, tep_href_link('checkout_payment.php', '', 'SSL'));
+$breadcrumb->add(NAVBAR_TITLE_1, tep_href_link('checkout_shipping.php'));
+$breadcrumb->add(NAVBAR_TITLE_2, tep_href_link('checkout_payment.php'));
 
 require('includes/template_top.php');
 ?>
@@ -134,7 +134,7 @@ require('includes/template_top.php');
     </div>
   </div>
 
-<?php echo tep_draw_form('checkout_payment', tep_href_link('checkout_confirmation.php', '', 'SSL'), 'post', 'onsubmit="return check_form();"', true); ?>
+<?php echo tep_draw_form('checkout_payment', tep_href_link('checkout_confirmation.php'), 'post', 'onsubmit="return check_form();"', true); ?>
 
   <div class="mb-5">
 
@@ -163,7 +163,7 @@ require('includes/template_top.php');
 
       <p><?php echo TEXT_SELECTED_BILLING_DESTINATION; ?></p>
 
-      <?php echo tep_draw_button(IMAGE_BUTTON_CHANGE_ADDRESS, 'home', tep_href_link('checkout_payment_address.php', '', 'SSL')); ?>
+      <?php echo tep_draw_button(IMAGE_BUTTON_CHANGE_ADDRESS, 'home', tep_href_link('checkout_payment_address.php')); ?>
     </div>
 
     <div class="clearfix"></div>
@@ -281,7 +281,7 @@ require('includes/template_top.php');
       <?php echo tep_draw_textarea_field('comments', $comments, 'class="form-control" rows="3"'); ?>
     </div>
     <div class="btn-toolbar justify-content-between">
-      <?php echo tep_draw_button(IMAGE_BUTTON_BACK, 'triangle-1-w', tep_href_link('checkout_shipping.php', '', 'SSL'), 'btn-light'); ?>
+      <?php echo tep_draw_button(IMAGE_BUTTON_BACK, 'triangle-1-w', tep_href_link('checkout_shipping.php'), 'btn-light'); ?>
       <?php echo tep_draw_button(IMAGE_BUTTON_CONTINUE, 'triangle-1-e', null, 'btn-primary'); ?>
     </div>
 

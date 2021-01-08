@@ -14,13 +14,13 @@ require('includes/application_top.php');
 
 if (!tep_session_is_registered('customer_id')) {
   $navigation->set_snapshot();
-  tep_redirect(tep_href_link('login.php', '', 'SSL'));
+  tep_redirect(tep_href_link('login.php'));
 }
 
 require('includes/languages/' . $language . '/address_book.php');
 
-$breadcrumb->add(NAVBAR_TITLE_1, tep_href_link('account.php', '', 'SSL'));
-$breadcrumb->add(NAVBAR_TITLE_2, tep_href_link('address_book.php', '', 'SSL'));
+$breadcrumb->add(NAVBAR_TITLE_1, tep_href_link('account.php'));
+$breadcrumb->add(NAVBAR_TITLE_2, tep_href_link('address_book.php'));
 
 require('includes/template_top.php');
 ?>
@@ -70,13 +70,13 @@ if ($messageStack->size('addressbook') > 0) {
 
     <div class="btn-toolbar justify-content-between">
 
-      <?php echo tep_draw_button(IMAGE_BUTTON_BACK, 'triangle-1-w', tep_href_link('account.php', '', 'SSL'), 'btn-light'); ?>
+      <?php echo tep_draw_button(IMAGE_BUTTON_BACK, 'triangle-1-w', tep_href_link('account.php'), 'btn-light'); ?>
 
       <?php
       if (tep_count_customer_address_book_entries() < MAX_ADDRESS_BOOK_ENTRIES) {
         ?>
 
-        <?php echo tep_draw_button(IMAGE_BUTTON_ADD_ADDRESS, 'home', tep_href_link('address_book_process.php', '', 'SSL'), 'btn-primary'); ?>
+        <?php echo tep_draw_button(IMAGE_BUTTON_ADD_ADDRESS, 'home', tep_href_link('address_book_process.php'), 'btn-primary'); ?>
 
         <?php
       }

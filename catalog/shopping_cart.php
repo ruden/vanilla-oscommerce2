@@ -126,7 +126,7 @@ require('includes/template_top.php');
       }
       ?>
 
-      <div class="text-end"><?php echo tep_draw_button(IMAGE_BUTTON_CHECKOUT, 'triangle-1-e', tep_href_link('checkout_shipping.php', '', 'SSL'), 'btn-primary'); ?></div>
+      <div class="text-end"><?php echo tep_draw_button(IMAGE_BUTTON_CHECKOUT, 'triangle-1-e', tep_href_link('checkout_shipping.php'), 'btn-primary'); ?></div>
 
       <?php echo $OSCOM_Hooks->call('shopping_cart', 'displayAlternativeCheckoutButtons'); ?>
 

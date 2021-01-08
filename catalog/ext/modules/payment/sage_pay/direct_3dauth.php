@@ -16,15 +16,15 @@
 // if the customer is not logged on, redirect them to the login page
   if (!tep_session_is_registered('customer_id')) {
     $navigation->set_snapshot(array('mode' => 'SSL', 'page' => 'checkout_payment.php'));
-    tep_redirect(tep_href_link('login.php', '', 'SSL'));
+    tep_redirect(tep_href_link('login.php'));
   }
 
   if (!tep_session_is_registered('sage_pay_direct_acsurl')) {
-    tep_redirect(tep_href_link('checkout_payment.php', '', 'SSL'));
+    tep_redirect(tep_href_link('checkout_payment.php'));
   }
 
   if (!tep_session_is_registered('payment') || ($payment != 'sage_pay_direct')) {
-    tep_redirect(tep_href_link('checkout_payment.php', '', 'SSL'));
+    tep_redirect(tep_href_link('checkout_payment.php'));
   }
 
   require('includes/languages/' . $language . '/checkout_confirmation.php');
@@ -41,7 +41,7 @@
 <body>
 <FORM name="form" action="<?php echo $sage_pay_direct_acsurl; ?>" method="POST">
 <input type="hidden" name="PaReq" value="<?php echo $sage_pay_direct_pareq; ?>" />
-<input type="hidden" name="TermUrl" value="<?php echo tep_href_link('ext/modules/payment/sage_pay/redirect.php', '', 'SSL'); ?>" />
+<input type="hidden" name="TermUrl" value="<?php echo tep_href_link('ext/modules/payment/sage_pay/redirect.php'); ?>" />
 <input type="hidden" name="MD" value="<?php echo $sage_pay_direct_md; ?>" />
 <NOSCRIPT>
 <?php echo '<center><p>' . MODULE_PAYMENT_SAGE_PAY_DIRECT_3DAUTH_INFO . '</p><p><input type="submit" value="' . MODULE_PAYMENT_SAGE_PAY_DIRECT_3DAUTH_BUTTON . '"/></p></center>'; ?>

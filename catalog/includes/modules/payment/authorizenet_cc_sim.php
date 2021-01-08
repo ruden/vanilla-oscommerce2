@@ -127,7 +127,7 @@
                       'x_fp_sequence' => $sequence,
                       'x_fp_timestamp' => $tstamp,
                       'x_fp_hash' => $this->_hmac(MODULE_PAYMENT_AUTHORIZENET_CC_SIM_TRANSACTION_KEY, MODULE_PAYMENT_AUTHORIZENET_CC_SIM_LOGIN_ID . '^' . $sequence . '^' . $tstamp . '^' . $this->format_raw($order->info['total']) . '^' . $currency),
-                      'x_cancel_url' => tep_href_link('shopping_cart.php', '', 'SSL'),
+                      'x_cancel_url' => tep_href_link('shopping_cart.php'),
                       'x_cancel_url_text' => MODULE_PAYMENT_AUTHORIZENET_CC_SIM_TEXT_RETURN_BUTTON);
 
       if (is_numeric($sendto) && ($sendto > 0)) {
@@ -286,7 +286,7 @@
         tep_session_unregister('payment');
         tep_session_unregister('comments');
 
-        $redirect_url = tep_href_link('checkout_success.php', '', 'SSL');
+        $redirect_url = tep_href_link('checkout_success.php');
 
         echo <<<EOD
 <form name="redirect" action="{$redirect_url}" method="post" target="_top">

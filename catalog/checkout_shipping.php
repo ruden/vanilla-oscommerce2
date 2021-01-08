@@ -15,7 +15,7 @@ require('includes/application_top.php');
 // if the customer is not logged on, redirect them to the login page
 if (!tep_session_is_registered('customer_id')) {
   $navigation->set_snapshot();
-  tep_redirect(tep_href_link('login.php', '', 'SSL'));
+  tep_redirect(tep_href_link('login.php'));
 }
 
 // if there is nothing in the customers cart, redirect them to the shopping cart page
@@ -59,7 +59,7 @@ if ($order->content_type == 'virtual') {
   if (!tep_session_is_registered('shipping')) tep_session_register('shipping');
   $shipping = false;
   $sendto = false;
-  tep_redirect(tep_href_link('checkout_payment.php', '', 'SSL'));
+  tep_redirect(tep_href_link('checkout_payment.php'));
 }
 
 $total_weight = $cart->show_weight();
@@ -127,7 +127,7 @@ if (isset($_POST['action']) && ($_POST['action'] == 'process') && isset($_POST['
                               'title' => (($free_shipping == true) ? $quote[0]['methods'][0]['title'] : $quote[0]['module'] . ' (' . $quote[0]['methods'][0]['title'] . ')'),
                               'cost' => $quote[0]['methods'][0]['cost']);
 
-            tep_redirect(tep_href_link('checkout_payment.php', '', 'SSL'));
+            tep_redirect(tep_href_link('checkout_payment.php'));
           }
         }
       } else {
@@ -140,7 +140,7 @@ if (isset($_POST['action']) && ($_POST['action'] == 'process') && isset($_POST['
     } else {
       $shipping = false;
 
-      tep_redirect(tep_href_link('checkout_payment.php', '', 'SSL'));
+      tep_redirect(tep_href_link('checkout_payment.php'));
     }
   }
 }
@@ -159,11 +159,11 @@ require('includes/languages/' . $language . '/checkout_shipping.php');
 if (defined('SHIPPING_ALLOW_UNDEFINED_ZONES') && (SHIPPING_ALLOW_UNDEFINED_ZONES == 'False') && !tep_session_is_registered('shipping') && ($shipping == false)) {
   $messageStack->add_session('checkout_address', ERROR_NO_SHIPPING_AVAILABLE_TO_SHIPPING_ADDRESS);
 
-  tep_redirect(tep_href_link('checkout_shipping_address.php', '', 'SSL'));
+  tep_redirect(tep_href_link('checkout_shipping_address.php'));
 }
 
-$breadcrumb->add(NAVBAR_TITLE_1, tep_href_link('checkout_shipping.php', '', 'SSL'));
-$breadcrumb->add(NAVBAR_TITLE_2, tep_href_link('checkout_shipping.php', '', 'SSL'));
+$breadcrumb->add(NAVBAR_TITLE_1, tep_href_link('checkout_shipping.php'));
+$breadcrumb->add(NAVBAR_TITLE_2, tep_href_link('checkout_shipping.php'));
 
 require('includes/template_top.php');
 ?>
@@ -215,7 +215,7 @@ require('includes/template_top.php');
     </div>
   </div>
 
-<?php echo tep_draw_form('checkout_address', tep_href_link('checkout_shipping.php', '', 'SSL'), 'post', '', true) . tep_draw_hidden_field('action', 'process'); ?>
+<?php echo tep_draw_form('checkout_address', tep_href_link('checkout_shipping.php'), 'post', '', true) . tep_draw_hidden_field('action', 'process'); ?>
 
   <div class="mb-5">
     <h2><?php echo TABLE_HEADING_SHIPPING_ADDRESS; ?></h2>
@@ -229,7 +229,7 @@ require('includes/template_top.php');
 
       <p><?php echo TEXT_CHOOSE_SHIPPING_DESTINATION; ?></p>
 
-      <?php echo tep_draw_button(IMAGE_BUTTON_CHANGE_ADDRESS, 'home', tep_href_link('checkout_shipping_address.php', '', 'SSL')); ?>
+      <?php echo tep_draw_button(IMAGE_BUTTON_CHANGE_ADDRESS, 'home', tep_href_link('checkout_shipping_address.php')); ?>
     </div>
 
     <div class="clearfix"></div>

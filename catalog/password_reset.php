@@ -77,11 +77,11 @@ if (isset($_GET['action']) && ($_GET['action'] == 'process') && isset($_POST['fo
 
     $messageStack->add_session('login', SUCCESS_PASSWORD_RESET, 'success');
 
-    tep_redirect(tep_href_link('login.php', '', 'SSL'));
+    tep_redirect(tep_href_link('login.php'));
   }
 }
 
-$breadcrumb->add(NAVBAR_TITLE_1, tep_href_link('login.php', '', 'SSL'));
+$breadcrumb->add(NAVBAR_TITLE_1, tep_href_link('login.php'));
 $breadcrumb->add(NAVBAR_TITLE_2);
 
 require('includes/template_top.php');

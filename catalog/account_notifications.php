@@ -14,7 +14,7 @@ require('includes/application_top.php');
 
 if (!tep_session_is_registered('customer_id')) {
   $navigation->set_snapshot();
-  tep_redirect(tep_href_link('login.php', '', 'SSL'));
+  tep_redirect(tep_href_link('login.php'));
 }
 
 // needs to be included earlier to set the success message in the messageStack
@@ -61,18 +61,18 @@ if (isset($_POST['action']) && ($_POST['action'] == 'process') && isset($_POST['
 
   $messageStack->add_session('account', SUCCESS_NOTIFICATIONS_UPDATED, 'success');
 
-  tep_redirect(tep_href_link('account.php', '', 'SSL'));
+  tep_redirect(tep_href_link('account.php'));
 }
 
-$breadcrumb->add(NAVBAR_TITLE_1, tep_href_link('account.php', '', 'SSL'));
-$breadcrumb->add(NAVBAR_TITLE_2, tep_href_link('account_notifications.php', '', 'SSL'));
+$breadcrumb->add(NAVBAR_TITLE_1, tep_href_link('account.php'));
+$breadcrumb->add(NAVBAR_TITLE_2, tep_href_link('account_notifications.php'));
 
 require('includes/template_top.php');
 ?>
 
   <h1><?php echo HEADING_TITLE; ?></h1>
 
-<?php echo tep_draw_form('account_notifications', tep_href_link('account_notifications.php', '', 'SSL'), 'post', '', true) . tep_draw_hidden_field('action', 'process'); ?>
+<?php echo tep_draw_form('account_notifications', tep_href_link('account_notifications.php'), 'post', '', true) . tep_draw_hidden_field('action', 'process'); ?>
 
   <div class="col-lg-6 mb-5">
 
@@ -135,7 +135,7 @@ require('includes/template_top.php');
     ?>
 
     <div class="btn-toolbar justify-content-between">
-      <?php echo tep_draw_button(IMAGE_BUTTON_BACK, 'triangle-1-w', tep_href_link('account.php', '', 'SSL'), 'btn-light'); ?>
+      <?php echo tep_draw_button(IMAGE_BUTTON_BACK, 'triangle-1-w', tep_href_link('account.php'), 'btn-light'); ?>
       <?php echo tep_draw_button(IMAGE_BUTTON_CONTINUE, 'triangle-1-e', null, 'btn-primary'); ?>
     </div>
 

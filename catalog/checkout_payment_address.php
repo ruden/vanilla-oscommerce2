@@ -15,7 +15,7 @@ require('includes/application_top.php');
 // if the customer is not logged on, redirect them to the login page
 if (!tep_session_is_registered('customer_id')) {
   $navigation->set_snapshot();
-  tep_redirect(tep_href_link('login.php', '', 'SSL'));
+  tep_redirect(tep_href_link('login.php'));
 }
 
 // if there is nothing in the customers cart, redirect them to the shopping cart page
@@ -149,7 +149,7 @@ if (isset($_POST['action']) && ($_POST['action'] == 'submit') && isset($_POST['f
 
       if (tep_session_is_registered('payment')) tep_session_unregister('payment');
 
-      tep_redirect(tep_href_link('checkout_payment.php', '', 'SSL'));
+      tep_redirect(tep_href_link('checkout_payment.php'));
     }
 // process the selected billing destination
   } elseif (isset($_POST['address'])) {
@@ -171,7 +171,7 @@ if (isset($_POST['action']) && ($_POST['action'] == 'submit') && isset($_POST['f
 
     if ($check_address['total'] == '1') {
       if ($reset_payment == true) tep_session_unregister('payment');
-      tep_redirect(tep_href_link('checkout_payment.php', '', 'SSL'));
+      tep_redirect(tep_href_link('checkout_payment.php'));
     } else {
       tep_session_unregister('billto');
     }
@@ -180,7 +180,7 @@ if (isset($_POST['action']) && ($_POST['action'] == 'submit') && isset($_POST['f
     if (!tep_session_is_registered('billto')) tep_session_register('billto');
     $billto = $customer_default_address_id;
 
-    tep_redirect(tep_href_link('checkout_payment.php', '', 'SSL'));
+    tep_redirect(tep_href_link('checkout_payment.php'));
   }
 }
 
@@ -189,8 +189,8 @@ if (!tep_session_is_registered('billto')) {
   $billto = $customer_default_address_id;
 }
 
-$breadcrumb->add(NAVBAR_TITLE_1, tep_href_link('checkout_payment.php', '', 'SSL'));
-$breadcrumb->add(NAVBAR_TITLE_2, tep_href_link('checkout_payment_address.php', '', 'SSL'));
+$breadcrumb->add(NAVBAR_TITLE_1, tep_href_link('checkout_payment.php'));
+$breadcrumb->add(NAVBAR_TITLE_2, tep_href_link('checkout_payment_address.php'));
 
 $addresses_count = tep_count_customer_address_book_entries();
 
@@ -253,7 +253,7 @@ if ($messageStack->size('checkout_address') > 0) {
 }
 ?>
 
-<?php echo tep_draw_form('checkout_address', tep_href_link('checkout_payment_address.php', '', 'SSL'), 'post', 'onsubmit="return check_form_optional(checkout_address);"', true); ?>
+<?php echo tep_draw_form('checkout_address', tep_href_link('checkout_payment_address.php'), 'post', 'onsubmit="return check_form_optional(checkout_address);"', true); ?>
 
   <div class="mb-5">
 
@@ -326,7 +326,7 @@ if ($messageStack->size('checkout_address') > 0) {
         </div>
 
         <div class="btn-toolbar justify-content-between mb-3">
-          <?php echo tep_draw_button(IMAGE_BUTTON_BACK, 'triangle-1-w', tep_href_link(($process == true ? 'checkout_payment_address.php' : 'checkout_payment.php'), '', 'SSL'), 'btn-light'); ?>
+          <?php echo tep_draw_button(IMAGE_BUTTON_BACK, 'triangle-1-w', tep_href_link(($process == true ? 'checkout_payment_address.php' : 'checkout_payment.php')), 'btn-light'); ?>
           <?php echo tep_draw_hidden_field('action', 'submit') . tep_draw_button(IMAGE_BUTTON_CONTINUE, 'triangle-1-e', null, 'btn-primary'); ?>
         </div>
 
@@ -356,7 +356,7 @@ if ($messageStack->size('checkout_address') > 0) {
     ?>
 
     <div class="btn-toolbar justify-content-between">
-      <?php echo tep_draw_button(IMAGE_BUTTON_BACK, 'triangle-1-w', tep_href_link(($process == true ? 'checkout_payment_address.php' : 'checkout_payment.php'), '', 'SSL'), 'btn-light'); ?>
+      <?php echo tep_draw_button(IMAGE_BUTTON_BACK, 'triangle-1-w', tep_href_link(($process == true ? 'checkout_payment_address.php' : 'checkout_payment.php')), 'btn-light'); ?>
       <?php echo tep_draw_hidden_field('action', 'submit') . tep_draw_button(IMAGE_BUTTON_CONTINUE, 'triangle-1-e', null, 'btn-primary'); ?>
     </div>
 

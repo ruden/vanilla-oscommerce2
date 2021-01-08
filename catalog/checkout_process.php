@@ -15,7 +15,7 @@ include('includes/application_top.php');
 // if the customer is not logged on, redirect them to the login page
 if (!tep_session_is_registered('customer_id')) {
   $navigation->set_snapshot(array('mode' => 'SSL', 'page' => 'checkout_payment.php'));
-  tep_redirect(tep_href_link('login.php', '', 'SSL'));
+  tep_redirect(tep_href_link('login.php'));
 }
 
 // if there is nothing in the customers cart, redirect them to the shopping cart page
@@ -25,17 +25,17 @@ if ($cart->count_contents() < 1) {
 
 // if no shipping method has been selected, redirect the customer to the shipping method selection page
 if (!tep_session_is_registered('shipping') || !tep_session_is_registered('sendto')) {
-  tep_redirect(tep_href_link('checkout_shipping.php', '', 'SSL'));
+  tep_redirect(tep_href_link('checkout_shipping.php'));
 }
 
 if ((tep_not_null(MODULE_PAYMENT_INSTALLED)) && (!tep_session_is_registered('payment'))) {
-  tep_redirect(tep_href_link('checkout_payment.php', '', 'SSL'));
+  tep_redirect(tep_href_link('checkout_payment.php'));
 }
 
 // avoid hack attempts during the checkout procedure by checking the internal cartID
 if (isset($cart->cartID) && tep_session_is_registered('cartID')) {
   if ($cart->cartID != $cartID) {
-    tep_redirect(tep_href_link('checkout_shipping.php', '', 'SSL'));
+    tep_redirect(tep_href_link('checkout_shipping.php'));
   }
 }
 
@@ -278,6 +278,6 @@ tep_session_unregister('shipping');
 tep_session_unregister('payment');
 tep_session_unregister('comments');
 
-tep_redirect(tep_href_link('checkout_success.php', '', 'SSL'));
+tep_redirect(tep_href_link('checkout_success.php'));
 
 require('includes/application_bottom.php');
