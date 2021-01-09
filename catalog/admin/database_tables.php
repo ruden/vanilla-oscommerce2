@@ -120,7 +120,7 @@
                                tep_draw_checkbox_field('masterblaster'));
       }
 
-      $table_data = array();
+      $table_data[] = array("alter database `" . DB_DATABASE . "` convert to character set utf8mb4 collate utf8mb4_unicode_ci");
 
       foreach ( $_POST['id'] as $table ) {
         $result = 'OK';
@@ -136,11 +136,11 @@
               $old_charset = $_POST['from_charset'];
             }
 
-            $queries[] = "update " . $table . " set " . $cols['Field'] . " = convert(binary convert(" . $cols['Field'] . " using " . $old_charset . ") using utf8) where char_length(" . $cols['Field'] . ") = length(convert(binary convert(" . $cols['Field'] . " using " . $old_charset . ") using utf8))";
+            $queries[] = "update " . $table . " set " . $cols['Field'] . " = convert(binary convert(" . $cols['Field'] . " using " . $old_charset . ") using utf8mb4) where char_length(" . $cols['Field'] . ") = length(convert(binary convert(" . $cols['Field'] . " using " . $old_charset . ") using utf8mb4))";
           }
         }
 
-        $query = "alter table " . $table . " convert to character set utf8 collate utf8_unicode_ci";
+        $query = "alter table " . $table . " convert to character set utf8mb4 collate utf8mb4_unicode_ci";
 
         if ( isset($_POST['dryrun']) ) {
           $table_data[] = array($query);

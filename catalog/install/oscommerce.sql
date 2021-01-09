@@ -26,7 +26,7 @@ CREATE TABLE action_recorder (
   KEY idx_action_recorder_user_id (user_id),
   KEY idx_action_recorder_identifier (identifier),
   KEY idx_action_recorder_date_added (date_added)
-) CHARACTER SET utf8 COLLATE utf8_unicode_ci;
+) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 DROP TABLE IF EXISTS address_book;
 CREATE TABLE address_book (
@@ -45,7 +45,7 @@ CREATE TABLE address_book (
    entry_zone_id int DEFAULT '0' NOT NULL,
    PRIMARY KEY (address_book_id),
    KEY idx_address_book_customers_id (customers_id)
-) CHARACTER SET utf8 COLLATE utf8_unicode_ci;
+) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 DROP TABLE IF EXISTS address_format;
 CREATE TABLE address_format (
@@ -53,7 +53,7 @@ CREATE TABLE address_format (
   address_format varchar(128) NOT NULL,
   address_summary varchar(48) NOT NULL,
   PRIMARY KEY (address_format_id)
-) CHARACTER SET utf8 COLLATE utf8_unicode_ci;
+) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 DROP TABLE IF EXISTS administrators;
 CREATE TABLE administrators (
@@ -61,7 +61,7 @@ CREATE TABLE administrators (
   user_name varchar(255) binary NOT NULL,
   user_password varchar(60) NOT NULL,
   PRIMARY KEY (id)
-) CHARACTER SET utf8 COLLATE utf8_unicode_ci;
+) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 DROP TABLE IF EXISTS categories;
 CREATE TABLE categories (
@@ -73,7 +73,7 @@ CREATE TABLE categories (
    last_modified datetime,
    PRIMARY KEY (categories_id),
    KEY idx_categories_parent_id (parent_id)
-) CHARACTER SET utf8 COLLATE utf8_unicode_ci;
+) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 DROP TABLE IF EXISTS categories_description;
 CREATE TABLE categories_description (
@@ -83,7 +83,7 @@ CREATE TABLE categories_description (
    categories_description text,
    PRIMARY KEY (categories_id, language_id),
    KEY idx_categories_name (categories_name)
-) CHARACTER SET utf8 COLLATE utf8_unicode_ci;
+) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 DROP TABLE IF EXISTS configuration;
 CREATE TABLE configuration (
@@ -99,7 +99,7 @@ CREATE TABLE configuration (
   use_function varchar(255) NULL,
   set_function varchar(255) NULL,
   PRIMARY KEY (configuration_id)
-) CHARACTER SET utf8 COLLATE utf8_unicode_ci;
+) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 DROP TABLE IF EXISTS configuration_group;
 CREATE TABLE configuration_group (
@@ -109,7 +109,7 @@ CREATE TABLE configuration_group (
   sort_order int(5) NULL,
   visible int(1) DEFAULT '1' NULL,
   PRIMARY KEY (configuration_group_id)
-) CHARACTER SET utf8 COLLATE utf8_unicode_ci;
+) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 DROP TABLE IF EXISTS countries;
 CREATE TABLE countries (
@@ -120,7 +120,7 @@ CREATE TABLE countries (
   address_format_id int NOT NULL,
   PRIMARY KEY (countries_id),
   KEY IDX_COUNTRIES_NAME (countries_name)
-) CHARACTER SET utf8 COLLATE utf8_unicode_ci;
+) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 DROP TABLE IF EXISTS currencies;
 CREATE TABLE currencies (
@@ -136,7 +136,7 @@ CREATE TABLE currencies (
   last_updated datetime NULL,
   PRIMARY KEY (currencies_id),
   KEY idx_currencies_code (code)
-) CHARACTER SET utf8 COLLATE utf8_unicode_ci;
+) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 DROP TABLE IF EXISTS customers;
 CREATE TABLE customers (
@@ -153,7 +153,7 @@ CREATE TABLE customers (
    customers_newsletter char(1),
    PRIMARY KEY (customers_id),
    KEY idx_customers_email_address (customers_email_address)
-) CHARACTER SET utf8 COLLATE utf8_unicode_ci;
+) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 DROP TABLE IF EXISTS customers_basket;
 CREATE TABLE customers_basket (
@@ -165,7 +165,7 @@ CREATE TABLE customers_basket (
   customers_basket_date_added char(8),
   PRIMARY KEY (customers_basket_id),
   KEY idx_customers_basket_customers_id (customers_id)
-) CHARACTER SET utf8 COLLATE utf8_unicode_ci;
+) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 DROP TABLE IF EXISTS customers_basket_attributes;
 CREATE TABLE customers_basket_attributes (
@@ -176,7 +176,7 @@ CREATE TABLE customers_basket_attributes (
   products_options_value_id int NOT NULL,
   PRIMARY KEY (customers_basket_attributes_id),
   KEY idx_customers_basket_att_customers_id (customers_id)
-) CHARACTER SET utf8 COLLATE utf8_unicode_ci;
+) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 DROP TABLE IF EXISTS customers_info;
 CREATE TABLE customers_info (
@@ -189,7 +189,7 @@ CREATE TABLE customers_info (
   password_reset_key char(40),
   password_reset_date datetime,
   PRIMARY KEY (customers_info_id)
-) CHARACTER SET utf8 COLLATE utf8_unicode_ci;
+) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 DROP TABLE IF EXISTS customers_wishlist;
 CREATE TABLE customers_wishlist (
@@ -199,7 +199,7 @@ CREATE TABLE customers_wishlist (
   customers_wishlist_date_added char(8),
   PRIMARY KEY (customers_wishlist_id),
   KEY idx_wishlist_customers_id (customers_id)
-) CHARACTER SET utf8 COLLATE utf8_unicode_ci;
+) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 DROP TABLE IF EXISTS customers_wishlist_attributes;
 CREATE TABLE customers_wishlist_attributes (
@@ -210,7 +210,7 @@ CREATE TABLE customers_wishlist_attributes (
   products_options_value_id int NOT NULL,
   PRIMARY KEY (customers_wishlist_attributes_id),
   KEY idx_wishlist_att_customers_id (customers_id)
-) CHARACTER SET utf8 COLLATE utf8_unicode_ci;
+) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 DROP TABLE IF EXISTS information_pages;
 CREATE TABLE information_pages (
@@ -220,7 +220,7 @@ CREATE TABLE information_pages (
   pages_status tinyint(1) DEFAULT '1' NOT NULL,
   sort_order int(3),
   PRIMARY KEY (pages_id)
-) CHARACTER SET utf8 COLLATE utf8_unicode_ci;
+) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 DROP TABLE IF EXISTS information_pages_content;
 CREATE TABLE information_pages_content (
@@ -230,7 +230,7 @@ CREATE TABLE information_pages_content (
   pages_content text,
   PRIMARY KEY (pages_id, language_id),
   KEY pages_name (pages_name)
-) CHARACTER SET utf8 COLLATE utf8_unicode_ci;
+) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 DROP TABLE IF EXISTS languages;
 CREATE TABLE languages (
@@ -242,7 +242,7 @@ CREATE TABLE languages (
   sort_order int(3),
   PRIMARY KEY (languages_id),
   KEY IDX_LANGUAGES_NAME (name)
-) CHARACTER SET utf8 COLLATE utf8_unicode_ci;
+) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 DROP TABLE IF EXISTS manufacturers;
 CREATE TABLE manufacturers (
@@ -253,7 +253,7 @@ CREATE TABLE manufacturers (
   last_modified datetime NULL,
   PRIMARY KEY (manufacturers_id),
   KEY IDX_MANUFACTURERS_NAME (manufacturers_name)
-) CHARACTER SET utf8 COLLATE utf8_unicode_ci;
+) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 DROP TABLE IF EXISTS manufacturers_info;
 CREATE TABLE manufacturers_info (
@@ -263,7 +263,7 @@ CREATE TABLE manufacturers_info (
   url_clicked int(5) NOT NULL default '0',
   date_last_click datetime NULL,
   PRIMARY KEY (manufacturers_id, languages_id)
-) CHARACTER SET utf8 COLLATE utf8_unicode_ci;
+) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 DROP TABLE IF EXISTS newsletters;
 CREATE TABLE newsletters (
@@ -276,7 +276,7 @@ CREATE TABLE newsletters (
   status int(1),
   locked int(1) DEFAULT '0',
   PRIMARY KEY (newsletters_id)
-) CHARACTER SET utf8 COLLATE utf8_unicode_ci;
+) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 DROP TABLE IF EXISTS orders;
 CREATE TABLE orders (
@@ -324,7 +324,7 @@ CREATE TABLE orders (
   currency_value decimal(14,6),
   PRIMARY KEY (orders_id),
   KEY idx_orders_customers_id (customers_id)
-) CHARACTER SET utf8 COLLATE utf8_unicode_ci;
+) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 DROP TABLE IF EXISTS orders_products;
 CREATE TABLE orders_products (
@@ -340,7 +340,7 @@ CREATE TABLE orders_products (
   PRIMARY KEY (orders_products_id),
   KEY idx_orders_products_orders_id (orders_id),
   KEY idx_orders_products_products_id (products_id)
-) CHARACTER SET utf8 COLLATE utf8_unicode_ci;
+) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 DROP TABLE IF EXISTS orders_status;
 CREATE TABLE orders_status (
@@ -351,7 +351,7 @@ CREATE TABLE orders_status (
    downloads_flag int DEFAULT '0',
    PRIMARY KEY (orders_status_id, language_id),
    KEY idx_orders_status_name (orders_status_name)
-) CHARACTER SET utf8 COLLATE utf8_unicode_ci;
+) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 DROP TABLE IF EXISTS orders_status_history;
 CREATE TABLE orders_status_history (
@@ -363,7 +363,7 @@ CREATE TABLE orders_status_history (
    comments text,
    PRIMARY KEY (orders_status_history_id),
    KEY idx_orders_status_history_orders_id (orders_id)
-) CHARACTER SET utf8 COLLATE utf8_unicode_ci;
+) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 DROP TABLE IF EXISTS orders_products_attributes;
 CREATE TABLE orders_products_attributes (
@@ -376,7 +376,7 @@ CREATE TABLE orders_products_attributes (
   price_prefix char(1) NOT NULL,
   PRIMARY KEY (orders_products_attributes_id),
   KEY idx_orders_products_att_orders_id (orders_id)
-) CHARACTER SET utf8 COLLATE utf8_unicode_ci;
+) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 DROP TABLE IF EXISTS orders_products_download;
 CREATE TABLE orders_products_download (
@@ -388,7 +388,7 @@ CREATE TABLE orders_products_download (
   download_count int(2) NOT NULL default '0',
   PRIMARY KEY  (orders_products_download_id),
   KEY idx_orders_products_download_orders_id (orders_id)
-) CHARACTER SET utf8 COLLATE utf8_unicode_ci;
+) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 DROP TABLE IF EXISTS orders_total;
 CREATE TABLE orders_total (
@@ -401,7 +401,7 @@ CREATE TABLE orders_total (
   sort_order int NOT NULL,
   PRIMARY KEY (orders_total_id),
   KEY idx_orders_total_orders_id (orders_id)
-) CHARACTER SET utf8 COLLATE utf8_unicode_ci;
+) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 DROP TABLE IF EXISTS products;
 CREATE TABLE products (
@@ -421,7 +421,7 @@ CREATE TABLE products (
   PRIMARY KEY (products_id),
   KEY idx_products_model (products_model),
   KEY idx_products_date_added (products_date_added)
-) CHARACTER SET utf8 COLLATE utf8_unicode_ci;
+) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 DROP TABLE IF EXISTS products_attributes;
 CREATE TABLE products_attributes (
@@ -433,7 +433,7 @@ CREATE TABLE products_attributes (
   price_prefix char(1) NOT NULL,
   PRIMARY KEY (products_attributes_id),
   KEY idx_products_attributes_products_id (products_id)
-) CHARACTER SET utf8 COLLATE utf8_unicode_ci;
+) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 DROP TABLE IF EXISTS products_attributes_download;
 CREATE TABLE products_attributes_download (
@@ -442,7 +442,7 @@ CREATE TABLE products_attributes_download (
   products_attributes_maxdays int(2) DEFAULT '0',
   products_attributes_maxcount int(2) DEFAULT '0',
   PRIMARY KEY  (products_attributes_id)
-) CHARACTER SET utf8 COLLATE utf8_unicode_ci;
+) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 DROP TABLE IF EXISTS products_description;
 CREATE TABLE products_description (
@@ -454,7 +454,7 @@ CREATE TABLE products_description (
   products_viewed int(5) default '0',
   PRIMARY KEY  (products_id,language_id),
   KEY products_name (products_name)
-) CHARACTER SET utf8 COLLATE utf8_unicode_ci;
+) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 DROP TABLE IF EXISTS products_images;
 CREATE TABLE products_images (
@@ -465,7 +465,7 @@ CREATE TABLE products_images (
   sort_order int NOT NULL,
   PRIMARY KEY (id),
   KEY products_images_prodid (products_id)
-) CHARACTER SET utf8 COLLATE utf8_unicode_ci;
+) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 DROP TABLE IF EXISTS products_notifications;
 CREATE TABLE products_notifications (
@@ -473,7 +473,7 @@ CREATE TABLE products_notifications (
   customers_id int NOT NULL,
   date_added datetime NOT NULL,
   PRIMARY KEY (products_id, customers_id)
-) CHARACTER SET utf8 COLLATE utf8_unicode_ci;
+) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 DROP TABLE IF EXISTS products_options;
 CREATE TABLE products_options (
@@ -481,7 +481,7 @@ CREATE TABLE products_options (
   language_id int NOT NULL default '1',
   products_options_name varchar(32) NOT NULL default '',
   PRIMARY KEY  (products_options_id,language_id)
-) CHARACTER SET utf8 COLLATE utf8_unicode_ci;
+) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 DROP TABLE IF EXISTS products_options_values;
 CREATE TABLE products_options_values (
@@ -489,7 +489,7 @@ CREATE TABLE products_options_values (
   language_id int NOT NULL default '1',
   products_options_values_name varchar(64) NOT NULL default '',
   PRIMARY KEY  (products_options_values_id,language_id)
-) CHARACTER SET utf8 COLLATE utf8_unicode_ci;
+) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 DROP TABLE IF EXISTS products_options_values_to_products_options;
 CREATE TABLE products_options_values_to_products_options (
@@ -497,14 +497,14 @@ CREATE TABLE products_options_values_to_products_options (
   products_options_id int NOT NULL,
   products_options_values_id int NOT NULL,
   PRIMARY KEY (products_options_values_to_products_options_id)
-) CHARACTER SET utf8 COLLATE utf8_unicode_ci;
+) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 DROP TABLE IF EXISTS products_to_categories;
 CREATE TABLE products_to_categories (
   products_id int NOT NULL,
   categories_id int NOT NULL,
   PRIMARY KEY (products_id,categories_id)
-) CHARACTER SET utf8 COLLATE utf8_unicode_ci;
+) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 DROP TABLE IF EXISTS reviews;
 CREATE TABLE reviews (
@@ -520,14 +520,14 @@ CREATE TABLE reviews (
   PRIMARY KEY (reviews_id),
   KEY idx_reviews_products_id (products_id),
   KEY idx_reviews_customers_id (customers_id)
-) CHARACTER SET utf8 COLLATE utf8_unicode_ci;
+) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 DROP TABLE IF EXISTS sec_directory_whitelist;
 CREATE TABLE sec_directory_whitelist (
   id int NOT NULL auto_increment,
   directory varchar(255) NOT NULL,
   PRIMARY KEY (id)
-) CHARACTER SET utf8 COLLATE utf8_unicode_ci;
+) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 DROP TABLE IF EXISTS sessions;
 CREATE TABLE sessions (
@@ -535,7 +535,7 @@ CREATE TABLE sessions (
   expiry int(11) unsigned NOT NULL,
   value text NOT NULL,
   PRIMARY KEY (sesskey)
-) CHARACTER SET utf8 COLLATE utf8_unicode_ci;
+) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 DROP TABLE IF EXISTS specials;
 CREATE TABLE specials (
@@ -549,7 +549,7 @@ CREATE TABLE specials (
   status int(1) NOT NULL DEFAULT '1',
   PRIMARY KEY (specials_id),
   KEY idx_specials_products_id (products_id)
-) CHARACTER SET utf8 COLLATE utf8_unicode_ci;
+) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 DROP TABLE IF EXISTS tax_class;
 CREATE TABLE tax_class (
@@ -559,7 +559,7 @@ CREATE TABLE tax_class (
   last_modified datetime NULL,
   date_added datetime NOT NULL,
   PRIMARY KEY (tax_class_id)
-) CHARACTER SET utf8 COLLATE utf8_unicode_ci;
+) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 DROP TABLE IF EXISTS tax_rates;
 CREATE TABLE tax_rates (
@@ -572,7 +572,7 @@ CREATE TABLE tax_rates (
   last_modified datetime NULL,
   date_added datetime NOT NULL,
   PRIMARY KEY (tax_rates_id)
-) CHARACTER SET utf8 COLLATE utf8_unicode_ci;
+) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 DROP TABLE IF EXISTS geo_zones;
 CREATE TABLE geo_zones (
@@ -582,7 +582,7 @@ CREATE TABLE geo_zones (
   last_modified datetime NULL,
   date_added datetime NOT NULL,
   PRIMARY KEY (geo_zone_id)
-) CHARACTER SET utf8 COLLATE utf8_unicode_ci;
+) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 DROP TABLE IF EXISTS zones;
 CREATE TABLE zones (
@@ -592,7 +592,7 @@ CREATE TABLE zones (
   zone_name varchar(255) NOT NULL,
   PRIMARY KEY (zone_id),
   KEY idx_zones_country_id (zone_country_id)
-) CHARACTER SET utf8 COLLATE utf8_unicode_ci;
+) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 DROP TABLE IF EXISTS zones_to_geo_zones;
 CREATE TABLE zones_to_geo_zones (
@@ -604,7 +604,7 @@ CREATE TABLE zones_to_geo_zones (
    date_added datetime NOT NULL,
    PRIMARY KEY (association_id),
    KEY idx_zones_to_geo_zones_country_id (zone_country_id)
-) CHARACTER SET utf8 COLLATE utf8_unicode_ci;
+) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 # data
 

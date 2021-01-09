@@ -27,7 +27,7 @@ CREATE TABLE oscom_app_paypal_log (
   date_added datetime,
   PRIMARY KEY (id),
   KEY idx_oapl_module (module)
-) CHARACTER SET utf8 COLLATE utf8_unicode_ci;
+) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 EOD;
 
@@ -51,17 +51,6 @@ EOD;
 
   if ( $action == 'start' ) {
     if ( $OSCOM_PayPal->migrate() ) {
-      if ( defined('MODULE_ADMIN_DASHBOARD_INSTALLED') ) {
-        $admin_dashboard_modules = explode(';', MODULE_ADMIN_DASHBOARD_INSTALLED);
-
-        if ( !in_array('d_paypal_app.php', $admin_dashboard_modules) ) {
-          $admin_dashboard_modules[] = 'd_paypal_app.php';
-
-          tep_db_query("update configuration set configuration_value = '" . tep_db_input(implode(';', $admin_dashboard_modules)) . "' where configuration_key = 'MODULE_ADMIN_DASHBOARD_INSTALLED'");
-          tep_db_query("insert into configuration (configuration_title, configuration_key, configuration_value, configuration_description, configuration_group_id, sort_order, date_added) values ('Sort Order', 'MODULE_ADMIN_DASHBOARD_PAYPAL_APP_SORT_ORDER', '5000', 'Sort order of display. Lowest is displayed first.', '6', '0', now())");
-        }
-      }
-
       tep_redirect(tep_href_link('paypal.php', tep_get_all_get_params()));
     }
   }

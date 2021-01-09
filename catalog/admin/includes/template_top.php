@@ -13,7 +13,7 @@
 <!DOCTYPE html>
 <html <?php echo HTML_PARAMS; ?>>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=<?php echo CHARSET; ?>">
+<meta charset="<?php echo CHARSET; ?>">
 <meta name="robots" content="noindex,nofollow">
 <title><?php echo TITLE; ?></title>
 <base href="<?php echo ($request_type == 'SSL') ? HTTPS_SERVER . DIR_WS_HTTPS_ADMIN : HTTP_SERVER . DIR_WS_ADMIN; ?>" />

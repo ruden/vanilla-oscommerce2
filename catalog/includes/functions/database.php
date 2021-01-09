@@ -20,7 +20,7 @@
     $$link = mysqli_connect($server, $username, $password, $database);
 
     if ( !mysqli_connect_errno() ) {
-      mysqli_set_charset($$link, 'utf8');
+      mysqli_set_charset($$link, 'utf8mb4');
     }
 
     @mysqli_query($$link, 'set session sql_mode=""');
