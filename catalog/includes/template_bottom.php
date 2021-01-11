@@ -29,8 +29,8 @@
 if (defined('ACCOUNT_DOB') && ACCOUNT_DOB == 'true' && in_array($PHP_SELF, array('create_account.php', 'account_edit.php'))) {
   ?>
 
-  <link rel="stylesheet" href="ext/vanillajs-datepicker/css/datepicker-bs4.min.css">
-  <script src="ext/vanillajs-datepicker/js/datepicker.min.js"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/vanillajs-datepicker@1.1.1/dist/css/datepicker-bs4.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/vanillajs-datepicker@1.1.1/dist/js/datepicker.min.js"></script>
 
   <script>
     const inputDob = document.querySelector('input[name="dob"]');
@@ -46,7 +46,7 @@ if (defined('ACCOUNT_DOB') && ACCOUNT_DOB == 'true' && in_array($PHP_SELF, array
   if (defined('JQUERY_DATEPICKER_I18N_CODE') && !empty(JQUERY_DATEPICKER_I18N_CODE)) {
     ?>
 
-    <script src="ext/vanillajs-datepicker/js/locales/<?php echo JQUERY_DATEPICKER_I18N_CODE; ?>.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vanillajs-datepicker@1.1.1/dist/js/locales/<?php echo JQUERY_DATEPICKER_I18N_CODE; ?>.js"></script>
     <script>
       if (typeof datepicker !== 'undefined') {
         datepicker.setOptions({
