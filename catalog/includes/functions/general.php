@@ -168,26 +168,29 @@ function tep_break_string($string, $len, $break_char = '-') {
 
 ////
 // Return all HTTP GET variables, except those passed as a parameter
-function tep_get_all_get_params($exclude_array = '') {
-  if (!is_array($exclude_array)) $exclude_array = array();
-
-  $exclude_array[] = session_name();
-  $exclude_array[] = 'error';
-  $exclude_array[] = 'x';
-  $exclude_array[] = 'y';
-
-  $exclude_array[] = 'language';
-  $exclude_array[] = 'currency';
-  $exclude_array[] = 'languages_id';
+function tep_get_all_get_params(array $exclude_array = []) {
+  $exclude_array += array(session_name(),
+                          'error',
+                          'x',
+                          'y',
+                          'language',
+                          'currency',
+                          'languages_id',
+                          'mid',
+                          'pfrom',
+                          'pto',
+                          'attrib');
 
   $get_url = '';
 
   if (is_array($_GET) && (!empty($_GET))) {
     foreach ($_GET as $key => $value) {
-      if (!in_array($key, $exclude_array)) {
-        if (is_array($value)) {
-          $get_url .= $key . '[]=' . rawurlencode(stripslashes($value[0])) . '&';
-        }else{
+      if (!preg_match('/^(' . implode('|', $exclude_array)  . ')/', $key) && !empty($value)) {
+        if (is_array($_GET[$key])) {
+          foreach ($_GET[$key] as $k => $v) {
+            $get_url .= $key . '[' . $k . ']=' . rawurlencode(stripslashes($v)) . '&';
+          }
+        } else {
           $get_url .= $key . '=' . rawurlencode(stripslashes($value)) . '&';
         }
       }
@@ -1438,5 +1441,3 @@ function tep_count_customer_address_book_entries($id = '', $check_session = true
 function tep_convert_linefeeds($from, $to, $string) {
   return str_replace($from, $to, $string);
 }
-
-?>

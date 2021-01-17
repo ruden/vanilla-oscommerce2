@@ -17,6 +17,7 @@ class pf_manufacturers {
   public $description;
   public $sort_order;
   public $enabled = false;
+  public $mid = array();
 
   public function __construct() {
     $this->code = get_class($this);
@@ -29,38 +30,31 @@ class pf_manufacturers {
       $this->sort_order = MODULE_PRODUCT_FILTERS_MANUFACTURERS_SORT_ORDER;
       $this->enabled = (MODULE_PRODUCT_FILTERS_MANUFACTURERS_STATUS == 'True');
     }
+
+    $this->mid = (isset($_GET['mid']) && !empty($_GET['mid']) ? tep_db_prepare_input($_GET['mid']) : null);
   }
 
-  public function execute() {
-    global $oscTemplate, $current_category_id, $languages_id, $cPath;
+  public function getOutput() {
+    global $current_category_id, $languages_id, $cPath;
 
-    if (isset($_GET['manufacturers_id']) && !empty($_GET['manufacturers_id'])) {
-      $filterlist_sql = "select distinct c.categories_id as id, cd.categories_name as name from products p, products_to_categories p2c, categories c, categories_description cd where p.products_status = '1' and p.products_id = p2c.products_id and p2c.categories_id = c.categories_id and p2c.categories_id = cd.categories_id and cd.language_id = '" . (int)$languages_id . "' and p.manufacturers_id = '" . (int)$_GET['manufacturers_id'] . "' order by cd.categories_name";
-    } else {
-      $filterlist_sql = "select distinct m.manufacturers_id as id, m.manufacturers_name as name from products p, products_to_categories p2c, manufacturers m where p.products_status = '1' and p.manufacturers_id = m.manufacturers_id and p.products_id = p2c.products_id and p2c.categories_id = '" . (int)$current_category_id . "' order by m.manufacturers_name";
-    }
-    $filterlist_query = tep_db_query($filterlist_sql);
-    if (tep_db_num_rows($filterlist_query) > 1) {
-      echo '<div>' . tep_draw_form('filter', 'index.php', 'get') . '<p align="right">' . TEXT_SHOW . '&nbsp;';
-      if (isset($_GET['manufacturers_id']) && !empty($_GET['manufacturers_id'])) {
-        echo tep_draw_hidden_field('manufacturers_id', $_GET['manufacturers_id']);
-        $options = array(array('id' => '', 'text' => TEXT_ALL_CATEGORIES));
-      } else {
-        echo tep_draw_hidden_field('cPath', $cPath);
-        $options = array(array('id' => '', 'text' => TEXT_ALL_MANUFACTURERS));
-      }
-      echo tep_draw_hidden_field('sort', $_GET['sort']);
-      while ($filterlist = tep_db_fetch_array($filterlist_query)) {
-        $options[] = array('id' => $filterlist['id'], 'text' => $filterlist['name']);
-      }
-      echo tep_draw_pull_down_menu('filter_id', $options, (isset($_GET['filter_id']) ? $_GET['filter_id'] : ''), 'onchange="this.form.submit()"');
-      echo tep_hide_session_id() . '</p></form></div>' . "\n";
+    $filterlist_query = tep_db_query("select distinct m.* from products p, products_to_categories p2c, manufacturers m where p.products_status = '1' and p.manufacturers_id = m.manufacturers_id and p.products_id = p2c.products_id and p2c.categories_id = '" . (int)$current_category_id . "' order by m.manufacturers_name");
+
+    if (tep_db_num_rows($filterlist_query) > 0) {
+      ob_start();
+      include('includes/modules/' . $this->group . '/templates/manufacturers.php');
+
+      return ob_get_clean();
     }
 
-    ob_start();
-    include('includes/modules/' . $this->group . '/templates/manufacturers.php');
+    return null;
+  }
 
-    $oscTemplate->addBlock(ob_get_clean(), $this->group);
+  public function where() {
+    if (!empty($this->mid) && is_array($this->mid)) {
+      return " and m.manufacturers_id in ('" . implode("', '", $this->mid) . "') ";
+    }
+
+    return null;
   }
 
   public function isEnabled() {
@@ -73,7 +67,7 @@ class pf_manufacturers {
 
   public function install() {
     tep_db_query("INSERT INTO configuration (configuration_title, configuration_key, configuration_value, configuration_description, configuration_group_id, sort_order, set_function, date_added) VALUES ('Enable Module', 'MODULE_PRODUCT_FILTERS_MANUFACTURERS_STATUS', 'True', 'Do you want to add the module to your shop?', '6', '1', 'tep_cfg_select_option(array(\'True\', \'False\'), ', now())");
-    tep_db_query("INSERT INTO configuration (configuration_title, configuration_key, configuration_value, configuration_description, configuration_group_id, sort_order, date_added) VALUES ('Sort Order', 'MODULE_PRODUCT_FILTERS_MANUFACTURERS_SORT_ORDER', '0', 'Sort order of display. Lowest is displayed first.', '6', '0', now())");
+    tep_db_query("INSERT INTO configuration (configuration_title, configuration_key, configuration_value, configuration_description, configuration_group_id, sort_order, date_added) VALUES ('Sort Order', 'MODULE_PRODUCT_FILTERS_MANUFACTURERS_SORT_ORDER', '300', 'Sort order of display. Lowest is displayed first.', '6', '0', now())");
   }
 
   public function remove() {

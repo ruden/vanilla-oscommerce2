@@ -96,7 +96,7 @@ if (isset($_GET['info_message']) && tep_not_null($_GET['info_message'])) {
       if ($oscTemplate->hasBlocks('boxes_column_left') && isset($cPath_array)) {
         ?>
 
-        <aside class="aside col-lg-2 d-none d-lg-block">
+        <aside class="aside col-lg-2">
           <?php echo $oscTemplate->getBlocks('boxes_column_left'); ?>
         </aside>
 
