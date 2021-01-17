@@ -58,9 +58,9 @@ class cm_index_special_products {
   }
 
   public function isEnabled() {
-    global $cPath_array;
+    global $category_depth;
 
-    if (!isset($cPath_array)) {
+    if ($category_depth == 'top') {
       return $this->enabled;
     }
 

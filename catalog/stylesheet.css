@@ -26,8 +26,8 @@ h2 {
 
 .svg-icon-heart, .svg-icon-shopping-cart, .svg-icon-user, .svg-icon-search {
   fill: var(--bs-primary);
-  width: 2.25rem;
-  height: 2.25rem;
+  width: 2rem;
+  height: 2rem;
 }
 
 .svg-icon-search-form {
