@@ -12,6 +12,7 @@
 
 class pf_attributes {
   public $code;
+  public $group;
   public $title;
   public $description;
   public $sort_order;
@@ -20,6 +21,7 @@ class pf_attributes {
 
   public function __construct() {
     $this->code = get_class($this);
+    $this->group = basename(dirname(__FILE__));
 
     $this->title = MODULE_PRODUCT_FILTERS_ATTRIBUTES_TITLE;
     $this->description = MODULE_PRODUCT_FILTERS_ATTRIBUTES_DESCRIPTION;
