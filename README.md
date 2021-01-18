@@ -44,9 +44,9 @@ Todo
 * [ ] Migration script old osCommerce version.
 * [x] New sorting products in listing and modularized.
 * [x] Add Spanish language.
-* [ ] Modularized the index page.
+* [x] Modularized the index page.
 * [x] Update review system.
 * [x] Add wishlist.
 * [x] Modularized the XML sitemap. 
-* [ ] Modularized the box product filter. 
+* [x] Modularized the box product filter. 
 * [x] SMTP Authentication.
