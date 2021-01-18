@@ -32,7 +32,7 @@ class cm_index_sort_by {
   }
 
   public function execute() {
-    global $oscTemplate, $language, $request_type, $PHP_SELF, $listing_sql;
+    global $oscTemplate, $language, $PHP_SELF, $listing_sql;
 
     if (defined('MODULE_LISTING_SORT_INSTALLED') && !empty(MODULE_LISTING_SORT_INSTALLED)) {
       $sbm_array = explode(';', MODULE_LISTING_SORT_INSTALLED);
@@ -106,12 +106,17 @@ class cm_index_sort_by {
                            'y',
                            'language',
                            'currency',
-                           'languages_id',
-                           'mid');
+                           'languages_id');
 
     foreach ($_GET as $key => $value) {
-      if (is_string($value) && !in_array($key, $exclude_array)) {
-        $hidden_get_params .= tep_draw_hidden_field($key, $value);
+      if (!preg_match('/^(' . implode('|', $exclude_array)  . ')/', $key) && !empty($value)) {
+        if (is_array($_GET[$key])) {
+          foreach ($_GET[$key] as $k => $v) {
+            $hidden_get_params .= tep_draw_hidden_field($key . '[' . $k . ']', tep_db_prepare_input($v));
+          }
+        } else {
+          $hidden_get_params .= tep_draw_hidden_field($key, tep_db_prepare_input($value));
+        }
       }
     }
 

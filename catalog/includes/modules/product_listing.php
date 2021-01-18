@@ -49,7 +49,7 @@
             </div>
 
             <div class="mb-2">
-              <?php echo tep_draw_button(IMAGE_BUTTON_BUY_NOW, 'cart', tep_href_link($PHP_SELF, tep_get_all_get_params(array('action')) . 'action=buy_now&products_id=' . $listing['products_id'])); ?>
+              <?php echo tep_draw_button(IMAGE_BUTTON_BUY_NOW, 'cart', tep_href_link($PHP_SELF, tep_get_all_get_params(array('action', 'mid', 'pfrom', 'pto', 'attrib')) . 'action=buy_now&products_id=' . $listing['products_id'])); ?>
             </div>
           </div>
 

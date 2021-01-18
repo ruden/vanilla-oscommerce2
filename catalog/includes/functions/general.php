@@ -175,11 +175,7 @@ function tep_get_all_get_params(array $exclude_array = []) {
                           'y',
                           'language',
                           'currency',
-                          'languages_id',
-                          'mid',
-                          'pfrom',
-                          'pto',
-                          'attrib');
+                          'languages_id');
 
   $get_url = '';
 
