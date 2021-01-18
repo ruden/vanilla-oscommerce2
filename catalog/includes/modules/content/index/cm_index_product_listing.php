@@ -52,7 +52,9 @@ class cm_index_product_listing {
 
     ob_start();
 
-    echo $sort_blocks;
+    if ($listing_split->number_of_rows > 0) {
+      echo $sort_blocks;
+    }
 
     include('includes/modules/product_listing.php');
 
