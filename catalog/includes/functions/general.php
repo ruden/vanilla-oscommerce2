@@ -1252,7 +1252,19 @@ function tep_array_to_string($array, $exclude = '', $equals = '=', $separator = 
 }
 
 function tep_not_null($value) {
-  return !empty($value);
+  if (is_array($value)) {
+    if (sizeof($value) > 0) {
+      return true;
+    } else {
+      return false;
+    }
+  } else {
+    if ((is_string($value) || is_int($value)) && ($value != '') && ($value != 'NULL') && (strlen(trim($value)) > 0)) {
+      return true;
+    } else {
+      return false;
+    }
+  }
 }
 
 ////

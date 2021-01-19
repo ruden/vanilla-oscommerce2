@@ -335,7 +335,19 @@ function tep_get_zone_name($country_id, $zone_id, $default_zone) {
 }
 
 function tep_not_null($value) {
-  return !empty($value);
+  if (is_array($value)) {
+    if (sizeof($value) > 0) {
+      return true;
+    } else {
+      return false;
+    }
+  } else {
+    if ((is_string($value) || is_int($value)) && ($value != '') && ($value != 'NULL') && (strlen(trim($value)) > 0)) {
+      return true;
+    } else {
+      return false;
+    }
+  }
 }
 
 function tep_browser_detect($component) {
