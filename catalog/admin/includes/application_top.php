@@ -41,10 +41,10 @@
   $PHP_SELF = substr($req['path'], ($request_type == 'SSL') ? strlen(DIR_WS_HTTPS_ADMIN) : strlen(DIR_WS_ADMIN));
 
 // Used in the "Backup Manager" to compress backups
-  define('LOCAL_EXE_GZIP', 'gzip');
-  define('LOCAL_EXE_GUNZIP', 'gunzip');
-  define('LOCAL_EXE_ZIP', 'zip');
-  define('LOCAL_EXE_UNZIP', 'unzip');
+  define('LOCAL_EXE_GZIP', '/bin/gzip');
+  define('LOCAL_EXE_GUNZIP', '/bin/gunzip');
+  define('LOCAL_EXE_ZIP', '/usr/bin/zip');
+  define('LOCAL_EXE_UNZIP', '/usr/bin/unzip');
 
 // include the list of project filenames
   require('includes/filenames.php');
