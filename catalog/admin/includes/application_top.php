@@ -54,8 +54,8 @@
 
 // Define how do we update currency exchange rates
 // Possible values are 'oanda' 'xe' or ''
-  define('CURRENCY_SERVER_PRIMARY', 'oanda');
-  define('CURRENCY_SERVER_BACKUP', 'xe');
+  define('CURRENCY_SERVER_PRIMARY', 'ecb_s1');
+  define('CURRENCY_SERVER_BACKUP', 'ecb_s2');
 
 // include the database functions
   require('includes/functions/database.php');

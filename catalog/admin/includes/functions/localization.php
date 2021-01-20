@@ -10,31 +10,40 @@
   Released under the GNU General Public License
 */
 
-  function quote_oanda_currency($code, $base = DEFAULT_CURRENCY) {
-    $page = file('http://www.oanda.com/convert/fxdaily?value=1&redirected=1&exch=' . $code .  '&format=CSV&dest=Get+Table&sel_list=' . $base);
+function quote_ecb_s1_currency($to, $from = DEFAULT_CURRENCY) {
+  static $data;
+  $rate = 1;
 
-    $match = array();
-
-    preg_match('/(.+),(\w{3}),([0-9.]+),([0-9.]+)/i', implode('', $page), $match);
-
-    if (sizeof($match) > 0) {
-      return $match[3];
-    } else {
-      return false;
-    }
+  if ($to == $from) {
+    return $rate;
   }
 
-  function quote_xe_currency($to, $from = DEFAULT_CURRENCY) {
-    $page = file('http://www.xe.net/ucc/convert.cgi?Amount=1&From=' . $from . '&To=' . $to);
-
-    $match = array();
-
-    preg_match('/[0-9.]+\s*' . $from . '\s*=\s*([0-9.]+)\s*' . $to . '/', implode('', $page), $match);
-
-    if (sizeof($match) > 0) {
-      return $match[1];
-    } else {
-      return false;
-    }
+  if (empty($data)) {
+    $data = json_decode(file_get_contents('https://api.exchangeratesapi.io/latest?base=' . $from), true);
   }
-?>
+
+  if (!empty($data)) {
+    return isset($data['rates'][$to]) ? (string)$data['rates'][$to] : '';
+  }
+
+  return $rate;
+}
+
+function quote_ecb_s2_currency($to, $from = DEFAULT_CURRENCY) {
+  static $data;
+  $rate = 1;
+
+  if ($to == $from) {
+    return $rate;
+  }
+
+  if (empty($data)) {
+    $data = json_decode(file_get_contents('https://api.exchangerate.host/latest?base=' . $from), true);
+  }
+
+  if (!empty($data) && $data['success'] === true) {
+    return isset($data['rates'][$to]) ? (string)$data['rates'][$to] : '';
+  }
+
+  return $rate;
+}
