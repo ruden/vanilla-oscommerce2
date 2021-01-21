@@ -5,6 +5,8 @@
   "require": {
     "swiftmailer/swiftmailer": "^6.0",
     "ext-json": "*",
-    "ext-mysqli": "*"
+    "ext-mysqli": "*",
+    "ext-curl": "*",
+    "ext-gd": "*"
   }
 }
