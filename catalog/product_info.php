@@ -16,6 +16,14 @@ if (!isset($_GET['products_id'])) {
   tep_redirect(tep_href_link('products_new.php'));
 }
 
+$product_info_query = tep_db_query("select p.*, pd.*, m.*, group_concat(pi.image) as products_images, IF(s.status, s.specials_new_products_price, null) as specials_new_products_price from products p left join products_description pd on (pd.products_id = p.products_id and pd.language_id = '" . (int)$languages_id . "') left join products_images pi on pi.products_id = p.products_id left join manufacturers m on m.manufacturers_id = p.manufacturers_id left join specials s on s.products_id = p.products_id where p.products_status = '1' and p.products_id = '" . (int)$_GET['products_id'] . "'");
+$product_info = tep_db_fetch_array($product_info_query);
+if (isset($product_info['products_id'])) {
+  $breadcrumb->add($product_info['products_name'], tep_href_link('product_info.php', 'cPath=' . $cPath . '&products_id=' . $product_info['products_id']));
+} else {
+  http_response_code(404);
+}
+
 require('includes/languages/' . $language . '/product_info.php');
 
 $page_content = $oscTemplate->getContent('product_info');

@@ -387,25 +387,6 @@ if (isset($cPath_array)) {
       break;
     }
   }
-} /*elseif (isset($_GET['manufacturers_id'])) {
-$manufacturers_query = tep_db_query("select m.*, mi.* from manufacturers m left join manufacturers_info mi on (m.manufacturers_id = mi.manufacturers_id and mi.languages_id = '" . (int)$languages_id . "') where m.manufacturers_id = '" . (int)$_GET['manufacturers_id'] . "'");
-$manufacturers = tep_db_fetch_array($manufacturers_query);
-if (isset($manufacturers['manufacturers_id'])) {
-$breadcrumb->add($manufacturers['manufacturers_name'], tep_href_link('index.php', 'manufacturers_id=' . $_GET['manufacturers_id']));
-} else{
-http_response_code(404);
-}
-}*/
-
-// add the products name to the breadcrumb trail
-if (isset($_GET['products_id'])) {
-  $product_info_query = tep_db_query("select p.*, pd.*, m.*, group_concat(pi.image) as products_images, IF(s.status, s.specials_new_products_price, NULL) as specials_new_products_price from products p left join products_description pd on (pd.products_id = p.products_id and pd.language_id = '" . (int)$languages_id . "') left join products_images pi on pi.products_id = p.products_id left join manufacturers m on m.manufacturers_id = p.manufacturers_id left join specials s on s.products_id = p.products_id where p.products_status = '1' and p.products_id = '" . (int)$_GET['products_id'] . "'");
-  $product_info = tep_db_fetch_array($product_info_query);
-  if (isset($product_info['products_id'])) {
-    $breadcrumb->add($product_info['products_name'], tep_href_link('product_info.php', 'cPath=' . $cPath . '&products_id=' . $_GET['products_id']));
-  } else {
-    http_response_code(404);
-  }
 }
 
 // initialize the message stack for output messages
