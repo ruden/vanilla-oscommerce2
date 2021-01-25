@@ -60,16 +60,16 @@ if (isset($_GET['manufacturer_id'])) {
 
     <?php
     if (!empty($manufacturers_array)) {
-      $last_letter = '';
+      $last_letter = null;
 
-      foreach ($manufacturers_array as $item => $manufacturers) {
+      foreach ($manufacturers_array as $manufacturers) {
         $letter = $manufacturers['manufacturers_name'][0];
 
         if (strtolower($letter) !== strtolower($last_letter)) {
-          if ($last_letter !== '') {
+          if (!empty($last_letter)) {
             ?>
 
-              </ul>
+            </ul>
 
             <?php
           }
@@ -90,6 +90,11 @@ if (isset($_GET['manufacturer_id'])) {
 
         <?php
       }
+      ?>
+
+      </ul>
+
+      <?php
     } else {
       ?>
 
