@@ -87,7 +87,7 @@
   }
 
   function osc_draw_time_zone_select_menu($name, $default = null) {
-    if ( !isset($default) ) {
+    if (empty($default)) {
       $default = date_default_timezone_get();
     }
 

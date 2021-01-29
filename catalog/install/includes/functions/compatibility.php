@@ -36,6 +36,6 @@ do_magic_quotes_gpc($_POST);
 do_magic_quotes_gpc($_COOKIE);
 
 // set default timezone if none exists (PHP 5.3 throws an E_WARNING)
-if ((strlen(ini_get('date.timezone')) < 1) && function_exists('date_default_timezone_set')) {
+if (!empty(ini_get('date.timezone')) && function_exists('date_default_timezone_set')) {
   date_default_timezone_set(@date_default_timezone_get());
 }
