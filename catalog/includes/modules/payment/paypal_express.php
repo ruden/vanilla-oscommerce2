@@ -70,7 +70,7 @@
       }
 
       if ( defined('FILENAME_SHOPPING_CART') && (basename($PHP_SELF) == 'shopping_cart.php') ) {
-        if ( (OSCOM_APP_PAYPAL_GATEWAY == '1') && (OSCOM_APP_PAYPAL_EC_CHECKOUT_FLOW == '1') ) {
+        if ( (defined('OSCOM_APP_PAYPAL_GATEWAY') && OSCOM_APP_PAYPAL_GATEWAY == '1') && ( defined('OSCOM_APP_PAYPAL_EC_CHECKOUT_FLOW') && OSCOM_APP_PAYPAL_EC_CHECKOUT_FLOW == '1') ) {
           if ( isset($request_type) && ($request_type != 'SSL') && (ENABLE_SSL == true) ) {
             tep_redirect(tep_href_link('shopping_cart.php', tep_get_all_get_params(), 'SSL'));
           }
@@ -91,7 +91,7 @@
       if ( $this->enabled === true ) {
         if ( defined('FILENAME_SHOPPING_CART') && (basename($PHP_SELF) == 'shopping_cart.php') ) {
           if ( $this->templateClassExists() ) {
-            if ( (OSCOM_APP_PAYPAL_GATEWAY == '1') && (OSCOM_APP_PAYPAL_EC_CHECKOUT_FLOW == '1') ) {
+            if ( (defined('OSCOM_APP_PAYPAL_GATEWAY') && OSCOM_APP_PAYPAL_GATEWAY == '1') && ( defined('OSCOM_APP_PAYPAL_EC_CHECKOUT_FLOW') && OSCOM_APP_PAYPAL_EC_CHECKOUT_FLOW == '1') ) {
               $oscTemplate->addBlock('<style>#ppECButton { display: inline-block; }</style>', 'header_tags');
             }
 
