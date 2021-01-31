@@ -47,7 +47,8 @@ usort($modules, 'tep_sort_imgmodules');
 
 $action = (isset($_GET['action']) ? $_GET['action'] : '');
 
-$counter = array();
+$counter = array('success' => null,
+                 'warning' => null);
 
 if (tep_not_null($action)) {
   switch ($action) {
@@ -60,6 +61,8 @@ if (tep_not_null($action)) {
             if (is_object($class) && $class->action == 'resize') {
               foreach ($class->getOutput() as $id => $images) {
                 foreach ($images as $image) {
+                  set_time_limit(0);
+
                   if (isset($_POST['overwrite']) && $_POST['overwrite'] == 'on') {
                     if (file_exists(DIR_FS_CATALOG . 'images/' . $class->origin_directory . $image)) {
                       tep_resize_image(DIR_FS_CATALOG . 'images/' . $class->origin_directory . $image, DIR_FS_CATALOG . 'images/' . $class->directory . $image, SMALL_IMAGE_WIDTH, SMALL_IMAGE_HEIGHT);
