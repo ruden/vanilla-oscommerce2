@@ -94,7 +94,7 @@ if ($messageStack->size('search') > 0) {
     </div>
 
     <div class="btn-toolbar justify-content-between mb-3">
-      <a href="advanced_search.php#help" data-toggle="modal" data-target="#help"><?php echo TEXT_SEARCH_HELP_LINK; ?></a>
+      <a href="advanced_search.php#help" data-bs-toggle="modal" data-bs-target="#help"><?php echo TEXT_SEARCH_HELP_LINK; ?></a>
 
       <?php echo tep_draw_button(IMAGE_BUTTON_SEARCH, 'search', null, 'btn-primary'); ?>
     </div>
@@ -103,7 +103,7 @@ if ($messageStack->size('search') > 0) {
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="text-end m-3">
-            <a href="advanced_search.php#modal" class="text-danger" data-dismiss="modal">
+            <a href="advanced_search.php#modal" class="text-danger" data-bs-dismiss="modal">
               <?php echo TEXT_CLOSE_WINDOW; ?>
             </a>
           </div>
