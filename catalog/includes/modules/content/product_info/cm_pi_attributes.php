@@ -32,7 +32,7 @@ class cm_pi_attributes {
   }
 
   public function execute() {
-    global $oscTemplate, $product_info, $languages_id, $currencies;
+    global $oscTemplate, $product_info, $languages_id, $currencies, $cart;
 
     $products_attributes_array = array();
 

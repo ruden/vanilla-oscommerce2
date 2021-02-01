@@ -5,8 +5,22 @@
     ?>
 
     <div class="mb-3">
-      <label class="form-label" for="<?php echo 'id[' . $products_attributes['id'] . ']'; ?>"><?php echo $products_attributes['name'] . ':'; ?></label>
-      <?php echo tep_draw_pull_down_menu('id[' . $products_attributes['id'] . ']', $products_attributes['array'], $products_attributes['selected_attribute'], 'class="form-select w-auto" id="id[' . $products_attributes['id'] . ']"'); ?>
+      <h5><?php echo $products_attributes['name']; ?></h5>
+
+      <?php
+      foreach ($products_attributes['array'] as $attribute) {
+        ?>
+
+        <div class="form-check-inline">
+          <label class="form-check-label">
+            <?php echo tep_draw_radio_field('id[' . $products_attributes['id'] . ']', $attribute['id'], ($products_attributes['selected_attribute'] == $attribute['id']), 'class="form-check-input" required') . ' ' . $attribute['text']; ?>
+          </label>
+        </div>
+
+        <?php
+      }
+      ?>
+
     </div>
 
     <?php
