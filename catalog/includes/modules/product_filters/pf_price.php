@@ -32,8 +32,8 @@ class pf_price {
       $this->enabled = (MODULE_PRODUCT_FILTERS_PRICE_STATUS == 'True');
     }
 
-    $this->pfrom = (isset($_GET['pfrom']) ? tep_db_prepare_input($_GET['pfrom']) : null);
-    $this->pto = (isset($_GET['pto']) ? tep_db_prepare_input($_GET['pto']) : null);
+    $this->pfrom = (isset($_GET['pfrom']) && is_numeric($_GET['pfrom']) ? tep_db_prepare_input($_GET['pfrom']) : null);
+    $this->pto = (isset($_GET['pto']) && is_numeric($_GET['pto']) ? tep_db_prepare_input($_GET['pto']) : null);
   }
 
   public function getOutput() {

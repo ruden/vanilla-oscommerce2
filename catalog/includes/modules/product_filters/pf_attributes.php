@@ -65,7 +65,11 @@ class pf_attributes {
   }
 
   public function from() {
-    return " left join products_attributes pa on p.products_id = pa.products_id";
+    if (!empty($this->attributes)) {
+      return " left join products_attributes pa on p.products_id = pa.products_id";
+    }
+
+    return null;
   }
 
   public function where() {
