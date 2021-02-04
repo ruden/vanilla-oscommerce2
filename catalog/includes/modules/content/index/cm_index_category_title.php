@@ -32,22 +32,18 @@ class cm_index_category_title {
   }
 
   public function execute() {
-    global $oscTemplate, $categories, $manufacturers;
+    global $oscTemplate, $categories;
 
     $catname = '';
 
-    if (defined('HEADING_TITLE')) {
+    if (isset($categories['categories_name'])) {
+      $catname = $categories['categories_name'];
+    } elseif (defined('HEADING_TITLE')) {
       $catname = HEADING_TITLE;
     } elseif (defined('HEADING_TITLE_2')) {
       $catname = HEADING_TITLE_2;
     } elseif (defined('HEADING_TITLE_1')) {
       $catname = HEADING_TITLE_1;
-    }
-
-    if (isset($manufacturers['manufacturers_id'])) {
-      $catname = $manufacturers['manufacturers_name'];
-    } elseif (isset($categories['categories_id'])) {
-      $catname = $categories['categories_name'];
     }
 
     if (!empty($catname)) {
@@ -59,7 +55,13 @@ class cm_index_category_title {
   }
 
   public function isEnabled() {
-    return $this->enabled;
+    global $current_category_id;
+
+    if ($current_category_id > 0) {
+      return $this->enabled;
+    }
+
+    return false;
   }
 
   public function check() {
