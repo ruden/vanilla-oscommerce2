@@ -10,6 +10,6 @@
   }
   ?>
 
-  <a href="<?php echo tep_href_link('contact_us.php', null, 'SSL'); ?>"><?php echo MODULE_FOOTER_INFORMATION_TEXT_CONTACT_US; ?></a>
+  <a href="<?php echo tep_href_link('contact_us.php'); ?>"><?php echo MODULE_FOOTER_INFORMATION_TEXT_CONTACT_US; ?></a>
 
 </div>

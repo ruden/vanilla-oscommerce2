@@ -41,7 +41,7 @@
       }
 
 // reset per-session cart contents, but not the database contents
-      $this->reset(false);
+      $this->reset();
 
       $products_query = tep_db_query("select products_id, customers_basket_quantity from customers_basket where customers_id = '" . (int)$customer_id . "'");
       while ($products = tep_db_fetch_array($products_query)) {

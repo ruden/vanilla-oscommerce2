@@ -10,6 +10,6 @@
   }
   ?>
 
-  <a class="col-form-label-sm" href="<?php echo tep_href_link('contact_us.php', null, 'SSL'); ?>"><?php echo MODULE_HEADER_INFORMATION_TEXT_CONTACT_US; ?></a>
+  <a class="col-form-label-sm" href="<?php echo tep_href_link('contact_us.php'); ?>"><?php echo MODULE_HEADER_INFORMATION_TEXT_CONTACT_US; ?></a>
 
 </div>

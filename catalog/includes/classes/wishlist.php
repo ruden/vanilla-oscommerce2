@@ -38,7 +38,7 @@ class wishList {
       }
     }
 
-    $this->reset(false);
+    $this->reset();
 
     $products_query = tep_db_query("select products_id from customers_wishlist where customers_id = '" . (int)$customer_id . "'");
     while ($products = tep_db_fetch_array($products_query)) {
