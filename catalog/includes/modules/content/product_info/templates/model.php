@@ -1,13 +1,5 @@
-<?php
-if (isset($product_info['products_model'])) {
-  ?>
+<div class="mt-2 float-end">
 
-  <div class="mt-2 float-end">
+  <?php echo $product_info['products_model']; ?>
 
-    <?php echo $product_info['products_model']; ?>
-
-  </div>
-
-  <?php
-}
-?>
+</div>

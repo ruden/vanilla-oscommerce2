@@ -34,10 +34,12 @@ class cm_pi_manufacturer {
   public function execute() {
     global $oscTemplate, $product_info;
 
-    ob_start();
-    include('includes/modules/content/' . $this->group . '/templates/manufacturer.php');
+    if (!empty($product_info['manufacturers_id'])) {
+      ob_start();
+      include('includes/modules/content/' . $this->group . '/templates/manufacturer.php');
 
-    $oscTemplate->addContent(ob_get_clean(), 'product_info_right');
+      $oscTemplate->addContent(ob_get_clean(), 'product_info_right');
+    }
   }
 
   public function isEnabled() {

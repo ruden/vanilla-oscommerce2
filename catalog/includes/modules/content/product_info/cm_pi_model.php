@@ -34,10 +34,12 @@ class cm_pi_model {
   public function execute() {
     global $oscTemplate, $product_info;
 
-    ob_start();
-    include('includes/modules/content/' . $this->group . '/templates/model.php');
+    if (!empty($product_info['products_model'])) {
+      ob_start();
+      include('includes/modules/content/' . $this->group . '/templates/model.php');
 
-    $oscTemplate->addContent(ob_get_clean(), 'product_info_right');
+      $oscTemplate->addContent(ob_get_clean(), 'product_info_right');
+    }
   }
 
   public function isEnabled() {
