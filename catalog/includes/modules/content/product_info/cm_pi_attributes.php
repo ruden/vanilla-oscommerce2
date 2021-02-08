@@ -32,7 +32,7 @@ class cm_pi_attributes {
   }
 
   public function execute() {
-    global $oscTemplate, $product_info, $languages_id, $currencies, $cart;
+    global $oscTemplate, $product_info, $languages_id, $currencies, $cart, $wishlist;
 
     $products_attributes_array = array();
 
@@ -51,10 +51,14 @@ class cm_pi_attributes {
           }
         }
 
-        if (is_string($_GET['products_id']) && isset($cart->contents[$_GET['products_id']]['attributes'][$products_options_name['products_options_id']])) {
-          $selected_attribute = $cart->contents[$_GET['products_id']]['attributes'][$products_options_name['products_options_id']];
-        } else {
-          $selected_attribute = false;
+        $selected_attribute = false;
+
+        if (is_string($_GET['products_id'])) {
+          if (isset($cart->contents[$_GET['products_id']]['attributes'][$products_options_name['products_options_id']])) {
+            $selected_attribute = $cart->contents[$_GET['products_id']]['attributes'][$products_options_name['products_options_id']];
+          } elseif (isset($wishlist->list[$_GET['products_id']]['attributes'][$products_options_name['products_options_id']])) {
+            $selected_attribute = $wishlist->list[$_GET['products_id']]['attributes'][$products_options_name['products_options_id']];
+          }
         }
 
         $products_attributes_array[] = array('id' => $products_options_name['products_options_id'],
