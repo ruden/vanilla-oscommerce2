@@ -33,8 +33,8 @@ class hm_categories {
     }
   }
 
-  public function getData() {
-    global $oscTemplate, $cart, $wishlist;
+  public function execute() {
+    global $oscTemplate, $SID, $cart, $wishlist;
 
     $special_products = false;
     if (tep_db_num_rows(tep_db_query("SELECT 1 FROM specials WHERE status = '1'"))) {
@@ -51,27 +51,16 @@ class hm_categories {
       $wishlist_count_list = '';
     }
 
-    $categories = $this->getCategories();
-    $categories_list = $this->showCategories($categories, $categories[0]);
+    if ((USE_CACHE == 'true') && empty($SID)) {
+      $categories_list = $this->cache();
+    } else {
+      $categories_list = $this->showCategories();
+    }
 
     ob_start();
     include 'includes/modules/header/templates/categories.php';
 
-    return ob_get_clean();
-  }
-
-  public function execute() {
-    global $SID, $oscTemplate;
-
-    if ((USE_CACHE == 'true') && empty($SID)) {
-      $output = $this->cache();
-    } else {
-      $output = $this->getData();
-    }
-
-    $oscTemplate->addBlock($output, $this->group);
-    $oscTemplate->addBlock('<script src="includes/modules/header/templates/categories/jquery.smartmenus.min.js"></script>
-<script src="includes/modules/header/templates/categories/bootstrap-4/jquery.smartmenus.bootstrap-4.min.js"></script>', 'footer_scripts');
+    $oscTemplate->addBlock(ob_get_clean(), $this->group);
   }
 
   public function isEnabled() {
@@ -95,9 +84,10 @@ class hm_categories {
     return array('MODULE_HEADER_CATEGORIES_STATUS', 'MODULE_HEADER_CATEGORIES_SORT_ORDER');
   }
 
-  public function showCategories(array $tree, array $parent_array, &$categories_list = '', $cPath = array()) {
-    if (empty($parent_array)) {
-      return null;
+  public function showCategories($tree = array(), $parent_array = array(), &$categories_list = '', $cPath = array()) {
+    if (empty($tree) && empty($categories_list)) {
+      $tree = $this->getCategories();
+      $parent_array = $tree[0];
     }
 
     foreach ($parent_array as $categories) {
@@ -109,12 +99,12 @@ class hm_categories {
         $a_dropdown = 'dropdown-toggle';
       }
 
-      $cPath[sizeof($parent_array)] = $categories['categories_id'];
+      $cPath[sizeof($parent_array). $categories['parent_id']] = $categories['categories_id'];
 
       if ($categories['parent_id'] == 0) {
         $categories_list .= '<li class="nav-item ' . $li_dropdown . '"><a class="nav-link fw-bold ' . $a_dropdown . '" href="' . tep_href_link('index.php', 'cPath=' . implode('_', $cPath), 'SSL', false) . '">' . $categories['categories_name'] . '</a>' . (isset($tree[$categories['categories_id']]) ? '' : '</li>');
       } else {
-        $categories_list .= '<li class="' . $li_dropdown . '"><a class="dropdown-item ' . $a_dropdown . '" href="' . tep_href_link('index.php', 'cPath=' . implode('_', $cPath), 'SSL', false) . '">' . $categories['categories_name'] . '</a>';
+        $categories_list .= '<li class="' . $li_dropdown . ' dropdown-submenu"><a class="dropdown-item ' . $a_dropdown . '" href="' . tep_href_link('index.php', 'cPath=' . implode('_', $cPath), 'SSL', false) . '">' . $categories['categories_name'] . '</a>';
       }
 
       if (isset($tree[$categories['categories_id']])) {
@@ -132,7 +122,7 @@ class hm_categories {
 
     $category_tree = array();
 
-    $categories_query = tep_db_query("select c.categories_id, c.parent_id, c.date_added, c.last_modified, cd.categories_name from categories c, categories_description cd where c.categories_id = cd.categories_id and cd.language_id = '" . (int)$languages_id . "' order by c.sort_order, cd.categories_name");
+    $categories_query = tep_db_query("select c.*, cd.categories_name from categories c, categories_description cd where c.categories_id = cd.categories_id and cd.language_id = '" . (int)$languages_id . "' order by c.sort_order, cd.categories_name");
     while ($categories = tep_db_fetch_array($categories_query)) {
       $category_tree[$categories['parent_id']][] = $categories;
     }
@@ -146,7 +136,7 @@ class hm_categories {
     $cache_output = '';
 
     if (($refresh == true) || !read_cache($cache_output, 'categories_box-' . $language . '.cache', $auto_expire)) {
-      $cache_output = $this->getData();
+      $cache_output = $this->showCategories();
 
       write_cache($cache_output, 'categories_box-' . $language . '.cache');
     }
