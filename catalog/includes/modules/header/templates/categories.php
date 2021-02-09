@@ -1,4 +1,4 @@
-<style>jquery.smartmenus
+<style>
   @media (min-width: 992px) {
     .navbar-nav li:hover > ul.dropdown-menu {
       display: block;
