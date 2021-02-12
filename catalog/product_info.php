@@ -34,14 +34,11 @@ if (!isset($product_info['products_id'])) {
   ?>
 
   <div class="mb-5">
-    <div class="mb-3">
-      <?php echo TEXT_PRODUCT_NOT_FOUND; ?>
-    </div>
+    <?php echo TEXT_PRODUCT_NOT_FOUND; ?>
   </div>
 
   <?php
 } else {
-  tep_db_query("update products_description set products_viewed = products_viewed+1 where products_id = '" . (int)$_GET['products_id'] . "' and language_id = '" . (int)$languages_id . "'");
   ?>
 
   <div class="container">
@@ -69,7 +66,6 @@ if (!isset($product_info['products_id'])) {
       </div>
     </div>
   </div>
-
 
   <?php
 }

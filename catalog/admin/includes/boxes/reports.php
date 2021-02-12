@@ -14,11 +14,6 @@
     'heading' => BOX_HEADING_REPORTS,
     'apps' => array(
       array(
-        'code' => 'stats_products_viewed.php',
-        'title' => BOX_REPORTS_PRODUCTS_VIEWED,
-        'link' => tep_href_link('stats_products_viewed.php')
-      ),
-      array(
         'code' => 'stats_products_purchased.php',
         'title' => BOX_REPORTS_PRODUCTS_PURCHASED,
         'link' => tep_href_link('stats_products_purchased.php')
