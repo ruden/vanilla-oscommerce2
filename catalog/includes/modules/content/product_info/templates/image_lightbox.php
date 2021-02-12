@@ -43,7 +43,7 @@
 
             <li data-bs-target="#carouselIndicators" data-bs-slide-to="<?php echo $i; ?>" class="w-100 h-auto d-inline-flex bg-transparent <?php echo $active; ?>">
 
-              <?php echo tep_image('images/products/thumbs/' . $products_images_array[$i]['image'], $products_name, (int)MODULE_CONTENT_PRODUCT_INFO_IMAGE_LIGHTBOX_THUMB_IMAGE_WIDTH, (int)MODULE_CONTENT_PRODUCT_INFO_IMAGE_LIGHTBOX_THUMB_IMAGE_HEIGHT, 'class="img-fluid"'); ?>
+              <?php echo tep_image('images/products/thumbs/' . $products_images_array[$i]['image'], $products_name, (int)MODULE_CONTENT_PRODUCT_INFO_IMAGE_LIGHTBOX_THUMB_IMAGE_WIDTH, (int)MODULE_CONTENT_PRODUCT_INFO_IMAGE_LIGHTBOX_THUMB_IMAGE_HEIGHT, 'class="img-fluid mx-auto"'); ?>
 
             </li>
 
