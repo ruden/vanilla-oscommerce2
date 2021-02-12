@@ -2,39 +2,62 @@
 
   <?php
   if (!empty($products_images_array)) {
-    foreach ($products_images_array as $k => $products) {
-      if ($k == 0) {
-        ?>
+    ?>
 
-        <a href="<?php echo tep_href_link('images/products/originals/' . $products['image']); ?>" class="lightbox"><?php echo tep_image('images/products/originals/' . $products['image'], $products_name, (int)MODULE_CONTENT_PRODUCT_INFO_IMAGE_LIGHTBOX_ORIGINAL_IMAGE_WIDTH, (int)MODULE_CONTENT_PRODUCT_INFO_IMAGE_LIGHTBOX_ORIGINAL_IMAGE_HEIGHT, 'class="img-fluid mb-3"'); ?></a>
+    <div id="carouselIndicators" class="carousel carousel-dark slide">
+      <div class="carousel-inner">
 
         <?php
-      } else {
-        if (!empty($products['htmlcontent'])) {
+        foreach ($products_images_array as $item => $products) {
+          $active = $item == 0 ? 'active' : '';
           ?>
 
-          <a href="<?php echo $products['htmlcontent']; ?>" data-type="iframe" class="lightbox"><?php echo tep_image('images/products/thumbs/' . $products['image'], $products_name, (int)MODULE_CONTENT_PRODUCT_INFO_IMAGE_LIGHTBOX_THUMB_IMAGE_WIDTH, (int)MODULE_CONTENT_PRODUCT_INFO_IMAGE_LIGHTBOX_THUMB_IMAGE_HEIGHT, 'class="img-fluid"'); ?></a>
+          <div class="carousel-item <?php echo $active; ?>">
+            <a href="<?php echo tep_href_link('images/products/originals/' . $products['image'], '', 'SSL', false, false); ?>" target="_blank"><?php echo tep_image('images/products/originals/' . $products['image'], $products_name, (int)MODULE_CONTENT_PRODUCT_INFO_IMAGE_LIGHTBOX_ORIGINAL_IMAGE_WIDTH, (int)MODULE_CONTENT_PRODUCT_INFO_IMAGE_LIGHTBOX_ORIGINAL_IMAGE_HEIGHT, 'class="img-fluid"'); ?></a>
+          </div>
 
           <?php
-        } else {
+        }
+        ?>
+
+      </div>
+
+      <?php
+      if (count($products_images_array) > 1) {
+        ?>
+
+        <a class="carousel-control-prev h-75" href="#carouselIndicators" role="button" data-bs-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden"><?php echo PREVNEXT_BUTTON_PREV; ?></span>
+        </a>
+        <a class="carousel-control-next h-75" href="#carouselIndicators" role="button" data-bs-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden"><?php echo PREVNEXT_BUTTON_NEXT; ?></span>
+        </a>
+
+        <ol class="carousel-indicators position-static">
+          <?php
+          for ($i = 0, $n = sizeof($products_images_array); $i + 1 <= $n; $i++) {
+            $active = $i == 0 ? 'active' : '';
+            ?>
+
+            <li data-bs-target="#carouselIndicators" data-bs-slide-to="<?php echo $i; ?>" class="w-100 h-auto d-inline-flex bg-transparent <?php echo $active; ?>">
+
+              <?php echo tep_image('images/products/thumbs/' . $products_images_array[$i]['image'], $products_name, (int)MODULE_CONTENT_PRODUCT_INFO_IMAGE_LIGHTBOX_THUMB_IMAGE_WIDTH, (int)MODULE_CONTENT_PRODUCT_INFO_IMAGE_LIGHTBOX_THUMB_IMAGE_HEIGHT, 'class="img-fluid"'); ?>
+
+            </li>
+
+            <?php
+          }
           ?>
 
-          <a href="<?php echo tep_href_link('images/products/originals/' . $products['image']); ?>" class="lightbox"><?php echo tep_image('images/products/thumbs/' . $products['image'], $products_name, (int)MODULE_CONTENT_PRODUCT_INFO_IMAGE_LIGHTBOX_THUMB_IMAGE_WIDTH, (int)MODULE_CONTENT_PRODUCT_INFO_IMAGE_LIGHTBOX_THUMB_IMAGE_HEIGHT, 'class="img-fluid"'); ?></a>
+        </ol>
 
         <?php
-        }
       }
-    }
-  ?>
+      ?>
 
-    <link rel="stylesheet" href="includes/modules/content/product_info/templates/image_lightbox/css/tobi.min.css">
-    <script src="includes/modules/content/product_info/templates/image_lightbox/js/tobi.min.js"></script>
-    <script>
-      const tobi = new Tobi({
-        captions: false,
-        zoom: false
-      })
-    </script>
+    </div>
 
     <?php
   } else {
