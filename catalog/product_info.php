@@ -41,29 +41,27 @@ if (!isset($product_info['products_id'])) {
 } else {
   ?>
 
-  <div class="container">
-    <div class="row">
-      <div class="col-lg">
-        <?php echo $oscTemplate->getContent('product_info_left'); ?>
-      </div>
-      <div class="col-lg">
-        <h1><?php echo $product_info['products_name']; ?></h1>
+  <div class="row">
+    <div class="col-lg">
+      <?php echo $oscTemplate->getContent('product_info_left'); ?>
+    </div>
+    <div class="col-lg">
+      <h1><?php echo $product_info['products_name']; ?></h1>
 
-        <?php echo $oscTemplate->getContent('product_info_right'); ?>
+      <?php echo $oscTemplate->getContent('product_info_right'); ?>
 
-        <?php echo tep_draw_form('cart_quantity', tep_href_link('product_info.php', tep_get_all_get_params(array('action')) . 'action=add_product')); ?>
+      <?php echo tep_draw_form('cart_quantity', tep_href_link('product_info.php', tep_get_all_get_params(array('action')) . 'action=add_product')); ?>
 
-        <div class="bg-light p-3 my-3">
-          <?php echo $oscTemplate->getContent('product_info_form'); ?>
-        </div>
-
-        </form>
-
+      <div class="bg-light p-3 my-3">
+        <?php echo $oscTemplate->getContent('product_info_form'); ?>
       </div>
 
-      <div class="col-12">
-        <?php echo $page_content; ?>
-      </div>
+      </form>
+
+    </div>
+
+    <div class="col-12">
+      <?php echo $page_content; ?>
     </div>
   </div>
 
