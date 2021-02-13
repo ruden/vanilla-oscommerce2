@@ -48,7 +48,7 @@
         }
       }
 
-      $this->data['og:site_name'] = STORE_NAME;
+      $this->data['og:site_name'] = tep_output_string(STORE_NAME);
 
       if (isset($product_info['products_id'])) {
         $this->data['og:type'] = 'product';
@@ -109,7 +109,7 @@
         $this->get_og_image('images/manufacturers/' . $manufacturers['manufacturers_image']);
       } else { // default page
         $this->data['og:type'] = 'product.group';
-        $this->data['og:title'] = STORE_NAME;
+        $this->data['og:title'] = tep_output_string(STORE_NAME);
         $this->data['og:url'] = tep_href_link('index.php', '', 'SSL', false);
         $this->get_og_description();
         $this->get_og_image('images/store_logo.png');
