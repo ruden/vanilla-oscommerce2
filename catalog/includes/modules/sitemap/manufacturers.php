@@ -20,7 +20,7 @@ if (tep_db_num_rows($manufacturers_query) > 0) {
 
   while ($manufacturers = tep_db_fetch_array($manufacturers_query)) {
     $xml .= '  <url>' . "\n";
-    $xml .= '    <loc>' . tep_href_link('index.php', 'manufacturers_id=' . (int)$manufacturers['manufacturers_id'], 'SSL', false) . '</loc>' . "\n";
+    $xml .= '    <loc>' . tep_href_link('manufacturers.php', 'manufacturer_id=' . (int)$manufacturers['manufacturers_id'], 'SSL', false) . '</loc>' . "\n";
     $xml .= '    <lastmod>' . (strtotime($manufacturers['last_modified']) > strtotime($manufacturers['date_added']) ? date("Y-m-d", strtotime($manufacturers['last_modified'])) : date("Y-m-d", strtotime($manufacturers['date_added']))) . '</lastmod>' . "\n";
     $xml .= '    <changefreq>weekly</changefreq>' . "\n";
     $xml .= '    <priority>0.5</priority>' . "\n";

@@ -33,7 +33,7 @@
     }
 
     public function execute() {
-      global $oscTemplate, $currency, $currencies, $lng, $product_info, $categories, $cPath, $manufacturers;
+      global $oscTemplate, $currency, $lng, $product_info, $categories, $cPath, $manufacturers;
 
       if (!isset($lng) || (isset($lng) && !is_object($lng))) {
         include('includes/classes/language.php');
@@ -105,7 +105,7 @@
       } elseif (isset($manufacturers['manufacturers_id'])) {
         $this->data['og:type'] = 'product.group';
         $this->data['og:title'] = $manufacturers['manufacturers_name'];
-        $this->data['og:url'] = tep_href_link('index.php', 'manufacturers_id=' . $manufacturers['manufacturers_id'], 'SSL', false);
+        $this->data['og:url'] = tep_href_link('manufacturers.php', 'manufacturer_id=' . $manufacturers['manufacturers_id'], 'SSL', false);
         $this->get_og_image('images/manufacturers/' . $manufacturers['manufacturers_image']);
       } else { // default page
         $this->data['og:type'] = 'product.group';
@@ -139,7 +139,7 @@
     function isEnabled() {
       global $PHP_SELF;
 
-      if (in_array($PHP_SELF, ['index.php', 'product_info.php'])) {
+      if (in_array($PHP_SELF, array('index.php', 'manufacturers.php', 'product_info.php'))) {
         return $this->enabled;
       }
 
