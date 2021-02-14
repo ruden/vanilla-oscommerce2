@@ -21,7 +21,7 @@ $oscTemplate->buildBlocks();
   <base href="<?php echo ($request_type == 'SSL' ? HTTPS_SERVER : HTTP_SERVER) . DIR_WS_CATALOG; ?>">
   <link rel="shortcut icon" href="favicon.ico">
 
-  <link rel="stylesheet" href="ext/bootstrap/bootstrap.min.css">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
   <link rel="stylesheet" href="stylesheet.css">
 
   <?php echo $oscTemplate->getBlocks('header_tags'); ?>
