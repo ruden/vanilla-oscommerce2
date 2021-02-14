@@ -18,13 +18,13 @@
             if (!empty($products['htmlcontent'])) {
               ?>
 
-              <iframe src="<?php echo $products['htmlcontent']; ?>" style="width: 100%; height: <?php echo (int)MODULE_CONTENT_PRODUCT_INFO_IMAGE_LIGHTBOX_ORIGINAL_IMAGE_HEIGHT; ?>px;" class="img-fluid"></iframe>
+              <iframe src="<?php echo $products['htmlcontent']; ?>" style="width: 100%; height: <?php echo (int)MODULE_CONTENT_PRODUCT_INFO_IMAGES_ORIGINAL_IMAGE_HEIGHT; ?>px;" class="img-fluid"></iframe>
 
               <?php
             } else {
               ?>
 
-              <a href="<?php echo tep_href_link('images/products/originals/' . $products['image'], '', 'SSL', false, false); ?>" target="_blank"><?php echo tep_image('images/products/originals/' . $products['image'], $products_name, (int)MODULE_CONTENT_PRODUCT_INFO_IMAGE_LIGHTBOX_ORIGINAL_IMAGE_WIDTH, (int)MODULE_CONTENT_PRODUCT_INFO_IMAGE_LIGHTBOX_ORIGINAL_IMAGE_HEIGHT, 'class="img-fluid"'); ?></a>
+              <a href="<?php echo tep_href_link('images/products/originals/' . $products['image'], '', 'SSL', false, false); ?>" target="_blank"><?php echo tep_image('images/products/originals/' . $products['image'], $products_name, (int)MODULE_CONTENT_PRODUCT_INFO_IMAGES_ORIGINAL_IMAGE_WIDTH, (int)MODULE_CONTENT_PRODUCT_INFO_IMAGES_ORIGINAL_IMAGE_HEIGHT, 'class="img-fluid"'); ?></a>
 
               <?php
             }
@@ -59,7 +59,7 @@
 
             <li data-bs-target="#carouselIndicators" data-bs-slide-to="<?php echo $i; ?>" class="w-100 h-auto d-inline-flex bg-transparent <?php echo $active; ?>">
 
-              <?php echo tep_image('images/products/thumbs/' . $products_images_array[$i]['image'], $products_name, (int)MODULE_CONTENT_PRODUCT_INFO_IMAGE_LIGHTBOX_THUMB_IMAGE_WIDTH, (int)MODULE_CONTENT_PRODUCT_INFO_IMAGE_LIGHTBOX_THUMB_IMAGE_HEIGHT, 'class="img-fluid mx-auto"'); ?>
+              <?php echo tep_image('images/products/thumbs/' . $products_images_array[$i]['image'], $products_name, (int)MODULE_CONTENT_PRODUCT_INFO_IMAGES_THUMB_IMAGE_WIDTH, (int)MODULE_CONTENT_PRODUCT_INFO_IMAGES_THUMB_IMAGE_HEIGHT, 'class="img-fluid mx-auto"'); ?>
 
             </li>
 
