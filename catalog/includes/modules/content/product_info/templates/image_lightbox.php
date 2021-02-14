@@ -13,7 +13,23 @@
           ?>
 
           <div class="carousel-item <?php echo $active; ?>">
-            <a href="<?php echo tep_href_link('images/products/originals/' . $products['image'], '', 'SSL', false, false); ?>" target="_blank"><?php echo tep_image('images/products/originals/' . $products['image'], $products_name, (int)MODULE_CONTENT_PRODUCT_INFO_IMAGE_LIGHTBOX_ORIGINAL_IMAGE_WIDTH, (int)MODULE_CONTENT_PRODUCT_INFO_IMAGE_LIGHTBOX_ORIGINAL_IMAGE_HEIGHT, 'class="img-fluid"'); ?></a>
+
+            <?php
+            if (!empty($products['htmlcontent'])) {
+              ?>
+
+              <iframe src="<?php echo $products['htmlcontent']; ?>" style="width: 100%; height: <?php echo (int)MODULE_CONTENT_PRODUCT_INFO_IMAGE_LIGHTBOX_ORIGINAL_IMAGE_HEIGHT; ?>px;" class="img-fluid"></iframe>
+
+              <?php
+            } else {
+              ?>
+
+              <a href="<?php echo tep_href_link('images/products/originals/' . $products['image'], '', 'SSL', false, false); ?>" target="_blank"><?php echo tep_image('images/products/originals/' . $products['image'], $products_name, (int)MODULE_CONTENT_PRODUCT_INFO_IMAGE_LIGHTBOX_ORIGINAL_IMAGE_WIDTH, (int)MODULE_CONTENT_PRODUCT_INFO_IMAGE_LIGHTBOX_ORIGINAL_IMAGE_HEIGHT, 'class="img-fluid"'); ?></a>
+
+              <?php
+            }
+            ?>
+
           </div>
 
           <?php
