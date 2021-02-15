@@ -97,7 +97,7 @@ class cm_paypal_login {
   }
 
   function preLogin() {
-    global $paypal_login_access_token, $paypal_login_customer_id, $sendto, $billto;
+    global $paypal_login_access_token, $paypal_login_customer_id, $sendto, $billto, $customer_id;
 
     $return_url = tep_href_link('login.php');
 
@@ -127,7 +127,7 @@ class cm_paypal_login {
           $force_login = false;
 
           if (!isset($response['given_name'], $response['family_name'])) {
-            preg_match('/(?:\w+\. )?(\w+).*?(\w+)(?: \w+\.)?$/', $response['name'], $result);
+            preg_match('/(?:\S+\. )?(\S+).*?(\S+)(?: \S+\.)?$/', $response['name'], $result);
             $response['given_name'] = $result[1];
             $response['family_name'] = $result[2];
           }
@@ -142,7 +142,7 @@ class cm_paypal_login {
             $email_address = tep_db_prepare_input($response['email']);
 
             $check_query = tep_db_query("select customers_id from customers where customers_email_address = '" . tep_db_input($email_address) . "' limit 1");
-            if (tep_db_num_rows($check_query)) {
+            if (tep_db_num_rows($check_query) == 1) {
               $check = tep_db_fetch_array($check_query);
 
               $customer_id = (int)$check['customers_id'];
