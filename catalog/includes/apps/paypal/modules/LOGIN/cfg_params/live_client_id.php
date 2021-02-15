@@ -10,23 +10,23 @@
   Released under the GNU General Public License
 */
 
-  class OSCOM_PayPal_LOGIN_Cfg_live_client_id {
-    var $default = '';
-    var $title;
-    var $description;
-    var $sort_order = 200;
+class OSCOM_PayPal_LOGIN_Cfg_live_client_id {
+  public $default = '';
+  public $title;
+  public $description;
+  public $sort_order = 200;
 
-    function __construct() {
-      global $OSCOM_PayPal;
+  public function __construct() {
+    global $OSCOM_PayPal;
 
-      $this->title = $OSCOM_PayPal->getDef('cfg_login_live_client_id_title');
-      $this->description = $OSCOM_PayPal->getDef('cfg_login_live_client_id_desc');
-    }
+    $this->title = $OSCOM_PayPal->getDef('cfg_login_live_client_id_title');
+    $this->description = $OSCOM_PayPal->getDef('cfg_login_live_client_id_desc');
+  }
 
-    function getSetField() {
-      $input = tep_draw_input_field('live_client_id', OSCOM_APP_PAYPAL_LOGIN_LIVE_CLIENT_ID, 'id="inputLogInLiveClientId"');
+  public function getSetField() {
+    $input = tep_draw_input_field('live_client_id', OSCOM_APP_PAYPAL_LOGIN_LIVE_CLIENT_ID, 'id="inputLogInLiveClientId"');
 
-      $result = <<<EOT
+    $result = <<<EOT
 <div>
   <p>
     <label for="inputLogInLiveClientId">{$this->title}</label>
@@ -40,7 +40,6 @@
 </div>
 EOT;
 
-      return $result;
-    }
+    return $result;
   }
-?>
+}

@@ -10,5 +10,4 @@
   Released under the GNU General Public License
 */
 
-  $content = 'log.php';
-?>
+$content = 'log.php';

@@ -10,5 +10,4 @@
   Released under the GNU General Public License
 */
 
-  $content = 'privacy.php';
-?>
+$content = 'privacy.php';

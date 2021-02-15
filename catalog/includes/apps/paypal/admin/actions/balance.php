@@ -10,5 +10,4 @@
   Released under the GNU General Public License
 */
 
-  $content = 'balance.php';
-?>
+$content = 'balance.php';

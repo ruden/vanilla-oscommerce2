@@ -10,33 +10,33 @@
   Released under the GNU General Public License
 */
 
-  class OSCOM_PayPal_PS_Cfg_order_status_id {
-    var $default = '0';
-    var $title;
-    var $description;
-    var $sort_order = 500;
+class OSCOM_PayPal_PS_Cfg_order_status_id {
+  public $default = '0';
+  public $title;
+  public $description;
+  public $sort_order = 500;
 
-    function __construct() {
-      global $OSCOM_PayPal;
+  public function __construct() {
+    global $OSCOM_PayPal;
 
-      $this->title = $OSCOM_PayPal->getDef('cfg_ps_order_status_id_title');
-      $this->description = $OSCOM_PayPal->getDef('cfg_ps_order_status_id_desc');
+    $this->title = $OSCOM_PayPal->getDef('cfg_ps_order_status_id_title');
+    $this->description = $OSCOM_PayPal->getDef('cfg_ps_order_status_id_desc');
+  }
+
+  public function getSetField() {
+    global $OSCOM_PayPal, $languages_id;
+
+    $statuses_array = array(array('id' => '0', 'text' => $OSCOM_PayPal->getDef('cfg_ps_order_status_id_default')));
+
+    $statuses_query = tep_db_query("select orders_status_id, orders_status_name from orders_status where language_id = '" . (int)$languages_id . "' order by orders_status_name");
+    while ($statuses = tep_db_fetch_array($statuses_query)) {
+      $statuses_array[] = array('id' => $statuses['orders_status_id'],
+                                'text' => $statuses['orders_status_name']);
     }
 
-    function getSetField() {
-      global $OSCOM_PayPal, $languages_id;
+    $input = tep_draw_pull_down_menu('order_status_id', $statuses_array, OSCOM_APP_PAYPAL_PS_ORDER_STATUS_ID, 'id="inputPsOrderStatusId"');
 
-      $statuses_array = array(array('id' => '0', 'text' => $OSCOM_PayPal->getDef('cfg_ps_order_status_id_default')));
-
-      $statuses_query = tep_db_query("select orders_status_id, orders_status_name from orders_status where language_id = '" . (int)$languages_id . "' order by orders_status_name");
-      while ($statuses = tep_db_fetch_array($statuses_query)) {
-        $statuses_array[] = array('id' => $statuses['orders_status_id'],
-                                  'text' => $statuses['orders_status_name']);
-      }
-
-      $input = tep_draw_pull_down_menu('order_status_id', $statuses_array, OSCOM_APP_PAYPAL_PS_ORDER_STATUS_ID, 'id="inputPsOrderStatusId"');
-
-      $result = <<<EOT
+    $result = <<<EOT
 <div>
   <p>
     <label for="inputPsOrderStatusId">{$this->title}</label>
@@ -50,7 +50,6 @@
 </div>
 EOT;
 
-      return $result;
-    }
+    return $result;
   }
-?>
+}

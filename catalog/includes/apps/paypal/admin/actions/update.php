@@ -10,5 +10,4 @@
   Released under the GNU General Public License
 */
 
-  $content = 'update.php';
-?>
+$content = 'update.php';

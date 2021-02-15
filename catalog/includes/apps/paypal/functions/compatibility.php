@@ -61,4 +61,3 @@ if (!defined('FILENAME_PRODUCT_INFO')) {
 if (!defined('FILENAME_SHOPPING_CART')) {
   define('FILENAME_SHOPPING_CART', 'shopping_cart.php');
 }
-?>

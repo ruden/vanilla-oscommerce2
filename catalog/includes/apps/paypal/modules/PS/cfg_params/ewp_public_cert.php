@@ -10,23 +10,23 @@
   Released under the GNU General Public License
 */
 
-  class OSCOM_PayPal_PS_Cfg_ewp_public_cert {
-    var $default = '';
-    var $title;
-    var $description;
-    var $sort_order = 900;
+class OSCOM_PayPal_PS_Cfg_ewp_public_cert {
+  public $default = '';
+  public $title;
+  public $description;
+  public $sort_order = 900;
 
-    function __construct() {
-      global $OSCOM_PayPal;
+  public function __construct() {
+    global $OSCOM_PayPal;
 
-      $this->title = $OSCOM_PayPal->getDef('cfg_ps_ewp_public_cert_title');
-      $this->description = $OSCOM_PayPal->getDef('cfg_ps_ewp_public_cert_desc');
-    }
+    $this->title = $OSCOM_PayPal->getDef('cfg_ps_ewp_public_cert_title');
+    $this->description = $OSCOM_PayPal->getDef('cfg_ps_ewp_public_cert_desc');
+  }
 
-    function getSetField() {
-      $input = tep_draw_input_field('ewp_public_cert', OSCOM_APP_PAYPAL_PS_EWP_PUBLIC_CERT, 'id="inputPsEwpPublicCert"');
+  public function getSetField() {
+    $input = tep_draw_input_field('ewp_public_cert', OSCOM_APP_PAYPAL_PS_EWP_PUBLIC_CERT, 'id="inputPsEwpPublicCert"');
 
-      $result = <<<EOT
+    $result = <<<EOT
 <div>
   <p>
     <label for="inputPsEwpPublicCert">{$this->title}</label>
@@ -40,7 +40,6 @@
 </div>
 EOT;
 
-      return $result;
-    }
+    return $result;
   }
-?>
+}

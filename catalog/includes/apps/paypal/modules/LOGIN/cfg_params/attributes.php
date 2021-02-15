@@ -10,88 +10,86 @@
   Released under the GNU General Public License
 */
 
-  class OSCOM_PayPal_LOGIN_Cfg_attributes {
-    var $default = ''; // set in classs constructor
-    var $title;
-    var $description;
-    var $sort_order = 700;
+class OSCOM_PayPal_LOGIN_Cfg_attributes {
+  public $default = ''; // set in classs constructor
+  public $title;
+  public $description;
+  public $sort_order = 700;
+  public $attributes = array(
+    'personal' => array(
+      'full_name' => 'profile',
+      'date_of_birth' => 'profile',
+      'age_range' => 'https://uri.paypal.com/services/paypalattributes',
+      'gender' => 'profile'
+    ),
+    'address' => array(
+      'email_address' => 'email',
+      'street_address' => 'address',
+      'city' => 'address',
+      'state' => 'address',
+      'country' => 'address',
+      'zip_code' => 'address',
+      'phone' => 'phone'
+    ),
+    'account' => array(
+      'account_status' => 'https://uri.paypal.com/services/paypalattributes',
+      'account_type' => 'https://uri.paypal.com/services/paypalattributes',
+      'account_creation_date' => 'https://uri.paypal.com/services/paypalattributes',
+      'time_zone' => 'profile',
+      'locale' => 'profile',
+      'language' => 'profile'
+    ),
+    'checkout' => array(
+      'seamless_checkout' => 'https://uri.paypal.com/services/expresscheckout'
+    )
+  );
+  public $required = array(
+    'full_name',
+    'email_address',
+    'street_address',
+    'city',
+    'state',
+    'country',
+    'zip_code'
+  );
 
-    var $attributes = array(
-                        'personal' => array(
-                          'full_name' => 'profile',
-                          'date_of_birth' => 'profile',
-                          'age_range' => 'https://uri.paypal.com/services/paypalattributes',
-                          'gender' => 'profile'
-                        ),
-                        'address' => array(
-                          'email_address' => 'email',
-                          'street_address' => 'address',
-                          'city' => 'address',
-                          'state' => 'address',
-                          'country' => 'address',
-                          'zip_code' => 'address',
-                          'phone' => 'phone'
-                        ),
-                        'account' => array(
-                          'account_status' => 'https://uri.paypal.com/services/paypalattributes',
-                          'account_type' => 'https://uri.paypal.com/services/paypalattributes',
-                          'account_creation_date' => 'https://uri.paypal.com/services/paypalattributes',
-                          'time_zone' => 'profile',
-                          'locale' => 'profile',
-                          'language' => 'profile'
-                        ),
-                        'checkout' => array(
-                          'seamless_checkout' => 'https://uri.paypal.com/services/expresscheckout'
-                        )
-                      );
+  public function __construct() {
+    global $OSCOM_PayPal;
 
-    var $required = array(
-                      'full_name',
-                      'email_address',
-                      'street_address',
-                      'city',
-                      'state',
-                      'country',
-                      'zip_code'
-                    );
+    $this->default = implode(';', $this->getAttributes());
 
-    function __construct() {
-      global $OSCOM_PayPal;
+    $this->title = $OSCOM_PayPal->getDef('cfg_login_attributes_title');
+    $this->description = $OSCOM_PayPal->getDef('cfg_login_attributes_desc');
+  }
 
-      $this->default = implode(';', $this->getAttributes());
+  public function getSetField() {
+    global $OSCOM_PayPal;
 
-      $this->title = $OSCOM_PayPal->getDef('cfg_login_attributes_title');
-      $this->description = $OSCOM_PayPal->getDef('cfg_login_attributes_desc');
+    $values_array = explode(';', OSCOM_APP_PAYPAL_LOGIN_ATTRIBUTES);
+
+    $input = '';
+
+    foreach ($this->attributes as $group => $attributes) {
+      $input .= '<strong>' . $OSCOM_PayPal->getDef('cfg_login_attributes_group_' . $group) . '</strong><br />';
+
+      foreach ($attributes as $attribute => $scope) {
+        if (in_array($attribute, $this->required)) {
+          $input .= '<input type="radio" id="ppLogInAttributesSelection' . ucfirst($attribute) . '" name="ppLogInAttributesTmp' . ucfirst($attribute) . '" value="' . $attribute . '" checked="checked" />';
+        } else {
+          $input .= '<input type="checkbox" id="ppLogInAttributesSelection' . ucfirst($attribute) . '" name="ppLogInAttributes[]" value="' . $attribute . '"' . (in_array($attribute, $values_array) ? ' checked="checked"' : '') . ' />';
+        }
+
+        $input .= '&nbsp;<label for="ppLogInAttributesSelection' . ucfirst($attribute) . '">' . $OSCOM_PayPal->getDef('cfg_login_attributes_attribute_' . $attribute) . '</label><br />';
+      }
     }
 
-    function getSetField() {
-      global $OSCOM_PayPal;
+    if (!empty($input)) {
+      $input = '<br />' . substr($input, 0, -6);
+    }
 
-      $values_array = explode(';', OSCOM_APP_PAYPAL_LOGIN_ATTRIBUTES);
+    $input .= '<input type="hidden" name="attributes" value="" />';
 
-      $input = '';
-
-      foreach ( $this->attributes as $group => $attributes ) {
-        $input .= '<strong>' . $OSCOM_PayPal->getDef('cfg_login_attributes_group_' . $group) . '</strong><br />';
-
-        foreach ( $attributes as $attribute => $scope ) {
-          if ( in_array($attribute, $this->required) ) {
-            $input .= '<input type="radio" id="ppLogInAttributesSelection' . ucfirst($attribute) . '" name="ppLogInAttributesTmp' . ucfirst($attribute) . '" value="' . $attribute . '" checked="checked" />';
-          } else {
-            $input .= '<input type="checkbox" id="ppLogInAttributesSelection' . ucfirst($attribute) . '" name="ppLogInAttributes[]" value="' . $attribute . '"' . (in_array($attribute, $values_array) ? ' checked="checked"' : '') . ' />';
-          }
-
-          $input .= '&nbsp;<label for="ppLogInAttributesSelection' . ucfirst($attribute) . '">' . $OSCOM_PayPal->getDef('cfg_login_attributes_attribute_' . $attribute) . '</label><br />';
-        }
-      }
-
-      if ( !empty($input) ) {
-        $input = '<br />' . substr($input, 0, -6);
-      }
-
-      $input .= '<input type="hidden" name="attributes" value="" />';
-
-      $result = <<<EOT
+    $result = <<<EOT
 <div>
   <p>
     <label>{$this->title}</label>
@@ -139,19 +137,18 @@ $(function() {
 </script>
 EOT;
 
-      return $result;
-    }
-
-    function getAttributes() {
-      $data = array();
-
-      foreach ( $this->attributes as $group => $attributes ) {
-        foreach ( $attributes as $attribute => $scope ) {
-          $data[] = $attribute;
-        }
-      }
-
-      return $data;
-    }
+    return $result;
   }
-?>
+
+  public function getAttributes() {
+    $data = array();
+
+    foreach ($this->attributes as $group => $attributes) {
+      foreach ($attributes as $attribute => $scope) {
+        $data[] = $attribute;
+      }
+    }
+
+    return $data;
+  }
+}

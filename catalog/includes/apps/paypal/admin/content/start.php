@@ -32,13 +32,13 @@
 </div>
 
 <script>
-$(function() {
-  $('#ppStartDashboard > div:nth-child(2)').each(function() {
-    if ( $(this).prev().height() < $(this).height() ) {
-      $(this).prev().height($(this).height());
-    } else {
-      $(this).height($(this).prev().height());
-    }
+  $(function () {
+    $('#ppStartDashboard > div:nth-child(2)').each(function () {
+      if ($(this).prev().height() < $(this).height()) {
+        $(this).prev().height($(this).height());
+      } else {
+        $(this).height($(this).prev().height());
+      }
+    });
   });
-});
 </script>
