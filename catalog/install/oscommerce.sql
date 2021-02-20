@@ -1028,10 +1028,14 @@ INSERT INTO currencies VALUES (2,'Euro','EUR','','€','.',',','2','1.0000', now
 INSERT INTO information_pages VALUES ('1', now(), null, '1', '3');
 INSERT INTO information_pages VALUES ('2', now(), null, '1', '2');
 INSERT INTO information_pages VALUES ('3', now(), null, '1', '1');
+INSERT INTO information_pages VALUES ('4', now(), null, '0', '1');
+INSERT INTO information_pages VALUES ('5', now(), null, '1', '1');
 
 INSERT INTO information_pages_content VALUES ('1', '1', 'Shipping & Returns', 'Put here your Shipping & Returns information.');
 INSERT INTO information_pages_content VALUES ('2', '1', 'Privacy Notice', 'Put here your Privacy Notice information. ');
 INSERT INTO information_pages_content VALUES ('3', '1', 'Conditions of Use', 'Put here your Conditions of Use information.');
+INSERT INTO information_pages_content VALUES ('4', '1', 'Returns & Refunds', 'Put here your Returns & Refunds information.');
+INSERT INTO information_pages_content VALUES ('5', '1', 'Cookie Policy', 'Put here your Cookie Policy information.');
 
 INSERT INTO languages VALUES (1,'English','en','icon.gif','english',1);
 
