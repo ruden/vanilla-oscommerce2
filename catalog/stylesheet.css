@@ -9,6 +9,11 @@
   Released under the GNU General Public License
 */
 
+* {
+  font-size: 14px;
+  line-height: 1.42857;
+}
+
 a {
   text-decoration: unset;
 }
