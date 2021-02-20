@@ -125,7 +125,7 @@ class sage_pay_form {
                    'Currency' => $currency,
                    'Description' => substr(STORE_NAME, 0, 100),
                    'SuccessURL' => tep_href_link('checkout_process.php'),
-                   'FailureURL' => tep_href_link('checkout_payment.php', 'payment_error=' . $this->code, 'SSL'),
+                   'FailureURL' => tep_href_link('checkout_payment.php', 'payment_error=' . $this->code),
                    'CustomerName' => substr($order->billing['firstname'] . ' ' . $order->billing['lastname'], 0, 100),
                    'CustomerEMail' => substr($order->customer['email_address'], 0, 255),
                    'BillingSurname' => substr($order->billing['lastname'], 0, 20),
@@ -232,10 +232,10 @@ class sage_pay_form {
 
         $error = $this->getErrorMessageNumber($sage_pay_response['StatusDetail']);
 
-        tep_redirect(tep_href_link('checkout_payment.php', 'payment_error=' . $this->code . (tep_not_null($error) ? '&error=' . $error : ''), 'SSL'));
+        tep_redirect(tep_href_link('checkout_payment.php', 'payment_error=' . $this->code . (tep_not_null($error) ? '&error=' . $error : '')));
       }
     } else {
-      tep_redirect(tep_href_link('checkout_payment.php', 'payment_error=' . $this->code, 'SSL'));
+      tep_redirect(tep_href_link('checkout_payment.php', 'payment_error=' . $this->code));
     }
   }
 

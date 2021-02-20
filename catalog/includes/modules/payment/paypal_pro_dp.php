@@ -280,10 +280,10 @@ class paypal_pro_dp {
       $response_array = $this->_app->getApiResult('DP', 'DoDirectPayment', $params);
 
       if (!in_array($response_array['ACK'], array('Success', 'SuccessWithWarning'))) {
-        tep_redirect(tep_href_link('shopping_cart.php', 'error_message=' . stripslashes($response_array['L_LONGMESSAGE0']), 'SSL'));
+        tep_redirect(tep_href_link('shopping_cart.php', 'error_message=' . stripslashes($response_array['L_LONGMESSAGE0'])));
       }
     } else {
-      tep_redirect(tep_href_link('checkout_confirmation.php', 'error_message=' . $this->_app->getDef('module_dp_error_all_fields_required'), 'SSL'));
+      tep_redirect(tep_href_link('checkout_confirmation.php', 'error_message=' . $this->_app->getDef('module_dp_error_all_fields_required')));
     }
   }
 
@@ -383,10 +383,10 @@ class paypal_pro_dp {
             break;
         }
 
-        tep_redirect(tep_href_link('checkout_confirmation.php', 'error_message=' . $error_message, 'SSL'));
+        tep_redirect(tep_href_link('checkout_confirmation.php', 'error_message=' . $error_message));
       }
     } else {
-      tep_redirect(tep_href_link('checkout_confirmation.php', 'error_message=' . $this->_app->getDef('module_dp_error_all_fields_required'), 'SSL'));
+      tep_redirect(tep_href_link('checkout_confirmation.php', 'error_message=' . $this->_app->getDef('module_dp_error_all_fields_required')));
     }
   }
 

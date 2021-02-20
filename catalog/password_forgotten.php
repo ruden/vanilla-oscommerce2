@@ -73,7 +73,7 @@ if ($password_reset_initiated == true) {
 } else {
   ?>
 
-  <?php echo tep_draw_form('password_forgotten', tep_href_link('password_forgotten.php', 'action=process', 'SSL'), 'post', '', true); ?>
+  <?php echo tep_draw_form('password_forgotten', tep_href_link('password_forgotten.php', 'action=process'), 'post', '', true); ?>
 
   <p><?php echo TEXT_MAIN; ?></p>
 

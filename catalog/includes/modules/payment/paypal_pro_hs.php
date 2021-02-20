@@ -361,8 +361,8 @@
         tep_session_register('pphs_key');
       }
 
-      $iframe_url = tep_href_link('ext/modules/payment/paypal/hosted_checkout.php', 'key=' . $pphs_key, 'SSL');
-      $form_url = tep_href_link('checkout_payment.php', 'payment_error=paypal_pro_hs', 'SSL');
+      $iframe_url = tep_href_link('ext/modules/payment/paypal/hosted_checkout.php', 'key=' . $pphs_key);
+      $form_url = tep_href_link('checkout_payment.php', 'payment_error=paypal_pro_hs');
 
 // include jquery if it doesn't exist in the template
       $output = <<<EOD

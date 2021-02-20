@@ -37,7 +37,7 @@ class OSCOM_PayPal_LOGIN {
       }
 
       $this->_req_notes[] = $OSCOM_PayPal->getDef('module_login_notice_paypal_app_return_url', array(
-        'return_url' => tep_catalog_href_link('login.php', 'action=paypal_login', 'SSL')
+        'return_url' => tep_catalog_href_link('login.php', 'action=paypal_login')
       ));
     }
   }

@@ -96,7 +96,7 @@ if ($messageStack->size('password_reset') > 0) {
 }
 ?>
 
-<?php echo tep_draw_form('password_reset', tep_href_link('password_reset.php', 'account=' . $email_address . '&key=' . $password_key . '&action=process', 'SSL'), 'post', 'onsubmit="return check_form(password_reset);"', true); ?>
+<?php echo tep_draw_form('password_reset', tep_href_link('password_reset.php', 'account=' . $email_address . '&key=' . $password_key . '&action=process'), 'post', 'onsubmit="return check_form(password_reset);"', true); ?>
 
   <p><?php echo TEXT_MAIN; ?></p>
 

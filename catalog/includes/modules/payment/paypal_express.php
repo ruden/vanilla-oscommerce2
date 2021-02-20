@@ -72,7 +72,7 @@
       if ( defined('FILENAME_SHOPPING_CART') && (basename($PHP_SELF) == 'shopping_cart.php') ) {
         if ( (defined('OSCOM_APP_PAYPAL_GATEWAY') && OSCOM_APP_PAYPAL_GATEWAY == '1') && ( defined('OSCOM_APP_PAYPAL_EC_CHECKOUT_FLOW') && OSCOM_APP_PAYPAL_EC_CHECKOUT_FLOW == '1') ) {
           if ( isset($request_type) && ($request_type != 'SSL') && (ENABLE_SSL == true) ) {
-            tep_redirect(tep_href_link('shopping_cart.php', tep_get_all_get_params(), 'SSL'));
+            tep_redirect(tep_href_link('shopping_cart.php', tep_get_all_get_params()));
           }
 
           header('X-UA-Compatible: IE=edge', true);
@@ -172,9 +172,9 @@
 
           $server = (OSCOM_APP_PAYPAL_EC_STATUS === '1') ? 'production' : 'sandbox';
 
-          $ppecset_url = tep_href_link('ext/modules/payment/paypal/express.php', 'format=json', 'SSL');
+          $ppecset_url = tep_href_link('ext/modules/payment/paypal/express.php', 'format=json');
 
-          $ppecerror_url = tep_href_link('ext/modules/payment/paypal/express.php', 'osC_Action=setECError', 'SSL');
+          $ppecerror_url = tep_href_link('ext/modules/payment/paypal/express.php', 'osC_Action=setECError');
 
           switch (OSCOM_APP_PAYPAL_EC_INCONTEXT_BUTTON_COLOR) {
             case '3':
@@ -285,13 +285,13 @@ EOD;
 
       if ( OSCOM_APP_PAYPAL_GATEWAY == '1' ) { // PayPal
         if ( !in_array($appPayPalEcResult['ACK'], array('Success', 'SuccessWithWarning')) ) {
-          tep_redirect(tep_href_link('shopping_cart.php', 'error_message=' . stripslashes($appPayPalEcResult['L_LONGMESSAGE0']), 'SSL'));
+          tep_redirect(tep_href_link('shopping_cart.php', 'error_message=' . stripslashes($appPayPalEcResult['L_LONGMESSAGE0'])));
         } elseif ( !tep_session_is_registered('appPayPalEcSecret') || ($appPayPalEcResult['PAYMENTREQUEST_0_CUSTOM'] != $appPayPalEcSecret) ) {
           tep_redirect(tep_href_link('shopping_cart.php'));
         }
       } else { // Payflow
         if ($appPayPalEcResult['RESULT'] != '0') {
-          tep_redirect(tep_href_link('shopping_cart.php', 'error_message=' . urlencode($appPayPalEcResult['OSCOM_ERROR_MESSAGE']), 'SSL'));
+          tep_redirect(tep_href_link('shopping_cart.php', 'error_message=' . urlencode($appPayPalEcResult['OSCOM_ERROR_MESSAGE'])));
         } elseif ( !tep_session_is_registered('appPayPalEcSecret') || ($appPayPalEcResult['CUSTOM'] != $appPayPalEcSecret) ) {
           tep_redirect(tep_href_link('shopping_cart.php'));
         }
@@ -341,7 +341,7 @@ EOD;
           tep_redirect(tep_href_link('shopping_cart.php'));
         }
       } else {
-        tep_redirect(tep_href_link('shopping_cart.php', 'error_message=' . stripslashes($appPayPalEcResult['L_LONGMESSAGE0']), 'SSL'));
+        tep_redirect(tep_href_link('shopping_cart.php', 'error_message=' . stripslashes($appPayPalEcResult['L_LONGMESSAGE0'])));
       }
 
       if (empty($comments)) {
@@ -382,7 +382,7 @@ EOD;
           tep_redirect($paypal_url);
         }
 
-        tep_redirect(tep_href_link('shopping_cart.php', 'error_message=' . stripslashes($response_array['L_LONGMESSAGE0']), 'SSL'));
+        tep_redirect(tep_href_link('shopping_cart.php', 'error_message=' . stripslashes($response_array['L_LONGMESSAGE0'])));
       }
     }
 
@@ -398,7 +398,7 @@ EOD;
           tep_redirect(tep_href_link('shopping_cart.php'));
         }
       } else {
-        tep_redirect(tep_href_link('shopping_cart.php', 'error_message=' . urlencode($appPayPalEcResult['OSCOM_ERROR_MESSAGE']), 'SSL'));
+        tep_redirect(tep_href_link('shopping_cart.php', 'error_message=' . urlencode($appPayPalEcResult['OSCOM_ERROR_MESSAGE'])));
       }
 
       if ( empty($comments) ) {
@@ -428,7 +428,7 @@ EOD;
       $response_array = $this->_app->getApiResult('EC', 'PayflowDoExpressCheckoutPayment', $params);
 
       if ( $response_array['RESULT'] != '0' ) {
-        tep_redirect(tep_href_link('shopping_cart.php', 'error_message=' . urlencode($response_array['OSCOM_ERROR_MESSAGE']), 'SSL'));
+        tep_redirect(tep_href_link('shopping_cart.php', 'error_message=' . urlencode($response_array['OSCOM_ERROR_MESSAGE'])));
       }
     }
 

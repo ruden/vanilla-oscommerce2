@@ -66,7 +66,7 @@ $osC_Action = isset($_GET['osC_Action']) ? $_GET['osC_Action'] : null;
 
 switch ($osC_Action) {
   case 'setECError':
-    tep_redirect(tep_href_link('shopping_cart.php', 'error_message=' . $paypal_express->_app->getDef('module_ec_error_setexpresscheckout_call'), 'SSL'));
+    tep_redirect(tep_href_link('shopping_cart.php', 'error_message=' . $paypal_express->_app->getDef('module_ec_error_setexpresscheckout_call')));
     break;
 
   case 'cancel':
@@ -1060,7 +1060,7 @@ EOD;
           exit;
         }
 
-        tep_redirect(tep_href_link('shopping_cart.php', 'error_message=' . stripslashes($response_array['L_LONGMESSAGE0']), 'SSL'));
+        tep_redirect(tep_href_link('shopping_cart.php', 'error_message=' . stripslashes($response_array['L_LONGMESSAGE0'])));
       }
     } else { // Payflow
       $params['CUSTOM'] = $appPayPalEcSecret;
@@ -1075,7 +1075,7 @@ EOD;
       if ($response_array['RESULT'] == '0') {
         tep_redirect($paypal_url . 'token=' . $response_array['TOKEN']);
       } else {
-        tep_redirect(tep_href_link('shopping_cart.php', 'error_message=' . urlencode($response_array['OSCOM_ERROR_MESSAGE']), 'SSL'));
+        tep_redirect(tep_href_link('shopping_cart.php', 'error_message=' . urlencode($response_array['OSCOM_ERROR_MESSAGE'])));
       }
     }
 

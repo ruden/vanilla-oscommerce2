@@ -73,7 +73,7 @@ require('includes/template_top.php');
               <td><?php echo tep_output_string_protected($order_name); ?></td>
               <td><?php echo $products['count']; ?></td>
               <td><?php echo strip_tags($history['order_total']); ?></td>
-              <td class="text-end"><?php echo tep_draw_button(SMALL_IMAGE_BUTTON_VIEW, 'document', tep_href_link('account_history_info.php', (isset($_GET['page']) ? 'page=' . $_GET['page'] . '&' : '') . 'order_id=' . $history['orders_id'], 'SSL'), 'btn-primary btn-sm'); ?></td>
+              <td class="text-end"><?php echo tep_draw_button(SMALL_IMAGE_BUTTON_VIEW, 'document', tep_href_link('account_history_info.php', (isset($_GET['page']) ? 'page=' . $_GET['page'] . '&' : '') . 'order_id=' . $history['orders_id']), 'btn-primary btn-sm'); ?></td>
             </tr>
 
             <?php

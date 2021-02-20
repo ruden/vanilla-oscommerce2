@@ -17,7 +17,7 @@ if ($session_started == false) {
   if (!isset($_GET['cookie_test'])) {
     $all_get = tep_get_all_get_params();
 
-    tep_redirect(tep_href_link('login.php', $all_get . (empty($all_get) ? '' : '&') . 'cookie_test=1', 'SSL'));
+    tep_redirect(tep_href_link('login.php', $all_get . (empty($all_get) ? '' : '&') . 'cookie_test=1'));
   }
 
   tep_redirect(tep_href_link('cookie_usage.php'));

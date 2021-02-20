@@ -31,7 +31,7 @@ require('includes/languages/' . $language . '/account_history_info.php');
 
 $breadcrumb->add(NAVBAR_TITLE_1, tep_href_link('account.php'));
 $breadcrumb->add(NAVBAR_TITLE_2, tep_href_link('account_history.php'));
-$breadcrumb->add(sprintf(NAVBAR_TITLE_3, $_GET['order_id']), tep_href_link('account_history_info.php', 'order_id=' . $_GET['order_id'], 'SSL'));
+$breadcrumb->add(sprintf(NAVBAR_TITLE_3, $_GET['order_id']), tep_href_link('account_history_info.php', 'order_id=' . $_GET['order_id']));
 
 require('includes/classes/order.php');
 $order = new order($_GET['order_id']);
@@ -177,7 +177,7 @@ require('includes/template_top.php');
     }
     ?>
 
-    <?php echo tep_draw_button(IMAGE_BUTTON_BACK, 'triangle-1-w', tep_href_link('account_history.php', tep_get_all_get_params(array('order_id')), 'SSL'), 'btn-light'); ?>
+    <?php echo tep_draw_button(IMAGE_BUTTON_BACK, 'triangle-1-w', tep_href_link('account_history.php', tep_get_all_get_params(array('order_id'))), 'btn-light'); ?>
 
   </div>
 

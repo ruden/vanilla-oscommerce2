@@ -43,7 +43,7 @@ if ($error === false) {
     $form_url = 'https://securepayments.sandbox.paypal.com/webapps/HostedSoleSolutionApp/webflow/sparta/hostedSoleSolutionProcess';
   }
 } else {
-  $form_url = tep_href_link('checkout_payment.php', 'payment_error=paypal_pro_hs', 'SSL');
+  $form_url = tep_href_link('checkout_payment.php', 'payment_error=paypal_pro_hs');
 }
 ?>
 <!DOCTYPE html>

@@ -3,7 +3,7 @@
 
   <p><?php echo MODULE_CONTENT_LOGIN_TEXT_RETURNING_CUSTOMER; ?></p>
 
-  <?php echo tep_draw_form('login', tep_href_link('login.php', 'action=process', 'SSL'), 'post', '', true); ?>
+  <?php echo tep_draw_form('login', tep_href_link('login.php', 'action=process'), 'post', '', true); ?>
 
   <div class="mb-3">
     <label class="form-label" for="email-address"><?php echo ENTRY_EMAIL_ADDRESS; ?></label>

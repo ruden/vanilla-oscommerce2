@@ -53,7 +53,7 @@ $order = new order;
 $payment_modules->update_status();
 
 if (($payment_modules->selected_module != $payment) || (is_array($payment_modules->modules) && (sizeof($payment_modules->modules) > 1) && !is_object($$payment)) || (is_object($$payment) && ($$payment->enabled == false))) {
-  tep_redirect(tep_href_link('checkout_payment.php', 'error_message=' . urlencode(ERROR_NO_PAYMENT_MODULE_SELECTED), 'SSL'));
+  tep_redirect(tep_href_link('checkout_payment.php', 'error_message=' . urlencode(ERROR_NO_PAYMENT_MODULE_SELECTED)));
 }
 
 if (is_array($payment_modules->modules)) {

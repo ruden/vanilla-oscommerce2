@@ -56,7 +56,7 @@ if ($messageStack->size('addressbook') > 0) {
           <p><?php echo tep_address_format($format_id, $addresses, true, ' ', '<br />'); ?></p>
 
           <div class="mb-3">
-            <?php echo tep_draw_button(SMALL_IMAGE_BUTTON_DELETE, 'trash', tep_href_link('address_book_process.php', 'delete=' . $addresses['address_book_id'], 'SSL'), 'btn-light') . ' ' . tep_draw_button(SMALL_IMAGE_BUTTON_EDIT, 'document', tep_href_link('address_book_process.php', 'edit=' . $addresses['address_book_id'], 'SSL')); ?>
+            <?php echo tep_draw_button(SMALL_IMAGE_BUTTON_DELETE, 'trash', tep_href_link('address_book_process.php', 'delete=' . $addresses['address_book_id']), 'btn-light') . ' ' . tep_draw_button(SMALL_IMAGE_BUTTON_EDIT, 'document', tep_href_link('address_book_process.php', 'edit=' . $addresses['address_book_id'])); ?>
           </div>
         </div>
 

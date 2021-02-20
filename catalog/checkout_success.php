@@ -44,7 +44,7 @@ require('includes/template_top.php');
 
 <h1><?php echo HEADING_TITLE; ?></h1>
 
-<?php echo tep_draw_form('order', tep_href_link('checkout_success.php', 'action=update', 'SSL')); ?>
+<?php echo tep_draw_form('order', tep_href_link('checkout_success.php', 'action=update')); ?>
 
 <div class="mb-5">
   <?php echo $page_content; ?>

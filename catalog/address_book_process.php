@@ -240,9 +240,9 @@ $breadcrumb->add(NAVBAR_TITLE_1, tep_href_link('account.php'));
 $breadcrumb->add(NAVBAR_TITLE_2, tep_href_link('address_book.php'));
 
 if (isset($_GET['edit']) && is_numeric($_GET['edit'])) {
-  $breadcrumb->add(NAVBAR_TITLE_MODIFY_ENTRY, tep_href_link('address_book_process.php', 'edit=' . $_GET['edit'], 'SSL'));
+  $breadcrumb->add(NAVBAR_TITLE_MODIFY_ENTRY, tep_href_link('address_book_process.php', 'edit=' . $_GET['edit']));
 } elseif (isset($_GET['delete']) && is_numeric($_GET['delete'])) {
-  $breadcrumb->add(NAVBAR_TITLE_DELETE_ENTRY, tep_href_link('address_book_process.php', 'delete=' . $_GET['delete'], 'SSL'));
+  $breadcrumb->add(NAVBAR_TITLE_DELETE_ENTRY, tep_href_link('address_book_process.php', 'delete=' . $_GET['delete']));
 } else {
   $breadcrumb->add(NAVBAR_TITLE_ADD_ENTRY, tep_href_link('address_book_process.php'));
 }
@@ -277,14 +277,14 @@ if (isset($_GET['delete'])) {
 
   <div class="btn-toolbar justify-content-between">
     <?php echo tep_draw_button(IMAGE_BUTTON_BACK, 'triangle-1-w', tep_href_link('address_book.php'), 'btn-light'); ?>
-    <?php echo tep_draw_button(IMAGE_BUTTON_DELETE, 'trash', tep_href_link('address_book_process.php', 'delete=' . $_GET['delete'] . '&action=deleteconfirm&formid=' . md5($sessiontoken), 'SSL'), 'btn-primary'); ?>
+    <?php echo tep_draw_button(IMAGE_BUTTON_DELETE, 'trash', tep_href_link('address_book_process.php', 'delete=' . $_GET['delete'] . '&action=deleteconfirm&formid=' . md5($sessiontoken)), 'btn-primary'); ?>
   </div>
 
   <?php
 } else {
   ?>
 
-  <?php echo tep_draw_form('addressbook', tep_href_link('address_book_process.php', (isset($_GET['edit']) ? 'edit=' . $_GET['edit'] : ''), 'SSL'), 'post', 'onsubmit="return check_form(addressbook);"', true); ?>
+  <?php echo tep_draw_form('addressbook', tep_href_link('address_book_process.php', (isset($_GET['edit']) ? 'edit=' . $_GET['edit'] : '')), 'post', 'onsubmit="return check_form(addressbook);"', true); ?>
 
   <div class="col-lg-6 mb-5">
     <div class="text-end text-danger small"><?php echo FORM_REQUIRED_INFORMATION; ?></div>

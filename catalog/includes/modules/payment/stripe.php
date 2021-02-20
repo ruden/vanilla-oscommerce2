@@ -241,7 +241,7 @@ class stripe {
           $params['customer'] = $stripe_token_array[0];
           $params['card'] = $stripe_token_array[1];
         } else {
-          tep_redirect(tep_href_link('checkout_payment.php', 'payment_error=' . $this->code . '&error=cardstored', 'SSL'));
+          tep_redirect(tep_href_link('checkout_payment.php', 'payment_error=' . $this->code . '&error=cardstored'));
         }
       }
     }
@@ -293,7 +293,7 @@ class stripe {
 
     $this->sendDebugEmail($stripe_result);
 
-    tep_redirect(tep_href_link('checkout_payment.php', 'payment_error=' . $this->code, 'SSL'));
+    tep_redirect(tep_href_link('checkout_payment.php', 'payment_error=' . $this->code));
   }
 
   public function after_process() {

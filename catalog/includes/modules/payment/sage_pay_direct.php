@@ -301,7 +301,7 @@ class sage_pay_direct {
         $cc_type = isset($_POST['cc_type']) ? substr($_POST['cc_type'], 0, 15) : null;
 
         if (!isset($cc_type) || ($this->isCard($cc_type) == false)) {
-          tep_redirect(tep_href_link('checkout_payment.php', 'payment_error=' . $this->code . '&error=cardtype', 'SSL'));
+          tep_redirect(tep_href_link('checkout_payment.php', 'payment_error=' . $this->code . '&error=cardtype'));
         }
 
         if ($cc_type != 'PAYPAL') {
@@ -330,48 +330,48 @@ class sage_pay_direct {
           }
 
           if (!isset($cc_owner) || empty($cc_owner)) {
-            tep_redirect(tep_href_link('checkout_payment.php', 'payment_error=' . $this->code . '&error=cardowner', 'SSL'));
+            tep_redirect(tep_href_link('checkout_payment.php', 'payment_error=' . $this->code . '&error=cardowner'));
           }
 
           if (!isset($cc_number) || (is_numeric($cc_number) == false)) {
-            tep_redirect(tep_href_link('checkout_payment.php', 'payment_error=' . $this->code . '&error=cardnumber', 'SSL'));
+            tep_redirect(tep_href_link('checkout_payment.php', 'payment_error=' . $this->code . '&error=cardnumber'));
           }
 
           if ((($cc_type == 'MAESTRO') && (MODULE_PAYMENT_SAGE_PAY_DIRECT_ALLOW_MAESTRO == 'True')) || (($cc_type == 'AMEX') && (MODULE_PAYMENT_SAGE_PAY_DIRECT_ALLOW_AMEX == 'True'))) {
             if (!isset($_POST['cc_starts_month']) || !in_array($_POST['cc_starts_month'], $months_array)) {
-              tep_redirect(tep_href_link('checkout_payment.php', 'payment_error=' . $this->code . '&error=cardstart', 'SSL'));
+              tep_redirect(tep_href_link('checkout_payment.php', 'payment_error=' . $this->code . '&error=cardstart'));
             }
 
             if (!isset($_POST['cc_starts_year']) || !in_array($_POST['cc_starts_year'], $year_valid_from_array)) {
-              tep_redirect(tep_href_link('checkout_payment.php', 'payment_error=' . $this->code . '&error=cardstart', 'SSL'));
+              tep_redirect(tep_href_link('checkout_payment.php', 'payment_error=' . $this->code . '&error=cardstart'));
             }
 
             $cc_start = substr($_POST['cc_starts_month'] . $_POST['cc_starts_year'], 0, 4);
           }
 
           if (!isset($_POST['cc_expires_month']) || !in_array($_POST['cc_expires_month'], $months_array)) {
-            tep_redirect(tep_href_link('checkout_payment.php', 'payment_error=' . $this->code . '&error=cardexpires', 'SSL'));
+            tep_redirect(tep_href_link('checkout_payment.php', 'payment_error=' . $this->code . '&error=cardexpires'));
           }
 
           if (!isset($_POST['cc_expires_year']) || !in_array($_POST['cc_expires_year'], $year_valid_to_array)) {
-            tep_redirect(tep_href_link('checkout_payment.php', 'payment_error=' . $this->code . '&error=cardexpires', 'SSL'));
+            tep_redirect(tep_href_link('checkout_payment.php', 'payment_error=' . $this->code . '&error=cardexpires'));
           }
 
           if (($_POST['cc_expires_year'] == date('y')) && ($_POST['cc_expires_month'] < date('m'))) {
-            tep_redirect(tep_href_link('checkout_payment.php', 'payment_error=' . $this->code . '&error=cardexpires', 'SSL'));
+            tep_redirect(tep_href_link('checkout_payment.php', 'payment_error=' . $this->code . '&error=cardexpires'));
           }
 
           $cc_expires = substr($_POST['cc_expires_month'] . $_POST['cc_expires_year'], 0, 4);
 
           if ((($cc_type == 'MAESTRO') && (MODULE_PAYMENT_SAGE_PAY_DIRECT_ALLOW_MAESTRO == 'True'))) {
             if (!isset($cc_issue) || empty($cc_issue)) {
-              tep_redirect(tep_href_link('checkout_payment.php', 'payment_error=' . $this->code . '&error=cardissue', 'SSL'));
+              tep_redirect(tep_href_link('checkout_payment.php', 'payment_error=' . $this->code . '&error=cardissue'));
             }
           }
 
           if (MODULE_PAYMENT_SAGE_PAY_DIRECT_VERIFY_WITH_CVC == 'True') {
             if (!isset($cc_cvc) || empty($cc_cvc)) {
-              tep_redirect(tep_href_link('checkout_payment.php', 'payment_error=' . $this->code . '&error=cardcvc', 'SSL'));
+              tep_redirect(tep_href_link('checkout_payment.php', 'payment_error=' . $this->code . '&error=cardcvc'));
             }
           }
         }
@@ -413,7 +413,7 @@ class sage_pay_direct {
         $params['CardType'] = $cc_type;
 
         if ($cc_type == 'PAYPAL') {
-          $params['PayPalCallbackURL'] = tep_href_link('checkout_process.php', 'check=PAYPAL', 'SSL');
+          $params['PayPalCallbackURL'] = tep_href_link('checkout_process.php', 'check=PAYPAL');
         } else {
           $params['CardHolder'] = $cc_owner;
           $params['CardNumber'] = $cc_number;
@@ -538,7 +538,7 @@ class sage_pay_direct {
 
       $error = $this->getErrorMessageNumber($sage_pay_response['StatusDetail']);
 
-      tep_redirect(tep_href_link('checkout_payment.php', 'payment_error=' . $this->code . (tep_not_null($error) ? '&error=' . $error : ''), 'SSL'));
+      tep_redirect(tep_href_link('checkout_payment.php', 'payment_error=' . $this->code . (tep_not_null($error) ? '&error=' . $error : '')));
     }
   }
 

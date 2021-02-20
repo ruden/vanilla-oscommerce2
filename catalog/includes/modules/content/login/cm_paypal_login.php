@@ -105,7 +105,7 @@ class cm_paypal_login {
       $paypal_login_customer_id = false;
 
       $params = array('code' => $_GET['code'],
-                      'redirect_uri' => str_replace('&amp;', '&', tep_href_link('login.php', 'action=paypal_login', 'SSL')));
+                      'redirect_uri' => str_replace('&amp;', '&', tep_href_link('login.php', 'action=paypal_login')));
 
       $response_token = $this->_app->getApiResult('LOGIN', 'GrantToken', $params);
 
@@ -261,7 +261,7 @@ class cm_paypal_login {
             tep_session_register('billto');
           }
 
-          $return_url = tep_href_link('login.php', 'action=paypal_login_process', 'SSL');
+          $return_url = tep_href_link('login.php', 'action=paypal_login_process');
         }
       }
     }
