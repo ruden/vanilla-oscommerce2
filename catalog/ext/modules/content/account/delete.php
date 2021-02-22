@@ -49,7 +49,7 @@ if (isset($_GET['account'], $_GET['key']) && (!empty($_GET['account']) || !empty
   if ($error === false) {
     $customer = 'customer' . $customer_id;
 
-    tep_db_query("update comments set customers_id = 0, customers_name = '" . tep_db_input($customer) . "' where customers_id = '" . (int)$customer_id . "'");
+    tep_db_query("update reviews set customers_id = 0, customers_name = '" . tep_db_input($customer) . "' where customers_id = '" . (int)$customer_id . "'");
 
     tep_db_query("delete from address_book where customers_id = '" . (int)$customer_id . "'");
     tep_db_query("delete from customers where customers_id = '" . (int)$customer_id . "'");
