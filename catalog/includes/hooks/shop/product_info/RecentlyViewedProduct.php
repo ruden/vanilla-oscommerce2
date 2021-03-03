@@ -18,7 +18,7 @@
     }
 
     public function listen_addRecentlyViewedProduct() {
-      if (!tep_session_is_registered('recently_viewed_products')) {
+      if (!isset($_SESSION['recently_viewed_products'])) {
         tep_session_register('recently_viewed_products');
       }
 

@@ -18,7 +18,7 @@ $breadcrumb->add(NAVBAR_TITLE, tep_href_link('wishlist.php'));
 
 require('includes/template_top.php');
 
-if (!tep_session_is_registered('customer_id')) {
+if (!isset($_SESSION['customer_id'])) {
   $messageStack->add('wishlist', sprintf(TEXT_LOGIN_WISHLIST_SAVE, tep_href_link('login.php')));
 }
 ?>

@@ -341,7 +341,7 @@ function tep_get_tax_rate($class_id, $country_id = -1, $zone_id = -1) {
   static $tax_rates = array();
 
   if (($country_id == -1) && ($zone_id == -1)) {
-    if (!tep_session_is_registered('customer_id')) {
+    if (!isset($_SESSION['customer_id'])) {
       $country_id = STORE_COUNTRY;
       $zone_id = STORE_ZONE;
     } else {
@@ -1024,7 +1024,7 @@ function tep_get_prid($uprid) {
 function tep_customer_greeting() {
   global $customer_id, $customer_first_name;
 
-  if (tep_session_is_registered('customer_first_name') && tep_session_is_registered('customer_id')) {
+  if (isset($_SESSION['customer_first_name']) && isset($_SESSION['customer_id'])) {
     $greeting_string = sprintf(TEXT_GREETING_PERSONAL, tep_output_string_protected($customer_first_name), tep_href_link('products_new.php'));
   } else {
     $greeting_string = sprintf(TEXT_GREETING_GUEST, tep_href_link('login.php'), tep_href_link('create_account.php'));
@@ -1403,7 +1403,7 @@ function tep_count_customer_orders($id = '', $check_session = true) {
   global $customer_id, $languages_id;
 
   if (is_numeric($id) == false) {
-    if (tep_session_is_registered('customer_id')) {
+    if (isset($_SESSION['customer_id'])) {
       $id = $customer_id;
     } else {
       return 0;
@@ -1411,7 +1411,7 @@ function tep_count_customer_orders($id = '', $check_session = true) {
   }
 
   if ($check_session == true) {
-    if ((tep_session_is_registered('customer_id') == false) || ($id != $customer_id)) {
+    if ((isset($_SESSION['customer_id']) == false) || ($id != $customer_id)) {
       return 0;
     }
   }
@@ -1426,7 +1426,7 @@ function tep_count_customer_address_book_entries($id = '', $check_session = true
   global $customer_id;
 
   if (is_numeric($id) == false) {
-    if (tep_session_is_registered('customer_id')) {
+    if (isset($_SESSION['customer_id'])) {
       $id = $customer_id;
     } else {
       return 0;
@@ -1434,7 +1434,7 @@ function tep_count_customer_address_book_entries($id = '', $check_session = true
   }
 
   if ($check_session == true) {
-    if ((tep_session_is_registered('customer_id') == false) || ($id != $customer_id)) {
+    if ((isset($_SESSION['customer_id']) == false) || ($id != $customer_id)) {
       return 0;
     }
   }

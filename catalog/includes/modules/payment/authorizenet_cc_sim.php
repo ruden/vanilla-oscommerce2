@@ -219,7 +219,7 @@
         tep_redirect(tep_href_link('checkout_payment.php', 'payment_error=' . $this->code . '&error=' . $error));
       }
 
-      if ( tep_session_is_registered('authorizenet_cc_sim_error') ) {
+      if ( isset($_SESSION['authorizenet_cc_sim_error']) ) {
         unset($_SESSION['authorizenet_cc_sim_error']);
       }
     }
@@ -323,7 +323,7 @@ EOD;
           break;
       }
 
-      if ( ($_GET['error'] != 'verification') && tep_session_is_registered('authorizenet_cc_sim_error') ) {
+      if ( ($_GET['error'] != 'verification') && isset($_SESSION['authorizenet_cc_sim_error']) ) {
         $error_message = $authorizenet_cc_sim_error;
 
         unset($_SESSION['authorizenet_cc_sim_error']);

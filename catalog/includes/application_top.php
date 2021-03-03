@@ -161,7 +161,7 @@ if ($session_started == true) { // force register_globals
 }
 
 // initialize a session token
-if (!tep_session_is_registered('sessiontoken')) {
+if (!isset($_SESSION['sessiontoken'])) {
   $sessiontoken = md5(tep_rand() . tep_rand() . tep_rand() . tep_rand());
   tep_session_register('sessiontoken');
 }
@@ -172,7 +172,7 @@ $SID = (defined('SID') ? SID : '');
 // verify the ssl_session_id if the feature is enabled
 if (($request_type == 'SSL') && (SESSION_CHECK_SSL_SESSION_ID == 'True') && (ENABLE_SSL == true) && ($session_started == true)) {
   $ssl_session_id = getenv('SSL_SESSION_ID');
-  if (!tep_session_is_registered('SSL_SESSION_ID')) {
+  if (!isset($_SESSION['SSL_SESSION_ID'])) {
     $SESSION_SSL_ID = $ssl_session_id;
     tep_session_register('SESSION_SSL_ID');
   }
@@ -186,7 +186,7 @@ if (($request_type == 'SSL') && (SESSION_CHECK_SSL_SESSION_ID == 'True') && (ENA
 // verify the browser user agent if the feature is enabled
 if (SESSION_CHECK_USER_AGENT == 'True') {
   $http_user_agent = getenv('HTTP_USER_AGENT');
-  if (!tep_session_is_registered('SESSION_USER_AGENT')) {
+  if (!isset($_SESSION['SESSION_USER_AGENT'])) {
     $SESSION_USER_AGENT = $http_user_agent;
     tep_session_register('SESSION_USER_AGENT');
   }
@@ -200,7 +200,7 @@ if (SESSION_CHECK_USER_AGENT == 'True') {
 // verify the IP address if the feature is enabled
 if (SESSION_CHECK_IP_ADDRESS == 'True') {
   $ip_address = tep_get_ip_address();
-  if (!tep_session_is_registered('SESSION_IP_ADDRESS')) {
+  if (!isset($_SESSION['SESSION_IP_ADDRESS'])) {
     $SESSION_IP_ADDRESS = $ip_address;
     tep_session_register('SESSION_IP_ADDRESS');
   }
@@ -212,14 +212,14 @@ if (SESSION_CHECK_IP_ADDRESS == 'True') {
 }
 
 // create the shopping cart
-if (!tep_session_is_registered('cart') || !is_object($cart)) {
+if (!isset($_SESSION['cart']) || !is_object($cart)) {
   tep_session_register('cart');
   $cart = new shoppingCart;
 }
 
 $cart->update_content();
 
-if (!tep_session_is_registered('wishlist') || !is_object($wishlist)) {
+if (!isset($_SESSION['wishlist']) || !is_object($wishlist)) {
   tep_session_register('wishlist');
   $wishlist = new wishList;
 }
@@ -236,8 +236,8 @@ $currencies = new currencies();
 //require('includes/classes/email.php');
 
 // set the language
-if (!tep_session_is_registered('language') || isset($_GET['language'])) {
-  if (!tep_session_is_registered('language')) {
+if (!isset($_SESSION['language']) || isset($_GET['language'])) {
+  if (!isset($_SESSION['language'])) {
     tep_session_register('language');
     tep_session_register('languages_id');
   }
@@ -261,8 +261,8 @@ require('includes/languages/' . $language . '.php');
 setlocale(LC_NUMERIC, $_system_locale_numeric); // Prevent LC_ALL from setting LC_NUMERIC to a locale with 1,0 float/decimal values instead of 1.0 (see bug #634)
 
 // currency
-if (!tep_session_is_registered('currency') || isset($_GET['currency']) || ((USE_DEFAULT_LANGUAGE_CURRENCY == 'true') && (LANGUAGE_CURRENCY != $currency))) {
-  if (!tep_session_is_registered('currency')) tep_session_register('currency');
+if (!isset($_SESSION['currency']) || isset($_GET['currency']) || ((USE_DEFAULT_LANGUAGE_CURRENCY == 'true') && (LANGUAGE_CURRENCY != $currency))) {
+  if (!isset($_SESSION['currency'])) tep_session_register('currency');
 
   if (isset($_GET['currency']) && $currencies->is_set($_GET['currency'])) {
     $currency = $_GET['currency'];
@@ -272,7 +272,7 @@ if (!tep_session_is_registered('currency') || isset($_GET['currency']) || ((USE_
 }
 
 // navigation history
-if (!tep_session_is_registered('navigation') || !is_object($navigation)) {
+if (!isset($_SESSION['navigation']) || !is_object($navigation)) {
   tep_session_register('navigation');
   $navigation = new navigationHistory;
 }

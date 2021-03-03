@@ -10,7 +10,7 @@
   Released under the GNU General Public License
 */
 
-if (tep_session_is_registered('customer_id') && isset($_GET['pid'])) {
+if (isset($_SESSION['customer_id']) && isset($_GET['pid'])) {
   if (tep_has_product_attributes($_GET['pid'])) {
     tep_redirect(tep_href_link('product_info.php', 'products_id=' . $_GET['pid']));
   } else {

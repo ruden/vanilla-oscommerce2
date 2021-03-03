@@ -13,7 +13,7 @@
 require('includes/application_top.php');
 
 // if the customer is not logged on, redirect them to the login page
-if (!tep_session_is_registered('customer_id')) {
+if (!isset($_SESSION['customer_id'])) {
   $navigation->set_snapshot();
   tep_redirect(tep_href_link('login.php'));
 }
@@ -24,12 +24,12 @@ if ($cart->count_contents() < 1) {
 }
 
 // if no shipping method has been selected, redirect the customer to the shipping method selection page
-if (!tep_session_is_registered('shipping')) {
+if (!isset($_SESSION['shipping'])) {
   tep_redirect(tep_href_link('checkout_shipping.php'));
 }
 
 // avoid hack attempts during the checkout procedure by checking the internal cartID
-if (isset($cart->cartID) && tep_session_is_registered('cartID')) {
+if (isset($cart->cartID) && isset($_SESSION['cartID'])) {
   if ($cart->cartID != $cartID) {
     tep_redirect(tep_href_link('checkout_shipping.php'));
   }
@@ -47,7 +47,7 @@ if ((STOCK_CHECK == 'true') && (STOCK_ALLOW_CHECKOUT != 'true')) {
 }
 
 // if no billing destination address was selected, use the customers own address as default
-if (!tep_session_is_registered('billto')) {
+if (!isset($_SESSION['billto'])) {
   tep_session_register('billto');
   $billto = $customer_default_address_id;
 } else {
@@ -58,7 +58,7 @@ if (!tep_session_is_registered('billto')) {
 
     if ($check_address['total'] != '1') {
       $billto = $customer_default_address_id;
-      if (tep_session_is_registered('payment')) unset($_SESSION['payment']);
+      if (isset($_SESSION['payment'])) unset($_SESSION['payment']);
     }
   }
 }
@@ -66,7 +66,7 @@ if (!tep_session_is_registered('billto')) {
 require('includes/classes/order.php');
 $order = new order;
 
-if (!tep_session_is_registered('comments')) tep_session_register('comments');
+if (!isset($_SESSION['comments'])) tep_session_register('comments');
 if (isset($_POST['comments']) && tep_not_null($_POST['comments'])) {
   $comments = tep_db_prepare_input($_POST['comments']);
 }

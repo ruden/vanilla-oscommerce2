@@ -101,7 +101,7 @@
     function selection() {
       global $cart_PayPal_Pro_HS_ID;
 
-      if (tep_session_is_registered('cart_PayPal_Pro_HS_ID')) {
+      if (isset($_SESSION['cart_PayPal_Pro_HS_ID'])) {
         $order_id = substr($cart_PayPal_Pro_HS_ID, strpos($cart_PayPal_Pro_HS_ID, '-')+1);
 
         $check_query = tep_db_query('select orders_id from ' . TABLE_ORDERS_STATUS_HISTORY . ' where orders_id = "' . (int)$order_id . '" limit 1');
@@ -129,7 +129,7 @@
         $cartID = $cart->cartID = $cart->generate_cart_id();
       }
 
-      if (!tep_session_is_registered('cartID')) {
+      if (!isset($_SESSION['cartID'])) {
         tep_session_register('cartID');
       }
     }
@@ -139,10 +139,10 @@
 
       $pphs_result = array();
 
-      if (tep_session_is_registered('cartID')) {
+      if (isset($_SESSION['cartID'])) {
         $insert_order = false;
 
-        if (tep_session_is_registered('cart_PayPal_Pro_HS_ID')) {
+        if (isset($_SESSION['cart_PayPal_Pro_HS_ID'])) {
           $order_id = substr($cart_PayPal_Pro_HS_ID, strpos($cart_PayPal_Pro_HS_ID, '-')+1);
 
           $curr_check = tep_db_query("select currency from orders where orders_id = '" . (int)$order_id . "'");
@@ -350,14 +350,14 @@
 
         $pphs_result = $this->_app->getApiResult('APP', 'BMCreateButton', $params, (OSCOM_APP_PAYPAL_HS_STATUS == '1') ? 'live' : 'sandbox');
 
-        if ( !tep_session_is_registered('pphs_result') ) {
+        if ( !isset($_SESSION['pphs_result']) ) {
           tep_session_register('pphs_result');
         }
       }
 
       $pphs_key = tep_create_random_value(16);
 
-      if ( !tep_session_is_registered('pphs_key') ) {
+      if ( !isset($_SESSION['pphs_key']) ) {
         tep_session_register('pphs_key');
       }
 
@@ -605,7 +605,7 @@ EOD;
       $error = array('title' => $this->_app->getDef('module_hs_error_general_title'),
                      'error' => $this->_app->getDef('module_hs_error_general'));
 
-      if ( tep_session_is_registered('pphs_error_msg') ) {
+      if ( isset($_SESSION['pphs_error_msg']) ) {
         $error['error'] = $pphs_error_msg;
 
         unset($_SESSION['pphs_error_msg']);

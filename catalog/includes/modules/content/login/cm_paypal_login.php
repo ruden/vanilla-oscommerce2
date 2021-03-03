@@ -133,7 +133,7 @@ class cm_paypal_login {
           }
 
 // check if e-mail address exists in database and login or create customer account
-          if (!tep_session_is_registered('customer_id')) {
+          if (!isset($_SESSION['customer_id'])) {
             $customer_id = 0;
             $customer_default_address_id = 0;
 
@@ -247,17 +247,17 @@ class cm_paypal_login {
             $paypal_login_customer_id = false;
           }
 
-          if (!tep_session_is_registered('paypal_login_customer_id')) {
+          if (!isset($_SESSION['paypal_login_customer_id'])) {
             tep_session_register('paypal_login_customer_id');
           }
 
           $billto = $sendto;
 
-          if (!tep_session_is_registered('sendto')) {
+          if (!isset($_SESSION['sendto'])) {
             tep_session_register('sendto');
           }
 
-          if (!tep_session_is_registered('billto')) {
+          if (!isset($_SESSION['billto'])) {
             tep_session_register('billto');
           }
 
@@ -274,7 +274,7 @@ class cm_paypal_login {
   function postLogin() {
     global $paypal_login_customer_id, $login_customer_id, $language, $payment;
 
-    if (tep_session_is_registered('paypal_login_customer_id')) {
+    if (isset($_SESSION['paypal_login_customer_id'])) {
       if ($paypal_login_customer_id !== false) {
         $login_customer_id = $paypal_login_customer_id;
       }
@@ -283,7 +283,7 @@ class cm_paypal_login {
     }
 
 // Register PayPal Express Checkout as the default payment method
-    if (!tep_session_is_registered('payment') || ($payment != 'paypal_express')) {
+    if (!isset($_SESSION['payment']) || ($payment != 'paypal_express')) {
       if (defined('MODULE_PAYMENT_INSTALLED') && tep_not_null(MODULE_PAYMENT_INSTALLED)) {
         if (in_array('paypal_express.php', explode(';', MODULE_PAYMENT_INSTALLED))) {
           if (!class_exists('paypal_express')) {

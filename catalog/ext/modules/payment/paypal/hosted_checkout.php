@@ -22,7 +22,7 @@ if (!defined('OSCOM_APP_PAYPAL_HS_STATUS') || !in_array(OSCOM_APP_PAYPAL_HS_STAT
 }
 
 if ($error === false) {
-  if (!isset($_GET['key']) || !tep_session_is_registered('pphs_key') || ($_GET['key'] != $pphs_key) || !tep_session_is_registered('pphs_result')) {
+  if (!isset($_GET['key']) || !isset($_SESSION['pphs_key']) || ($_GET['key'] != $pphs_key) || !isset($_SESSION['pphs_result'])) {
     $error = true;
   }
 }

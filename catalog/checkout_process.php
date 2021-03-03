@@ -13,7 +13,7 @@
 include('includes/application_top.php');
 
 // if the customer is not logged on, redirect them to the login page
-if (!tep_session_is_registered('customer_id')) {
+if (!isset($_SESSION['customer_id'])) {
   $navigation->set_snapshot(array('mode' => 'SSL', 'page' => 'checkout_payment.php'));
   tep_redirect(tep_href_link('login.php'));
 }
@@ -24,16 +24,16 @@ if ($cart->count_contents() < 1) {
 }
 
 // if no shipping method has been selected, redirect the customer to the shipping method selection page
-if (!tep_session_is_registered('shipping') || !tep_session_is_registered('sendto')) {
+if (!isset($_SESSION['shipping']) || !isset($_SESSION['sendto'])) {
   tep_redirect(tep_href_link('checkout_shipping.php'));
 }
 
-if ((tep_not_null(MODULE_PAYMENT_INSTALLED)) && (!tep_session_is_registered('payment'))) {
+if ((tep_not_null(MODULE_PAYMENT_INSTALLED)) && (!isset($_SESSION['payment']))) {
   tep_redirect(tep_href_link('checkout_payment.php'));
 }
 
 // avoid hack attempts during the checkout procedure by checking the internal cartID
-if (isset($cart->cartID) && tep_session_is_registered('cartID')) {
+if (isset($cart->cartID) && isset($_SESSION['cartID'])) {
   if ($cart->cartID != $cartID) {
     tep_redirect(tep_href_link('checkout_shipping.php'));
   }

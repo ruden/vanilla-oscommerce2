@@ -10,7 +10,7 @@
   Released under the GNU General Public License
 */
 
-if (tep_session_is_registered('customer_id')) {
+if (isset($_SESSION['customer_id'])) {
   if (isset($_GET['products_id'])) {
     $notify = $_GET['products_id'];
   } elseif (isset($_GET['notify'])) {

@@ -104,7 +104,7 @@ EOD;
   public function isEnabled() {
     global $PHP_SELF;
 
-    if (($PHP_SELF == 'checkout_success.php') && tep_session_is_registered('customer_id')) {
+    if (($PHP_SELF == 'checkout_success.php') && isset($_SESSION['customer_id'])) {
       if (!isset($_COOKIE['cookieAccepted']) || (isset($_COOKIE['cookieAccepted']) && !in_array($this->cookie_group, json_decode(stripslashes($_COOKIE['cookieAccepted']))))) {
         return $this->enabled;
       }

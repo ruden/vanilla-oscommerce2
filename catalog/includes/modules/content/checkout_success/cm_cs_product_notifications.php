@@ -34,7 +34,7 @@ class cm_cs_product_notifications {
   function execute() {
     global $oscTemplate, $customer_id, $order_id;
 
-    if (tep_session_is_registered('customer_id')) {
+    if (isset($_SESSION['customer_id'])) {
       $global_query = tep_db_query("select global_product_notifications from customers_info where customers_info_id = '" . (int)$customer_id . "'");
       $global = tep_db_fetch_array($global_query);
 

@@ -20,7 +20,7 @@ class wishList {
   public function restore_lists() {
     global $customer_id;
 
-    if (!tep_session_is_registered('customer_id')) {
+    if (!isset($_SESSION['customer_id'])) {
       return false;
     }
 
@@ -56,7 +56,7 @@ class wishList {
 
     $this->list = [];
 
-    if (tep_session_is_registered('customer_id') && $reset_database == true) {
+    if (isset($_SESSION['customer_id']) && $reset_database == true) {
       tep_db_query("delete from customers_wishlist where customers_id = '" . (int)$customer_id . "'");
       tep_db_query("delete from customers_wishlist_attributes where customers_id = '" . (int)$customer_id . "'");
     }
@@ -93,14 +93,14 @@ class wishList {
 
       if (($check_product !== false) && ($check_product['products_status'] == '1')) {
         $this->list[$products_id_string] = [];
-        if (tep_session_is_registered('customer_id')) {
+        if (isset($_SESSION['customer_id'])) {
           tep_db_query("insert into customers_wishlist (customers_id, products_id, customers_wishlist_date_added) values ('" . (int)$customer_id . "', '" . tep_db_input($products_id_string) . "', '" . date('Ymd') . "')");
         }
 
         if (is_array($attributes)) {
           foreach ($attributes as $option => $value) {
             $this->list[$products_id_string]['attributes'][$option] = $value;
-            if (tep_session_is_registered('customer_id')) {
+            if (isset($_SESSION['customer_id'])) {
               tep_db_query("insert into customers_wishlist_attributes (customers_id, products_id, products_options_id, products_options_value_id) values ('" . (int)$customer_id . "', '" . tep_db_input($products_id_string) . "', '" . (int)$option . "', '" . (int)$value . "')");
             }
           }
@@ -134,7 +134,7 @@ class wishList {
 
     unset($this->list[$products_id]);
 
-    if (tep_session_is_registered('customer_id')) {
+    if (isset($_SESSION['customer_id'])) {
       tep_db_query("delete from customers_wishlist where customers_id = '" . (int)$customer_id . "' and products_id = '" . tep_db_input($products_id) . "'");
       tep_db_query("delete from customers_wishlist_attributes where customers_id = '" . (int)$customer_id . "' and products_id = '" . tep_db_input($products_id) . "'");
     }

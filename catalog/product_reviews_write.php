@@ -14,7 +14,7 @@ require('includes/application_top.php');
 
 require('includes/languages/' . $language . '/product_reviews_write.php');
 
-if (!tep_session_is_registered('customer_id')) {
+if (!isset($_SESSION['customer_id'])) {
   $navigation->set_snapshot();
   tep_redirect(tep_href_link('login.php'));
 }

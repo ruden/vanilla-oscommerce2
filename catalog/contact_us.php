@@ -27,7 +27,7 @@ if (isset($_GET['action']) && ($_GET['action'] == 'send') && isset($_POST['formi
     $messageStack->add('contact', ENTRY_EMAIL_ADDRESS_CHECK_ERROR);
   }
 
-  $actionRecorder = new actionRecorder('ar_contact_us', (tep_session_is_registered('customer_id') ? $customer_id : null), $name);
+  $actionRecorder = new actionRecorder('ar_contact_us', (isset($_SESSION['customer_id']) ? $customer_id : null), $name);
   if (!$actionRecorder->canPerform()) {
     $error = true;
 

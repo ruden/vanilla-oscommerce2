@@ -18,14 +18,14 @@
   $action = (isset($_GET['action']) ? $_GET['action'] : '');
 
 // prepare to logout an active administrator if the login page is accessed again
-  if (tep_session_is_registered('admin')) {
+  if (isset($_SESSION['admin'])) {
     $action = 'logoff';
   }
 
   if (tep_not_null($action)) {
     switch ($action) {
       case 'process':
-        if (tep_session_is_registered('redirect_origin') && isset($redirect_origin['auth_user']) && !isset($_POST['username'])) {
+        if (isset($_SESSION['redirect_origin']) && isset($redirect_origin['auth_user']) && !isset($_POST['username'])) {
           $username = tep_db_prepare_input($redirect_origin['auth_user']);
           $password = tep_db_prepare_input($redirect_origin['auth_pw']);
         } else {
@@ -55,7 +55,7 @@
               $actionRecorder->_user_id = $admin['id'];
               $actionRecorder->record();
 
-              if (tep_session_is_registered('redirect_origin')) {
+              if (isset($_SESSION['redirect_origin'])) {
                 $page = $redirect_origin['page'];
 
                 $get_string = http_build_query($redirect_origin['get']);

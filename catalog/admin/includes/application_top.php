@@ -104,8 +104,8 @@
   extract($_SESSION, EXTR_OVERWRITE+EXTR_REFS);
 
 // set the language
-  if (!tep_session_is_registered('language') || isset($_GET['language'])) {
-    if (!tep_session_is_registered('language')) {
+  if (!isset($_SESSION['language']) || isset($_GET['language'])) {
+    if (!isset($_SESSION['language'])) {
       tep_session_register('language');
       tep_session_register('languages_id');
     }
@@ -124,20 +124,20 @@
   }
 
 // redirect to login page if administrator is not yet logged in
-  if (!tep_session_is_registered('admin')) {
+  if (!isset($_SESSION['admin'])) {
     $redirect = false;
 
     $current_page = $PHP_SELF;
 
 // if the first page request is to the login page, set the current page to the index page
 // so the redirection on a successful login is not made to the login page again
-    if ( ($current_page == 'login.php') && !tep_session_is_registered('redirect_origin') ) {
+    if ( ($current_page == 'login.php') && !isset($_SESSION['redirect_origin']) ) {
       $current_page = 'index.php';
       $_GET = array();
     }
 
     if ($current_page != 'login.php') {
-      if (!tep_session_is_registered('redirect_origin')) {
+      if (!isset($_SESSION['redirect_origin'])) {
         tep_session_register('redirect_origin');
 
         $redirect_origin = array('page' => $current_page,
@@ -145,7 +145,7 @@
       }
 
 // try to automatically login with the HTTP Authentication values if it exists
-      if (!tep_session_is_registered('auth_ignore')) {
+      if (!isset($_SESSION['auth_ignore'])) {
         if (isset($_SERVER['PHP_AUTH_USER']) && !empty($_SERVER['PHP_AUTH_USER']) && isset($_SERVER['PHP_AUTH_PW']) && !empty($_SERVER['PHP_AUTH_PW'])) {
           $redirect_origin['auth_user'] = $_SERVER['PHP_AUTH_USER'];
           $redirect_origin['auth_pw'] = $_SERVER['PHP_AUTH_PW'];

@@ -13,7 +13,7 @@
 require('includes/application_top.php');
 
 // if the customer is not logged on, redirect them to the login page
-if (!tep_session_is_registered('customer_id')) {
+if (!isset($_SESSION['customer_id'])) {
   $navigation->set_snapshot();
   tep_redirect(tep_href_link('login.php'));
 }
@@ -24,7 +24,7 @@ if ($cart->count_contents() < 1) {
 }
 
 // if no shipping destination address was selected, use the customers own address as default
-if (!tep_session_is_registered('sendto')) {
+if (!isset($_SESSION['sendto'])) {
   tep_session_register('sendto');
   $sendto = $customer_default_address_id;
 } else {
@@ -35,7 +35,7 @@ if (!tep_session_is_registered('sendto')) {
 
     if ($check_address['total'] != '1') {
       $sendto = $customer_default_address_id;
-      if (tep_session_is_registered('shipping')) unset($_SESSION['shipping']);
+      if (isset($_SESSION['shipping'])) unset($_SESSION['shipping']);
     }
   }
 }
@@ -45,9 +45,9 @@ $order = new order;
 
 // register a random ID in the session to check throughout the checkout procedure
 // against alterations in the shopping cart contents
-if (!tep_session_is_registered('cartID')) {
+if (!isset($_SESSION['cartID'])) {
   tep_session_register('cartID');
-} elseif (($cartID != $cart->cartID) && tep_session_is_registered('shipping')) {
+} elseif (($cartID != $cart->cartID) && isset($_SESSION['shipping'])) {
   unset($_SESSION['shipping']);
 }
 
@@ -56,7 +56,7 @@ $cartID = $cart->cartID = $cart->generate_cart_id();
 // if the order contains only virtual products, forward the customer to the billing page as
 // a shipping address is not needed
 if ($order->content_type == 'virtual') {
-  if (!tep_session_is_registered('shipping')) tep_session_register('shipping');
+  if (!isset($_SESSION['shipping'])) tep_session_register('shipping');
   $shipping = false;
   $sendto = false;
   tep_redirect(tep_href_link('checkout_payment.php'));
@@ -100,12 +100,12 @@ if (defined('MODULE_ORDER_TOTAL_SHIPPING_FREE_SHIPPING') && (MODULE_ORDER_TOTAL_
 
 // process the selected shipping method
 if (isset($_POST['action']) && ($_POST['action'] == 'process') && isset($_POST['formid']) && ($_POST['formid'] == $sessiontoken)) {
-  if (!tep_session_is_registered('comments')) tep_session_register('comments');
+  if (!isset($_SESSION['comments'])) tep_session_register('comments');
   if (tep_not_null($_POST['comments'])) {
     $comments = tep_db_prepare_input($_POST['comments']);
   }
 
-  if (!tep_session_is_registered('shipping')) tep_session_register('shipping');
+  if (!isset($_SESSION['shipping'])) tep_session_register('shipping');
 
   if ((tep_count_shipping_modules() > 0) || ($free_shipping == true)) {
     if ((isset($_POST['shipping'])) && (strpos($_POST['shipping'], '_'))) {
@@ -152,11 +152,11 @@ $quotes = $shipping_modules->quote();
 // if the modules status was changed when none were available, to save on implementing
 // a javascript force-selection method, also automatically select the first shipping
 // method if more than one module is now enabled
-if (!tep_session_is_registered('shipping') || (tep_session_is_registered('shipping') && ($shipping == false) && (tep_count_shipping_modules() > 1))) $shipping = $shipping_modules->get_first();
+if (!isset($_SESSION['shipping']) || (isset($_SESSION['shipping']) && ($shipping == false) && (tep_count_shipping_modules() > 1))) $shipping = $shipping_modules->get_first();
 
 require('includes/languages/' . $language . '/checkout_shipping.php');
 
-if (defined('SHIPPING_ALLOW_UNDEFINED_ZONES') && (SHIPPING_ALLOW_UNDEFINED_ZONES == 'False') && !tep_session_is_registered('shipping') && ($shipping == false)) {
+if (defined('SHIPPING_ALLOW_UNDEFINED_ZONES') && (SHIPPING_ALLOW_UNDEFINED_ZONES == 'False') && !isset($_SESSION['shipping']) && ($shipping == false)) {
   $messageStack->add_session('checkout_address', ERROR_NO_SHIPPING_AVAILABLE_TO_SHIPPING_ADDRESS);
 
   tep_redirect(tep_href_link('checkout_shipping_address.php'));

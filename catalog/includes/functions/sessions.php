@@ -110,7 +110,7 @@ function tep_session_register($variable) {
   return false;
 }
 
-function tep_session_is_registered($variable) {
+function isset($_SESSION[$variable]) {
   return isset($_SESSION) && array_key_exists($variable, $_SESSION);
 }
 

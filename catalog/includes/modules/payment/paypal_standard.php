@@ -79,7 +79,7 @@
 // has already beed deducated in the IPN to avoid a quantity == 0 redirect
       if ( $this->enabled === true ) {
         if ( defined('FILENAME_CHECKOUT_PROCESS') && (basename($PHP_SELF) == 'checkout_process.php') ) {
-          if ( tep_session_is_registered('payment') && ($payment == $this->code) ) {
+          if ( isset($_SESSION['payment']) && ($payment == $this->code) ) {
             $this->pre_before_check();
           }
         }
@@ -115,7 +115,7 @@
     function selection() {
       global $cart_PayPal_Standard_ID;
 
-      if (tep_session_is_registered('cart_PayPal_Standard_ID')) {
+      if (isset($_SESSION['cart_PayPal_Standard_ID'])) {
         $order_id = substr($cart_PayPal_Standard_ID, strpos($cart_PayPal_Standard_ID, '-')+1);
 
         $check_query = tep_db_query('select orders_id from ' . TABLE_ORDERS_STATUS_HISTORY . ' where orders_id = "' . (int)$order_id . '" limit 1');
@@ -143,7 +143,7 @@
         $cartID = $cart->cartID = $cart->generate_cart_id();
       }
 
-      if (!tep_session_is_registered('cartID')) {
+      if (!isset($_SESSION['cartID'])) {
         tep_session_register('cartID');
       }
 
@@ -154,10 +154,10 @@
     function confirmation() {
       global $cartID, $cart_PayPal_Standard_ID, $customer_id, $languages_id, $order, $order_total_modules;
 
-      if (tep_session_is_registered('cartID')) {
+      if (isset($_SESSION['cartID'])) {
         $insert_order = false;
 
-        if (tep_session_is_registered('cart_PayPal_Standard_ID')) {
+        if (isset($_SESSION['cart_PayPal_Standard_ID'])) {
           $order_id = substr($cart_PayPal_Standard_ID, strpos($cart_PayPal_Standard_ID, '-')+1);
 
           $curr_check = tep_db_query("select currency from orders where orders_id = '" . (int)$order_id . "'");
@@ -652,7 +652,7 @@
 
 // skip before_process() if order was already processed in IPN
       if ( $check['orders_status'] != OSCOM_APP_PAYPAL_PS_PREPARE_ORDER_STATUS_ID ) {
-        if ( tep_session_is_registered('comments') && !empty($comments) ) {
+        if ( isset($_SESSION['comments']) && !empty($comments) ) {
           $sql_data_array = array('orders_id' => $order_id,
                                   'orders_status_id' => (int)$check['orders_status'],
                                   'date_added' => 'now()',
