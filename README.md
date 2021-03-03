@@ -9,6 +9,8 @@ Supported PHP v7.x or v8.x
 
 Demo: <http://demo.osclab.com/vanilla-oscommerce/>
 
+Download: <https://github.com/ruden/vanilla-oscommerce/archive/dev.zip/>
+
 Changelog
 ---------
 * [x] PHP v7 compatibility fixes.
