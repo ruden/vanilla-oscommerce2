@@ -28,4 +28,5 @@ define('MY_ORDERS_VIEW', 'View the orders I have made.');
 define('EMAIL_NOTIFICATIONS_TITLE', 'E-Mail Notifications');
 define('EMAIL_NOTIFICATIONS_NEWSLETTERS', 'Subscribe or unsubscribe from newsletters.');
 define('EMAIL_NOTIFICATIONS_PRODUCTS', 'View or change my product notification list.');
-?>
+
+define('PRIVACY_SETTINGS_TITLE', 'Privacy Settings');

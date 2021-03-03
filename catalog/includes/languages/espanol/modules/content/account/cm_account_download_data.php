@@ -5,18 +5,18 @@ $Id$
 osCommerce, Open Source E-Commerce Solutions
 http://www.oscommerce.com
 
-Copyright (c) 2020 osCommerce
+Copyright (c) 2021 osCommerce
 
 Released under the GNU General Public License
 */
 
-define('MODULE_CONTENT_ACCOUNT_DELETE_TITLE', 'Eliminar cuenta');
+define('MODULE_CONTENT_ACCOUNT_DELETE_TITLE', 'Delete Account');
 define('MODULE_CONTENT_ACCOUNT_DELETE_DESCRIPTION', 'Show the delete account link on the account page');
-define('MODULE_CONTENT_ACCOUNT_DELETE_LINK_TITLE', 'Eliminar mi cuenta');
+define('MODULE_CONTENT_ACCOUNT_DELETE_LINK_TITLE', 'Delete my account');
 
-define('MODULE_CONTENT_ACCOUNT_DELETE_NAVBAR_TITLE_1', 'Mi cuenta');
-define('MODULE_CONTENT_ACCOUNT_DELETE_NAVBAR_TITLE_2', 'Eliminar mi cuenta');
-define('MODULE_CONTENT_ACCOUNT_DELETE_HEADING_TITLE', 'Eliminar mi cuenta');
+define('MODULE_CONTENT_ACCOUNT_DELETE_NAVBAR_TITLE_1', 'My Account');
+define('MODULE_CONTENT_ACCOUNT_DELETE_NAVBAR_TITLE_2', 'Delete My Account');
+define('MODULE_CONTENT_ACCOUNT_DELETE_HEADING_TITLE', 'Delete My Account');
 
 define('MODULE_CONTENT_ACCOUNT_DELETE_TEXT_NO_DELETE_LINK_FOUND', 'Error: The account delete link was not found in our records, please try again by generating a new link.');
 define('MODULE_CONTENT_ACCOUNT_DELETE_TEXT_INITIATED', 'Please check your registered email address to confirm and delete your account permanently.');
