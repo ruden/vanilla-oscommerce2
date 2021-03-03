@@ -6,20 +6,11 @@
     'aliases' => 
     array (
     ),
-    'reference' => 'bdd965c742cd4c6de4c1f1440597534e1207dea5',
-    'name' => '__root__',
+    'reference' => 'c15a57e895a85d7e3ba309bf38f50474cba36787',
+    'name' => 'ruden/vanilla-oscommerce',
   ),
   'versions' => 
   array (
-    '__root__' => 
-    array (
-      'pretty_version' => 'dev-master',
-      'version' => 'dev-master',
-      'aliases' => 
-      array (
-      ),
-      'reference' => 'bdd965c742cd4c6de4c1f1440597534e1207dea5',
-    ),
     'doctrine/lexer' => 
     array (
       'pretty_version' => '1.2.1',
@@ -37,6 +28,15 @@
       array (
       ),
       'reference' => '0dbf5d78455d4d6a41d186da50adc1122ec066f4',
+    ),
+    'ruden/vanilla-oscommerce' => 
+    array (
+      'pretty_version' => 'dev-master',
+      'version' => 'dev-master',
+      'aliases' => 
+      array (
+      ),
+      'reference' => 'c15a57e895a85d7e3ba309bf38f50474cba36787',
     ),
     'swiftmailer/swiftmailer' => 
     array (

@@ -1,4 +1,6 @@
 {
+  "name": "ruden/vanilla-oscommerce",
+  "description": "Vanilla osCommerce fork osCommerce v2.3.5.",
   "config": {
     "vendor-dir": "includes/vendor"
   },
