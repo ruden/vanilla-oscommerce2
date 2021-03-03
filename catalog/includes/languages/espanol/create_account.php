@@ -5,7 +5,7 @@
   osCommerce, Open Source E-Commerce Solutions
   http://www.oscommerce.com
 
-  Copyright (c) 2020 osCommerce
+  Copyright (c) 2021 osCommerce
 
   Released under the GNU General Public License
 */
@@ -24,4 +24,7 @@ define('EMAIL_WELCOME', 'Le damos la bienvenida a <strong>' . STORE_NAME . '</st
 define('EMAIL_TEXT', 'Ahora puede tomar parte en los <strong>diferentes servicios</strong> que tenemos para ofrecerle. Algunos de estos servicios incluyen:' . "\n\n" . '<li><strong>Cesta de Compras Permanente</strong> - Cualquier producto añadido a su carrito permanecera en el hasta que lo elimine, o compre.' . "\n" . '<li><strong>Libreta de direcciones</strong> - Podemos enviar sus productos a otras direcciones aparte de la suya! Esto es perfecto para enviar regalos de cumpleaños directamente a la persona que cumple años.' . "\n" . '<li><strong>Historial de pedidos</strong> - Ver el historial de compras que ha realizado con nosotros.' . "\n" . '<li><strong>Comentarios de los Productos</strong> - Comparta sus opiniones sobre los productos con otros clientes.' . "\n\n");
 define('EMAIL_CONTACT', 'Para obtener ayuda con cualquiera de nuestros servicios, por favor escriba al Administrador de la Tienda: ' . STORE_OWNER_EMAIL_ADDRESS . '.' . "\n\n");
 define('EMAIL_WARNING', '<strong>Nota:</strong> Esta direcci&oacute;n de correo electr&oacute;nico nos fue proporcionada por uno de nuestros clientes. Si no se ha suscrito a ser miembro, por favor env&iacute;e un correo electr&oacute;nico a ' . STORE_OWNER_EMAIL_ADDRESS . '.' . "\n");
-?>
+
+define('ENTRY_LEGAL_AGREEMENTS', 'I have read and accept the <a href="%s" target="_blank"><u>Terms & Conditions</u></a> and <a href="%s" target="_blank"><u>Privacy Policy</u></a>');
+define('ENTRY_LEGAL_AGREEMENTS_ERROR', 'Please select Legal Agreements.');
+define('ENTRY_LEGAL_AGREEMENTS_TEXT', '');

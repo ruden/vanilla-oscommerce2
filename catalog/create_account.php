@@ -415,9 +415,9 @@ if ($messageStack->size('create_account') > 0) {
       <label class="form-label" for="fax"><?php echo ENTRY_FAX_NUMBER . (tep_not_null(ENTRY_FAX_NUMBER_TEXT) ? '<span class="text-danger ms-1">' . ENTRY_FAX_NUMBER_TEXT . '</span>' : ''); ?></label>
       <?php echo tep_draw_input_field('fax', null, 'id="fax" class="form-control"'); ?>
     </div>
-    <div class="mb-3">
-      <label class="form-check-label" for="newsletter"><?php echo ENTRY_NEWSLETTER; ?></label>
+    <div class="mb-3 form-check">
       <?php echo tep_draw_checkbox_field('newsletter', '1', false, 'class="form-check-input" id="newsletter"') . (tep_not_null(ENTRY_NEWSLETTER_TEXT) ? '<span class="text-danger ms-1">' . ENTRY_NEWSLETTER_TEXT . '</span>' : ''); ?>
+      <label class="form-check-label" for="newsletter"><?php echo ENTRY_NEWSLETTER; ?></label>
     </div>
 
     <h2><?php echo CATEGORY_PASSWORD; ?></h2>
@@ -430,6 +430,19 @@ if ($messageStack->size('create_account') > 0) {
       <label class="form-label" for="confirmation"><?php echo ENTRY_PASSWORD_CONFIRMATION . (tep_not_null(ENTRY_PASSWORD_CONFIRMATION_TEXT) ? '<span class="text-danger ms-1">' . ENTRY_PASSWORD_CONFIRMATION_TEXT . '</span>' : ''); ?></label>
       <?php echo tep_draw_password_field('confirmation', null, 'id="confirmation" class="form-control"'); ?>
     </div>
+
+    <?php
+    if (defined('ACCOUNT_LEGAL_AGREEMENTS') && ACCOUNT_LEGAL_AGREEMENTS == 'true') {
+      ?>
+
+      <div class="mb-3 form-check">
+        <?php echo tep_draw_checkbox_field('legal-agreements', '1', false, 'class="form-check-input" id="legal-agreements"') . (tep_not_null(ENTRY_LEGAL_AGREEMENTS_TEXT) ? '<span class="text-danger ms-1">' . ENTRY_LEGAL_AGREEMENTS_TEXT . '</span>' : ''); ?>
+        <label class="form-check-label" for="legal-agreements"><?php echo sprintf(ENTRY_LEGAL_AGREEMENTS, tep_href_link('information.php', 'pages_id=3'), tep_href_link('information.php', 'pages_id=2')); ?></label>
+      </div>
+
+      <?php
+    }
+    ?>
 
     <div class="text-end">
       <?php echo tep_draw_button(IMAGE_BUTTON_CONTINUE, 'person', null, 'btn-primary'); ?>
