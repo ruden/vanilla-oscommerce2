@@ -33,7 +33,7 @@ New
 
 Todo
 ----
-* [ ] GDPR.
+* [x] Cookie notice and compliance for GDPR/CCPA
 * [x] Recently viewed products.
 * [ ] <s>Related products.</s>
 * [ ] SEO optimization (not SEO URL).
