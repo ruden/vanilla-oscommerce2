@@ -26,7 +26,7 @@ Changelog
 * [x] Disable output of PHP error messages; log errors to a file in the work
    directory.
 * [x] Update PayPal modules to the latest PayPal App version (v5.018).
-* [x] Remove Braintree module to the latest Braintree App version (vx.xxx).
+* [x] Update Braintree module to the latest Braintree App version (v2.015).
 
 New
 ---
