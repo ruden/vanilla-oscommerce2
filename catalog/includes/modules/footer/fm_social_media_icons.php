@@ -36,37 +36,39 @@ class fm_social_media_icons {
   public function execute() {
     global $language, $oscTemplate;
 
-    if (defined('MODULE_SOCIAL_MEDIA_INSTALLED') && tep_not_null(MODULE_SOCIAL_MEDIA_INSTALLED)) {
-      $sm_array = explode(';', MODULE_SOCIAL_MEDIA_INSTALLED);
+    $sm_array = explode(';', MODULE_SOCIAL_MEDIA_INSTALLED);
 
-      $social_media = array();
+    $social_media = array();
 
-      foreach ($sm_array as $sm) {
-        $class = substr($sm, 0, strrpos($sm, '.'));
+    foreach ($sm_array as $sm) {
+      $class = substr($sm, 0, strrpos($sm, '.'));
 
-        if (!class_exists($class)) {
-          include('includes/languages/' . $language . '/modules/social_media/' . $sm);
-          include('includes/modules/social_media/' . $class . '.php');
-        }
-
-        $smi = new $class();
-
-        if ($smi->isEnabled()) {
-          $social_media[] = $smi->getOutput();
-        }
+      if (!class_exists($class)) {
+        include('includes/languages/' . $language . '/modules/social_media/' . $sm);
+        include('includes/modules/social_media/' . $class . '.php');
       }
 
-      if (!empty($social_media)) {
-        ob_start();
-        include('includes/modules/' . $this->group . '/templates/social_media_icons.php');
+      $smi = new $class();
 
-        $oscTemplate->addBlock(ob_get_clean(), $this->group);
+      if ($smi->isEnabled()) {
+        $social_media[] = $smi->getOutput();
       }
+    }
+
+    if (!empty($social_media)) {
+      ob_start();
+      include('includes/modules/' . $this->group . '/templates/social_media_icons.php');
+
+      $oscTemplate->addBlock(ob_get_clean(), $this->group);
     }
   }
 
   public function isEnabled() {
-    return $this->enabled;
+    if (defined('MODULE_SOCIAL_MEDIA_INSTALLED') && !empty(MODULE_SOCIAL_MEDIA_INSTALLED)) {
+      return $this->enabled;
+    }
+
+    return false;
   }
 
   public function check() {
@@ -74,8 +76,8 @@ class fm_social_media_icons {
   }
 
   public function install() {
-    tep_db_query("INSERT INTO configuration (configuration_title, configuration_key, configuration_value, configuration_description, configuration_group_id, sort_order, set_function, date_added) VALUES ('Enable Module', 'MODULE_FOOTER_SOCIAL_MEDIA_ICONS_STATUS', 'True', 'Do you want to add the module to your shop?', '6', '1', 'tep_cfg_select_option(array(\'True\', \'False\'), ', now())");
-    tep_db_query("INSERT INTO configuration (configuration_title, configuration_key, configuration_value, configuration_description, configuration_group_id, sort_order, date_added) VALUES ('Sort Order', 'MODULE_FOOTER_SOCIAL_MEDIA_ICONS_SORT_ORDER', '0', 'Sort order of display. Lowest is displayed first.', '6', '0', now())");
+    tep_db_query("INSERT INTO configuration (configuration_title, configuration_key, configuration_value, configuration_description, configuration_group_id, sort_order, set_function, date_added) VALUES ('Enable Module', 'MODULE_FOOTER_SOCIAL_MEDIA_ICONS_STATUS', 'True', 'Do you want to add the module to your shop?', '6', '1', 'tep_cfg_select_option(array(\'True\', \'False\'), ', NOW())");
+    tep_db_query("INSERT INTO configuration (configuration_title, configuration_key, configuration_value, configuration_description, configuration_group_id, sort_order, date_added) VALUES ('Sort Order', 'MODULE_FOOTER_SOCIAL_MEDIA_ICONS_SORT_ORDER', '0', 'Sort order of display. Lowest is displayed first.', '6', '0', NOW())");
   }
 
   public function remove() {
