@@ -705,7 +705,7 @@ class OSCOM_PayPal {
       }
     }
 
-    tep_session_unregister('OSCOM_PayPal_Alerts');
+    unset($_SESSION['OSCOM_PayPal_Alerts']);
 
     return $output;
   }

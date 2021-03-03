@@ -60,7 +60,7 @@
 
                 $get_string = http_build_query($redirect_origin['get']);
 
-                tep_session_unregister('redirect_origin');
+                unset($_SESSION['redirect_origin']);
 
                 tep_redirect(tep_href_link($page, $get_string));
               } else {
@@ -83,7 +83,7 @@
         break;
 
       case 'logoff':
-        tep_session_unregister('admin');
+        unset($_SESSION['admin']);
 
         if (isset($_SERVER['PHP_AUTH_USER']) && !empty($_SERVER['PHP_AUTH_USER']) && isset($_SERVER['PHP_AUTH_PW']) && !empty($_SERVER['PHP_AUTH_PW'])) {
           tep_session_register('auth_ignore');

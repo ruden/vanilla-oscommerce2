@@ -279,7 +279,7 @@ class cm_paypal_login {
         $login_customer_id = $paypal_login_customer_id;
       }
 
-      tep_session_unregister('paypal_login_customer_id');
+      unset($_SESSION['paypal_login_customer_id']);
     }
 
 // Register PayPal Express Checkout as the default payment method

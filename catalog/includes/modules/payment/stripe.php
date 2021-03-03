@@ -327,7 +327,7 @@ class stripe {
     tep_db_perform('orders_status_history', $sql_data_array);
 
     if (tep_session_is_registered('stripe_error')) {
-      tep_session_unregister('stripe_error');
+      unset($_SESSION['stripe_error']);
     }
   }
 
@@ -339,7 +339,7 @@ class stripe {
     if (tep_session_is_registered('stripe_error')) {
       $message = $stripe_error . ' ' . $message;
 
-      tep_session_unregister('stripe_error');
+      unset($_SESSION['stripe_error']);
     }
 
     if (isset($_GET['error']) && !empty($_GET['error'])) {

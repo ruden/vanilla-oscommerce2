@@ -182,7 +182,7 @@
         $check = tep_db_fetch_array($check_query);
 
         if ($admin['id'] == $check['id']) {
-          tep_session_unregister('admin');
+          unset($_SESSION['admin']);
         }
 
         tep_db_query("delete from administrators where id = '" . (int)$id . "'");

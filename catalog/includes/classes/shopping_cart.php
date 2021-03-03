@@ -73,7 +73,7 @@
       }
 
       unset($this->cartID);
-      if (tep_session_is_registered('cartID')) tep_session_unregister('cartID');
+      if (tep_session_is_registered('cartID')) unset($_SESSION['cartID']);
     }
 
     function add_cart($products_id, $qty = '1', $attributes = '', $notify = true) {

@@ -147,7 +147,7 @@ if (isset($_POST['action']) && ($_POST['action'] == 'submit') && isset($_POST['f
 
       $billto = tep_db_insert_id();
 
-      if (tep_session_is_registered('payment')) tep_session_unregister('payment');
+      if (tep_session_is_registered('payment')) unset($_SESSION['payment']);
 
       tep_redirect(tep_href_link('checkout_payment.php'));
     }
@@ -170,10 +170,10 @@ if (isset($_POST['action']) && ($_POST['action'] == 'submit') && isset($_POST['f
     $check_address = tep_db_fetch_array($check_address_query);
 
     if ($check_address['total'] == '1') {
-      if ($reset_payment == true) tep_session_unregister('payment');
+      if ($reset_payment == true) unset($_SESSION['payment']);
       tep_redirect(tep_href_link('checkout_payment.php'));
     } else {
-      tep_session_unregister('billto');
+      unset($_SESSION['billto']);
     }
 // no addresses to select from - customer decided to keep the current assigned address
   } else {

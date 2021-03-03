@@ -114,7 +114,7 @@
           tep_db_query('delete from ' . TABLE_ORDERS_PRODUCTS_ATTRIBUTES . ' where orders_id = "' . (int)$order_id . '"');
           tep_db_query('delete from ' . TABLE_ORDERS_PRODUCTS_DOWNLOAD . ' where orders_id = "' . (int)$order_id . '"');
 
-          tep_session_unregister('cart_PayPal_Pro_HS_ID');
+          unset($_SESSION['cart_PayPal_Pro_HS_ID']);
         }
       }
 
@@ -582,15 +582,15 @@ EOD;
       $cart->reset(true);
 
 // unregister session variables used during checkout
-      tep_session_unregister('sendto');
-      tep_session_unregister('billto');
-      tep_session_unregister('shipping');
-      tep_session_unregister('payment');
-      tep_session_unregister('comments');
+      unset($_SESSION['sendto']);
+      unset($_SESSION['billto']);
+      unset($_SESSION['shipping']);
+      unset($_SESSION['payment']);
+      unset($_SESSION['comments']);
 
-      tep_session_unregister('cart_PayPal_Pro_HS_ID');
-      tep_session_unregister('pphs_result');
-      tep_session_unregister('pphs_key');
+      unset($_SESSION['cart_PayPal_Pro_HS_ID']);
+      unset($_SESSION['pphs_result']);
+      unset($_SESSION['pphs_key']);
 
       tep_redirect(tep_href_link('checkout_success.php'));
     }
@@ -608,7 +608,7 @@ EOD;
       if ( tep_session_is_registered('pphs_error_msg') ) {
         $error['error'] = $pphs_error_msg;
 
-        tep_session_unregister('pphs_error_msg');
+        unset($_SESSION['pphs_error_msg']);
       }
 
       return $error;

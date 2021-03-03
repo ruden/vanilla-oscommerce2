@@ -16,30 +16,30 @@ require('includes/languages/' . $language . '/logoff.php');
 
 $breadcrumb->add(NAVBAR_TITLE);
 
-tep_session_unregister('customer_id');
-tep_session_unregister('customer_default_address_id');
-tep_session_unregister('customer_first_name');
-tep_session_unregister('customer_country_id');
-tep_session_unregister('customer_zone_id');
+unset($_SESSION['customer_id']);
+unset($_SESSION['customer_default_address_id']);
+unset($_SESSION['customer_first_name']);
+unset($_SESSION['customer_country_id']);
+unset($_SESSION['customer_zone_id']);
 
 if (tep_session_is_registered('sendto')) {
-  tep_session_unregister('sendto');
+  unset($_SESSION['sendto']);
 }
 
 if (tep_session_is_registered('billto')) {
-  tep_session_unregister('billto');
+  unset($_SESSION['billto']);
 }
 
 if (tep_session_is_registered('shipping')) {
-  tep_session_unregister('shipping');
+  unset($_SESSION['shipping']);
 }
 
 if (tep_session_is_registered('payment')) {
-  tep_session_unregister('payment');
+  unset($_SESSION['payment']);
 }
 
 if (tep_session_is_registered('comments')) {
-  tep_session_unregister('comments');
+  unset($_SESSION['comments']);
 }
 
 $cart->reset();

@@ -70,15 +70,15 @@ switch ($osC_Action) {
     break;
 
   case 'cancel':
-    tep_session_unregister('appPayPalEcResult');
-    tep_session_unregister('appPayPalEcSecret');
+    unset($_SESSION['appPayPalEcResult']);
+    unset($_SESSION['appPayPalEcSecret']);
 
     if (empty($sendto['firstname']) && empty($sendto['lastname']) && empty($sendto['street_address'])) {
-      tep_session_unregister('sendto');
+      unset($_SESSION['sendto']);
     }
 
     if (empty($billto['firstname']) && empty($billto['lastname']) && empty($billto['street_address'])) {
-      tep_session_unregister('billto');
+      unset($_SESSION['billto']);
     }
 
     tep_redirect(tep_href_link('shopping_cart.php'));
@@ -647,7 +647,7 @@ EOD;
           }
         } else {
           if (defined('SHIPPING_ALLOW_UNDEFINED_ZONES') && (SHIPPING_ALLOW_UNDEFINED_ZONES == 'False')) {
-            tep_session_unregister('shipping');
+            unset($_SESSION['shipping']);
 
             $messageStack->add_session('checkout_address', $paypal_express->_app->getDef('module_ec_error_no_shipping_available'), 'error');
 
@@ -670,7 +670,7 @@ EOD;
             }
 
             if (isset($quote['error'])) {
-              tep_session_unregister('shipping');
+              unset($_SESSION['shipping']);
 
               tep_redirect(tep_href_link('checkout_shipping.php'));
             } else {
@@ -877,7 +877,7 @@ EOD;
           }
         } else {
           if (defined('SHIPPING_ALLOW_UNDEFINED_ZONES') && (SHIPPING_ALLOW_UNDEFINED_ZONES == 'False')) {
-            tep_session_unregister('shipping');
+            unset($_SESSION['shipping']);
 
             $messageStack->add_session('checkout_address', $paypal_express->_app->getDef('module_ec_error_no_shipping_available'), 'error');
 

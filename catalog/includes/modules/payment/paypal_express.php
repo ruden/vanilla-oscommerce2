@@ -81,7 +81,7 @@
 
 // When changing the shipping address due to no shipping rates being available, head straight to the checkout confirmation page
       if ( defined('FILENAME_CHECKOUT_PAYMENT') && (basename($PHP_SELF) == 'checkout_payment.php') && tep_session_is_registered('appPayPalEcRightTurn') ) {
-        tep_session_unregister('appPayPalEcRightTurn');
+        unset($_SESSION['appPayPalEcRightTurn']);
 
         if ( tep_session_is_registered('payment') && ($payment == $this->code) ) {
           tep_redirect(tep_href_link('checkout_confirmation.php'));
@@ -458,8 +458,8 @@ EOD;
 
       tep_db_perform('orders_status_history', $sql_data_array);
 
-      tep_session_unregister('appPayPalEcResult');
-      tep_session_unregister('appPayPalEcSecret');
+      unset($_SESSION['appPayPalEcResult']);
+      unset($_SESSION['appPayPalEcSecret']);
     }
 
     function after_process_payflow() {
@@ -482,8 +482,8 @@ EOD;
 
       tep_db_perform('orders_status_history', $sql_data_array);
 
-      tep_session_unregister('appPayPalEcResult');
-      tep_session_unregister('appPayPalEcSecret');
+      unset($_SESSION['appPayPalEcResult']);
+      unset($_SESSION['appPayPalEcSecret']);
 
 // Manually call PayflowInquiry to retrieve more details about the transaction and to allow admin post-transaction actions
       $response = $this->_app->getApiResult('APP', 'PayflowInquiry', array('ORIGID' => $response_array['PNREF']));
