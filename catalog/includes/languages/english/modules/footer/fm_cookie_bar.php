@@ -30,4 +30,4 @@ define('MODULE_FOOTER_COOKIE_BAR_COOKIE_GROUP_STATISTICS', 'Statistics');
 define('MODULE_FOOTER_COOKIE_BAR_COOKIE_GROUP_STATISTICS_DESCRIPTION', 'These cookies allow us to measure visitors traffic and see traffic sources by collecting information in data sets. They also help us understand which products and actions are more popular than others.');
 
 define('MODULE_FOOTER_COOKIE_BAR_TEXT_HIDE', 'Hide');
-define('MODULE_FOOTER_COOKIE_BAR_TEXT_SAVE_CHANGES', 'Save changes');
+define('MODULE_FOOTER_COOKIE_BAR_TEXT_SAVE_CHANGES', 'Save Changes');

@@ -4,9 +4,9 @@
     <h5 class="alert-heading"><?php echo MODULE_FOOTER_COOKIE_BAR_TEXT_TITLE; ?></h5>
     <p><?php echo MODULE_FOOTER_COOKIE_BAR_TEXT_DESCRIPTION; ?></p>
     <p class="text-center">
-      <button type="button" class="btn btn-link" data-bs-toggle="collapse" data-cookie-groups="<?php echo implode (', ', $cookie_groups); ?>" href="#cookie-bar" role="button" aria-expanded="false" aria-controls="cookie-bar"><?php echo MODULE_FOOTER_COOKIE_BAR_TEXT_COOKIES_SETTING; ?></button>
-      <button type="button" id="cookies-disable-all" class="btn btn-primary" data-bs-dismiss="alert" aria-label="Close"><?php echo MODULE_FOOTER_COOKIE_BAR_TEXT_DISABLE_ALL; ?></button>
-      <button type="button" id="cookies-allow-all" class="btn btn-primary" data-bs-dismiss="alert" aria-label="Close"><?php echo MODULE_FOOTER_COOKIE_BAR_TEXT_ALLOW_ALL; ?></button>
+      <?php echo tep_draw_button(MODULE_FOOTER_COOKIE_BAR_TEXT_COOKIES_SETTING, 'document', null, 'btn-link', array('params' => 'data-bs-toggle="collapse" data-cookie-groups="' . implode(', ', $cookie_groups) . '" href="#cookie-bar" role="button" aria-expanded="false" aria-controls="cookie-bar"')); ?>
+      <?php echo tep_draw_button(MODULE_FOOTER_COOKIE_BAR_TEXT_DISABLE_ALL, 'check', null, 'btn-primary', array('params' => 'id="cookies-disable-all" data-bs-dismiss="alert" aria-label="Close"')); ?>
+      <?php echo tep_draw_button(MODULE_FOOTER_COOKIE_BAR_TEXT_ALLOW_ALL, 'check', null, 'btn-primary', array('params' => 'id="cookies-allow-all" data-bs-dismiss="alert" aria-label="Close"')); ?>
     </p>
     <div class="collapse" id="cookie-bar">
       <div class="card">
@@ -40,8 +40,8 @@
             ?>
 
             <div class="text-center">
-              <button type="button" class="btn" data-bs-toggle="collapse" data-bs-target="#cookie-bar" role="button" aria-expanded="false" aria-controls="cookie-bar"><?php echo MODULE_FOOTER_COOKIE_BAR_TEXT_HIDE; ?></button>
-              <button type="button" class="btn btn-primary" data-bs-dismiss="alert" aria-label="Close"><?php echo MODULE_FOOTER_COOKIE_BAR_TEXT_SAVE_CHANGES; ?></button>
+              <?php echo tep_draw_button(MODULE_FOOTER_COOKIE_BAR_TEXT_HIDE, 'close', null, '', array('params' => 'data-bs-toggle="collapse" data-bs-target="#cookie-bar" role="button" aria-expanded="false" aria-controls="cookie-bar"')); ?>
+              <?php echo tep_draw_button(MODULE_FOOTER_COOKIE_BAR_TEXT_SAVE_CHANGES, 'disk', null, 'btn-primary', array('params' => 'id="cookies-save-changes" data-bs-dismiss="alert" aria-label="Close"')); ?>
             </div>
           </div>
         </div>

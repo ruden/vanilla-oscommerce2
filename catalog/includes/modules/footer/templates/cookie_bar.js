@@ -4,12 +4,6 @@ const cookieBar = function () {
   const documentCookie = document.cookie.replace(/(?:(?:^|.*;\s*)cookieAccepted\s*\=\s*(\[^\]*).*$)|^.*$/, "$1") || [];
   const setCookies = new Set(documentCookie);
 
-  const getCookie = function (group, el) {
-    if (documentCookie.indexOf(group) !== -1) {
-      el.checked = true;
-    }
-  }
-
   const addChecked = function (group, el) {
     if (documentCookie.indexOf(group) !== -1) {
       el.checked = true;
@@ -37,6 +31,7 @@ const cookieBar = function () {
 
     addEventDisableAll();
     addEventAllowAll();
+    addEventSaveChanges();
   }
 
   const addEventDisableAll = function () {
@@ -52,6 +47,14 @@ const cookieBar = function () {
 
     allowAll.addEventListener('click', function () {
       createCookie(cookieGroups);
+    })
+  }
+
+  const addEventSaveChanges = function () {
+    const saveChanges = document.getElementById('cookies-save-changes');
+
+    saveChanges.addEventListener('click', function () {
+      createCookie();
     })
   }
 

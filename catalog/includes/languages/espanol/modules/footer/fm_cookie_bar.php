@@ -16,7 +16,7 @@ define('MODULE_FOOTER_COOKIE_BAR_DESCRIPTION', 'Add cookie bar to footer');
 define('MODULE_FOOTER_COOKIE_BAR_TEXT_TITLE', 'Consentimiento de cookies');
 define('MODULE_FOOTER_COOKIE_BAR_TEXT_DESCRIPTION', 'Las cookies de este sitio web se usan para personalizar el contenido y los anuncios, ofrecer funciones de redes sociales y analizar el tráfico. Además, compartimos información sobre el uso que haga del sitio web con nuestros partners de redes sociales, publicidad y análisis web, quienes pueden combinarla con otra información que les haya proporcionado o que hayan recopilado a partir del uso que haya hecho de sus servicios.');
 
-define('MODULE_FOOTER_COOKIE_BAR_TEXT_COOKIES_SETTING', 'Configurar ajustes');
+define('MODULE_FOOTER_COOKIE_BAR_TEXT_COOKIES_SETTING', 'Configurar Ajustes');
 define('MODULE_FOOTER_COOKIE_BAR_TEXT_DISABLE_ALL', 'Deshabiliar Todas');
 define('MODULE_FOOTER_COOKIE_BAR_TEXT_ALLOW_ALL', 'Habilitar Todas');
 
@@ -30,4 +30,4 @@ define('MODULE_FOOTER_COOKIE_BAR_COOKIE_GROUP_ANALYTICS_STATISTICS', 'Estadísti
 define('MODULE_FOOTER_COOKIE_BAR_COOKIE_GROUP_ANALYTICS_STATISTICS_DESCRIPTION', 'These cookies allow us to measure visitors traffic and see traffic sources by collecting information in data sets. They also help us understand which products and actions are more popular than others.');
 
 define('MODULE_FOOTER_COOKIE_BAR_TEXT_HIDE', 'Ocultarlo');
-define('MODULE_FOOTER_COOKIE_BAR_TEXT_SAVE_CHANGES', 'Guardar cambios');
+define('MODULE_FOOTER_COOKIE_BAR_TEXT_SAVE_CHANGES', 'Guardar Cambios');
