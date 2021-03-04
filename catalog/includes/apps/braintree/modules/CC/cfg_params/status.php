@@ -11,7 +11,7 @@
 */
 
 class OSCOM_Braintree_CC_Cfg_status {
-  public $default = '1';
+  public $default = '-1';
   public $title;
   public $description;
   public $sort_order = 100;
