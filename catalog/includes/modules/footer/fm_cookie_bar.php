@@ -44,7 +44,9 @@ class fm_cookie_bar {
   }
 
   public function isEnabled() {
-    if (isset($_COOKIE['cookieAccepted'])) {
+    global $PHP_SELF;
+
+    if (isset($_COOKIE['cookieAccepted']) && $PHP_SELF != basename('cookie_consent.php')) {
       return false;
     }
 

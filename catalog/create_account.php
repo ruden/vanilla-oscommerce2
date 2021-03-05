@@ -166,6 +166,16 @@ if (isset($_POST['action']) && ($_POST['action'] == 'process') && isset($_POST['
     $messageStack->add('create_account', ENTRY_PASSWORD_ERROR_NOT_MATCHING);
   }
 
+  if (defined('ACCOUNT_LEGAL_AGREEMENTS') && ACCOUNT_LEGAL_AGREEMENTS == 'true') {
+    $legal_agreements = tep_db_prepare_input($_POST['legal_agreements']);
+
+    if ($legal_agreements != 'on') {
+      $error = true;
+
+      $messageStack->add('create_account', ENTRY_LEGAL_AGREEMENTS_ERROR);
+    }
+  }
+
   if ($error == false) {
     $sql_data_array = array('customers_firstname' => $firstname,
                             'customers_lastname' => $lastname,
@@ -224,6 +234,11 @@ if (isset($_POST['action']) && ($_POST['action'] == 'process') && isset($_POST['
     tep_session_register('customer_default_address_id');
     tep_session_register('customer_country_id');
     tep_session_register('customer_zone_id');
+
+    if (defined('ACCOUNT_LEGAL_AGREEMENTS') && ACCOUNT_LEGAL_AGREEMENTS == 'true') {
+      $legal_agreements_consents = date("Y-m-d H:i:s");
+      tep_session_register('legal_agreements_consents');
+    }
 
     // reset session token
     $sessiontoken = md5(tep_rand() . tep_rand() . tep_rand() . tep_rand());
@@ -436,7 +451,7 @@ if ($messageStack->size('create_account') > 0) {
       ?>
 
       <div class="mb-3 form-check">
-        <?php echo tep_draw_checkbox_field('legal-agreements', '1', false, 'class="form-check-input" id="legal-agreements"') . (tep_not_null(ENTRY_LEGAL_AGREEMENTS_TEXT) ? '<span class="text-danger ms-1">' . ENTRY_LEGAL_AGREEMENTS_TEXT . '</span>' : ''); ?>
+        <?php echo tep_draw_checkbox_field('legal_agreements', 'on', false, 'class="form-check-input" id="legal-agreements"') . (tep_not_null(ENTRY_LEGAL_AGREEMENTS_TEXT) ? '<span class="text-danger ms-1">' . ENTRY_LEGAL_AGREEMENTS_TEXT . '</span>' : ''); ?>
         <label class="form-check-label" for="legal-agreements"><?php echo sprintf(ENTRY_LEGAL_AGREEMENTS, tep_href_link('information.php', 'pages_id=3'), tep_href_link('information.php', 'pages_id=2')); ?></label>
       </div>
 

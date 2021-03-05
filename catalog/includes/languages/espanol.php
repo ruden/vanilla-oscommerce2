@@ -248,3 +248,7 @@ define('TEXT_CCVAL_ERROR_INVALID_NUMBER', 'El n&uacute;mero de tarjeta de cr&eac
 define('TEXT_CCVAL_ERROR_UNKNOWN_CARD', 'Los primeros cuatro d&iacute;gitos del n&uacute;mero de introducir son: %s. Si ese n&uacute;mero es correcto, no aceptamos este tipo de tarjetas de cr&eacute;dito. Si es incorrecto, por favor, int&eacute;ntelo de nuevo.');
 
 define('FOOTER_TEXT_BODY', 'Copyright &copy; ' . date('Y') . ' <a href="' . tep_href_link('index.php') . '">' . STORE_NAME . '</a><br />Powered by <a href="http://www.oscommerce.com">osCommerce</a>');
+
+define('ENTRY_LEGAL_AGREEMENTS', 'I have read and accept the <a href="%s" target="_blank"><u>Terms & Conditions</u></a> and <a href="%s" target="_blank"><u>Privacy Policy</u></a>');
+define('ENTRY_LEGAL_AGREEMENTS_ERROR', 'Please select Legal Agreements.');
+define('ENTRY_LEGAL_AGREEMENTS_TEXT', '');
