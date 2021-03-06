@@ -29,7 +29,7 @@ private static $installed = array (
     'aliases' => 
     array (
     ),
-    'reference' => 'c15a57e895a85d7e3ba309bf38f50474cba36787',
+    'reference' => '470c36dc5764fb754ac8dd0a8d0906c61b0176e7',
     'name' => 'ruden/vanilla-oscommerce',
   ),
   'versions' => 
@@ -59,16 +59,16 @@ private static $installed = array (
       'aliases' => 
       array (
       ),
-      'reference' => 'c15a57e895a85d7e3ba309bf38f50474cba36787',
+      'reference' => '470c36dc5764fb754ac8dd0a8d0906c61b0176e7',
     ),
     'swiftmailer/swiftmailer' => 
     array (
-      'pretty_version' => 'v6.2.5',
-      'version' => '6.2.5.0',
+      'pretty_version' => 'v6.2.6',
+      'version' => '6.2.6.0',
       'aliases' => 
       array (
       ),
-      'reference' => '698a6a9f54d7eb321274de3ad19863802c879fb7',
+      'reference' => 'd2791ff0b73247cdc2096b14f5580aba40c12bff',
     ),
     'symfony/polyfill-iconv' => 
     array (
