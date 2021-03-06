@@ -2,53 +2,25 @@
 
 ---
 
-Vanilla osCommerce v2.3.5
-=========================
+Vanilla osCommerce
+==================
 
-Supported PHP v7.x or v8.x
+Vanilla osCommerce this fork osCommerce v2.3.5
+
+Compatibility
+-------------
+
+* PHP 7.X or PHP 8.X
+* MySQL 5.7.8+ or MariaDB 10.2.7+
+* Apache 2.2 and 2.4
 
 Demo: <http://demo.osclab.com/vanilla-oscommerce/>
 
-Download: <https://github.com/ruden/vanilla-oscommerce/archive/dev.zip/>
-
-Changelog
----------
-* [x] PHP v7 compatibility fixes.
-* [x] MySQL v5.7 compatibility fixes.
-* [x] Introduce hooks implementation.
-* [x] Update layout of the orders and products administration pages to a tabbed
-   layout.
-* [x] Automatically select the first shipping rate available instead of the
-   cheapest rate.
-* [x] Display the total price of the order in the label of the checkout
-   confirmation button.
-* [x] Improve session functions.
-* [x] Disable output of PHP error messages; log errors to a file in the work
-   directory.
-* [x] Update PayPal modules to the latest PayPal App version (v5.018).
-* [x] Update Braintree module to the latest Braintree App version (v2.015).
-
-New
----
-* [x] Information pages.
-* [x] Upload favicon.
+Download: <https://github.com/ruden/vanilla-oscommerce/archive/dev.zip>
 
 Todo
 ----
-* [x] Cookie notice and compliance for GDPR/CCPA
-* [x] Recently viewed products.
-* [ ] <s>Related products.</s>
+
 * [ ] SEO optimization (not SEO URL).
-* [x] MySQL v8 compatibility fixes.
-* [ ] <s>Featured products.</s>
-* [x] Bootstrap 5 template.
-* [x] New location and control images.
 * [ ] Migration script old osCommerce version.
-* [x] New sorting products in listing and modularized.
-* [x] Add Spanish language.
-* [x] Modularized the index page.
-* [x] Update review system.
-* [x] Add wishlist.
-* [x] Modularized the XML sitemap. 
-* [x] Modularized the box product filter. 
-* [x] SMTP Authentication.
+
