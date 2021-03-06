@@ -41,7 +41,7 @@ class fm_card_acceptance {
   }
 
   public function isEnabled() {
-    if (defined('MODULE_FOOTER_CARD_ACCEPTANCE_LOGOS') && tep_not_null(MODULE_FOOTER_CARD_ACCEPTANCE_LOGOS)) {
+    if (defined('MODULE_FOOTER_CARD_ACCEPTANCE_LOGOS') && !empty(MODULE_FOOTER_CARD_ACCEPTANCE_LOGOS)) {
       return $this->enabled;
     }
 

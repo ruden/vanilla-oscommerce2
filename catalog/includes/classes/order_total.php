@@ -17,7 +17,7 @@ class order_total {
   public function __construct() {
     global $language;
 
-    if (defined('MODULE_ORDER_TOTAL_INSTALLED') && tep_not_null(MODULE_ORDER_TOTAL_INSTALLED)) {
+    if (defined('MODULE_ORDER_TOTAL_INSTALLED') && !empty(MODULE_ORDER_TOTAL_INSTALLED)) {
       $this->modules = explode(';', MODULE_ORDER_TOTAL_INSTALLED);
 
       foreach ($this->modules as $value) {
@@ -40,7 +40,7 @@ class order_total {
           $GLOBALS[$class]->process();
 
           for ($i = 0, $n = sizeof($GLOBALS[$class]->output); $i < $n; $i++) {
-            if (tep_not_null($GLOBALS[$class]->output[$i]['title']) && tep_not_null($GLOBALS[$class]->output[$i]['text'])) {
+            if (!empty($GLOBALS[$class]->output[$i]['title']) && !empty($GLOBALS[$class]->output[$i]['text'])) {
               $order_total_array[] = array('code' => $GLOBALS[$class]->code,
                                            'title' => $GLOBALS[$class]->output[$i]['title'],
                                            'text' => $GLOBALS[$class]->output[$i]['text'],

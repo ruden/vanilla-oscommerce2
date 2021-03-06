@@ -44,7 +44,7 @@ class sage_pay_form {
     }
 
     if ($this->enabled === true) {
-      if (!tep_not_null(MODULE_PAYMENT_SAGE_PAY_FORM_VENDOR_LOGIN_NAME) || !tep_not_null(MODULE_PAYMENT_SAGE_PAY_FORM_ENCRYPTION_PASSWORD)) {
+      if (empty(MODULE_PAYMENT_SAGE_PAY_FORM_VENDOR_LOGIN_NAME) || empty(MODULE_PAYMENT_SAGE_PAY_FORM_ENCRYPTION_PASSWORD)) {
         $this->description = '<div class="secWarning">' . MODULE_PAYMENT_SAGE_PAY_FORM_ERROR_ADMIN_CONFIGURATION . '</div>' . $this->description;
 
         $this->enabled = false;
@@ -151,7 +151,7 @@ class sage_pay_form {
       $crypt['DeliveryState'] = tep_get_zone_code($order->delivery['country']['id'], $order->delivery['zone_id'], '');
     }
 
-    if (tep_not_null(MODULE_PAYMENT_SAGE_PAY_FORM_VENDOR_EMAIL)) {
+    if (!empty(MODULE_PAYMENT_SAGE_PAY_FORM_VENDOR_EMAIL)) {
       $crypt['VendorEMail'] = substr(MODULE_PAYMENT_SAGE_PAY_FORM_VENDOR_EMAIL, 0, 255);
     }
 
@@ -169,7 +169,7 @@ class sage_pay_form {
         break;
     }
 
-    if (tep_not_null(MODULE_PAYMENT_SAGE_PAY_FORM_CUSTOMER_EMAIL_MESSAGE)) {
+    if (!empty(MODULE_PAYMENT_SAGE_PAY_FORM_CUSTOMER_EMAIL_MESSAGE)) {
       $crypt['eMailMessage'] = substr(MODULE_PAYMENT_SAGE_PAY_FORM_CUSTOMER_EMAIL_MESSAGE, 0, 7500);
     }
 
@@ -214,7 +214,7 @@ class sage_pay_form {
   public function before_process() {
     global $sage_pay_response;
 
-    if (isset($_GET['crypt']) && tep_not_null($_GET['crypt'])) {
+    if (isset($_GET['crypt']) && !empty($_GET['crypt'])) {
       $transaction_response = $this->decryptParams($_GET['crypt']);
 
       $string_array = explode('&', $transaction_response);
@@ -232,7 +232,7 @@ class sage_pay_form {
 
         $error = $this->getErrorMessageNumber($sage_pay_response['StatusDetail']);
 
-        tep_redirect(tep_href_link('checkout_payment.php', 'payment_error=' . $this->code . (tep_not_null($error) ? '&error=' . $error : '')));
+        tep_redirect(tep_href_link('checkout_payment.php', 'payment_error=' . $this->code . (!empty($error) ? '&error=' . $error : '')));
       }
     } else {
       tep_redirect(tep_href_link('checkout_payment.php', 'payment_error=' . $this->code));
@@ -302,7 +302,7 @@ class sage_pay_form {
 
     if (isset($_GET['error']) && is_numeric($_GET['error']) && $this->errorMessageNumberExists($_GET['error'])) {
       $error_number = $_GET['error'];
-    } elseif (isset($_GET['crypt']) && tep_not_null($_GET['crypt'])) {
+    } elseif (isset($_GET['crypt']) && !empty($_GET['crypt'])) {
       $transaction_response = $this->decryptParams($_GET['crypt']);
 
       $string_array = explode('&', $transaction_response);
@@ -500,7 +500,7 @@ class sage_pay_form {
         $class = substr($value, 0, strrpos($value, '.'));
         if ($GLOBALS[$class]->enabled) {
           for ($i = 0, $n = sizeof($GLOBALS[$class]->output); $i < $n; $i++) {
-            if (tep_not_null($GLOBALS[$class]->output[$i]['title']) && tep_not_null($GLOBALS[$class]->output[$i]['text'])) {
+            if (!empty($GLOBALS[$class]->output[$i]['title']) && !empty($GLOBALS[$class]->output[$i]['text'])) {
               $order_total_array[] = array('code' => $GLOBALS[$class]->code,
                                            'title' => $GLOBALS[$class]->output[$i]['title'],
                                            'text' => $GLOBALS[$class]->output[$i]['text'],
@@ -582,7 +582,7 @@ class sage_pay_form {
   }
 
   public function sendDebugEmail($response = array()) {
-    if (tep_not_null(MODULE_PAYMENT_SAGE_PAY_FORM_DEBUG_EMAIL)) {
+    if (!empty(MODULE_PAYMENT_SAGE_PAY_FORM_DEBUG_EMAIL)) {
       $email_body = '';
 
       if (!empty($response)) {

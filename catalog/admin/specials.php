@@ -17,7 +17,7 @@
 
   $action = (isset($_GET['action']) ? $_GET['action'] : '');
 
-  if (tep_not_null($action)) {
+  if (!empty($action)) {
     switch ($action) {
       case 'setflag':
         tep_set_specials_status($_GET['id'], $_GET['flag']);
@@ -39,11 +39,11 @@
         }
 
         $expires_date = '';
-        if (tep_not_null($expdate)) {
+        if (!empty($expdate)) {
           $expires_date = substr($expdate, 0, 4) . substr($expdate, 5, 2) . substr($expdate, 8, 2);
         }
 
-        tep_db_query("insert into specials (products_id, specials_new_products_price, specials_date_added, expires_date, status) values ('" . (int)$products_id . "', '" . tep_db_input($specials_price) . "', now(), " . (tep_not_null($expires_date) ? "'" . tep_db_input($expires_date) . "'" : 'null') . ", '1')");
+        tep_db_query("insert into specials (products_id, specials_new_products_price, specials_date_added, expires_date, status) values ('" . (int)$products_id . "', '" . tep_db_input($specials_price) . "', now(), " . (!empty($expires_date) ? "'" . tep_db_input($expires_date) . "'" : 'null') . ", '1')");
 
         tep_redirect(tep_href_link('specials.php', 'page=' . $_GET['page']));
         break;
@@ -56,11 +56,11 @@
         if (substr($specials_price, -1) == '%') $specials_price = ($products_price - (($specials_price / 100) * $products_price));
 
         $expires_date = '';
-        if (tep_not_null($expdate)) {
+        if (!empty($expdate)) {
           $expires_date = substr($expdate, 0, 4) . substr($expdate, 5, 2) . substr($expdate, 8, 2);
         }
 
-        tep_db_query("update specials set specials_new_products_price = '" . tep_db_input($specials_price) . "', specials_last_modified = now(), expires_date = " . (tep_not_null($expires_date) ? "'" . tep_db_input($expires_date) . "'" : 'null') . " where specials_id = '" . (int)$specials_id . "'");
+        tep_db_query("update specials set specials_new_products_price = '" . tep_db_input($specials_price) . "', specials_last_modified = now(), expires_date = " . (!empty($expires_date) ? "'" . tep_db_input($expires_date) . "'" : 'null') . " where specials_id = '" . (int)$specials_id . "'");
 
         tep_redirect(tep_href_link('specials.php', 'page=' . $_GET['page'] . '&sID=' . $specials_id));
         break;
@@ -234,7 +234,7 @@ $('#expdate').datepicker({
       }
       break;
   }
-  if ( (tep_not_null($heading)) && (tep_not_null($contents)) ) {
+  if ( (!empty($heading)) && (!empty($contents)) ) {
     echo '            <td width="25%" valign="top">' . "\n";
 
     $box = new box;

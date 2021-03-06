@@ -57,7 +57,7 @@ require('includes/template_top.php');
             $products_query = tep_db_query("select count(*) as count from orders_products where orders_id = '" . (int)$history['orders_id'] . "'");
             $products = tep_db_fetch_array($products_query);
 
-            if (tep_not_null($history['delivery_name'])) {
+            if (!empty($history['delivery_name'])) {
               $order_type = TEXT_ORDER_SHIPPED_TO;
               $order_name = $history['delivery_name'];
             } else {

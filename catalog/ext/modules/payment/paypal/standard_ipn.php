@@ -27,7 +27,7 @@ $result = false;
 
 $seller_accounts = array($paypal_standard->_app->getCredentials('PS', 'email'));
 
-if (tep_not_null($paypal_standard->_app->getCredentials('PS', 'email_primary'))) {
+if (!empty($paypal_standard->_app->getCredentials('PS', 'email_primary'))) {
   $seller_accounts[] = $paypal_standard->_app->getCredentials('PS', 'email_primary');
 }
 

@@ -45,7 +45,7 @@
         }
       }
 
-      if (tep_not_null($order->info['shipping_method'])) {
+      if (!empty($order->info['shipping_method'])) {
         $module = substr($GLOBALS['shipping']['id'], 0, strpos($GLOBALS['shipping']['id'], '_'));
 
         if ($GLOBALS[$module]->tax_class > 0) {

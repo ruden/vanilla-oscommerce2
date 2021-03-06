@@ -29,7 +29,7 @@ class breadcrumb {
     $trail_string = '';
 
     for ($i = 0, $n = sizeof($this->_trail); $i < $n; $i++) {
-      if (isset($this->_trail[$i]['link']) && tep_not_null($this->_trail[$i]['link'])) {
+      if (isset($this->_trail[$i]['link']) && !empty($this->_trail[$i]['link'])) {
         if ($i == 0) {
           $trail_string .= '<li class="list-inline-item"><a href="' . $this->_trail[$i]['link'] . '">' . $this->_trail[$i]['title'] . '</a></li>';
         } else {

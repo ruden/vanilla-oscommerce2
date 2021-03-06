@@ -101,7 +101,7 @@ if (defined('MODULE_ORDER_TOTAL_SHIPPING_FREE_SHIPPING') && (MODULE_ORDER_TOTAL_
 // process the selected shipping method
 if (isset($_POST['action']) && ($_POST['action'] == 'process') && isset($_POST['formid']) && ($_POST['formid'] == $sessiontoken)) {
   if (!isset($_SESSION['comments'])) tep_session_register('comments');
-  if (tep_not_null($_POST['comments'])) {
+  if (!empty($_POST['comments'])) {
     $comments = tep_db_prepare_input($_POST['comments']);
   }
 
@@ -287,7 +287,7 @@ require('includes/template_top.php');
 
               <tr>
                 <td colspan="3">
-                  <span class="fw-bold"><?php echo $quotes[$i]['module']; ?></span>&nbsp;<?php if (isset($quotes[$i]['icon']) && tep_not_null($quotes[$i]['icon'])) {
+                  <span class="fw-bold"><?php echo $quotes[$i]['module']; ?></span>&nbsp;<?php if (isset($quotes[$i]['icon']) && !empty($quotes[$i]['icon'])) {
                     echo $quotes[$i]['icon'];
                   } ?></td>
               </tr>

@@ -36,7 +36,7 @@ class cm_account_sage_pay_cards {
 
     $sage_pay_enabled = false;
 
-    if (defined('MODULE_PAYMENT_INSTALLED') && tep_not_null(MODULE_PAYMENT_INSTALLED) && in_array('sage_pay_direct.php', explode(';', MODULE_PAYMENT_INSTALLED))) {
+    if (defined('MODULE_PAYMENT_INSTALLED') && !empty(MODULE_PAYMENT_INSTALLED) && in_array('sage_pay_direct.php', explode(';', MODULE_PAYMENT_INSTALLED))) {
       if (!class_exists('sage_pay_direct')) {
         include(DIR_FS_CATALOG . 'includes/languages/' . $language . '/modules/payment/sage_pay_direct.php');
         include(DIR_FS_CATALOG . 'includes/modules/payment/sage_pay_direct.php');

@@ -40,7 +40,7 @@ if ((isset($_GET['keywords']) && empty($_GET['keywords'])) &&
   }
 
   $price_check_error = false;
-  if (tep_not_null($pfrom)) {
+  if (!empty($pfrom)) {
     if (!settype($pfrom, 'double')) {
       $error = true;
       $price_check_error = true;
@@ -49,7 +49,7 @@ if ((isset($_GET['keywords']) && empty($_GET['keywords'])) &&
     }
   }
 
-  if (tep_not_null($pto)) {
+  if (!empty($pto)) {
     if (!settype($pto, 'double')) {
       $error = true;
       $price_check_error = true;
@@ -66,7 +66,7 @@ if ((isset($_GET['keywords']) && empty($_GET['keywords'])) &&
     }
   }
 
-  if (tep_not_null($keywords)) {
+  if (!empty($keywords)) {
     if (!tep_parse_search_string($keywords, $search_keywords)) {
       $error = true;
 
@@ -90,13 +90,13 @@ $breadcrumb->add(NAVBAR_TITLE_2, tep_href_link('advanced_search_result.php', tep
 
 $select_str = "select distinct p.products_id, p.*, m.*, pd.*, if(s.status, s.specials_new_products_price, null) as specials_new_products_price, if(s.status, s.specials_new_products_price, p.products_price) as final_price ";
 
-if ((DISPLAY_PRICE_WITH_TAX == 'true') && (tep_not_null($pfrom) || tep_not_null($pto))) {
+if ((DISPLAY_PRICE_WITH_TAX == 'true') && (!empty($pfrom) || !empty($pto))) {
   $select_str .= ", SUM(tr.tax_rate) as tax_rate ";
 }
 
 $from_str = "from products p left join manufacturers m using(manufacturers_id) left join specials s on p.products_id = s.products_id";
 
-if ((DISPLAY_PRICE_WITH_TAX == 'true') && (tep_not_null($pfrom) || tep_not_null($pto))) {
+if ((DISPLAY_PRICE_WITH_TAX == 'true') && (!empty($pfrom) || !empty($pto))) {
   if (!isset($_SESSION['customer_country_id'])) {
     $customer_country_id = STORE_COUNTRY;
     $customer_zone_id = STORE_ZONE;
@@ -108,7 +108,7 @@ $from_str .= ", products_description pd, categories c, products_to_categories p2
 
 $where_str = " where p.products_status = '1' and p.products_id = pd.products_id and pd.language_id = '" . (int)$languages_id . "' and p.products_id = p2c.products_id and p2c.categories_id = c.categories_id ";
 
-if (isset($_GET['categories_id']) && tep_not_null($_GET['categories_id'])) {
+if (isset($_GET['categories_id']) && !empty($_GET['categories_id'])) {
   if (isset($_GET['inc_subcat']) && ($_GET['inc_subcat'] == '1')) {
     $subcategories_array = array();
     tep_get_subcategories($subcategories_array, $_GET['categories_id']);
@@ -125,7 +125,7 @@ if (isset($_GET['categories_id']) && tep_not_null($_GET['categories_id'])) {
   }
 }
 
-if (isset($_GET['manufacturers_id']) && tep_not_null($_GET['manufacturers_id'])) {
+if (isset($_GET['manufacturers_id']) && !empty($_GET['manufacturers_id'])) {
   $where_str .= " and m.manufacturers_id = '" . (int)$_GET['manufacturers_id'] . "'";
 }
 
@@ -150,7 +150,7 @@ if (isset($search_keywords) && (sizeof($search_keywords) > 0)) {
   $where_str .= " )";
 }
 
-if (tep_not_null($pfrom)) {
+if (!empty($pfrom)) {
   if ($currencies->is_set($currency)) {
     $rate = $currencies->get_value($currency);
 
@@ -158,7 +158,7 @@ if (tep_not_null($pfrom)) {
   }
 }
 
-if (tep_not_null($pto)) {
+if (!empty($pto)) {
   if (isset($rate)) {
     $pto = $pto / $rate;
   }
@@ -172,7 +172,7 @@ if (DISPLAY_PRICE_WITH_TAX == 'true') {
   if ($pto > 0) $where_str .= " and (IF(s.status, s.specials_new_products_price, p.products_price) <= " . (double)$pto . ")";
 }
 
-if ((DISPLAY_PRICE_WITH_TAX == 'true') && (tep_not_null($pfrom) || tep_not_null($pto))) {
+if ((DISPLAY_PRICE_WITH_TAX == 'true') && (!empty($pfrom) || !empty($pto))) {
   $where_str .= " group by p.products_id, tr.tax_priority";
 }
 

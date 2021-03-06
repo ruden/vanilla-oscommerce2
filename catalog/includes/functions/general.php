@@ -201,7 +201,7 @@ function tep_get_all_get_params(array $exclude_array = []) {
 // TABLES: countries
 function tep_get_countries($countries_id = '', $with_iso_codes = false) {
   $countries_array = array();
-  if (tep_not_null($countries_id)) {
+  if (!empty($countries_id)) {
     if ($with_iso_codes == true) {
       $countries = tep_db_query("select countries_name, countries_iso_code_2, countries_iso_code_3 from countries where countries_id = '" . (int)$countries_id . "' order by countries_name");
       $countries_values = tep_db_fetch_array($countries);
@@ -235,7 +235,7 @@ function tep_get_countries_with_iso_codes($countries_id) {
 function tep_get_path($current_category_id = '') {
   global $cPath_array;
 
-  if (tep_not_null($current_category_id)) {
+  if (!empty($current_category_id)) {
     $cp_size = sizeof($cPath_array);
     if ($cp_size == 0) {
       $cPath_new = $current_category_id;
@@ -465,10 +465,10 @@ function tep_address_format($address_format_id, $address, $html, $boln, $eoln) {
   $address_format = tep_db_fetch_array($address_format_query);
 
   $company = tep_output_string_protected($address['company']);
-  if (isset($address['firstname']) && tep_not_null($address['firstname'])) {
+  if (isset($address['firstname']) && !empty($address['firstname'])) {
     $firstname = tep_output_string_protected($address['firstname']);
     $lastname = tep_output_string_protected($address['lastname']);
-  } elseif (isset($address['name']) && tep_not_null($address['name'])) {
+  } elseif (isset($address['name']) && !empty($address['name'])) {
     $firstname = tep_output_string_protected($address['name']);
     $lastname = '';
   } else {
@@ -479,13 +479,13 @@ function tep_address_format($address_format_id, $address, $html, $boln, $eoln) {
   $suburb = tep_output_string_protected($address['suburb']);
   $city = tep_output_string_protected($address['city']);
   $state = tep_output_string_protected($address['state']);
-  if (isset($address['country_id']) && tep_not_null($address['country_id'])) {
+  if (isset($address['country_id']) && !empty($address['country_id'])) {
     $country = tep_get_country_name($address['country_id']);
 
-    if (isset($address['zone_id']) && tep_not_null($address['zone_id'])) {
+    if (isset($address['zone_id']) && !empty($address['zone_id'])) {
       $state = tep_get_zone_code($address['country_id'], $address['zone_id'], $state);
     }
-  } elseif (isset($address['country']) && tep_not_null($address['country'])) {
+  } elseif (isset($address['country']) && !empty($address['country'])) {
     $country = tep_output_string_protected($address['country']['title']);
   } else {
     $country = '';
@@ -521,7 +521,7 @@ function tep_address_format($address_format_id, $address, $html, $boln, $eoln) {
   $fmt = $address_format['format'];
   eval("\$address = \"$fmt\";");
 
-  if ((ACCOUNT_COMPANY == 'true') && (tep_not_null($company))) {
+  if ((ACCOUNT_COMPANY == 'true') && (!empty($company))) {
     $address = $company . $cr . $address;
   }
 
@@ -943,7 +943,7 @@ function tep_get_product_path($products_id) {
 
     $cPath = implode('_', $categories);
 
-    if (tep_not_null($cPath)) $cPath .= '_';
+    if (!empty($cPath)) $cPath .= '_';
     $cPath .= $category['categories_id'];
   }
 
@@ -1354,7 +1354,7 @@ function tep_rand($min = null, $max = null) {
 }
 
 function tep_setcookie($name, $value = '', $expire = 0, $path = '/', $domain = '', $secure = 0) {
-  setcookie($name, $value, $expire, $path, (tep_not_null($domain) ? $domain : ''), $secure);
+  setcookie($name, $value, $expire, $path, (!empty($domain) ? $domain : ''), $secure);
 }
 
 function tep_validate_ip_address($ip_address) {

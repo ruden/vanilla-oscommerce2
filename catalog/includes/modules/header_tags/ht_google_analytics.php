@@ -32,7 +32,7 @@ class ht_google_analytics {
   public function execute() {
     global $PHP_SELF, $oscTemplate, $customer_id;
 
-    if (tep_not_null(MODULE_HEADER_TAGS_GOOGLE_ANALYTICS_ID)) {
+    if (!empty(MODULE_HEADER_TAGS_GOOGLE_ANALYTICS_ID)) {
       if (MODULE_HEADER_TAGS_GOOGLE_ANALYTICS_JS_PLACEMENT != 'Header') {
         $this->group = 'footer_scripts';
       }

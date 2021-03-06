@@ -74,7 +74,7 @@ require('includes/template_top.php');
 
           if (STOCK_CHECK == 'true') {
             $stock_check = tep_check_stock($products[$i]['id'], $products[$i]['quantity']);
-            if (tep_not_null($stock_check)) {
+            if (!empty($stock_check)) {
               $any_out_of_stock = 1;
 
               $products_name .= $stock_check;

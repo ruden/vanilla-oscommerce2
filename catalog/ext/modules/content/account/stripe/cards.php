@@ -18,7 +18,7 @@ if (!isset($_SESSION['customer_id'])) {
   tep_redirect(tep_href_link('login.php'));
 }
 
-if (defined('MODULE_PAYMENT_INSTALLED') && tep_not_null(MODULE_PAYMENT_INSTALLED) && in_array('stripe.php', explode(';', MODULE_PAYMENT_INSTALLED))) {
+if (defined('MODULE_PAYMENT_INSTALLED') && !empty(MODULE_PAYMENT_INSTALLED) && in_array('stripe.php', explode(';', MODULE_PAYMENT_INSTALLED))) {
   if (!class_exists('stripe')) {
     include('includes/languages/' . $language . '/modules/payment/stripe.php');
     include('includes/modules/payment/stripe.php');

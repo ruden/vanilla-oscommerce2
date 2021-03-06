@@ -173,7 +173,7 @@
               $class = substr($value, 0, strrpos($value, '.'));
               if ($GLOBALS[$class]->enabled) {
                 for ($i=0, $n=sizeof($GLOBALS[$class]->output); $i<$n; $i++) {
-                  if (tep_not_null($GLOBALS[$class]->output[$i]['title']) && tep_not_null($GLOBALS[$class]->output[$i]['text'])) {
+                  if (!empty($GLOBALS[$class]->output[$i]['title']) && !empty($GLOBALS[$class]->output[$i]['text'])) {
                     $order_totals[] = array('code' => $GLOBALS[$class]->code,
                                             'title' => $GLOBALS[$class]->output[$i]['title'],
                                             'text' => $GLOBALS[$class]->output[$i]['text'],
@@ -285,7 +285,7 @@
 
                 tep_db_perform('orders_products_attributes', $sql_data_array);
 
-                if ((DOWNLOAD_ENABLED == 'true') && isset($attributes_values['products_attributes_filename']) && tep_not_null($attributes_values['products_attributes_filename'])) {
+                if ((DOWNLOAD_ENABLED == 'true') && isset($attributes_values['products_attributes_filename']) && !empty($attributes_values['products_attributes_filename'])) {
                   $sql_data_array = array('orders_id' => $insert_id,
                                           'orders_products_id' => $order_products_id,
                                           'orders_products_filename' => $attributes_values['products_attributes_filename'],
@@ -409,7 +409,7 @@ EOD;
 
       $seller_accounts = array($this->_app->getCredentials('HS', 'email'));
 
-      if ( tep_not_null($this->_app->getCredentials('HS', 'email_primary')) ) {
+      if ( !empty($this->_app->getCredentials('HS', 'email_primary')) ) {
         $seller_accounts[] = $this->_app->getCredentials('HS', 'email_primary');
       }
 
@@ -619,7 +619,7 @@ EOD;
       if ( tep_db_num_rows($check_query) ) {
         $check = tep_db_fetch_array($check_query);
 
-        return tep_not_null($check['configuration_value']);
+        return !empty($check['configuration_value']);
       }
 
       return false;

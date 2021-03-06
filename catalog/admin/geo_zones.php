@@ -14,7 +14,7 @@
 
   $saction = (isset($_GET['saction']) ? $_GET['saction'] : '');
 
-  if (tep_not_null($saction)) {
+  if (!empty($saction)) {
     switch ($saction) {
       case 'insert_sub':
         $zID = tep_db_prepare_input($_GET['zID']);
@@ -32,7 +32,7 @@
         $zone_country_id = tep_db_prepare_input($_POST['zone_country_id']);
         $zone_id = tep_db_prepare_input($_POST['zone_id']);
 
-        tep_db_query("update zones_to_geo_zones set geo_zone_id = '" . (int)$zID . "', zone_country_id = '" . (int)$zone_country_id . "', zone_id = " . (tep_not_null($zone_id) ? "'" . (int)$zone_id . "'" : 'null') . ", last_modified = now() where association_id = '" . (int)$sID . "'");
+        tep_db_query("update zones_to_geo_zones set geo_zone_id = '" . (int)$zID . "', zone_country_id = '" . (int)$zone_country_id . "', zone_id = " . (!empty($zone_id) ? "'" . (int)$zone_id . "'" : 'null') . ", last_modified = now() where association_id = '" . (int)$sID . "'");
 
         tep_redirect(tep_href_link('geo_zones.php', 'zpage=' . $_GET['zpage'] . '&zID=' . $_GET['zID'] . '&action=list&spage=' . $_GET['spage'] . '&sID=' . $_GET['sID']));
         break;
@@ -48,7 +48,7 @@
 
   $action = (isset($_GET['action']) ? $_GET['action'] : '');
 
-  if (tep_not_null($action)) {
+  if (!empty($action)) {
     switch ($action) {
       case 'insert_zone':
         $geo_zone_name = tep_db_prepare_input($_POST['geo_zone_name']);
@@ -260,7 +260,7 @@ function update_zone(theForm) {
 
           $contents[] = array('align' => 'center', 'text' => tep_draw_button(IMAGE_EDIT, 'document', tep_href_link('geo_zones.php', 'zpage=' . $_GET['zpage'] . '&zID=' . $_GET['zID'] . '&action=list&spage=' . $_GET['spage'] . '&sID=' . $sInfo->association_id . '&saction=edit')) . tep_draw_button(IMAGE_DELETE, 'trash', tep_href_link('geo_zones.php', 'zpage=' . $_GET['zpage'] . '&zID=' . $_GET['zID'] . '&action=list&spage=' . $_GET['spage'] . '&sID=' . $sInfo->association_id . '&saction=delete')));
           $contents[] = array('text' => '<br />' . TEXT_INFO_DATE_ADDED . ' ' . tep_date_short($sInfo->date_added));
-          if (tep_not_null($sInfo->last_modified)) $contents[] = array('text' => TEXT_INFO_LAST_MODIFIED . ' ' . tep_date_short($sInfo->last_modified));
+          if (!empty($sInfo->last_modified)) $contents[] = array('text' => TEXT_INFO_LAST_MODIFIED . ' ' . tep_date_short($sInfo->last_modified));
         }
         break;
     }
@@ -299,14 +299,14 @@ function update_zone(theForm) {
           $contents[] = array('align' => 'center', 'text' => tep_draw_button(IMAGE_EDIT, 'document', tep_href_link('geo_zones.php', 'zpage=' . $_GET['zpage'] . '&zID=' . $zInfo->geo_zone_id . '&action=edit_zone')) . tep_draw_button(IMAGE_DELETE, 'trash', tep_href_link('geo_zones.php', 'zpage=' . $_GET['zpage'] . '&zID=' . $zInfo->geo_zone_id . '&action=delete_zone')) . tep_draw_button(IMAGE_DETAILS, 'info', tep_href_link('geo_zones.php', 'zpage=' . $_GET['zpage'] . '&zID=' . $zInfo->geo_zone_id . '&action=list')));
           $contents[] = array('text' => '<br />' . TEXT_INFO_NUMBER_ZONES . ' ' . $zInfo->num_zones);
           $contents[] = array('text' => '<br />' . TEXT_INFO_DATE_ADDED . ' ' . tep_date_short($zInfo->date_added));
-          if (tep_not_null($zInfo->last_modified)) $contents[] = array('text' => TEXT_INFO_LAST_MODIFIED . ' ' . tep_date_short($zInfo->last_modified));
+          if (!empty($zInfo->last_modified)) $contents[] = array('text' => TEXT_INFO_LAST_MODIFIED . ' ' . tep_date_short($zInfo->last_modified));
           $contents[] = array('text' => '<br />' . TEXT_INFO_ZONE_DESCRIPTION . '<br />' . $zInfo->geo_zone_description);
         }
         break;
     }
   }
 
-  if ( (tep_not_null($heading)) && (tep_not_null($contents)) ) {
+  if ( (!empty($heading)) && (!empty($contents)) ) {
     echo '            <td width="25%" valign="top">' . "\n";
 
     $box = new box;

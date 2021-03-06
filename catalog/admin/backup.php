@@ -14,7 +14,7 @@
 
   $action = (isset($_GET['action']) ? $_GET['action'] : '');
 
-  if (tep_not_null($action)) {
+  if (!empty($action)) {
     switch ($action) {
       case 'forget':
         tep_db_query("delete from configuration where configuration_key = 'DB_LAST_RESTORE'");
@@ -451,7 +451,7 @@
                 break;
             }
 
-            if ((tep_not_null($heading)) && (tep_not_null($contents))) {
+            if ((!empty($heading)) && (!empty($contents))) {
               echo '            <td width="25%" valign="top">' . "\n";
 
               $box = new box;

@@ -31,7 +31,7 @@
     function execute() {
       global $PHP_SELF, $oscTemplate;
 
-      if (tep_not_null(MODULE_HEADER_TAGS_ROBOT_NOINDEX_PAGES)) {
+      if (!empty(MODULE_HEADER_TAGS_ROBOT_NOINDEX_PAGES)) {
         $pages_array = array();
 
         foreach (explode(';', MODULE_HEADER_TAGS_ROBOT_NOINDEX_PAGES) as $page) {

@@ -14,7 +14,7 @@
 
   $action = (isset($_GET['action']) ? $_GET['action'] : '');
 
-  if (tep_not_null($action)) {
+  if (!empty($action)) {
     switch ($action) {
       case 'insert':
         $zone_country_id = tep_db_prepare_input($_POST['zone_country_id']);
@@ -152,7 +152,7 @@
       break;
   }
 
-  if ( (tep_not_null($heading)) && (tep_not_null($contents)) ) {
+  if ( (!empty($heading)) && (!empty($contents)) ) {
     echo '            <td width="25%" valign="top">' . "\n";
 
     $box = new box;

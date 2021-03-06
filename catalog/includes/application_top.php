@@ -134,11 +134,11 @@ if (SESSION_FORCE_COOKIE_USE == 'True') {
   $user_agent = strtolower(getenv('HTTP_USER_AGENT'));
   $spider_flag = false;
 
-  if (tep_not_null($user_agent)) {
+  if (!empty($user_agent)) {
     $spiders = file(DIR_WS_INCLUDES . 'spiders.txt');
 
     for ($i = 0, $n = sizeof($spiders); $i < $n; $i++) {
-      if (tep_not_null($spiders[$i])) {
+      if (!empty($spiders[$i])) {
         if (is_integer(strpos($user_agent, trim($spiders[$i])))) {
           $spider_flag = true;
           break;
@@ -245,7 +245,7 @@ if (!isset($_SESSION['language']) || isset($_GET['language'])) {
   include('includes/classes/language.php');
   $lng = new language();
 
-  if (isset($_GET['language']) && tep_not_null($_GET['language'])) {
+  if (isset($_GET['language']) && !empty($_GET['language'])) {
     $lng->set_language($_GET['language']);
   } else {
     $lng->get_browser_language();
@@ -330,7 +330,7 @@ if (isset($_GET['cPath'])) {
   $cPath = '';
 }
 
-if (tep_not_null($cPath)) {
+if (!empty($cPath)) {
   $cPath_array = tep_parse_category_path($cPath);
   $cPath = implode('_', $cPath_array);
   $current_category_id = $cPath_array[(sizeof($cPath_array) - 1)];

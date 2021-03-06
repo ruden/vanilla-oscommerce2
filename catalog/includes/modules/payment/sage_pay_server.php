@@ -43,7 +43,7 @@
       }
 
       if ( $this->enabled === true ) {
-        if ( !tep_not_null(MODULE_PAYMENT_SAGE_PAY_SERVER_VENDOR_LOGIN_NAME) ) {
+        if ( empty(MODULE_PAYMENT_SAGE_PAY_SERVER_VENDOR_LOGIN_NAME) ) {
           $this->description = '<div class="secWarning">' . MODULE_PAYMENT_SAGE_PAY_SERVER_ERROR_ADMIN_CONFIGURATION . '</div>' . $this->description;
 
           $this->enabled = false;
@@ -263,7 +263,7 @@
         }
       }
 
-      tep_redirect(tep_href_link('checkout_payment.php', 'payment_error=' . $this->code . (tep_not_null($error) ? '&error=' . $error : '')));
+      tep_redirect(tep_href_link('checkout_payment.php', 'payment_error=' . $this->code . (!empty($error) ? '&error=' . $error : '')));
     }
 
     function after_process() {
@@ -505,7 +505,7 @@ EOD;
         curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
       }
 
-      if ( tep_not_null(MODULE_PAYMENT_SAGE_PAY_SERVER_PROXY) ) {
+      if ( !empty(MODULE_PAYMENT_SAGE_PAY_SERVER_PROXY) ) {
         curl_setopt($curl, CURLOPT_HTTPPROXYTUNNEL, true);
         curl_setopt($curl, CURLOPT_PROXY, MODULE_PAYMENT_SAGE_PAY_SERVER_PROXY);
       }
@@ -689,7 +689,7 @@ EOD;
     }
 
     function sendDebugEmail($response = array()) {
-      if (tep_not_null(MODULE_PAYMENT_SAGE_PAY_SERVER_DEBUG_EMAIL)) {
+      if (!empty(MODULE_PAYMENT_SAGE_PAY_SERVER_DEBUG_EMAIL)) {
         $email_body = '';
 
         if (!empty($response)) {

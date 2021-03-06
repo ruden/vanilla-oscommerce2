@@ -17,12 +17,12 @@
     function __construct($module = '') {
       global $language, $PHP_SELF;
 
-      if (defined('MODULE_SHIPPING_INSTALLED') && tep_not_null(MODULE_SHIPPING_INSTALLED)) {
+      if (defined('MODULE_SHIPPING_INSTALLED') && !empty(MODULE_SHIPPING_INSTALLED)) {
         $this->modules = explode(';', MODULE_SHIPPING_INSTALLED);
 
         $include_modules = array();
 
-        if ( (tep_not_null($module)) && (in_array(substr($module['id'], 0, strpos($module['id'], '_')) . '.' . substr($PHP_SELF, (strrpos($PHP_SELF, '.')+1)), $this->modules)) ) {
+        if ( (!empty($module)) && (in_array(substr($module['id'], 0, strpos($module['id'], '_')) . '.' . substr($PHP_SELF, (strrpos($PHP_SELF, '.')+1)), $this->modules)) ) {
           $include_modules[] = array('class' => substr($module['id'], 0, strpos($module['id'], '_')), 'file' => substr($module['id'], 0, strpos($module['id'], '_')) . '.' . substr($PHP_SELF, (strrpos($PHP_SELF, '.')+1)));
         } else {
           foreach ($this->modules as $value) {
@@ -65,7 +65,7 @@
 
         foreach ($this->modules as $value) {
           $class = substr($value, 0, strrpos($value, '.'));
-          if (tep_not_null($module)) {
+          if (!empty($module)) {
             if ( ($module == $class) && ($GLOBALS[$class]->enabled) ) {
               $include_quotes[] = $class;
             }
@@ -89,7 +89,7 @@
         $class = substr($value, 0, strrpos($value, '.'));
         if ( $GLOBALS[$class]->enabled ) {
           foreach ( $GLOBALS[$class]->quotes['methods'] as $method ) {
-            if ( isset($method['cost']) && tep_not_null($method['cost']) ) {
+            if ( isset($method['cost']) && !empty($method['cost']) ) {
               return array('id' => $GLOBALS[$class]->quotes['id'] . '_' . $method['id'],
                            'title' => $GLOBALS[$class]->quotes['module'] . ' (' . $method['title'] . ')',
                            'cost' => $method['cost']);
@@ -108,7 +108,7 @@
           if ($GLOBALS[$class]->enabled) {
             $quotes = $GLOBALS[$class]->quotes;
             for ($i=0, $n=sizeof($quotes['methods']); $i<$n; $i++) {
-              if (isset($quotes['methods'][$i]['cost']) && tep_not_null($quotes['methods'][$i]['cost'])) {
+              if (isset($quotes['methods'][$i]['cost']) && !empty($quotes['methods'][$i]['cost'])) {
                 $rates[] = array('id' => $quotes['id'] . '_' . $quotes['methods'][$i]['id'],
                                  'title' => $quotes['module'] . ' (' . $quotes['methods'][$i]['title'] . ')',
                                  'cost' => $quotes['methods'][$i]['cost']);

@@ -113,7 +113,7 @@
     include(DIR_FS_CATALOG . 'includes/classes/language.php');
     $lng = new language();
 
-    if (isset($_GET['language']) && tep_not_null($_GET['language'])) {
+    if (isset($_GET['language']) && !empty($_GET['language'])) {
       $lng->set_language($_GET['language']);
     } else {
       $lng->get_browser_language();
@@ -213,7 +213,7 @@
     $cPath = '';
   }
 
-  if (tep_not_null($cPath)) {
+  if (!empty($cPath)) {
     $cPath_array = tep_parse_category_path($cPath);
     $cPath = implode('_', $cPath_array);
     $current_category_id = $cPath_array[(sizeof($cPath_array)-1)];

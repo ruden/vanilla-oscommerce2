@@ -282,7 +282,7 @@ function tep_values_name($values_id) {
 function tep_info_image($image, $alt = '', $width = '', $height = '') {
   global $request_type;
 
-  if (tep_not_null($image) && file_exists(DIR_FS_CATALOG . 'images/' . $image)) {
+  if (!empty($image) && file_exists(DIR_FS_CATALOG . 'images/' . $image)) {
     $image = tep_image(($request_type == 'SSL' ? HTTPS_SERVER : HTTP_SERVER) . DIR_WS_CATALOG . 'images/' . $image, $alt, $width, $height);
   } else {
     $image = TEXT_IMAGE_NONEXISTENT;
@@ -398,10 +398,10 @@ function tep_address_format($address_format_id, $address, $html, $boln, $eoln) {
   $address_format = tep_db_fetch_array($address_format_query);
 
   $company = tep_output_string_protected($address['company']);
-  if (isset($address['firstname']) && tep_not_null($address['firstname'])) {
+  if (isset($address['firstname']) && !empty($address['firstname'])) {
     $firstname = tep_output_string_protected($address['firstname']);
     $lastname = tep_output_string_protected($address['lastname']);
-  } elseif (isset($address['name']) && tep_not_null($address['name'])) {
+  } elseif (isset($address['name']) && !empty($address['name'])) {
     $firstname = tep_output_string_protected($address['name']);
     $lastname = '';
   } else {
@@ -412,13 +412,13 @@ function tep_address_format($address_format_id, $address, $html, $boln, $eoln) {
   $suburb = tep_output_string_protected($address['suburb']);
   $city = tep_output_string_protected($address['city']);
   $state = tep_output_string_protected($address['state']);
-  if (isset($address['country_id']) && tep_not_null($address['country_id'])) {
+  if (isset($address['country_id']) && !empty($address['country_id'])) {
     $country = tep_get_country_name($address['country_id']);
 
-    if (isset($address['zone_id']) && tep_not_null($address['zone_id'])) {
+    if (isset($address['zone_id']) && !empty($address['zone_id'])) {
       $state = tep_get_zone_code($address['country_id'], $address['zone_id'], $state);
     }
-  } elseif (isset($address['country']) && tep_not_null($address['country'])) {
+  } elseif (isset($address['country']) && !empty($address['country'])) {
     $country = tep_output_string_protected($address['country']);
   } else {
     $country = '';
@@ -455,7 +455,7 @@ function tep_address_format($address_format_id, $address, $html, $boln, $eoln) {
   $fmt = $address_format['format'];
   eval("\$address = \"$fmt\";");
 
-  if ((ACCOUNT_COMPANY == 'true') && (tep_not_null($company))) {
+  if ((ACCOUNT_COMPANY == 'true') && (!empty($company))) {
     $address = $company . $cr . $address;
   }
 
@@ -791,7 +791,7 @@ function tep_cfg_select_option($select_array, $key_value, $key = '') {
   $string = '';
 
   for ($i = 0, $n = sizeof($select_array); $i < $n; $i++) {
-    $name = ((tep_not_null($key)) ? 'configuration[' . $key . ']' : 'configuration_value');
+    $name = ((!empty($key)) ? 'configuration[' . $key . ']' : 'configuration_value');
 
     $string .= '<br /><input type="radio" name="' . $name . '" value="' . $select_array[$i] . '"';
 
@@ -876,7 +876,7 @@ function tep_generate_category_path($id, $from = 'category', $categories_array =
         $category_query = tep_db_query("select cd.categories_name, c.parent_id from categories c, categories_description cd where c.categories_id = '" . (int)$categories['categories_id'] . "' and c.categories_id = cd.categories_id and cd.language_id = '" . (int)$languages_id . "'");
         $category = tep_db_fetch_array($category_query);
         $categories_array[$index][] = array('id' => $categories['categories_id'], 'text' => $category['categories_name']);
-        if ((tep_not_null($category['parent_id'])) && ($category['parent_id'] != '0')) $categories_array = tep_generate_category_path($category['parent_id'], 'category', $categories_array, $index);
+        if ((!empty($category['parent_id'])) && ($category['parent_id'] != '0')) $categories_array = tep_generate_category_path($category['parent_id'], 'category', $categories_array, $index);
         $categories_array[$index] = array_reverse($categories_array[$index]);
       }
       $index++;
@@ -885,7 +885,7 @@ function tep_generate_category_path($id, $from = 'category', $categories_array =
     $category_query = tep_db_query("select cd.categories_name, c.parent_id from categories c, categories_description cd where c.categories_id = '" . (int)$id . "' and c.categories_id = cd.categories_id and cd.language_id = '" . (int)$languages_id . "'");
     $category = tep_db_fetch_array($category_query);
     $categories_array[$index][] = array('id' => $id, 'text' => $category['categories_name']);
-    if ((tep_not_null($category['parent_id'])) && ($category['parent_id'] != '0')) $categories_array = tep_generate_category_path($category['parent_id'], 'category', $categories_array, $index);
+    if ((!empty($category['parent_id'])) && ($category['parent_id'] != '0')) $categories_array = tep_generate_category_path($category['parent_id'], 'category', $categories_array, $index);
   }
 
   return $categories_array;

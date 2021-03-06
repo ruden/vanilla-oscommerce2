@@ -14,7 +14,7 @@
 
   $action = (isset($_GET['action']) ? $_GET['action'] : '');
 
-  if (tep_not_null($action)) {
+  if (!empty($action)) {
     if ($action == 'reset') {
       tep_reset_cache_block($_GET['block']);
     }

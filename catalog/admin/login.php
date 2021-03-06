@@ -22,7 +22,7 @@
     $action = 'logoff';
   }
 
-  if (tep_not_null($action)) {
+  if (!empty($action)) {
     switch ($action) {
       case 'process':
         if (isset($_SESSION['redirect_origin']) && isset($redirect_origin['auth_user']) && !isset($_POST['username'])) {

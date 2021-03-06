@@ -59,7 +59,7 @@ require('includes/template_top.php');
           <p><?php echo tep_address_format($order->delivery['format_id'], $order->delivery, 1, ' ', '<br />'); ?></p>
 
           <?php
-          if (tep_not_null($order->info['shipping_method'])) {
+          if (!empty($order->info['shipping_method'])) {
             ?>
 
             <div class="fw-bold"><?php echo HEADING_SHIPPING_METHOD; ?></div>

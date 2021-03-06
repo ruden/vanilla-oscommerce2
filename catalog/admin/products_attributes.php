@@ -21,7 +21,7 @@
 
   $page_info = 'option_page=' . $option_page . '&value_page=' . $value_page . '&attribute_page=' . $attribute_page;
 
-  if (tep_not_null($action)) {
+  if (!empty($action)) {
     switch ($action) {
       case 'add_product_options':
         $products_options_id = tep_db_prepare_input($_POST['products_options_id']);
@@ -65,7 +65,7 @@
           $products_attributes_maxdays = tep_db_prepare_input($_POST['products_attributes_maxdays']);
           $products_attributes_maxcount = tep_db_prepare_input($_POST['products_attributes_maxcount']);
 
-          if (tep_not_null($products_attributes_filename)) {
+          if (!empty($products_attributes_filename)) {
             tep_db_query("insert into products_attributes_download values (" . (int)$products_attributes_id . ", '" . tep_db_input($products_attributes_filename) . "', '" . tep_db_input($products_attributes_maxdays) . "', '" . tep_db_input($products_attributes_maxcount) . "')");
           }
         }
@@ -114,7 +114,7 @@
           $products_attributes_maxdays = tep_db_prepare_input($_POST['products_attributes_maxdays']);
           $products_attributes_maxcount = tep_db_prepare_input($_POST['products_attributes_maxcount']);
 
-          if (tep_not_null($products_attributes_filename)) {
+          if (!empty($products_attributes_filename)) {
             tep_db_query("replace into products_attributes_download set products_attributes_id = '" . (int)$attribute_id . "', products_attributes_filename = '" . tep_db_input($products_attributes_filename) . "', products_attributes_maxdays = '" . tep_db_input($products_attributes_maxdays) . "', products_attributes_maxcount = '" . tep_db_input($products_attributes_maxcount) . "'");
           }
         }

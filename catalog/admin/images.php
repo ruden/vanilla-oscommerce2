@@ -50,7 +50,7 @@ $action = (isset($_GET['action']) ? $_GET['action'] : '');
 $counter = array('success' => null,
                  'warning' => null);
 
-if (tep_not_null($action)) {
+if (!empty($action)) {
   switch ($action) {
     case 'resize':
       if (isset($_POST['module'])) {

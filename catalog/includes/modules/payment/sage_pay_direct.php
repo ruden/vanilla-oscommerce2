@@ -46,7 +46,7 @@ class sage_pay_direct {
     }
 
     if ($this->enabled === true) {
-      if (!tep_not_null(MODULE_PAYMENT_SAGE_PAY_DIRECT_VENDOR_LOGIN_NAME)) {
+      if (empty(MODULE_PAYMENT_SAGE_PAY_DIRECT_VENDOR_LOGIN_NAME)) {
         $this->description = '<div class="secWarning">' . MODULE_PAYMENT_SAGE_PAY_DIRECT_ERROR_ADMIN_CONFIGURATION . '</div>' . $this->description;
 
         $this->enabled = false;
@@ -242,7 +242,7 @@ class sage_pay_direct {
     $error = null;
 
     if (isset($_GET['check'])) {
-      if (($_GET['check'] == '3D') && isset($_POST['MD']) && tep_not_null($_POST['MD']) && isset($_POST['PaRes']) && tep_not_null($_POST['PaRes'])) {
+      if (($_GET['check'] == '3D') && isset($_POST['MD']) && !empty($_POST['MD']) && isset($_POST['PaRes']) && !empty($_POST['PaRes'])) {
         if (MODULE_PAYMENT_SAGE_PAY_DIRECT_TRANSACTION_SERVER == 'Live') {
           $gateway_url = 'https://live.sagepay.com/gateway/service/direct3dcallback.vsp';
         } else {
@@ -538,7 +538,7 @@ class sage_pay_direct {
 
       $error = $this->getErrorMessageNumber($sage_pay_response['StatusDetail']);
 
-      tep_redirect(tep_href_link('checkout_payment.php', 'payment_error=' . $this->code . (tep_not_null($error) ? '&error=' . $error : '')));
+      tep_redirect(tep_href_link('checkout_payment.php', 'payment_error=' . $this->code . (!empty($error) ? '&error=' . $error : '')));
     }
   }
 
@@ -630,7 +630,7 @@ class sage_pay_direct {
   public function get_error() {
     $message = MODULE_PAYMENT_SAGE_PAY_DIRECT_ERROR_GENERAL;
 
-    if (isset($_GET['error']) && tep_not_null($_GET['error'])) {
+    if (isset($_GET['error']) && !empty($_GET['error'])) {
       if (is_numeric($_GET['error']) && $this->errorMessageNumberExists($_GET['error'])) {
         $message = $this->getErrorMessage($_GET['error']) . ' ' . MODULE_PAYMENT_SAGE_PAY_DIRECT_ERROR_GENERAL;
       } else {
@@ -909,7 +909,7 @@ EOD;
       curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
     }
 
-    if (tep_not_null(MODULE_PAYMENT_SAGE_PAY_DIRECT_PROXY)) {
+    if (!empty(MODULE_PAYMENT_SAGE_PAY_DIRECT_PROXY)) {
       curl_setopt($curl, CURLOPT_HTTPPROXYTUNNEL, true);
       curl_setopt($curl, CURLOPT_PROXY, MODULE_PAYMENT_SAGE_PAY_DIRECT_PROXY);
     }
@@ -1331,7 +1331,7 @@ EOD;
   }
 
   public function sendDebugEmail($response = array()) {
-    if (tep_not_null(MODULE_PAYMENT_SAGE_PAY_DIRECT_DEBUG_EMAIL)) {
+    if (!empty(MODULE_PAYMENT_SAGE_PAY_DIRECT_DEBUG_EMAIL)) {
       $email_body = '';
 
       if (!empty($response)) {

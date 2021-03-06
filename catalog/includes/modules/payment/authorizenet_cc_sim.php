@@ -41,7 +41,7 @@
       }
 
       if ( $this->enabled === true ) {
-        if ( !tep_not_null(MODULE_PAYMENT_AUTHORIZENET_CC_SIM_LOGIN_ID) || !tep_not_null(MODULE_PAYMENT_AUTHORIZENET_CC_SIM_TRANSACTION_KEY) ) {
+        if ( empty(MODULE_PAYMENT_AUTHORIZENET_CC_SIM_LOGIN_ID) || empty(MODULE_PAYMENT_AUTHORIZENET_CC_SIM_TRANSACTION_KEY) ) {
           $this->description = '<div class="secWarning">' . MODULE_PAYMENT_AUTHORIZENET_CC_SIM_ERROR_ADMIN_CONFIGURATION . '</div>' . $this->description;
 
           $this->enabled = false;
@@ -192,7 +192,7 @@
 
       if ( $error === false ) {
         if ( ($_POST['x_response_code'] == '1') || ($_POST['x_response_code'] == '4') ) {
-          if ( tep_not_null(MODULE_PAYMENT_AUTHORIZENET_CC_SIM_MD5_HASH) && (!isset($_POST['x_MD5_Hash']) || (strtoupper($_POST['x_MD5_Hash']) != strtoupper(md5(MODULE_PAYMENT_AUTHORIZENET_CC_SIM_MD5_HASH . MODULE_PAYMENT_AUTHORIZENET_CC_SIM_LOGIN_ID . $_POST['x_trans_id'] . $this->format_raw($order->info['total']))))) ) {
+          if ( !empty(MODULE_PAYMENT_AUTHORIZENET_CC_SIM_MD5_HASH) && (!isset($_POST['x_MD5_Hash']) || (strtoupper($_POST['x_MD5_Hash']) != strtoupper(md5(MODULE_PAYMENT_AUTHORIZENET_CC_SIM_MD5_HASH . MODULE_PAYMENT_AUTHORIZENET_CC_SIM_LOGIN_ID . $_POST['x_trans_id'] . $this->format_raw($order->info['total']))))) ) {
             $error = 'verification';
           } elseif ($_POST['x_amount'] != $this->format_raw($order->info['total'])) {
             $error = 'verification';
@@ -515,7 +515,7 @@ EOD;
     }
 
     function sendDebugEmail($response = array()) {
-      if (tep_not_null(MODULE_PAYMENT_AUTHORIZENET_CC_SIM_DEBUG_EMAIL)) {
+      if (!empty(MODULE_PAYMENT_AUTHORIZENET_CC_SIM_DEBUG_EMAIL)) {
         $email_body = '';
 
         if (!empty($response)) {

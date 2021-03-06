@@ -345,7 +345,7 @@ EOD;
       }
 
       if (empty($comments)) {
-        if (isset($_POST['ppecomments']) && tep_not_null($_POST['ppecomments'])) {
+        if (isset($_POST['ppecomments']) && !empty($_POST['ppecomments'])) {
           $comments = tep_db_prepare_input($_POST['ppecomments']);
 
           $order->info['comments'] = $comments;
@@ -402,7 +402,7 @@ EOD;
       }
 
       if ( empty($comments) ) {
-        if ( isset($_POST['ppecomments']) && tep_not_null($_POST['ppecomments']) ) {
+        if ( isset($_POST['ppecomments']) && !empty($_POST['ppecomments']) ) {
           $comments = tep_db_prepare_input($_POST['ppecomments']);
 
           $order->info['comments'] = $comments;
@@ -583,7 +583,7 @@ EOD;
       if ( tep_db_num_rows($check_query) ) {
         $check = tep_db_fetch_array($check_query);
 
-        return tep_not_null($check['configuration_value']);
+        return !empty($check['configuration_value']);
       }
 
       return false;

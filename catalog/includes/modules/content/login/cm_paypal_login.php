@@ -52,7 +52,7 @@ class cm_paypal_login {
       }
 
       if ($this->enabled === true) {
-        if (((OSCOM_APP_PAYPAL_LOGIN_STATUS == '1') && (!tep_not_null(OSCOM_APP_PAYPAL_LOGIN_LIVE_CLIENT_ID) || !tep_not_null(OSCOM_APP_PAYPAL_LOGIN_LIVE_SECRET))) || ((OSCOM_APP_PAYPAL_LOGIN_STATUS == '0') && (!tep_not_null(OSCOM_APP_PAYPAL_LOGIN_SANDBOX_CLIENT_ID) || !tep_not_null(OSCOM_APP_PAYPAL_LOGIN_SANDBOX_SECRET)))) {
+        if (((OSCOM_APP_PAYPAL_LOGIN_STATUS == '1') && (empty(OSCOM_APP_PAYPAL_LOGIN_LIVE_CLIENT_ID) || empty(OSCOM_APP_PAYPAL_LOGIN_LIVE_SECRET))) || ((OSCOM_APP_PAYPAL_LOGIN_STATUS == '0') && (empty(OSCOM_APP_PAYPAL_LOGIN_SANDBOX_CLIENT_ID) || empty(OSCOM_APP_PAYPAL_LOGIN_SANDBOX_SECRET)))) {
           $this->description .= '<div class="secWarning">' . $this->_app->getDef('module_login_error_credentials') . '</div>';
 
           $this->enabled = false;
@@ -158,7 +158,7 @@ class cm_paypal_login {
                                       'customers_newsletter' => '0',
                                       'customers_password' => '');
 
-              if ($this->hasAttribute('phone') && isset($response['phone_number']) && tep_not_null($response['phone_number'])) {
+              if ($this->hasAttribute('phone') && isset($response['phone_number']) && !empty($response['phone_number'])) {
                 $customers_telephone = tep_db_prepare_input($response['phone_number']);
 
                 $sql_data_array['customers_telephone'] = $customers_telephone;
@@ -284,7 +284,7 @@ class cm_paypal_login {
 
 // Register PayPal Express Checkout as the default payment method
     if (!isset($_SESSION['payment']) || ($payment != 'paypal_express')) {
-      if (defined('MODULE_PAYMENT_INSTALLED') && tep_not_null(MODULE_PAYMENT_INSTALLED)) {
+      if (defined('MODULE_PAYMENT_INSTALLED') && !empty(MODULE_PAYMENT_INSTALLED)) {
         if (in_array('paypal_express.php', explode(';', MODULE_PAYMENT_INSTALLED))) {
           if (!class_exists('paypal_express')) {
             include(DIR_FS_CATALOG . 'includes/modules/payment/paypal_express.php');

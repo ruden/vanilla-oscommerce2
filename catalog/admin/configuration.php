@@ -14,7 +14,7 @@
 
   $action = (isset($_GET['action']) ? $_GET['action'] : '');
 
-  if (tep_not_null($action)) {
+  if (!empty($action)) {
     switch ($action) {
       case 'save':
         $configuration_value = tep_db_prepare_input($_POST['configuration_value']);
@@ -56,7 +56,7 @@
 <?php
   $configuration_query = tep_db_query("select configuration_id, configuration_title, configuration_value, use_function from configuration where configuration_group_id = '" . (int)$gID . "' order by sort_order");
   while ($configuration = tep_db_fetch_array($configuration_query)) {
-    if (tep_not_null($configuration['use_function'])) {
+    if (!empty($configuration['use_function'])) {
       $use_function = $configuration['use_function'];
       if (preg_match('/->/', $use_function)) {
         $class_method = explode('->', $use_function);
@@ -120,12 +120,12 @@
         $contents[] = array('align' => 'center', 'text' => tep_draw_button(IMAGE_EDIT, 'document', tep_href_link('configuration.php', 'gID=' . $_GET['gID'] . '&cID=' . $cInfo->configuration_id . '&action=edit')));
         $contents[] = array('text' => '<br />' . $cInfo->configuration_description);
         $contents[] = array('text' => '<br />' . TEXT_INFO_DATE_ADDED . ' ' . tep_date_short($cInfo->date_added));
-        if (tep_not_null($cInfo->last_modified)) $contents[] = array('text' => TEXT_INFO_LAST_MODIFIED . ' ' . tep_date_short($cInfo->last_modified));
+        if (!empty($cInfo->last_modified)) $contents[] = array('text' => TEXT_INFO_LAST_MODIFIED . ' ' . tep_date_short($cInfo->last_modified));
       }
       break;
   }
 
-  if ( (tep_not_null($heading)) && (tep_not_null($contents)) ) {
+  if ( (!empty($heading)) && (!empty($contents)) ) {
     echo '            <td width="25%" valign="top">' . "\n";
 
     $box = new box;

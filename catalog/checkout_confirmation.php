@@ -39,7 +39,7 @@ if (!isset($_SESSION['payment'])) tep_session_register('payment');
 if (isset($_POST['payment'])) $payment = $_POST['payment'];
 
 if (!isset($_SESSION['comments'])) tep_session_register('comments');
-if (isset($_POST['comments']) && tep_not_null($_POST['comments'])) {
+if (isset($_POST['comments']) && !empty($_POST['comments'])) {
   $comments = tep_db_prepare_input($_POST['comments']);
 }
 
@@ -263,7 +263,7 @@ echo tep_draw_form('checkout_confirmation', $form_action_url, 'post');
     ?>
 
     <?php
-    if (tep_not_null($order->info['comments'])) {
+    if (!empty($order->info['comments'])) {
       ?>
 
       <h2><?php echo HEADING_ORDER_COMMENTS . ' <a href="' . tep_href_link('checkout_payment.php') . '"><span class="h6">(' . TEXT_EDIT . ')</span></a>'; ?></h2>

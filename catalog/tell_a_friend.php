@@ -79,7 +79,7 @@ if (isset($_GET['action']) && ($_GET['action'] == 'process') && isset($_POST['fo
     $email_subject = sprintf(TEXT_EMAIL_SUBJECT, $from_name, STORE_NAME);
     $email_body = sprintf(TEXT_EMAIL_INTRO, $to_name, $from_name, $product_info['products_name'], STORE_NAME) . "\n\n";
 
-    if (tep_not_null($message)) {
+    if (!empty($message)) {
       $email_body .= $message . "\n\n";
     }
 

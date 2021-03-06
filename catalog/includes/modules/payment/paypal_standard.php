@@ -62,7 +62,7 @@
       }
 
       if ( $this->enabled === true ) {
-        if ( !defined('OSCOM_APP_PAYPAL_PS_PDT_IDENTITY_TOKEN') || (!tep_not_null(OSCOM_APP_PAYPAL_PS_PDT_IDENTITY_TOKEN) && !$this->_app->hasCredentials('PS')) ) {
+        if ( !defined('OSCOM_APP_PAYPAL_PS_PDT_IDENTITY_TOKEN') || (empty(OSCOM_APP_PAYPAL_PS_PDT_IDENTITY_TOKEN) && !$this->_app->hasCredentials('PS')) ) {
           $this->description .= '<div class="secWarning">' . $this->_app->getDef('module_ps_error_credentials_pdt_api') . '</div>';
 
           $this->enabled = false;
@@ -188,7 +188,7 @@
               $class = substr($value, 0, strrpos($value, '.'));
               if ($GLOBALS[$class]->enabled) {
                 for ($i=0, $n=sizeof($GLOBALS[$class]->output); $i<$n; $i++) {
-                  if (tep_not_null($GLOBALS[$class]->output[$i]['title']) && tep_not_null($GLOBALS[$class]->output[$i]['text'])) {
+                  if (!empty($GLOBALS[$class]->output[$i]['title']) && !empty($GLOBALS[$class]->output[$i]['text'])) {
                     $order_totals[] = array('code' => $GLOBALS[$class]->code,
                                             'title' => $GLOBALS[$class]->output[$i]['title'],
                                             'text' => $GLOBALS[$class]->output[$i]['text'],
@@ -305,7 +305,7 @@
 
                 tep_db_perform('orders_products_attributes', $sql_data_array);
 
-                if ((DOWNLOAD_ENABLED == 'true') && isset($attributes_values['products_attributes_filename']) && tep_not_null($attributes_values['products_attributes_filename'])) {
+                if ((DOWNLOAD_ENABLED == 'true') && isset($attributes_values['products_attributes_filename']) && !empty($attributes_values['products_attributes_filename'])) {
                   $sql_data_array = array('orders_id' => $insert_id,
                                           'orders_products_id' => $order_products_id,
                                           'orders_products_filename' => $attributes_values['products_attributes_filename'],
@@ -427,7 +427,7 @@
 
           if ($GLOBALS[$class]->enabled) {
             for ($i=0, $n=sizeof($GLOBALS[$class]->output); $i<$n; $i++) {
-              if (tep_not_null($GLOBALS[$class]->output[$i]['title']) && tep_not_null($GLOBALS[$class]->output[$i]['text'])) {
+              if (!empty($GLOBALS[$class]->output[$i]['title']) && !empty($GLOBALS[$class]->output[$i]['text'])) {
                 if ( !in_array($GLOBALS[$class]->code, array('ot_subtotal', 'ot_shipping', 'ot_tax', 'ot_total')) ) {
                   $item_params['item_name_' . $line_item_no] = $GLOBALS[$class]->output[$i]['title'];
                   $item_params['amount_' . $line_item_no] = $this->_app->formatCurrencyRaw($GLOBALS[$class]->output[$i]['value']);
@@ -538,7 +538,7 @@
 
       $seller_accounts = array($this->_app->getCredentials('PS', 'email'));
 
-      if ( tep_not_null($this->_app->getCredentials('PS', 'email_primary')) ) {
+      if ( !empty($this->_app->getCredentials('PS', 'email_primary')) ) {
         $seller_accounts[] = $this->_app->getCredentials('PS', 'email_primary');
       }
 
@@ -565,7 +565,7 @@
 
         $this->_app->log('PS', '_notify-validate', ($result == 'VERIFIED') ? 1 : -1, $pptx_params, $result, (OSCOM_APP_PAYPAL_PS_STATUS == '1') ? 'live' : 'sandbox');
       } elseif ( isset($_GET['tx']) ) { // PDT
-        if ( tep_not_null(OSCOM_APP_PAYPAL_PS_PDT_IDENTITY_TOKEN) ) {
+        if ( !empty(OSCOM_APP_PAYPAL_PS_PDT_IDENTITY_TOKEN) ) {
           $pptx_params['cmd'] = '_notify-synch';
 
           $parameters = 'cmd=_notify-synch&tx=' . urlencode(stripslashes($_GET['tx'])) . '&at=' . urlencode(OSCOM_APP_PAYPAL_PS_PDT_IDENTITY_TOKEN);
@@ -834,7 +834,7 @@
       if ( tep_db_num_rows($check_query) ) {
         $check = tep_db_fetch_array($check_query);
 
-        return tep_not_null($check['configuration_value']);
+        return !empty($check['configuration_value']);
       }
 
       return false;

@@ -77,7 +77,7 @@
     $contents[] = array('text' => '<br />' . TEXT_INFO_DATE_EXPECTED . ' ' . tep_date_short($pInfo->products_date_available));
   }
 
-  if ( (tep_not_null($heading)) && (tep_not_null($contents)) ) {
+  if ( (!empty($heading)) && (!empty($contents)) ) {
     echo '            <td width="25%" valign="top">' . "\n";
 
     $box = new box;

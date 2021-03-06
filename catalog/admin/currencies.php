@@ -17,7 +17,7 @@
 
   $action = (isset($_GET['action']) ? $_GET['action'] : '');
 
-  if (tep_not_null($action)) {
+  if (!empty($action)) {
     switch ($action) {
       case 'insert':
       case 'save':
@@ -75,7 +75,7 @@
           $quote_function = 'quote_' . CURRENCY_SERVER_PRIMARY . '_currency';
           $rate = $quote_function($currency['code']);
 
-          if (empty($rate) && (tep_not_null(CURRENCY_SERVER_BACKUP))) {
+          if (empty($rate) && (!empty(CURRENCY_SERVER_BACKUP))) {
             $messageStack->add_session(sprintf(WARNING_PRIMARY_SERVER_FAILED, CURRENCY_SERVER_PRIMARY, $currency['title'], $currency['code']), 'warning');
 
             $quote_function = 'quote_' . CURRENCY_SERVER_BACKUP . '_currency';
@@ -84,7 +84,7 @@
             $server_used = CURRENCY_SERVER_BACKUP;
           }
 
-          if (tep_not_null($rate)) {
+          if (!empty($rate)) {
             tep_db_query("update currencies set value = '" . tep_db_input($rate) . "', last_updated = now() where currencies_id = '" . (int)$currency['currencies_id'] . "'");
 
             $messageStack->add_session(sprintf(TEXT_INFO_CURRENCY_UPDATED, $currency['title'], $currency['code'], $server_used), 'success');
@@ -300,7 +300,7 @@ function updateForm() {
       break;
   }
 
-  if ( (tep_not_null($heading)) && (tep_not_null($contents)) ) {
+  if ( (!empty($heading)) && (!empty($contents)) ) {
     echo '            <td width="25%" valign="top">' . "\n";
 
     $box = new box;

@@ -28,7 +28,7 @@ if (!isset($_SESSION['shipping']) || !isset($_SESSION['sendto'])) {
   tep_redirect(tep_href_link('checkout_shipping.php'));
 }
 
-if ((tep_not_null(MODULE_PAYMENT_INSTALLED)) && (!isset($_SESSION['payment']))) {
+if ((!empty(MODULE_PAYMENT_INSTALLED)) && (!isset($_SESSION['payment']))) {
   tep_redirect(tep_href_link('checkout_payment.php'));
 }
 
@@ -208,7 +208,7 @@ for ($i = 0, $n = sizeof($order->products); $i < $n; $i++) {
                               'price_prefix' => $attributes_values['price_prefix']);
       tep_db_perform('orders_products_attributes', $sql_data_array);
 
-      if ((DOWNLOAD_ENABLED == 'true') && isset($attributes_values['products_attributes_filename']) && tep_not_null($attributes_values['products_attributes_filename'])) {
+      if ((DOWNLOAD_ENABLED == 'true') && isset($attributes_values['products_attributes_filename']) && !empty($attributes_values['products_attributes_filename'])) {
         $sql_data_array = array('orders_id' => $insert_id,
                                 'orders_products_id' => $order_products_id,
                                 'orders_products_filename' => $attributes_values['products_attributes_filename'],

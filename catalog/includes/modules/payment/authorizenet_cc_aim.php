@@ -43,7 +43,7 @@
       }
 
       if ( $this->enabled === true ) {
-        if ( !tep_not_null(MODULE_PAYMENT_AUTHORIZENET_CC_AIM_LOGIN_ID) || !tep_not_null(MODULE_PAYMENT_AUTHORIZENET_CC_AIM_TRANSACTION_KEY) ) {
+        if ( empty(MODULE_PAYMENT_AUTHORIZENET_CC_AIM_LOGIN_ID) || empty(MODULE_PAYMENT_AUTHORIZENET_CC_AIM_TRANSACTION_KEY) ) {
           $this->description = '<div class="secWarning">' . MODULE_PAYMENT_AUTHORIZENET_CC_AIM_ERROR_ADMIN_CONFIGURATION . '</div>' . $this->description;
 
           $this->enabled = false;
@@ -268,7 +268,7 @@
       $error = false;
 
       if ( ($response['x_response_code'] == '1') || ($response['x_response_code'] == '4') ) {
-        if ( (tep_not_null(MODULE_PAYMENT_AUTHORIZENET_CC_AIM_MD5_HASH) && (strtoupper($response['x_MD5_Hash']) != strtoupper(md5(MODULE_PAYMENT_AUTHORIZENET_CC_AIM_MD5_HASH . MODULE_PAYMENT_AUTHORIZENET_CC_AIM_LOGIN_ID . $response['x_trans_id'] . $this->format_raw($order->info['total']))))) || ($response['x_amount'] != $this->format_raw($order->info['total'])) ) {
+        if ( (!empty(MODULE_PAYMENT_AUTHORIZENET_CC_AIM_MD5_HASH) && (strtoupper($response['x_MD5_Hash']) != strtoupper(md5(MODULE_PAYMENT_AUTHORIZENET_CC_AIM_MD5_HASH . MODULE_PAYMENT_AUTHORIZENET_CC_AIM_LOGIN_ID . $response['x_trans_id'] . $this->format_raw($order->info['total']))))) || ($response['x_amount'] != $this->format_raw($order->info['total'])) ) {
           if ( MODULE_PAYMENT_AUTHORIZENET_CC_AIM_REVIEW_ORDER_STATUS_ID > 0 ) {
             $order->info['order_status'] = MODULE_PAYMENT_AUTHORIZENET_CC_AIM_REVIEW_ORDER_STATUS_ID;
           }
@@ -327,7 +327,7 @@
 
       $status = array();
 
-      if ( tep_not_null(MODULE_PAYMENT_AUTHORIZENET_CC_AIM_MD5_HASH) ) {
+      if ( !empty(MODULE_PAYMENT_AUTHORIZENET_CC_AIM_MD5_HASH) ) {
         if ( strtoupper($response['x_MD5_Hash']) == strtoupper(md5(MODULE_PAYMENT_AUTHORIZENET_CC_AIM_MD5_HASH . MODULE_PAYMENT_AUTHORIZENET_CC_AIM_LOGIN_ID . $response['x_trans_id'] . $this->format_raw($order->info['total']))) ) {
           $status[] = 'MD5 Hash: Match';
         } else {
@@ -629,7 +629,7 @@
         curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
       }
 
-      if ( tep_not_null(MODULE_PAYMENT_AUTHORIZENET_CC_AIM_PROXY) ) {
+      if ( !empty(MODULE_PAYMENT_AUTHORIZENET_CC_AIM_PROXY) ) {
         curl_setopt($curl, CURLOPT_HTTPPROXYTUNNEL, true);
         curl_setopt($curl, CURLOPT_PROXY, MODULE_PAYMENT_AUTHORIZENET_CC_AIM_PROXY);
       }
@@ -774,7 +774,7 @@ EOD;
     }
 
     function sendDebugEmail($response = array()) {
-      if (tep_not_null(MODULE_PAYMENT_AUTHORIZENET_CC_AIM_DEBUG_EMAIL)) {
+      if (!empty(MODULE_PAYMENT_AUTHORIZENET_CC_AIM_DEBUG_EMAIL)) {
         $email_body = '';
 
         if (!empty($response)) {

@@ -18,7 +18,7 @@
     define('MODULE_CONTENT_INSTALLED', '');
   }
 
-  $modules_installed = (tep_not_null(MODULE_CONTENT_INSTALLED) ? explode(';', MODULE_CONTENT_INSTALLED) : array());
+  $modules_installed = (!empty(MODULE_CONTENT_INSTALLED) ? explode(';', MODULE_CONTENT_INSTALLED) : array());
   $modules = array('installed' => array(), 'new' => array());
 
   $file_extension = substr($PHP_SELF, strrpos($PHP_SELF, '.'));
@@ -90,7 +90,7 @@
 
   $action = (isset($_GET['action']) ? $_GET['action'] : '');
 
-  if (tep_not_null($action)) {
+  if (!empty($action)) {
     switch ($action) {
       case 'save':
         $class = basename($_GET['module']);
@@ -367,7 +367,7 @@
       break;
   }
 
-  if ( (tep_not_null($heading)) && (tep_not_null($contents)) ) {
+  if ( (!empty($heading)) && (!empty($contents)) ) {
     echo '            <td width="25%" valign="top">' . "\n";
 
     $box = new box;

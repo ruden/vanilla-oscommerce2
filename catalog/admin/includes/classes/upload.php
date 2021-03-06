@@ -21,7 +21,7 @@
 
       $this->set_output_messages('direct');
 
-      if (tep_not_null($this->file) && tep_not_null($this->destination)) {
+      if (!empty($this->file) && !empty($this->destination)) {
         $this->set_output_messages('session');
 
         if ( ($this->parse() == true) && ($this->save() == true) ) {
@@ -44,7 +44,7 @@
                       'tmp_name' => $_FILES[$this->file]['tmp_name']);
       }
 
-      if ( tep_not_null($file['tmp_name']) && ($file['tmp_name'] != 'none') && is_uploaded_file($file['tmp_name']) ) {
+      if ( !empty($file['tmp_name']) && ($file['tmp_name'] != 'none') && is_uploaded_file($file['tmp_name']) ) {
         if (sizeof($this->extensions) > 0) {
           if (!in_array(strtolower(substr($file['name'], strrpos($file['name'], '.')+1)), $this->extensions)) {
             if ($this->message_location == 'direct') {
@@ -120,7 +120,7 @@
     }
 
     function set_extensions($extensions) {
-      if (tep_not_null($extensions)) {
+      if (!empty($extensions)) {
         if (is_array($extensions)) {
           $this->extensions = $extensions;
         } else {

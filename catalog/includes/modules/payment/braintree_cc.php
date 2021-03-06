@@ -74,7 +74,7 @@ class braintree_cc {
       $this->enabled = false;
     }
 
-    if (defined('OSCOM_APP_PAYPAL_BRAINTREE_CC_PAYMENT_TYPES') && tep_not_null(OSCOM_APP_PAYPAL_BRAINTREE_CC_PAYMENT_TYPES)) {
+    if (defined('OSCOM_APP_PAYPAL_BRAINTREE_CC_PAYMENT_TYPES') && !empty(OSCOM_APP_PAYPAL_BRAINTREE_CC_PAYMENT_TYPES)) {
       $this->payment_types = explode(';', OSCOM_APP_PAYPAL_BRAINTREE_CC_PAYMENT_TYPES);
     }
 
@@ -683,7 +683,7 @@ EOD;
     if (tep_db_num_rows($check_query)) {
       $check = tep_db_fetch_array($check_query);
 
-      return tep_not_null($check['configuration_value']);
+      return !empty($check['configuration_value']);
     }
 
     return false;

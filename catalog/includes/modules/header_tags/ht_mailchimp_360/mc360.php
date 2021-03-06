@@ -14,7 +14,7 @@ class mc360 {
         $this->store_id = MODULE_HEADER_TAGS_MAILCHIMP_360_STORE_ID;
         $this->key_valid = ((MODULE_HEADER_TAGS_MAILCHIMP_360_KEY_VALID == 'true') ? true : false);
 
-        if (tep_not_null(MODULE_HEADER_TAGS_MAILCHIMP_360_DEBUG_EMAIL)) {
+        if (!empty(MODULE_HEADER_TAGS_MAILCHIMP_360_DEBUG_EMAIL)) {
           $this->debug = true;
         }
 

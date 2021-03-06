@@ -67,7 +67,7 @@ require('includes/classes/order.php');
 $order = new order;
 
 if (!isset($_SESSION['comments'])) tep_session_register('comments');
-if (isset($_POST['comments']) && tep_not_null($_POST['comments'])) {
+if (isset($_POST['comments']) && !empty($_POST['comments'])) {
   $comments = tep_db_prepare_input($_POST['comments']);
 }
 

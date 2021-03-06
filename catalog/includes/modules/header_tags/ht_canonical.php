@@ -34,15 +34,15 @@ class ht_canonical {
     if (basename($PHP_SELF) == 'product_info.php') {
       $oscTemplate->addBlock('<link rel="canonical" href="' . tep_href_link('product_info.php', 'products_id=' . (int)$_GET['products_id'], 'SSL', false) . '" />' . "\n", $this->group);
     } elseif (basename($PHP_SELF) == 'index.php') {
-      if (isset($cPath) && tep_not_null($cPath)) {
+      if (isset($cPath) && !empty($cPath)) {
         $oscTemplate->addBlock('<link rel="canonical" href="' . tep_href_link('index.php', 'cPath=' . $cPath, 'SSL', false) . '" />' . "\n", $this->group);
       }
     } elseif (basename($PHP_SELF) == 'manufacturers.php') {
-      if (isset($_GET['manufacturer_id']) && tep_not_null($_GET['manufacturer_id'])) {
+      if (isset($_GET['manufacturer_id']) && !empty($_GET['manufacturer_id'])) {
         $oscTemplate->addBlock('<link rel="canonical" href="' . tep_href_link('manufacturers.php', 'manufacturer_id=' . (int)$_GET['manufacturer_id'], 'SSL', false) . '" />' . "\n", $this->group);
       }
     } elseif (basename($PHP_SELF) == 'information.php') {
-      if (isset($_GET['pages_id']) && tep_not_null($_GET['pages_id'])) {
+      if (isset($_GET['pages_id']) && !empty($_GET['pages_id'])) {
         $oscTemplate->addBlock('<link rel="canonical" href="' . tep_href_link('information.php', 'pages_id=' . (int)$_GET['pages_id'], 'SSL', false) . '" />' . "\n", $this->group);
       }
     }

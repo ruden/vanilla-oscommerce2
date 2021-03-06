@@ -38,7 +38,7 @@
       if (empty($currency_type)) $currency_type = $currency;
 
       if ($calculate_currency_value == true) {
-        $rate = (tep_not_null($currency_value)) ? $currency_value : $this->currencies[$currency_type]['value'];
+        $rate = (!empty($currency_value)) ? $currency_value : $this->currencies[$currency_type]['value'];
         $format_string = $this->currencies[$currency_type]['symbol_left'] . number_format(tep_round($number * $rate, $this->currencies[$currency_type]['decimal_places']), $this->currencies[$currency_type]['decimal_places'], $this->currencies[$currency_type]['decimal_point'], $this->currencies[$currency_type]['thousands_point']) . $this->currencies[$currency_type]['symbol_right'];
       } else {
         $format_string = $this->currencies[$currency_type]['symbol_left'] . number_format(tep_round($number, $this->currencies[$currency_type]['decimal_places']), $this->currencies[$currency_type]['decimal_places'], $this->currencies[$currency_type]['decimal_point'], $this->currencies[$currency_type]['thousands_point']) . $this->currencies[$currency_type]['symbol_right'];
@@ -54,7 +54,7 @@
     }
 
     function is_set($code) {
-      if (isset($this->currencies[$code]) && tep_not_null($this->currencies[$code])) {
+      if (isset($this->currencies[$code]) && !empty($this->currencies[$code])) {
         return true;
       } else {
         return false;

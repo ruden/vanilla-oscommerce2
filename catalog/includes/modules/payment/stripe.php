@@ -46,7 +46,7 @@ class stripe {
     }
 
     if ($this->enabled === true) {
-      if (!tep_not_null(MODULE_PAYMENT_STRIPE_PUBLISHABLE_KEY) || !tep_not_null(MODULE_PAYMENT_STRIPE_SECRET_KEY)) {
+      if (empty(MODULE_PAYMENT_STRIPE_PUBLISHABLE_KEY) || empty(MODULE_PAYMENT_STRIPE_SECRET_KEY)) {
         $this->description = '<div class="secWarning">' . MODULE_PAYMENT_STRIPE_ERROR_ADMIN_CONFIGURATION . '</div>' . $this->description;
 
         $this->enabled = false;
@@ -572,7 +572,7 @@ EOD;
       curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
     }
 
-    if (tep_not_null(MODULE_PAYMENT_STRIPE_PROXY)) {
+    if (!empty(MODULE_PAYMENT_STRIPE_PROXY)) {
       curl_setopt($curl, CURLOPT_HTTPPROXYTUNNEL, true);
       curl_setopt($curl, CURLOPT_PROXY, MODULE_PAYMENT_STRIPE_PROXY);
     }
@@ -791,7 +791,7 @@ EOD;
   }
 
   public function sendDebugEmail($response = array()) {
-    if (tep_not_null(MODULE_PAYMENT_STRIPE_DEBUG_EMAIL)) {
+    if (!empty(MODULE_PAYMENT_STRIPE_DEBUG_EMAIL)) {
       $email_body = '';
 
       if (!empty($response)) {

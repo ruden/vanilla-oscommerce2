@@ -23,7 +23,7 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
 
   <?php
-  if (tep_not_null(JQUERY_DATEPICKER_I18N_CODE)) {
+  if (!empty(JQUERY_DATEPICKER_I18N_CODE)) {
     ?>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.10.4/i18n/jquery.ui.datepicker-<?php echo JQUERY_DATEPICKER_I18N_CODE; ?>.min.js"></script>
     <script>

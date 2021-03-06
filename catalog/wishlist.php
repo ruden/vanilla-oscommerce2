@@ -71,7 +71,7 @@ if (!isset($_SESSION['customer_id'])) {
 
           if (STOCK_CHECK == 'true') {
             $stock_check = tep_check_stock($products[$i]['id'], 1);
-            if (tep_not_null($stock_check)) {
+            if (!empty($stock_check)) {
               $any_out_of_stock = 1;
 
               $products_name .= $stock_check;

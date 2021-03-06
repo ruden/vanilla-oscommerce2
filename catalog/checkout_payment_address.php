@@ -30,7 +30,7 @@ $error = false;
 $process = false;
 if (isset($_POST['action']) && ($_POST['action'] == 'submit') && isset($_POST['formid']) && ($_POST['formid'] == $sessiontoken)) {
 // process a new billing address
-  if (tep_not_null($_POST['firstname']) && tep_not_null($_POST['lastname']) && tep_not_null($_POST['street_address'])) {
+  if (!empty($_POST['firstname']) && !empty($_POST['lastname']) && !empty($_POST['street_address'])) {
     $process = true;
 
     if (ACCOUNT_GENDER == 'true') $gender = tep_db_prepare_input($_POST['gender']);

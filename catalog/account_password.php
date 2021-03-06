@@ -78,15 +78,15 @@ if ($messageStack->size('account_password') > 0) {
     <div class="text-end text-danger small"><?php echo FORM_REQUIRED_INFORMATION; ?></div>
 
     <div class="mb-3">
-      <label class="form-label" for="password_current"><?php echo ENTRY_PASSWORD_CURRENT . (tep_not_null(ENTRY_PASSWORD_CURRENT_TEXT) ? '<span class="text-danger ms-1">' . ENTRY_PASSWORD_CURRENT_TEXT . '</span>' : ''); ?></label>
+      <label class="form-label" for="password_current"><?php echo ENTRY_PASSWORD_CURRENT . (!empty(ENTRY_PASSWORD_CURRENT_TEXT) ? '<span class="text-danger ms-1">' . ENTRY_PASSWORD_CURRENT_TEXT . '</span>' : ''); ?></label>
       <?php echo tep_draw_password_field('password_current', null, 'id="password_current" class="form-control"'); ?>
     </div>
     <div class="mb-3">
-      <label class="form-label" for="password_new"><?php echo ENTRY_PASSWORD_NEW . (tep_not_null(ENTRY_PASSWORD_NEW_TEXT) ? '<span class="text-danger ms-1">' . ENTRY_PASSWORD_NEW_TEXT . '</span>' : ''); ?></label>
+      <label class="form-label" for="password_new"><?php echo ENTRY_PASSWORD_NEW . (!empty(ENTRY_PASSWORD_NEW_TEXT) ? '<span class="text-danger ms-1">' . ENTRY_PASSWORD_NEW_TEXT . '</span>' : ''); ?></label>
       <?php echo tep_draw_password_field('password_new', null, 'id="password_new" class="form-control"'); ?>
     </div>
     <div class="mb-3">
-      <label class="form-label" for="password_confirmation"><?php echo ENTRY_PASSWORD_CONFIRMATION . (tep_not_null(ENTRY_PASSWORD_CONFIRMATION_TEXT) ? '<span class="text-danger ms-1">' . ENTRY_PASSWORD_CONFIRMATION_TEXT . '</span>' : ''); ?></label>
+      <label class="form-label" for="password_confirmation"><?php echo ENTRY_PASSWORD_CONFIRMATION . (!empty(ENTRY_PASSWORD_CONFIRMATION_TEXT) ? '<span class="text-danger ms-1">' . ENTRY_PASSWORD_CONFIRMATION_TEXT . '</span>' : ''); ?></label>
       <?php echo tep_draw_password_field('password_confirmation', null, 'id="password_confirmation" class="form-control"'); ?>
     </div>
     <div class="btn-toolbar justify-content-between">

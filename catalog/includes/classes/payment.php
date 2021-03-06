@@ -17,12 +17,12 @@
     function __construct($module = '') {
       global $payment, $language, $PHP_SELF;
 
-      if (defined('MODULE_PAYMENT_INSTALLED') && tep_not_null(MODULE_PAYMENT_INSTALLED)) {
+      if (defined('MODULE_PAYMENT_INSTALLED') && !empty(MODULE_PAYMENT_INSTALLED)) {
         $this->modules = explode(';', MODULE_PAYMENT_INSTALLED);
 
         $include_modules = array();
 
-        if ( (tep_not_null($module)) && (in_array($module . '.' . substr($PHP_SELF, (strrpos($PHP_SELF, '.')+1)), $this->modules)) ) {
+        if ( (!empty($module)) && (in_array($module . '.' . substr($PHP_SELF, (strrpos($PHP_SELF, '.')+1)), $this->modules)) ) {
           $this->selected_module = $module;
 
           $include_modules[] = array('class' => $module, 'file' => $module . '.php');
@@ -47,7 +47,7 @@
           $payment = $include_modules[0]['class'];
         }
 
-        if ( (tep_not_null($module)) && (in_array($module, $this->modules)) && (isset($GLOBALS[$module]->form_action_url)) ) {
+        if ( (!empty($module)) && (in_array($module, $this->modules)) && (isset($GLOBALS[$module]->form_action_url)) ) {
           $this->form_action_url = $GLOBALS[$module]->form_action_url;
         }
       }

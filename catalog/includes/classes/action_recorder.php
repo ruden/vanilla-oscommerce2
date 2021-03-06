@@ -20,8 +20,8 @@
 
       $module = tep_sanitize_string(str_replace(' ', '', $module));
 
-      if (defined('MODULE_ACTION_RECORDER_INSTALLED') && tep_not_null(MODULE_ACTION_RECORDER_INSTALLED)) {
-        if (tep_not_null($module) && in_array($module . '.' . substr($PHP_SELF, (strrpos($PHP_SELF, '.')+1)), explode(';', MODULE_ACTION_RECORDER_INSTALLED))) {
+      if (defined('MODULE_ACTION_RECORDER_INSTALLED') && !empty(MODULE_ACTION_RECORDER_INSTALLED)) {
+        if (!empty($module) && in_array($module . '.' . substr($PHP_SELF, (strrpos($PHP_SELF, '.')+1)), explode(';', MODULE_ACTION_RECORDER_INSTALLED))) {
           if (!class_exists($module)) {
             if (file_exists('includes/modules/action_recorder/' . $module . '.' . substr($PHP_SELF, (strrpos($PHP_SELF, '.')+1)))) {
               include('includes/languages/' . $language . '/modules/action_recorder/' . $module . '.' . substr($PHP_SELF, (strrpos($PHP_SELF, '.')+1)));
@@ -52,7 +52,7 @@
     }
 
     function canPerform() {
-      if (tep_not_null($this->_module)) {
+      if (!empty($this->_module)) {
         return $GLOBALS[$this->_module]->canPerform($this->_user_id, $this->_user_name);
       }
 
@@ -60,19 +60,19 @@
     }
 
     function getTitle() {
-      if (tep_not_null($this->_module)) {
+      if (!empty($this->_module)) {
         return $GLOBALS[$this->_module]->title;
       }
     }
 
     function getIdentifier() {
-      if (tep_not_null($this->_module)) {
+      if (!empty($this->_module)) {
         return $GLOBALS[$this->_module]->identifier;
       }
     }
 
     function record($success = true) {
-      if (tep_not_null($this->_module)) {
+      if (!empty($this->_module)) {
         tep_db_query("insert into action_recorder (module, user_id, user_name, identifier, success, date_added) values ('" . tep_db_input($this->_module) . "', '" . (int)$this->_user_id . "', '" . tep_db_input($this->_user_name) . "', '" . tep_db_input($this->getIdentifier()) . "', '" . ($success == true ? 1 : 0) . "', now())");
 
         // reset session token
@@ -81,7 +81,7 @@
     }
 
     function expireEntries() {
-      if (tep_not_null($this->_module)) {
+      if (!empty($this->_module)) {
         return $GLOBALS[$this->_module]->expireEntries();
       }
     }

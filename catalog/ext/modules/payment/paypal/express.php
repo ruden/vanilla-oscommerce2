@@ -398,7 +398,7 @@ EOD;
                                   'customers_password' => '',
                                   'customers_gender' => ''); // v22rc2a compatibility
 
-          if (isset($appPayPalEcResult['PHONENUM']) && tep_not_null($appPayPalEcResult['PHONENUM'])) {
+          if (isset($appPayPalEcResult['PHONENUM']) && !empty($appPayPalEcResult['PHONENUM'])) {
             $customers_telephone = tep_db_prepare_input($appPayPalEcResult['PHONENUM']);
 
             $sql_data_array['customers_telephone'] = $customers_telephone;
@@ -789,7 +789,7 @@ EOD;
       $line_item_no++;
     }
 
-    if (tep_not_null($order->delivery['street_address'])) {
+    if (!empty($order->delivery['street_address'])) {
       if (OSCOM_APP_PAYPAL_GATEWAY == '1') { // PayPal
         $params['PAYMENTREQUEST_0_SHIPTONAME'] = $order->delivery['firstname'] . ' ' . $order->delivery['lastname'];
         $params['PAYMENTREQUEST_0_SHIPTOSTREET'] = $order->delivery['street_address'];

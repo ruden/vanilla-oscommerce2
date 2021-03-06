@@ -14,7 +14,7 @@
 
   $action = (isset($_GET['action']) ? $_GET['action'] : '');
 
-  if (tep_not_null($action)) {
+  if (!empty($action)) {
     switch ($action) {
       case 'setflag':
         if (isset($_GET['pID'], $_GET['flag']) && ($_GET['flag'] == 0 || $_GET['flag'] == 1)) {
@@ -271,13 +271,13 @@
 
         $contents[] = array('align' => 'center', 'text' => tep_draw_button(IMAGE_EDIT, 'document', tep_href_link('information.php', 'page=' . $_GET['page'] . '&pID=' . $iInfo->pages_id . '&action=edit')) . tep_draw_button(IMAGE_DELETE, 'trash', tep_href_link('information.php', 'page=' . $_GET['page'] . '&pID=' . $iInfo->pages_id . '&action=delete')));
         $contents[] = array('text' => '<br />' . TEXT_INFO_DATE_ADDED . ' ' . tep_date_short($iInfo->pages_date_added));
-        if (tep_not_null($iInfo->pages_last_modified)) {
+        if (!empty($iInfo->pages_last_modified)) {
           $contents[] = array('text' => '' . TEXT_INFO_LAST_MODIFIED . ' ' . tep_date_short($iInfo->pages_last_modified));
         }
       }
       break;
   }
-  if ( (tep_not_null($heading)) && (tep_not_null($contents)) ) {
+  if ( (!empty($heading)) && (!empty($contents)) ) {
     echo '            <td width="25%" valign="top">' . "\n";
 
     $box = new box;

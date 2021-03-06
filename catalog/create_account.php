@@ -296,7 +296,7 @@ if ($messageStack->size('create_account') > 0) {
       ?>
 
       <div class="mb-3">
-        <label class="form-check-label me-2" for="gender"><?php echo ENTRY_GENDER . (tep_not_null(ENTRY_GENDER_TEXT) ? '<span class="text-danger ms-1">' . ENTRY_GENDER_TEXT . '</span>' : ''); ?></label>
+        <label class="form-check-label me-2" for="gender"><?php echo ENTRY_GENDER . (!empty(ENTRY_GENDER_TEXT) ? '<span class="text-danger ms-1">' . ENTRY_GENDER_TEXT . '</span>' : ''); ?></label>
         <div class="form-check-inline">
           <label class="form-check-label">
             <?php echo tep_draw_radio_field('gender', 'm', false, 'class="form-check-input"') . ' ' . MALE; ?>
@@ -314,11 +314,11 @@ if ($messageStack->size('create_account') > 0) {
     ?>
 
     <div class="mb-3">
-      <label class="form-label" for="firstname"><?php echo ENTRY_FIRST_NAME . (tep_not_null(ENTRY_FIRST_NAME_TEXT) ? '<span class="text-danger ms-1">' . ENTRY_FIRST_NAME_TEXT . '</span>' : ''); ?></label>
+      <label class="form-label" for="firstname"><?php echo ENTRY_FIRST_NAME . (!empty(ENTRY_FIRST_NAME_TEXT) ? '<span class="text-danger ms-1">' . ENTRY_FIRST_NAME_TEXT . '</span>' : ''); ?></label>
       <?php echo tep_draw_input_field('firstname', null, 'id="firstname" class="form-control"'); ?>
     </div>
     <div class="mb-3">
-      <label class="form-label" for="lastname"><?php echo ENTRY_LAST_NAME . (tep_not_null(ENTRY_LAST_NAME_TEXT) ? '<span class="text-danger ms-1">' . ENTRY_LAST_NAME_TEXT . '</span>' : ''); ?></label>
+      <label class="form-label" for="lastname"><?php echo ENTRY_LAST_NAME . (!empty(ENTRY_LAST_NAME_TEXT) ? '<span class="text-danger ms-1">' . ENTRY_LAST_NAME_TEXT . '</span>' : ''); ?></label>
       <?php echo tep_draw_input_field('lastname', null, 'id="lastname" class="form-control"'); ?>
     </div>
 
@@ -327,7 +327,7 @@ if ($messageStack->size('create_account') > 0) {
       ?>
 
       <div class="mb-3">
-        <label class="form-label" for="dob"><?php echo ENTRY_DATE_OF_BIRTH . (tep_not_null(ENTRY_DATE_OF_BIRTH_TEXT) ? '<span class="text-danger ms-1">' . ENTRY_DATE_OF_BIRTH_TEXT . '</span>' : ''); ?></label>
+        <label class="form-label" for="dob"><?php echo ENTRY_DATE_OF_BIRTH . (!empty(ENTRY_DATE_OF_BIRTH_TEXT) ? '<span class="text-danger ms-1">' . ENTRY_DATE_OF_BIRTH_TEXT . '</span>' : ''); ?></label>
         <?php echo tep_draw_input_field('dob', null, 'id="dob" class="form-control" placeholder="' . htmlspecialchars(DOB_FORMAT_STRING) . '"'); ?>
       </div>
 
@@ -336,7 +336,7 @@ if ($messageStack->size('create_account') > 0) {
     ?>
 
     <div class="mb-3">
-      <label class="form-label" for="email-address"><?php echo ENTRY_EMAIL_ADDRESS . (tep_not_null(ENTRY_EMAIL_ADDRESS_TEXT) ? '<span class="text-danger ms-1">' . ENTRY_EMAIL_ADDRESS_TEXT . '</span>' : ''); ?></label>
+      <label class="form-label" for="email-address"><?php echo ENTRY_EMAIL_ADDRESS . (!empty(ENTRY_EMAIL_ADDRESS_TEXT) ? '<span class="text-danger ms-1">' . ENTRY_EMAIL_ADDRESS_TEXT . '</span>' : ''); ?></label>
       <?php echo tep_draw_input_field('email_address', null, 'id="email-address" class="form-control"', 'email'); ?>
     </div>
 
@@ -347,7 +347,7 @@ if ($messageStack->size('create_account') > 0) {
       <h2><?php echo CATEGORY_COMPANY; ?></h2>
 
       <div class="mb-3">
-        <label class="form-label" for="company"><?php echo ENTRY_COMPANY . (tep_not_null(ENTRY_COMPANY_TEXT) ? '<span class="text-danger ms-1">' . ENTRY_COMPANY_TEXT . '</span>' : ''); ?></label>
+        <label class="form-label" for="company"><?php echo ENTRY_COMPANY . (!empty(ENTRY_COMPANY_TEXT) ? '<span class="text-danger ms-1">' . ENTRY_COMPANY_TEXT . '</span>' : ''); ?></label>
         <?php echo tep_draw_input_field('company', null, 'id="company" class="form-control"'); ?>
       </div>
 
@@ -358,7 +358,7 @@ if ($messageStack->size('create_account') > 0) {
     <h2><?php echo CATEGORY_ADDRESS; ?></h2>
 
     <div class="mb-3">
-      <label class="form-label" for="street-address"><?php echo ENTRY_STREET_ADDRESS . (tep_not_null(ENTRY_STREET_ADDRESS_TEXT) ? '<span class="text-danger ms-1">' . ENTRY_STREET_ADDRESS_TEXT . '</span>' : ''); ?></label>
+      <label class="form-label" for="street-address"><?php echo ENTRY_STREET_ADDRESS . (!empty(ENTRY_STREET_ADDRESS_TEXT) ? '<span class="text-danger ms-1">' . ENTRY_STREET_ADDRESS_TEXT . '</span>' : ''); ?></label>
       <?php echo tep_draw_input_field('street_address', null, 'id="street-address" class="form-control"'); ?>
     </div>
 
@@ -367,7 +367,7 @@ if ($messageStack->size('create_account') > 0) {
       ?>
 
       <div class="mb-3">
-        <label class="form-label" for="suburb"><?php echo ENTRY_SUBURB . (tep_not_null(ENTRY_SUBURB_TEXT) ? '<span class="text-danger ms-1">' . ENTRY_SUBURB_TEXT . '</span>' : ''); ?></label>
+        <label class="form-label" for="suburb"><?php echo ENTRY_SUBURB . (!empty(ENTRY_SUBURB_TEXT) ? '<span class="text-danger ms-1">' . ENTRY_SUBURB_TEXT . '</span>' : ''); ?></label>
         <?php echo tep_draw_input_field('suburb', null, 'id="suburb" class="form-control"'); ?>
       </div>
 
@@ -376,11 +376,11 @@ if ($messageStack->size('create_account') > 0) {
     ?>
 
     <div class="mb-3">
-      <label class="form-label" for="postcode"><?php echo ENTRY_POST_CODE . (tep_not_null(ENTRY_POST_CODE_TEXT) ? '<span class="text-danger ms-1">' . ENTRY_POST_CODE_TEXT . '</span>' : ''); ?></label>
+      <label class="form-label" for="postcode"><?php echo ENTRY_POST_CODE . (!empty(ENTRY_POST_CODE_TEXT) ? '<span class="text-danger ms-1">' . ENTRY_POST_CODE_TEXT . '</span>' : ''); ?></label>
       <?php echo tep_draw_input_field('postcode', null, 'id="postcode" class="form-control"'); ?>
     </div>
     <div class="mb-3">
-      <label class="form-label" for="city"><?php echo ENTRY_CITY . (tep_not_null(ENTRY_CITY_TEXT) ? '<span class="text-danger ms-1">' . ENTRY_CITY_TEXT . '</span>' : ''); ?></label>
+      <label class="form-label" for="city"><?php echo ENTRY_CITY . (!empty(ENTRY_CITY_TEXT) ? '<span class="text-danger ms-1">' . ENTRY_CITY_TEXT . '</span>' : ''); ?></label>
       <?php echo tep_draw_input_field('city', null, 'id="city" class="form-control"'); ?>
     </div>
 
@@ -389,7 +389,7 @@ if ($messageStack->size('create_account') > 0) {
       ?>
 
       <div class="mb-3">
-        <label class="form-label" for="state"><?php echo ENTRY_STATE . (tep_not_null(ENTRY_STATE_TEXT) ? '<span class="text-danger ms-1">' . ENTRY_STATE_TEXT . '</span>' : ''); ?></label>
+        <label class="form-label" for="state"><?php echo ENTRY_STATE . (!empty(ENTRY_STATE_TEXT) ? '<span class="text-danger ms-1">' . ENTRY_STATE_TEXT . '</span>' : ''); ?></label>
 
         <?php
         if ($process == true) {
@@ -416,33 +416,33 @@ if ($messageStack->size('create_account') > 0) {
 
 
     <div class="mb-3">
-      <label class="form-label" for="country"><?php echo ENTRY_COUNTRY . (tep_not_null(ENTRY_COUNTRY_TEXT) ? '<span class="text-danger ms-1">' . ENTRY_COUNTRY_TEXT . '</span>' : ''); ?></label>
+      <label class="form-label" for="country"><?php echo ENTRY_COUNTRY . (!empty(ENTRY_COUNTRY_TEXT) ? '<span class="text-danger ms-1">' . ENTRY_COUNTRY_TEXT . '</span>' : ''); ?></label>
       <?php echo tep_get_country_list('country', STORE_COUNTRY, 'id="country" class="form-select"'); ?>
     </div>
 
     <h2><?php echo CATEGORY_CONTACT; ?></h2>
 
     <div class="mb-3">
-      <label class="form-label" for="telephone"><?php echo ENTRY_TELEPHONE_NUMBER . (tep_not_null(ENTRY_TELEPHONE_NUMBER_TEXT) ? '<span class="text-danger ms-1">' . ENTRY_TELEPHONE_NUMBER_TEXT . '</span>' : ''); ?></label>
+      <label class="form-label" for="telephone"><?php echo ENTRY_TELEPHONE_NUMBER . (!empty(ENTRY_TELEPHONE_NUMBER_TEXT) ? '<span class="text-danger ms-1">' . ENTRY_TELEPHONE_NUMBER_TEXT . '</span>' : ''); ?></label>
       <?php echo tep_draw_input_field('telephone', null, 'id="telephone" class="form-control"'); ?>
     </div>
     <div class="mb-3">
-      <label class="form-label" for="fax"><?php echo ENTRY_FAX_NUMBER . (tep_not_null(ENTRY_FAX_NUMBER_TEXT) ? '<span class="text-danger ms-1">' . ENTRY_FAX_NUMBER_TEXT . '</span>' : ''); ?></label>
+      <label class="form-label" for="fax"><?php echo ENTRY_FAX_NUMBER . (!empty(ENTRY_FAX_NUMBER_TEXT) ? '<span class="text-danger ms-1">' . ENTRY_FAX_NUMBER_TEXT . '</span>' : ''); ?></label>
       <?php echo tep_draw_input_field('fax', null, 'id="fax" class="form-control"'); ?>
     </div>
     <div class="mb-3 form-check">
-      <?php echo tep_draw_checkbox_field('newsletter', '1', false, 'class="form-check-input" id="newsletter"') . (tep_not_null(ENTRY_NEWSLETTER_TEXT) ? '<span class="text-danger ms-1">' . ENTRY_NEWSLETTER_TEXT . '</span>' : ''); ?>
+      <?php echo tep_draw_checkbox_field('newsletter', '1', false, 'class="form-check-input" id="newsletter"') . (!empty(ENTRY_NEWSLETTER_TEXT) ? '<span class="text-danger ms-1">' . ENTRY_NEWSLETTER_TEXT . '</span>' : ''); ?>
       <label class="form-check-label" for="newsletter"><?php echo ENTRY_NEWSLETTER; ?></label>
     </div>
 
     <h2><?php echo CATEGORY_PASSWORD; ?></h2>
 
     <div class="mb-3">
-      <label class="form-label" for="password"><?php echo ENTRY_PASSWORD . (tep_not_null(ENTRY_PASSWORD_TEXT) ? '<span class="text-danger ms-1">' . ENTRY_PASSWORD_TEXT . '</span>' : ''); ?></label>
+      <label class="form-label" for="password"><?php echo ENTRY_PASSWORD . (!empty(ENTRY_PASSWORD_TEXT) ? '<span class="text-danger ms-1">' . ENTRY_PASSWORD_TEXT . '</span>' : ''); ?></label>
       <?php echo tep_draw_password_field('password', null, 'id="password" class="form-control"'); ?>
     </div>
     <div class="mb-3">
-      <label class="form-label" for="confirmation"><?php echo ENTRY_PASSWORD_CONFIRMATION . (tep_not_null(ENTRY_PASSWORD_CONFIRMATION_TEXT) ? '<span class="text-danger ms-1">' . ENTRY_PASSWORD_CONFIRMATION_TEXT . '</span>' : ''); ?></label>
+      <label class="form-label" for="confirmation"><?php echo ENTRY_PASSWORD_CONFIRMATION . (!empty(ENTRY_PASSWORD_CONFIRMATION_TEXT) ? '<span class="text-danger ms-1">' . ENTRY_PASSWORD_CONFIRMATION_TEXT . '</span>' : ''); ?></label>
       <?php echo tep_draw_password_field('confirmation', null, 'id="confirmation" class="form-control"'); ?>
     </div>
 
@@ -451,7 +451,7 @@ if ($messageStack->size('create_account') > 0) {
       ?>
 
       <div class="mb-3 form-check">
-        <?php echo tep_draw_checkbox_field('legal_agreements', 'on', false, 'class="form-check-input" id="legal-agreements"') . (tep_not_null(ENTRY_LEGAL_AGREEMENTS_TEXT) ? '<span class="text-danger ms-1">' . ENTRY_LEGAL_AGREEMENTS_TEXT . '</span>' : ''); ?>
+        <?php echo tep_draw_checkbox_field('legal_agreements', 'on', false, 'class="form-check-input" id="legal-agreements"') . (!empty(ENTRY_LEGAL_AGREEMENTS_TEXT) ? '<span class="text-danger ms-1">' . ENTRY_LEGAL_AGREEMENTS_TEXT . '</span>' : ''); ?>
         <label class="form-check-label" for="legal-agreements"><?php echo sprintf(ENTRY_LEGAL_AGREEMENTS, tep_href_link('information.php', 'pages_id=3'), tep_href_link('information.php', 'pages_id=2')); ?></label>
       </div>
 

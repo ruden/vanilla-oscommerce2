@@ -41,13 +41,13 @@
       $params['description'] = $product_info['products_name'];
 
 // and image (used for media)
-      if (tep_not_null($product_info['products_image'])) {
+      if (!empty($product_info['products_image'])) {
         $image_file = $product_info['products_image'];
 
         $products_images = empty($product_info['products_images']) ? array() : explode(',', $product_info['products_images']);
 
         foreach ($products_images as $pi) {
-          if (tep_not_null($pi)) {
+          if (!empty($pi)) {
             $image_file = $pi; // overwrite image with first multiple product image
             break;
           }

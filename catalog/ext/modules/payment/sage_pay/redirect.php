@@ -19,8 +19,8 @@
     tep_redirect(tep_href_link('login.php'));
   }
 
-  if ( isset($_GET['payment_error']) && tep_not_null($_GET['payment_error']) ) {
-    $redirect_url = tep_href_link('checkout_payment.php', 'payment_error=' . $_GET['payment_error'] . (isset($_GET['error']) && tep_not_null($_GET['error']) ? '&error=' . $_GET['error'] : ''));
+  if ( isset($_GET['payment_error']) && !empty($_GET['payment_error']) ) {
+    $redirect_url = tep_href_link('checkout_payment.php', 'payment_error=' . $_GET['payment_error'] . (isset($_GET['error']) && !empty($_GET['error']) ? '&error=' . $_GET['error'] : ''));
   } else {
     $hidden_params = '';
 

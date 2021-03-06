@@ -14,7 +14,7 @@ require('includes/application_top.php');
 
 $action = (isset($_GET['action']) ? $_GET['action'] : '');
 
-if (tep_not_null($action)) {
+if (!empty($action)) {
   switch ($action) {
     case 'setflag':
       if (($_GET['flag'] == '0') || ($_GET['flag'] == '1')) {
@@ -139,7 +139,7 @@ require('includes/template_top.php');
         </form></tr>
       <?php
     } elseif ($action == 'preview') {
-      if (tep_not_null($_POST)) {
+      if (!empty($_POST)) {
         $rInfo = new objectInfo($_POST);
       } else {
         $rID = tep_db_prepare_input($_GET['rID']);
@@ -194,7 +194,7 @@ require('includes/template_top.php');
         <td><?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
       </tr>
       <?php
-      if (tep_not_null($_POST)) {
+      if (!empty($_POST)) {
         /* Re-Post all POST'ed variables */
         foreach ($_POST as $key => $value) {
           echo tep_draw_hidden_field($key, htmlspecialchars(stripslashes($value)));
@@ -314,7 +314,7 @@ require('includes/template_top.php');
 
                     $contents[] = array('align' => 'center', 'text' => tep_draw_button(IMAGE_EDIT, 'document', tep_href_link('reviews.php', 'page=' . $_GET['page'] . '&rID=' . $rInfo->reviews_id . '&action=edit')) . tep_draw_button(IMAGE_DELETE, 'trash', tep_href_link('reviews.php', 'page=' . $_GET['page'] . '&rID=' . $rInfo->reviews_id . '&action=delete')));
                     $contents[] = array('text' => '<br />' . TEXT_INFO_DATE_ADDED . ' ' . tep_date_short($rInfo->date_added));
-                    if (tep_not_null($rInfo->last_modified)) $contents[] = array('text' => TEXT_INFO_LAST_MODIFIED . ' ' . tep_date_short($rInfo->last_modified));
+                    if (!empty($rInfo->last_modified)) $contents[] = array('text' => TEXT_INFO_LAST_MODIFIED . ' ' . tep_date_short($rInfo->last_modified));
                     $contents[] = array('text' => '<br />' . tep_info_image('products/thumbs/' . $rInfo->products_image, $rInfo->products_name, SMALL_IMAGE_WIDTH, SMALL_IMAGE_HEIGHT));
                     $contents[] = array('text' => '<br />' . TEXT_INFO_REVIEW_AUTHOR . ' ' . $rInfo->customers_name);
                     $contents[] = array('text' => TEXT_INFO_REVIEW_RATING . ' ' . tep_info_image('stars_' . $rInfo->reviews_rating . '.png', sprintf(TEXT_OF_5_STARS, $rInfo->reviews_rating)));
@@ -324,7 +324,7 @@ require('includes/template_top.php');
                   break;
               }
 
-              if ((tep_not_null($heading)) && (tep_not_null($contents))) {
+              if ((!empty($heading)) && (!empty($contents))) {
                 echo '            <td width="25%" valign="top">' . "\n";
 
                 $box = new box;

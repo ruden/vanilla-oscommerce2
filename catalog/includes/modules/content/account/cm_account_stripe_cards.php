@@ -36,7 +36,7 @@ class cm_account_stripe_cards {
 
     $stripe_enabled = false;
 
-    if (defined('MODULE_PAYMENT_INSTALLED') && tep_not_null(MODULE_PAYMENT_INSTALLED) && in_array('stripe.php', explode(';', MODULE_PAYMENT_INSTALLED))) {
+    if (defined('MODULE_PAYMENT_INSTALLED') && !empty(MODULE_PAYMENT_INSTALLED) && in_array('stripe.php', explode(';', MODULE_PAYMENT_INSTALLED))) {
       if (!class_exists('stripe')) {
         include(DIR_FS_CATALOG . 'includes/languages/' . $language . '/modules/payment/stripe.php');
         include(DIR_FS_CATALOG . 'includes/modules/payment/stripe.php');

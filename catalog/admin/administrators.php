@@ -46,7 +46,7 @@
 
   $action = (isset($_GET['action']) ? $_GET['action'] : '');
 
-  if (tep_not_null($action)) {
+  if (!empty($action)) {
     switch ($action) {
       case 'insert':
         require(DIR_FS_CATALOG . 'includes/functions/password_funcs.php');
@@ -123,7 +123,7 @@
 
         tep_db_query("update administrators set user_name = '" . tep_db_input($username) . "' where id = '" . (int)$_GET['aID'] . "'");
 
-        if (tep_not_null($password)) {
+        if (!empty($password)) {
 // update password in htpasswd
           if (is_array($htpasswd_array)) {
             for ($i=0, $n=sizeof($htpasswd_array); $i<$n; $i++) {
@@ -361,7 +361,7 @@
       break;
   }
 
-  if ( (tep_not_null($heading)) && (tep_not_null($contents)) ) {
+  if ( (!empty($heading)) && (!empty($contents)) ) {
     echo '            <td width="25%" valign="top">' . "\n";
 
     $box = new box;

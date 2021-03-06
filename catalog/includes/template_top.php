@@ -62,7 +62,7 @@ if ($messageStack->size('header') > 0) {
   <?php
 }
 
-if (isset($_GET['error_message']) && tep_not_null($_GET['error_message'])) {
+if (isset($_GET['error_message']) && !empty($_GET['error_message'])) {
   ?>
 
   <div class="p-3 mb-3 bg-danger text-white text-center">
@@ -72,7 +72,7 @@ if (isset($_GET['error_message']) && tep_not_null($_GET['error_message'])) {
   <?php
 }
 
-if (isset($_GET['info_message']) && tep_not_null($_GET['info_message'])) {
+if (isset($_GET['info_message']) && !empty($_GET['info_message'])) {
   ?>
 
   <div class="p-3 mb-3 bg-info text-white text-center">

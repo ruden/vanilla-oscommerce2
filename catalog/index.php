@@ -14,7 +14,7 @@ require('includes/application_top.php');
 
 // the following cPath references come from application_top.php
 $category_depth = 'top';
-if (isset($cPath) && tep_not_null($cPath)) {
+if (isset($cPath) && !empty($cPath)) {
   $categories_products_query = tep_db_query("select 1 from products_to_categories where categories_id = '" . (int)$current_category_id . "' limit 1");
   if (tep_db_num_rows($categories_products_query)) {
     $category_depth = 'products'; // display products

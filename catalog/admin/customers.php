@@ -17,7 +17,7 @@
   $error = false;
   $processed = false;
 
-  if (tep_not_null($action)) {
+  if (!empty($action)) {
     switch ($action) {
       case 'update':
         $customers_id = tep_db_prepare_input($_GET['cID']);
@@ -681,7 +681,7 @@ function check_form() {
               </tr>
 <?php
     $search = '';
-    if (isset($_GET['search']) && tep_not_null($_GET['search'])) {
+    if (isset($_GET['search']) && !empty($_GET['search'])) {
       $keywords = tep_db_input(tep_db_prepare_input($_GET['search']));
       $search = "where c.customers_lastname like '%" . $keywords . "%' or c.customers_firstname like '%" . $keywords . "%' or c.customers_email_address like '%" . $keywords . "%'";
     }
@@ -726,7 +726,7 @@ function check_form() {
                     <td class="smallText" align="right"><?php echo $customers_split->display_links($customers_query_numrows, MAX_DISPLAY_SEARCH_RESULTS, MAX_DISPLAY_PAGE_LINKS, $_GET['page'], tep_get_all_get_params(array('page', 'info', 'x', 'y', 'cID'))); ?></td>
                   </tr>
 <?php
-    if (isset($_GET['search']) && tep_not_null($_GET['search'])) {
+    if (isset($_GET['search']) && !empty($_GET['search'])) {
 ?>
                   <tr>
                     <td class="smallText" align="right" colspan="2"><?php echo tep_draw_button(IMAGE_RESET, 'arrowrefresh-1-w', tep_href_link('customers.php')); ?></td>
@@ -765,7 +765,7 @@ function check_form() {
       break;
   }
 
-  if ( (tep_not_null($heading)) && (tep_not_null($contents)) ) {
+  if ( (!empty($heading)) && (!empty($contents)) ) {
     echo '            <td width="25%" valign="top">' . "\n";
 
     $box = new box;

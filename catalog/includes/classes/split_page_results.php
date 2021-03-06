@@ -91,7 +91,7 @@ class splitPageResults {
     $display_links_string = '<nav aria-label="' . sprintf(PREVNEXT_TITLE_PAGE_NO, $this->current_page_number) . '">
                                <ul class="pagination justify-content-center justify-content-md-end mb-0">';
 
-    if (tep_not_null($parameters) && (substr($parameters, -1) != '&')) {
+    if (!empty($parameters) && (substr($parameters, -1) != '&')) {
       $parameters .= '&';
     }
 
