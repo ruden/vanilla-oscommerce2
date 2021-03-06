@@ -1,5 +1,6 @@
 osCommerce Online Merchant Changelog
-Copyright (c) 2020 osCommerce
+
+Copyright (c) 2021 osCommerce
 
 ------------------------------------------------------------------------------
 XX/03/2021 osCommerce Online Merchant v2.3.5
