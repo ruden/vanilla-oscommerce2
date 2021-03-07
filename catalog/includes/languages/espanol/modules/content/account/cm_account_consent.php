@@ -10,6 +10,10 @@ Copyright (c) 2020 osCommerce
 Released under the GNU General Public License
 */
 
-define('MODULE_CONTENT_ACCOUNT_DELETE_TITLE', 'Delete Account');
-define('MODULE_CONTENT_ACCOUNT_DELETE_DESCRIPTION', 'Show the delete account link on the account page');
-define('MODULE_CONTENT_ACCOUNT_DELETE_LINK_TITLE', 'Delete my account');
+define('MODULE_CONTENT_ACCOUNT_COOKIE_CONSENT_TITLE', 'Cookie Consent');
+define('MODULE_CONTENT_ACCOUNT_COOKIE_CONSENT_DESCRIPTION', 'Show the cookie consent link on the account page');
+define('MODULE_CONTENT_ACCOUNT_COOKIE_CONSENT_LINK_TITLE', 'Cookie consent');
+
+define('MODULE_CONTENT_ACCOUNT_COOKIE_CONSENT_NAVBAR_TITLE_1', 'Cookie Consent');
+define('MODULE_CONTENT_ACCOUNT_COOKIE_CONSENT_NAVBAR_TITLE_2', 'Cookie Consent');
+define('MODULE_CONTENT_ACCOUNT_COOKIE_CONSENT_HEADING_TITLE', 'Cookie Consent');
