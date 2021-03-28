@@ -1,5 +1,7 @@
 <p align="center"><img src="https://i.ibb.co/PjyZh88/vanilla-oscommerce.png"></p>
 
+<p align="center"><a href="https://paypal.me/ValeriiRudenko/10"><img src="https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif" alt="paypal"></a></p>
+
 ---
 
 Vanilla osCommerce
