@@ -42,19 +42,5 @@
     });
 
     OSCOM.APP.BRAINTREE.versionCheck();
-
-    $.getJSON('<?php echo tep_href_link('braintree.php', 'action=getNews'); ?>', function (data) {
-      if ((typeof data == 'object') && ('rpcStatus' in data) && (data['rpcStatus'] == 1)) {
-        var btNewsContent = '<div style="display: block; margin-top: 5px; min-height: 65px;"><a href="' + data.url + '" target="_blank"><img src="' + data.image + '" width="468" height="60" alt="' + data.title + '" border="0" /></a>';
-
-        if (data.status_update.length > 0) {
-          btNewsContent = btNewsContent + '<div style="font-size: 0.95em; padding-left: 480px; margin-top: -70px; padding-top: 4px; min-height: 60px;"><p>' + data.status_update + '</p></div>';
-        }
-
-        btNewsContent = btNewsContent + '</div>';
-
-        $('#btStartDashboard').after(btNewsContent);
-      }
-    });
   });
 </script>
