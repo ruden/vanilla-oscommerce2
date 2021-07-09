@@ -1387,7 +1387,9 @@ function tep_get_ip_address() {
     $ip_addresses[] = $_SERVER['HTTP_PROXY_USER'];
   }
 
-  $ip_addresses[] = $_SERVER['REMOTE_ADDR'];
+  if (isset($_SERVER['REMOTE_ADDR']) && !empty($_SERVER['REMOTE_ADDR'])) {
+    $ip_addresses[] = $_SERVER['REMOTE_ADDR'];
+  }
 
   foreach ($ip_addresses as $ip) {
     if (!empty($ip) && tep_validate_ip_address($ip)) {

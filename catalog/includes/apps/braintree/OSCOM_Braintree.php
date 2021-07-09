@@ -854,7 +854,9 @@ EOD;
     if (isset($_SERVER['HTTP_PROXY_USER']) && !empty($_SERVER['HTTP_PROXY_USER'])) {
       $ip_addresses[] = $_SERVER['HTTP_PROXY_USER'];
     }
-    $ip_addresses[] = $_SERVER['REMOTE_ADDR'];
+    if (isset($_SERVER['REMOTE_ADDR']) && !empty($_SERVER['REMOTE_ADDR'])) {
+      $ip_addresses[] = $_SERVER['REMOTE_ADDR'];
+    }
     foreach ($ip_addresses as $ip) {
       if (!empty($ip) && $this->isValidIpAddress($ip)) {
         $ip_address = $ip;
