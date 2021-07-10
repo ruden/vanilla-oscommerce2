@@ -88,6 +88,7 @@ require('includes/functions/html_output.php');
 // set the cookie domain
 $cookie_domain = (($request_type == 'NONSSL') ? HTTP_COOKIE_DOMAIN : HTTPS_COOKIE_DOMAIN);
 $cookie_path = (($request_type == 'NONSSL') ? HTTP_COOKIE_PATH : HTTPS_COOKIE_PATH);
+$cookie_path .= '; samesite=Lax';
 
 // include cache functions if enabled
 if (USE_CACHE == 'true') include('includes/functions/cache.php');
@@ -108,7 +109,7 @@ require('includes/functions/sessions.php');
 tep_session_save_path(SESSION_WRITE_DIRECTORY);
 
 // set the session cookie parameters
-session_set_cookie_params(0, $cookie_path, $cookie_domain);
+session_set_cookie_params(0, $cookie_path, $cookie_domain, ($request_type == 'SSL'));
 
 @ini_set('session.use_only_cookies', (SESSION_FORCE_COOKIE_USE == 'True') ? 1 : 0);
 
@@ -124,7 +125,7 @@ if (SESSION_FORCE_COOKIE_USE == 'False') {
 // start the session
 $session_started = false;
 if (SESSION_FORCE_COOKIE_USE == 'True') {
-  tep_setcookie('cookie_test', 'please_accept_for_session', time() + 60 * 60 * 24 * 30, $cookie_path, $cookie_domain, ($request_type == 'SSL'));
+  tep_setcookie('cookie_test', 'please_accept_for_session', time() + 60 * 60 * 24 * 30, $cookie_path, $cookie_domain);
 
   if (isset($_COOKIE['cookie_test'])) {
     tep_session_start();

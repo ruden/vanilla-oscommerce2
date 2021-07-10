@@ -87,6 +87,7 @@
 // set the cookie domain
   $cookie_domain = (($request_type == 'NONSSL') ? HTTP_COOKIE_DOMAIN : HTTPS_COOKIE_DOMAIN);
   $cookie_path = (($request_type == 'NONSSL') ? HTTP_COOKIE_PATH : HTTPS_COOKIE_PATH);
+  $cookie_path .= '; samesite=Lax';
 
 // set the session name and save path
   tep_session_name('osCAdminID');
