@@ -15,17 +15,15 @@ if (!class_exists('OSCOM_PayPal')) {
 }
 
 class cm_paypal_login {
-  var $code;
-  var $group;
-  var $title;
-  var $description;
-  var $sort_order;
-  var $enabled = false;
-  var $_app;
+  public $code;
+  public $group;
+  public $title;
+  public $description;
+  public $sort_order;
+  public $enabled = false;
+  public $_app;
 
-  function __construct() {
-    global $PHP_SELF;
-
+  public function __construct() {
     $this->_app = new OSCOM_PayPal();
     $this->_app->loadLanguageFile('modules/LOGIN/LOGIN.php');
 
@@ -61,7 +59,7 @@ class cm_paypal_login {
     }
   }
 
-  function execute() {
+  public function execute() {
     global $oscTemplate;
 
     if (isset($_GET['action'])) {
@@ -96,7 +94,7 @@ class cm_paypal_login {
     $oscTemplate->addContent($template, $this->group);
   }
 
-  function preLogin() {
+  public function preLogin() {
     global $paypal_login_access_token, $paypal_login_customer_id, $sendto, $billto, $customer_id;
 
     $return_url = tep_href_link('login.php');
@@ -132,7 +130,7 @@ class cm_paypal_login {
             $response['family_name'] = $result[2];
           }
 
-// check if e-mail address exists in database and login or create customer account
+          // check if e-mail address exists in database and login or create customer account
           if (!isset($_SESSION['customer_id'])) {
             $customer_id = 0;
             $customer_default_address_id = 0;
@@ -176,7 +174,7 @@ class cm_paypal_login {
             }
           }
 
-// check if paypal shipping address exists in the address book
+          // check if paypal shipping address exists in the address book
           $ship_firstname = tep_db_prepare_input($response['given_name']);
           $ship_lastname = tep_db_prepare_input($response['family_name']);
           $ship_address = tep_db_prepare_input($response['address']['street_address']);
@@ -241,14 +239,14 @@ class cm_paypal_login {
             }
           }
 
+          if (!isset($_SESSION['paypal_login_customer_id'])) {
+            tep_session_register('paypal_login_customer_id');
+          }
+
           if ($force_login == true) {
             $paypal_login_customer_id = $customer_id;
           } else {
             $paypal_login_customer_id = false;
-          }
-
-          if (!isset($_SESSION['paypal_login_customer_id'])) {
-            tep_session_register('paypal_login_customer_id');
           }
 
           $billto = $sendto;
@@ -266,12 +264,10 @@ class cm_paypal_login {
       }
     }
 
-    echo '<script>window.opener.location.href="' . str_replace('&amp;', '&', $return_url) . '";window.close();</script>';
-
-    exit;
+    tep_redirect($return_url);
   }
 
-  function postLogin() {
+  public function postLogin() {
     global $paypal_login_customer_id, $login_customer_id, $language, $payment;
 
     if (isset($_SESSION['paypal_login_customer_id'])) {
@@ -282,7 +278,7 @@ class cm_paypal_login {
       unset($_SESSION['paypal_login_customer_id']);
     }
 
-// Register PayPal Express Checkout as the default payment method
+    // Register PayPal Express Checkout as the default payment method
     if (!isset($_SESSION['payment']) || ($payment != 'paypal_express')) {
       if (defined('MODULE_PAYMENT_INSTALLED') && !empty(MODULE_PAYMENT_INSTALLED)) {
         if (in_array('paypal_express.php', explode(';', MODULE_PAYMENT_INSTALLED))) {
@@ -301,31 +297,31 @@ class cm_paypal_login {
     }
   }
 
-  function isEnabled() {
+  public function isEnabled() {
     return $this->enabled;
   }
 
-  function check() {
+  public function check() {
     return defined('OSCOM_APP_PAYPAL_LOGIN_STATUS');
   }
 
-  function install() {
+  public function install() {
     tep_redirect(tep_href_link('paypal.php', 'action=configure&subaction=install&module=LOGIN'));
   }
 
-  function remove() {
+  public function remove() {
     tep_redirect(tep_href_link('paypal.php', 'action=configure&subaction=uninstall&module=LOGIN'));
   }
 
-  function keys() {
+  public function keys() {
     return array('OSCOM_APP_PAYPAL_LOGIN_CONTENT_WIDTH', 'OSCOM_APP_PAYPAL_LOGIN_SORT_ORDER');
   }
 
-  function hasAttribute($attribute) {
+  public function hasAttribute($attribute) {
     return in_array($attribute, explode(';', OSCOM_APP_PAYPAL_LOGIN_ATTRIBUTES));
   }
 
-  function get_default_attributes() {
+  public function get_default_attributes() {
     $data = array();
 
     foreach (cm_paypal_login_get_attributes() as $group => $attributes) {
