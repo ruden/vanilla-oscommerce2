@@ -23,6 +23,8 @@
     function __construct() {
       global $messageToStack;
 
+      parent::__construct();
+
       $this->errors = array();
 
       if (isset($_SESSION['messageToStack'])) {

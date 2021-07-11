@@ -20,6 +20,7 @@
     var $table_data_parameters = '';
 
     function __construct() {
+
     }
 
     function tableBlock($contents) {
