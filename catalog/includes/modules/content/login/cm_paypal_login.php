@@ -264,7 +264,9 @@ class cm_paypal_login {
       }
     }
 
-    tep_redirect(str_replace('&amp;', '&', $return_url));
+    echo '<script>window.opener.location.href="' . str_replace('&amp;', '&', $return_url) . '";window.close();</script>';
+
+    exit;
   }
 
   public function postLogin() {
