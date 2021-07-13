@@ -36,7 +36,7 @@ class breadcrumb {
           $trail_string .= '<li class="list-inline-item mx-2"><a href="' . $this->_trail[$i]['link'] . '">' . $this->_trail[$i]['title'] . '</a></li>';
         }
       } else {
-        $trail_string .= '<li class="list-inline-item">' . $this->_trail[$i]['title'] . '</li>';
+        $trail_string .= '<li class="list-inline-item mx-2">' . $this->_trail[$i]['title'] . '</li>';
       }
 
       if (($i + 1) < $n) {
