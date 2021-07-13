@@ -242,19 +242,21 @@
         }
       }
 
-      $this->customer = array('firstname' => $customer_address['customers_firstname'],
-                              'lastname' => $customer_address['customers_lastname'],
-                              'company' => $customer_address['entry_company'],
-                              'street_address' => $customer_address['entry_street_address'],
-                              'suburb' => $customer_address['entry_suburb'],
-                              'city' => $customer_address['entry_city'],
-                              'postcode' => $customer_address['entry_postcode'],
-                              'state' => ((!empty($customer_address['entry_state'])) ? $customer_address['entry_state'] : $customer_address['zone_name']),
-                              'zone_id' => $customer_address['entry_zone_id'],
-                              'country' => array('id' => $customer_address['countries_id'], 'title' => $customer_address['countries_name'], 'iso_code_2' => $customer_address['countries_iso_code_2'], 'iso_code_3' => $customer_address['countries_iso_code_3']),
-                              'format_id' => $customer_address['address_format_id'],
-                              'telephone' => $customer_address['customers_telephone'],
-                              'email_address' => $customer_address['customers_email_address']);
+      if (is_array($customer_address) && !empty($customer_address)) {
+        $this->customer = array('firstname' => $customer_address['customers_firstname'],
+                                'lastname' => $customer_address['customers_lastname'],
+                                'company' => $customer_address['entry_company'],
+                                'street_address' => $customer_address['entry_street_address'],
+                                'suburb' => $customer_address['entry_suburb'],
+                                'city' => $customer_address['entry_city'],
+                                'postcode' => $customer_address['entry_postcode'],
+                                'state' => ((!empty($customer_address['entry_state'])) ? $customer_address['entry_state'] : $customer_address['zone_name']),
+                                'zone_id' => $customer_address['entry_zone_id'],
+                                'country' => array('id' => $customer_address['countries_id'], 'title' => $customer_address['countries_name'], 'iso_code_2' => $customer_address['countries_iso_code_2'], 'iso_code_3' => $customer_address['countries_iso_code_3']),
+                                'format_id' => $customer_address['address_format_id'],
+                                'telephone' => $customer_address['customers_telephone'],
+                                'email_address' => $customer_address['customers_email_address']);
+      }
 
       $this->delivery = array('firstname' => $shipping_address['entry_firstname'],
                               'lastname' => $shipping_address['entry_lastname'],
