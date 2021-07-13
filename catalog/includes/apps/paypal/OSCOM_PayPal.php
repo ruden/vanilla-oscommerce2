@@ -620,11 +620,11 @@ class OSCOM_PayPal {
   public function formatCurrencyRaw($total, $currency_code = null, $currency_value = null) {
     global $currencies, $currency;
 
-    if (!isset($currency_code)) {
-      $currency_code = isset($_SESSION['currency']) ? $currency : DEFAULT_CURRENCY;
+    if (empty($currency_code)) {
+      $currency_code = isset($currency) ? $currency : DEFAULT_CURRENCY;
     }
 
-    if (!isset($currency_value) || !is_numeric($currency_value)) {
+    if (empty($currency_value) || !is_numeric($currency_value)) {
       $currency_value = $currencies->currencies[$currency_code]['value'];
     }
 
