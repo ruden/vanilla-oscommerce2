@@ -14,7 +14,7 @@ require('includes/application_top.php');
 
 require('includes/languages/' . $language . '/logoff.php');
 
-$breadcrumb->add(NAVBAR_TITLE);
+$breadcrumb->add(NAVBAR_TITLE, tep_href_link('logoff.php'));
 
 unset($_SESSION['customer_id']);
 unset($_SESSION['customer_default_address_id']);
