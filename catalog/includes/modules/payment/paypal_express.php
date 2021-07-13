@@ -583,7 +583,7 @@ EOD;
       if ( tep_db_num_rows($check_query) ) {
         $check = tep_db_fetch_array($check_query);
 
-        return !empty($check['configuration_value']);
+        return is_numeric($check['configuration_value']);
       }
 
       return false;
