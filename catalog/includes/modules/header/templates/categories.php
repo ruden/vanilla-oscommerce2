@@ -51,7 +51,7 @@
         </a>
       </li>
       <li class="list-inline-item">
-        <a href="<?php echo tep_href_link('login.php'); ?>">
+        <a href="<?php echo tep_href_link('account.php'); ?>">
           <svg class="svg-icon-user">
             <use href="#svg-icon-user"/>
           </svg>
