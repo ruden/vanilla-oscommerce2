@@ -307,10 +307,10 @@ EOD;
         $comments = null;
       }
 
-      $confirmation = false;
+      $confirmation['title'] = '';
 
       if (empty($comments)) {
-        $confirmation = array('fields' => array(array('title' => $this->_app->getDef('module_ec_field_comments'),
+        $confirmation += array('fields' => array(array('title' => $this->_app->getDef('module_ec_field_comments'),
                                                       'field' => tep_draw_textarea_field('ppecomments', $comments, 'class="form-control" rows="3"'))));
       }
 
