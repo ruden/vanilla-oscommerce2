@@ -402,6 +402,12 @@ EOD;
       $content .= '</div>';
 
       $content .= <<<EOD
+<script>
+if ( typeof jQuery == 'undefined' ) {
+  document.write('<scr' + 'ipt src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></scr' + 'ipt>');
+}
+</script>
+
 <input type="hidden" name="payment_method_nonce">
 
 <script>
@@ -824,7 +830,7 @@ if ( typeof jQuery == 'undefined' ) {
 
 <script>
 $('form[name="checkout_confirmation"]').attr('id', 'braintree-payment-form');
-$('#braintree-payment-form button[type="submit"]').attr('id', 'braintree-payment-form-submit-button').button('disable');
+$('#braintree-payment-form button[type="submit"]').attr('id', 'braintree-payment-form-submit-button').addClass('ui-state-disabled');
 
 $(function() {
   if (typeof $('#braintree-payment-form-submit-button').data('orig-button-text') === 'undefined') {
@@ -907,7 +913,7 @@ $(function() {
             }
         }
 
-        $('#braintree-payment-form-submit-button').html($('#braintree-payment-form-submit-button').data('orig-button-text')).button('enable');
+        $('#braintree-payment-form-submit-button').html($('#braintree-payment-form-submit-button').data('orig-button-text')).removeClass('ui-state-disabled');
 
         return;
       }
@@ -938,7 +944,7 @@ $(function() {
             $('#btCardStatus').show();
           }
 
-          $('#braintree-payment-form-submit-button').html($('#braintree-payment-form-submit-button').data('orig-button-text')).button('enable');
+          $('#braintree-payment-form-submit-button').html($('#braintree-payment-form-submit-button').data('orig-button-text')).removeClass('ui-state-disabled');
 
           return;
         }
@@ -967,7 +973,7 @@ $(function() {
               $('#btCardStatus').show();
             }
 
-            $('#braintree-payment-form-submit-button').html($('#braintree-payment-form-submit-button').data('orig-button-text')).button('enable');
+            $('#braintree-payment-form-submit-button').html($('#braintree-payment-form-submit-button').data('orig-button-text')).removeClass('ui-state-disabled');
 
             return;
           }
@@ -984,7 +990,7 @@ $(function() {
         $('#btCardStatus').show();
       }
 
-      $('#braintree-payment-form-submit-button').html($('#braintree-payment-form-submit-button').data('orig-button-text')).button('enable');
+      $('#braintree-payment-form-submit-button').html($('#braintree-payment-form-submit-button').data('orig-button-text')).removeClass('ui-state-disabled');
     }
   }
 
@@ -993,7 +999,7 @@ $(function() {
 
   if ($('#braintree_cards').length > 0) {
     $('#braintree_cards').change(function() {
-      $('#braintree-payment-form-submit-button').button('disable');
+      $('#braintree-payment-form-submit-button').addClass('ui-state-disabled');
 
       var selected = $(this).val();
 
@@ -1161,7 +1167,7 @@ $(function() {
     if (btHostedFieldsInstance === undefined) {
       braintreeCreateStoredCardInstance();
     } else {
-      $('#braintree-payment-form-submit-button').button('enable');
+      $('#braintree-payment-form-submit-button').removeClass('ui-state-disabled');
     }
   }
 
@@ -1210,7 +1216,7 @@ $(function() {
 
       btHostedFieldsInstance = hostedFieldsInstance;
 
-      $('#braintree-payment-form-submit-button').button('enable');
+      $('#braintree-payment-form-submit-button').removeClass('ui-state-disabled');
     });
   }
 
@@ -1248,12 +1254,12 @@ $(function() {
 
         btHostedFieldsInstance = hostedFieldsInstance;
 
-        $('#braintree-payment-form-submit-button').button('enable');
+        $('#braintree-payment-form-submit-button').removeClass('ui-state-disabled');
       });
     } else {
       btHostedFieldsInstance = undefined;
 
-      $('#braintree-payment-form-submit-button').button('enable');
+      $('#braintree-payment-form-submit-button').removeClass('ui-state-disabled');
     }
   }
 });
