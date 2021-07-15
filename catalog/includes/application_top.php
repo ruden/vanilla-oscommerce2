@@ -88,7 +88,6 @@ require('includes/functions/html_output.php');
 // set the cookie domain
 $cookie_domain = (($request_type == 'NONSSL') ? HTTP_COOKIE_DOMAIN : HTTPS_COOKIE_DOMAIN);
 $cookie_path = (($request_type == 'NONSSL') ? HTTP_COOKIE_PATH : HTTPS_COOKIE_PATH);
-$cookie_path .= '; samesite=Lax';
 
 // include cache functions if enabled
 if (USE_CACHE == 'true') include('includes/functions/cache.php');
@@ -112,6 +111,10 @@ tep_session_save_path(SESSION_WRITE_DIRECTORY);
 session_set_cookie_params(0, $cookie_path, $cookie_domain, ($request_type == 'SSL'));
 
 @ini_set('session.use_only_cookies', (SESSION_FORCE_COOKIE_USE == 'True') ? 1 : 0);
+
+if (version_compare(PHP_VERSION, '7.3.0', '>=')) {
+  @ini_set('session.cookie_samesite', 'Lax');
+}
 
 // set the session ID if it exists
 if (SESSION_FORCE_COOKIE_USE == 'False') {
