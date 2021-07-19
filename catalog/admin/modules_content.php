@@ -285,7 +285,7 @@
         $keys .= '<strong>' . $value['title'] . '</strong><br />' . $value['description'] . '<br />';
 
         if ($value['set_function']) {
-          eval('$keys .= ' . $value['set_function'] . "'" . $value['value'] . "', '" . $key . "');");
+          eval('$keys .= ' . $value['set_function'] . "'" . tep_output_string_protected($value['value']) . "', '" . $key . "');");
         } else {
           $keys .= tep_draw_input_field('configuration[' . $key . ']', $value['value']);
         }

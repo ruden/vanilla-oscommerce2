@@ -103,7 +103,7 @@
       $heading[] = array('text' => '<strong>' . $cInfo->configuration_title . '</strong>');
 
       if ($cInfo->set_function) {
-        eval('$value_field = ' . $cInfo->set_function . '"' . htmlspecialchars($cInfo->configuration_value) . '");');
+        eval('$value_field = ' . $cInfo->set_function . '"' . tep_output_string_protected($cInfo->configuration_value) . '");');
       } else {
         $value_field = tep_draw_input_field('configuration_value', $cInfo->configuration_value);
       }
