@@ -131,7 +131,7 @@ EOD;
       }
     }
 
-    $this->deleteParameter('MODULE_CONTENT_ACCOUNT_BRAINTREE_CARDS_STATUS');
+    //$this->deleteParameter('MODULE_CONTENT_ACCOUNT_BRAINTREE_CARDS_STATUS');
 
     return $migrated;
   }
