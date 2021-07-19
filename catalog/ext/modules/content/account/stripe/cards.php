@@ -99,7 +99,7 @@ if ($messageStack->size('cards') > 0) {
       } else {
         ?>
 
-        <div class="alert alert-warning">
+        <div class="alert alert-warning pb-0">
           <?php echo MODULE_CONTENT_ACCOUNT_STRIPE_CARDS_TEXT_NO_CARDS; ?>
         </div>
 

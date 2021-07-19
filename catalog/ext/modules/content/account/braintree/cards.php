@@ -94,7 +94,7 @@ if ($messageStack->size('cards') > 0) {
     } else {
       ?>
 
-      <div style="background-color: #FEEFB3; border: 1px solid #9F6000; margin: 10px 0px; padding: 5px 10px; border-radius: 10px;">
+      <div class="alert alert-warning pb-0">
         <?php echo $cm->_app->getDef('account_braintree_cards_text_no_cards'); ?>
       </div>
 
