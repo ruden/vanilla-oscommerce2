@@ -323,14 +323,14 @@ EOD;
     }
 
     if (OSCOM_APP_PAYPAL_BRAINTREE_CC_ENTRY_FORM == '3') {
-      $content = '<div id="btCardStatus" class="ui-state-error ui-corner-all" style="display: none; padding: 10px; margin-bottom: 10px;"></div>';
+      $content = '<div id="btCardStatus" class="alert alert-danger" style="display: none;"></div>';
 
       if (!$this->templateClassExists()) {
         $content .= $this->getSubmitCardDetailsJavascript();
       }
 
       if (!$this->isValidCurrency($currency)) {
-        $content .= '<div class="ui-state-highlight ui-corner-all" style="padding: 10px; margin-bottom: 10px;">' .
+        $content .= '<div class="alert alert-info">' .
                     $this->_app->getDef('module_cc_notice_currency_charge', array(
                       'currency_total' => $currencies->format($order->info['total'], true, DEFAULT_CURRENCY),
                       'currency' => DEFAULT_CURRENCY,
@@ -372,7 +372,10 @@ EOD;
 
           if (OSCOM_APP_PAYPAL_BRAINTREE_CC_VERIFY_CVV == '1') {
             $content .= '<div id="braintree_stored_card_cvv">
-                             <label class="hosted-fields--label" for="card-token-cvv">' . $this->_app->getDef('module_cc_card_cvv') . ' <span class="ui-icon ui-icon-info" style="float: right;" title="' . addslashes($this->_app->getDef('module_cc_card_cvv_info')) . '" id="btCvvTokenInfoIcon"></span></label>
+                             <label class="hosted-fields--label" for="card-token-cvv">' . $this->_app->getDef('module_cc_card_cvv') . ' <span class="float-end" title="' . addslashes($this->_app->getDef('module_cc_card_cvv_info')) . '" id="btCvvTokenInfoIcon"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-info-circle" viewBox="0 0 16 16">
+  <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+  <path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"/>
+</svg></span></label>
                              <div id="card-token-cvv" class="hosted-field"></div>
                            </div>';
           }
@@ -389,7 +392,12 @@ EOD;
                        <div id="card-exp" class="hosted-field"></div>';
 
       if ((OSCOM_APP_PAYPAL_BRAINTREE_CC_VERIFY_CVV == '1') || (OSCOM_APP_PAYPAL_BRAINTREE_CC_VERIFY_CVV == '2')) {
-        $content .= '<label class="hosted-fields--label" for="card-cvv">' . $this->_app->getDef('module_cc_card_cvv') . ' <span class="ui-icon ui-icon-info" style="float: right;" title="' . addslashes($this->_app->getDef('module_cc_card_cvv_info')) . '" id="btCvvInfoIcon"></span></label>
+        $content .= '<label class="hosted-fields--label" for="card-cvv">' . $this->_app->getDef('module_cc_card_cvv') . ' <span class="float-end" title="' . addslashes($this->_app->getDef('module_cc_card_cvv_info')) . '" id="btCvvInfoIcon">
+<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-info-circle" viewBox="0 0 16 16">
+  <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+  <path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"/>
+</svg>
+</span></label>
                        <div id="card-cvv" class="hosted-field"></div>';
       }
 
@@ -421,7 +429,7 @@ EOD;
         $content .= <<<EOD
 <script>
 $(function() {
-  $('#btCvvTokenInfoIcon, #btCvvInfoIcon').tooltip();
+  //$('#btCvvTokenInfoIcon, #btCvvInfoIcon').tooltip();
 });
 </script>
 EOD;
@@ -685,14 +693,7 @@ EOD;
   }
 
   public function check() {
-    $check_query = tep_db_query("SELECT configuration_value FROM configuration WHERE configuration_key = 'OSCOM_APP_PAYPAL_BRAINTREE_CC_STATUS'");
-    if (tep_db_num_rows($check_query)) {
-      $check = tep_db_fetch_array($check_query);
-
-      return !empty($check['configuration_value']);
-    }
-
-    return false;
+    return tep_db_num_rows(tep_db_query("SELECT configuration_value FROM configuration WHERE configuration_key = 'OSCOM_APP_PAYPAL_BRAINTREE_CC_STATUS'"));
   }
 
   public function install() {
@@ -1167,7 +1168,7 @@ $(function() {
     if (btHostedFieldsInstance === undefined) {
       braintreeCreateStoredCardInstance();
     } else {
-      $('#braintree-payment-form-submit-button').removeClass('ui-state-disabled');
+      $('#braintree-payment-form-submit-button').removeAttr('disabled');
     }
   }
 
@@ -1216,7 +1217,7 @@ $(function() {
 
       btHostedFieldsInstance = hostedFieldsInstance;
 
-      $('#braintree-payment-form-submit-button').removeClass('ui-state-disabled');
+      $('#braintree-payment-form-submit-button').removeAttr('disabled');
     });
   }
 
@@ -1254,12 +1255,12 @@ $(function() {
 
         btHostedFieldsInstance = hostedFieldsInstance;
 
-        $('#braintree-payment-form-submit-button').removeClass('ui-state-disabled');
+        $('#braintree-payment-form-submit-button').removeAttr('disabled');
       });
     } else {
       btHostedFieldsInstance = undefined;
 
-      $('#braintree-payment-form-submit-button').removeClass('ui-state-disabled');
+      $('#braintree-payment-form-submit-button').removeAttr('disabled');
     }
   }
 });

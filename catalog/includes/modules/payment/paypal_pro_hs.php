@@ -615,14 +615,7 @@ EOD;
     }
 
     function check() {
-      $check_query = tep_db_query("select configuration_value from configuration where configuration_key = 'OSCOM_APP_PAYPAL_HS_STATUS'");
-      if ( tep_db_num_rows($check_query) ) {
-        $check = tep_db_fetch_array($check_query);
-
-        return !empty($check['configuration_value']);
-      }
-
-      return false;
+      return tep_db_num_rows(tep_db_query("SELECT configuration_value FROM configuration WHERE configuration_key = 'OSCOM_APP_PAYPAL_HS_STATUS'"));
     }
 
     function install() {
