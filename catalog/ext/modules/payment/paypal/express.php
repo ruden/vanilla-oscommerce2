@@ -438,9 +438,9 @@ EOD;
           $ship_firstname = tep_db_prepare_input(substr($appPayPalEcResult['PAYMENTREQUEST_0_SHIPTONAME'], 0, strpos($appPayPalEcResult['PAYMENTREQUEST_0_SHIPTONAME'], ' ')));
           $ship_lastname = tep_db_prepare_input(substr($appPayPalEcResult['PAYMENTREQUEST_0_SHIPTONAME'], strpos($appPayPalEcResult['PAYMENTREQUEST_0_SHIPTONAME'], ' ') + 1));
           $ship_address = tep_db_prepare_input($appPayPalEcResult['PAYMENTREQUEST_0_SHIPTOSTREET']);
-          $ship_suburb = tep_db_prepare_input($appPayPalEcResult['PAYMENTREQUEST_0_SHIPTOSTREET2']);
+          $ship_suburb = (isset($appPayPalEcResult['PAYMENTREQUEST_0_SHIPTOSTREET2']) ? tep_db_prepare_input($appPayPalEcResult['PAYMENTREQUEST_0_SHIPTOSTREET2']) : '');
           $ship_city = tep_db_prepare_input($appPayPalEcResult['PAYMENTREQUEST_0_SHIPTOCITY']);
-          $ship_zone = tep_db_prepare_input($appPayPalEcResult['PAYMENTREQUEST_0_SHIPTOSTATE']);
+          $ship_zone = (isset($appPayPalEcResult['PAYMENTREQUEST_0_SHIPTOSTATE']) ? tep_db_prepare_input($appPayPalEcResult['PAYMENTREQUEST_0_SHIPTOSTATE']) : '');
           $ship_postcode = tep_db_prepare_input($appPayPalEcResult['PAYMENTREQUEST_0_SHIPTOZIP']);
           $ship_country = tep_db_prepare_input($appPayPalEcResult['PAYMENTREQUEST_0_SHIPTOCOUNTRYCODE']);
         } else { // Payflow
@@ -593,7 +593,7 @@ EOD;
                     if (!isset($quote['error'])) {
                       foreach ($quote['methods'] as $rate) {
                         if ($appPayPalEcResult['SHIPPINGOPTIONNAME'] == trim($quote['module'] . ' ' . $rate['title'])) {
-                          $shipping_rate = $paypal_express->_app->formatCurrencyRaw($rate['cost'] + tep_calculate_tax($rate['cost'], $quote['tax']));
+                          $shipping_rate = $paypal_express->_app->formatCurrencyRaw($rate['cost'] + tep_calculate_tax($rate['cost'], (isset($quote['tax']) ? $quote['tax'] : null)));
 
                           if ($appPayPalEcResult['SHIPPINGOPTIONAMOUNT'] == $shipping_rate) {
                             $shipping = $quote['id'] . '_' . $rate['id'];
